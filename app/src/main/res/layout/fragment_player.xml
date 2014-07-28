@@ -1,0 +1,139 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <TextView
+        android:id="@+id/currentPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="currentPlayer"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:autoText="false" />
+
+    <TextView
+        android:id="@+id/txtTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_power"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignTop="@+id/total"
+        android:layout_toLeftOf="@+id/total"
+        android:layout_toStartOf="@+id/total"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/txtLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/level"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignTop="@+id/txtPlayerLvl"
+        android:layout_marginLeft="50dp" />
+
+    <TextView
+        android:id="@+id/txtPlayerLvl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="110dp"
+        android:layout_below="@+id/btnLvlUp"
+
+        android:layout_alignParentEnd="false" />
+
+    <TextView
+        android:id="@+id/txtGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gear"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignTop="@+id/txtPlayerGear"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="150dp" />
+
+    <TextView
+        android:id="@+id/txtPlayerGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/btnGearUp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="110dp" />
+
+
+    <ImageButton
+        android:id="@+id/btnLvlUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/lvl_up"
+        android:layout_below="@+id/currentPlayer"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="25dp" />
+
+    <ImageButton
+        android:id="@+id/btnLvlDwn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/lvl_dwn"
+        android:layout_below="@+id/txtPlayerLvl"
+        android:layout_marginLeft="104dp" />
+
+    <ImageButton
+        android:id="@+id/btnGearUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/gear_up"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="104dp"
+        android:layout_below="@+id/txtTotal"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:id="@+id/btnGearDwn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/gear_dwn"
+        android:layout_below="@+id/txtPlayerGear"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="104dp" />
+
+
+    <ImageButton
+        android:id="@+id/btnDice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/roll_dice"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/currentPlayer"
+        android:layout_marginTop="125dp"
+        android:layout_marginLeft="15dp" />
+
+    <ImageButton
+        android:id="@+id/btnNextTurn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/next_turn"
+        android:layout_below="@+id/total"
+        android:layout_marginTop="125dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp" />
+
+</RelativeLayout>
