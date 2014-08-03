@@ -1,18 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
 
     <TextView
         android:id="@+id/currentPlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="currentPlayer"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:autoText="false" />
+        android:layout_marginLeft="35dp" />
 
     <TextView
         android:id="@+id/txtTotal"
@@ -23,16 +21,15 @@
         android:layout_alignTop="@+id/total"
         android:layout_toLeftOf="@+id/total"
         android:layout_toStartOf="@+id/total"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="20dp" />
 
     <TextView
         android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="35dp"
         android:layout_marginTop="15dp" />
 
     <TextView
@@ -49,7 +46,6 @@
         android:id="@+id/txtPlayerLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N"
         android:textAppearance="?android:attr/textAppearanceMedium"
 
         android:layout_marginTop="0dp"
@@ -66,17 +62,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignTop="@+id/txtPlayerGear"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="150dp" />
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="145dp" />
 
     <TextView
         android:id="@+id/txtPlayerGear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/btnGearUp"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="110dp" />
+        android:layout_marginLeft="255dp"
+        android:layout_marginRight="107dp" />
 
 
     <ImageButton
@@ -102,9 +99,10 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/gear_up"
         android:layout_marginTop="25dp"
-        android:layout_marginRight="104dp"
         android:layout_below="@+id/txtTotal"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="100dp" />
 
     <ImageButton
         android:id="@+id/btnGearDwn"
@@ -113,7 +111,8 @@
         android:contentDescription="@string/gear_dwn"
         android:layout_below="@+id/txtPlayerGear"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="104dp" />
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="100dp" />
 
 
     <ImageButton
@@ -124,7 +123,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/currentPlayer"
         android:layout_marginTop="125dp"
-        android:layout_marginLeft="15dp" />
+        android:layout_marginLeft="35dp" />
 
     <ImageButton
         android:id="@+id/btnNextTurn"
@@ -134,6 +133,6 @@
         android:layout_below="@+id/total"
         android:layout_marginTop="125dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp" />
+        android:layout_marginRight="35dp" />
 
 </RelativeLayout>

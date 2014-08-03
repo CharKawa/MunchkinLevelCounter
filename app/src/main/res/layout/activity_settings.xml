@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/Lang"
+        android:id="@+id/txtLangSet"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spLang"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/txtLangSet"
+        android:layout_alignLeft="@+id/txtLangSet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/statsOnOff"
+        android:id="@+id/txtStatSet"
+        android:layout_below="@+id/spLang"
+        android:layout_alignParentStart="false"
+        android:layout_centerInParent="true"
+        android:layout_alignLeft="@+id/txtLangSet"
+        android:layout_marginRight="25dp" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tBtnStats"
+        android:layout_below="@+id/txtStatSet"
+        android:layout_alignParentStart="false"
+        android:layout_centerInParent="true"
+        android:layout_alignLeft="@+id/spLang"
+        android:layout_alignParentEnd="false" />
+</RelativeLayout>

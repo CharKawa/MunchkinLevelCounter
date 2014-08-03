@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.g_art.munchkinlevelcounter.FragmentPlayersList">
+    tools:context="com.g_art.munchkinlevelcounter.fragments.FragmentPlayersList">
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/inGamePlayersList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

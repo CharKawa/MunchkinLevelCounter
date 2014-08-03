@@ -1,65 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<RelativeLayout xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
 
-    <!--<fragment-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:name="com.g_art.munchkinlevelcounter.FragmentPlayersList"-->
-        <!--android:id="@+id/playerList_Fragment"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--tools:layout="@layout/fragment_players_list" />-->
-
-    <!--<fragment-->
-        <!--android:layout_below="@+id/playerList_Fragment"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:name="com.g_art.munchkinlevelcounter.FragmentPlayer"-->
-        <!--android:id="@+id/currentPlayer_Fragment"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--tools:layout="@layout/fragment_player" />-->
-
-<!--</RelativeLayout>-->
-
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.1"
-    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:id="@+id/fragmentList">
 
-    <fragment
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:name="com.g_art.munchkinlevelcounter.FragmentPlayersList"
-        android:id="@+id/playerList_Fragment"
-        tools:layout="@layout/fragment_players_list" />
+        android:id="@+id/currentPlayer_container">
 
-</LinearLayout>
+        <fragment
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:name="com.g_art.munchkinlevelcounter.fragments.FragmentPlayer"
+            android:id="@+id/currentPlayer_Fragment"
+            tools:layout="@layout/fragment_player" />
 
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
+    </LinearLayout>
 
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.g_art.munchkinlevelcounter.FragmentPlayer"
-        android:id="@+id/currentPlayer_Fragment"
-        tools:layout="@layout/fragment_player" />
-</LinearLayout>
 </LinearLayout>
