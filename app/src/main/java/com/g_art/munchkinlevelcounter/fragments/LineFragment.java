@@ -13,6 +13,7 @@ import com.echo.holographlibrary.Line;
 import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.bean.Player;
 
 import java.util.ArrayList;
 
@@ -24,56 +25,53 @@ public class LineFragment extends Fragment {
 
     final String TAG = "Munchkin";
     LinePoint p = null;
+    private ArrayList<Player> playersList;
+    final String PLAYER_KEY = "playersList";
     ArrayList<LinePoint> secondPlayerPoints;
     ArrayList<LinePoint> firstPlayerPoints;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
+            Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
         final Resources resources = getResources();
-        Line firstPlayerLine = new Line();
-        Line secondPlayerLine = new Line();
-        firstPlayerLine.setUsingDips(false);
+
 
         firstPlayerPoints = new ArrayList<LinePoint>();
+        Player player = playersList.get(0);
 
-        for (int i = 0, j = 0; i <= 10; i++) {
-            p = new LinePoint(i, j);
+        ArrayList<String> list = player.getLvlStats();
+
+
+        for (int i = 0; i < list.size(); i++) {
+            p = new LinePoint(i, Integer.parseInt(list.get(i)));
             p.setColor(resources.getColor(R.color.red));
             firstPlayerPoints.add(p);
 
-            Log.d(TAG, "Number i & j at firstPlayerPoints: " + i + " " + j);
-            if (j % 2 == 0) {
-                j += 3;
-            } else {
-                j -= 1;
-            }
+            Log.d(TAG, "Building points: " + list.get(i));
 
         }
-        ;
 
-
-        secondPlayerPoints = new ArrayList<LinePoint>();
-
-        for (int i = 0, j = 0; i <= 10; i++) {
-            p = new LinePoint(i, j);
-            p.setColor(resources.getColor(R.color.blue));
-            secondPlayerPoints.add(p);
-            Log.d(TAG, "Number i & j at secondPlayerPoints: " + i + " " + j);
-            j += 1;
-        }
+        Line firstPlayerLine = new Line();
 
         firstPlayerLine.setPoints(firstPlayerPoints);
         firstPlayerLine.setColor(resources.getColor(R.color.orange));
         firstPlayerLine.setUsingDips(false);
-        secondPlayerLine.setPoints(secondPlayerPoints);
-        secondPlayerLine.setColor(resources.getColor(R.color.green));
-        secondPlayerLine.setUsingDips(false);
 
         LineGraph li = (LineGraph) v.findViewById(R.id.linegraph);
         li.addLine(firstPlayerLine);
-        li.addLine(secondPlayerLine);
         li.setRangeY(0, 15);
         li.setRangeX(0, 15);
 

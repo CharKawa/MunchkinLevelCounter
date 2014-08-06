@@ -2,7 +2,9 @@ package com.g_art.munchkinlevelcounter.fragments;
 
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.activity.GameActivity;
+import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
 
@@ -23,6 +27,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     ViewHolder holder;
     private Player selectedPlayer;
     private static final String PLAYER_KEY = "playersList";
+    private final int MAX_LVL = 10;
+    private View view;
+    private boolean contAfterMaxLVL = false;
     final String TAG = "Munchkin";
     private PlayersListUpdate mCallback;
 
@@ -68,7 +75,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_player, container, false);
+        view = inflater.inflate(R.layout.fragment_player, container, false);
 
         holder = new ViewHolder();
         holder.txtCurrentPlayerName = (TextView) view.findViewById(R.id.currentPlayer);
@@ -96,8 +103,24 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLvlUp:
-                Log.d(TAG, "btnLvlUp clicked");
-                selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
+                Log.d("btnUP", "btnLvlUp clicked");
+                if (!isMaxLvlReached(selectedPlayer.getLevel())) {
+                    selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
+                } else {
+                    if (contAfterMaxLVL) {
+                        selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
+                    } else {
+                        DialogFragment continueDialog = new ContinueDialog();
+                        continueDialog.show(getActivity().getFragmentManager(), "dialog");
+                        if (contAfterMaxLVL) {
+                            selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
+                            Log.d("btnUP", "Continue the game");
+                        } else {
+                            Log.d("btnUP", "End the game");
+                        }
+                    }
+
+                }
                 break;
             case R.id.btnLvlDwn:
                 Log.d(TAG, "btnLvlDwn clicked");
@@ -116,11 +139,39 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnNextTurn:
                 Log.d(TAG, "btnNextTurn clicked");
+                selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
+                selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
+                selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
+                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getLvlStats().toString());
+                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getGearStats().toString());
+                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getPowerStats().toString());
                 break;
         }
         setSelectedPlayer();
         mCallback.onPlayersListUpdate();
+    }
 
+    public void doPositiveClick() {
+        contAfterMaxLVL = true;
+        onClick(view.findViewById(R.id.btnLvlUp));
+        Log.d(TAG, "Continue the game");
+    }
+
+    public void doNegativeClick() {
+        selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
+        onClick(view.findViewById(R.id.btnNextTurn));
+        Intent intent = new Intent(getActivity(), Stats.class);
+        intent.putParcelableArrayListExtra(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
+        startActivity(intent);
+        Log.d(TAG, "Negative click!");
+    }
+
+    private boolean isMaxLvlReached(int currentLvl) {
+        boolean maxLvlReached = false;
+        if (currentLvl + 1 == MAX_LVL) {
+            maxLvlReached = true;
+        }
+        return maxLvlReached;
     }
 
     public void changeSelectedPlayer(Player player) {

@@ -91,4 +91,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             Log.d(TAG, "List update");
         }
     }
+
+
+    public ArrayList<Player> getPlayersList() {
+        return playersList;
+    }
+
 }
