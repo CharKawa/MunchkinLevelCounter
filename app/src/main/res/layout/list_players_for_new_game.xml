@@ -1,0 +1,31 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dip"
+    android:layout_gravity="top">
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/newPlayerName"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|left|top"
+            android:textSize="25sp"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="4dip"
+            android:textColor="#000000"
+            android:layout_span="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imBtnDel"
+            android:src="@drawable/ic_action_remove"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/list_players_Delete"
+            android:layout_gravity="center_vertical|bottom|right" />
+
+    </TableRow>
+</TableLayout>
