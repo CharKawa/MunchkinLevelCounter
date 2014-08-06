@@ -25,7 +25,7 @@ public class Player implements Parcelable {
         gearStats = new ArrayList<String>();
         powerStats = new ArrayList<String>();
         this.name = name;
-        this.level = 0;
+        this.level = 1;
         this.gear = 0;
     }
 

@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
 
     <TextView
@@ -21,7 +21,9 @@
         android:layout_alignTop="@+id/total"
         android:layout_toLeftOf="@+id/total"
         android:layout_toStartOf="@+id/total"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="75dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="150dp" />
 
     <TextView
         android:id="@+id/total"
@@ -63,7 +65,7 @@
         android:layout_alignTop="@+id/txtPlayerGear"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="200dp"
-        android:layout_marginRight="145dp" />
+        android:layout_marginRight="135dp" />
 
     <TextView
         android:id="@+id/txtPlayerGear"
@@ -130,9 +132,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/next_turn"
-        android:layout_below="@+id/total"
-        android:layout_marginTop="125dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="35dp" />
+        android:layout_marginRight="35dp"
+        android:layout_alignBottom="@+id/btnDice"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginLeft="250dp" />
 
 </RelativeLayout>

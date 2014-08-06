@@ -8,7 +8,7 @@
     <string name="main_screen_Settings">Settings</string>
     <string name="main_screen_About">About</string>
     <string name="players_screen_Add_Player">Add Player</string>
-    <string name="players_screen_Start_Game">Start The Game</string>
+    <string name="players_screen_Start_Game">Play!</string>
     <string name="players_screen_Clear_All">Clear All</string>
     <string name="title_activity_stats">Stats</string>
     <string name="title_activity_newPlayers">Add players for the game</string>

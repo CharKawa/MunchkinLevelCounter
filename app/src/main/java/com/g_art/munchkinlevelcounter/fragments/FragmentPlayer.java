@@ -28,6 +28,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private Player selectedPlayer;
     private static final String PLAYER_KEY = "playersList";
     private final int MAX_LVL = 10;
+    private final int MIN_STAT = 0;
     private View view;
     private boolean contAfterMaxLVL = false;
     final String TAG = "Munchkin";
@@ -103,7 +104,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLvlUp:
-                Log.d("btnUP", "btnLvlUp clicked");
+                Log.d(TAG, "btnLvlUp clicked");
                 if (!isMaxLvlReached(selectedPlayer.getLevel())) {
                     selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                 } else {
@@ -114,9 +115,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                         continueDialog.show(getActivity().getFragmentManager(), "dialog");
                         if (contAfterMaxLVL) {
                             selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
-                            Log.d("btnUP", "Continue the game");
+                            Log.d(TAG, "Continue the game");
                         } else {
-                            Log.d("btnUP", "End the game");
+                            Log.d(TAG, "End the game");
                         }
                     }
 
@@ -124,18 +125,30 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnLvlDwn:
                 Log.d(TAG, "btnLvlDwn clicked");
-                selectedPlayer.setLevel(selectedPlayer.getLevel() - 1);
+                if (selectedPlayer.getLevel() != MIN_STAT + 1) {
+                    selectedPlayer.setLevel(selectedPlayer.getLevel() - 1);
+                }
                 break;
             case R.id.btnGearUp:
                 selectedPlayer.setGear(selectedPlayer.getGear() + 1);
                 Log.d(TAG, "btnGearUp clicked");
                 break;
             case R.id.btnGearDwn:
-                selectedPlayer.setGear(selectedPlayer.getGear() - 1);
                 Log.d(TAG, "btnGearDwn clicked");
+                if (selectedPlayer.getGear() != MIN_STAT) {
+                    selectedPlayer.setGear(selectedPlayer.getGear() - 1);
+                }
                 break;
             case R.id.btnDice:
                 Log.d(TAG, "btnDice clicked");
+                int Min = 1;
+                int Max = 6;
+                for (int i = 0; i <= 25; i++) {
+                    int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
+                    Log.d("DICE", String.valueOf(dice));
+                }
+
+//                Toast.makeText(getActivity(),String.valueOf(dice),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnNextTurn:
                 Log.d(TAG, "btnNextTurn clicked");
