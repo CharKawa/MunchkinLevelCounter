@@ -39,7 +39,6 @@ public class LineFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
 
-
         return v;
     }
 }
