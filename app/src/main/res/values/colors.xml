@@ -8,4 +8,6 @@
     <color name="orange">#FFFFBB33</color>
     <color name="transparent_orange">#80FFBB33</color>
     <color name="purple">#FFAA66CC</color>
+    <color name="axis">#37474f</color>
+    <color name="grid">#b0bec5</color>
 </resources>
