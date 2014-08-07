@@ -62,11 +62,8 @@
                 android:textSize="20dp"
                 android:textColor="#000000"
                 android:text="@string/total"
-                android:layout_alignParentEnd="false"
                 android:layout_alignBottom="@+id/InGameListPlayerTotalValue"
                 android:layout_marginBottom="0.5dp"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentRight="false"
                 android:layout_marginLeft="10dp"
                 android:layout_toLeftOf="@+id/InGameListPlayerTotalValue" />
 

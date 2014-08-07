@@ -10,7 +10,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="35dp" />
+        android:layout_marginLeft="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/txtTotal"
@@ -20,10 +22,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignTop="@+id/total"
         android:layout_toLeftOf="@+id/total"
-        android:layout_toStartOf="@+id/total"
-        android:layout_marginRight="75dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="150dp" />
+        android:layout_alignParentEnd="false" />
 
     <TextView
         android:id="@+id/total"
@@ -32,7 +31,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:id="@+id/txtLevel"
@@ -42,7 +43,10 @@
         android:textAlignment="viewEnd"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignTop="@+id/txtPlayerLvl"
-        android:layout_marginLeft="50dp" />
+        android:layout_marginLeft="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="15dp" />
 
     <TextView
         android:id="@+id/txtPlayerLvl"
@@ -50,11 +54,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
 
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="110dp"
         android:layout_below="@+id/btnLvlUp"
 
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        android:layout_toRightOf="@+id/txtLevel" />
 
     <TextView
         android:id="@+id/txtGear"
@@ -63,9 +66,8 @@
         android:text="@string/gear"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignTop="@+id/txtPlayerGear"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="200dp"
-        android:layout_marginRight="135dp" />
+        android:layout_alignParentEnd="false"
+        android:layout_toLeftOf="@+id/txtPlayerGear" />
 
     <TextView
         android:id="@+id/txtPlayerGear"
@@ -74,8 +76,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/btnGearUp"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="255dp"
-        android:layout_marginRight="107dp" />
+        android:layout_marginRight="77dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="15dp" />
 
 
     <ImageButton
@@ -103,8 +106,8 @@
         android:layout_marginTop="25dp"
         android:layout_below="@+id/txtTotal"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="250dp"
-        android:layout_marginRight="100dp" />
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true" />
 
     <ImageButton
         android:id="@+id/btnGearDwn"
@@ -113,8 +116,8 @@
         android:contentDescription="@string/gear_dwn"
         android:layout_below="@+id/txtPlayerGear"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="250dp"
-        android:layout_marginRight="100dp" />
+        android:layout_marginRight="70dp"
+        android:layout_alignParentRight="true" />
 
 
     <ImageButton
@@ -135,9 +138,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="35dp"
         android:layout_alignBottom="@+id/btnDice"
-        android:layout_alignParentRight="false"
+        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_marginLeft="250dp" />
+        android:layout_alignParentStart="false" />
 
 </RelativeLayout>
