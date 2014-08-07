@@ -6,10 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.db.chart.OnEntryClickListener;
+import com.db.chart.model.ChartSet;
 import com.db.chart.model.LineSet;
 import com.db.chart.model.Point;
 import com.db.chart.view.LineChartView;
+import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
@@ -32,6 +36,10 @@ public class LineFragment extends Fragment {
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
+//            if(playersList.size()==0){
+//                playersList = new ArrayList<Player>();
+//                playersList.add(new Player("Test"));
+//            }
             Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
         }
     }
@@ -44,32 +52,57 @@ public class LineFragment extends Fragment {
 
         LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
-        LineSet lineSet = new LineSet();
-        lineSet.addPoint(new Point("1", 2));
-        lineSet.addPoint(new Point("2", 5));
-        lineSet.addPoint(new Point("3", 5));
-        lineSet.addPoint(new Point("4", 6));
-        lineSet.addPoint(new Point("5", 3));
-        lineSet.addPoint(new Point("6", 1));
-        lineSet.addPoint(new Point("7", 7));
+        LineSet lineSet;
+        ArrayList<ChartSet> lvlLines = new ArrayList<ChartSet>();
 
-        // Style dots
-        lineSet.setDots(true);
-        lineSet.setDotsColor(getResources().getColor(R.color.blue));
-        lineSet.setDotsStrokeColor(getResources().getColor(R.color.green_light));
 
-        // Style line
-        lineSet.setLineThickness(0.5f);
-        lineSet.setLineColor(getResources().getColor(R.color.green));
+        for (Player player : playersList) {
+            lineSet = new LineSet();
 
-        // Style background fill
-        lineSet.setFill(false);
-//        lineSet.setFillColor(getResources().getColor(R.color.transparent_orange));
+            for (int i = 0; i < player.getLvlStats().size(); i++) {
+                lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
 
-        lineSet.setLineDashed(true);
-        lineSet.setLineSmooth(true);
-        chartView.addData(lineSet);
+            }
+
+            // Style dots
+            lineSet.setDots(true);
+            lineSet.setDotsColor(getResources().getColor(R.color.blue));
+            lineSet.setDotsStrokeColor(getResources().getColor(R.color.green_light));
+
+            // Style line
+//        lineSet.setLineThickness(0.9f);
+            lineSet.setLineColor(getResources().getColor(R.color.green));
+
+            // Style background fill
+            lineSet.setFill(false);
+
+            lineSet.setLineSmooth(true);
+            chartView.setGrid(true);
+
+            lvlLines.add(lineSet);
+        }
+
+        chartView.addData(lvlLines);
+
+//        ArrayList<String> firstPlayer = playersList.get(0).getLvlStats();
+//        if(!firstPlayer.isEmpty()){
+//            int length = firstPlayer.size();
+//
+//        }
+
+
+        chartView.setOnEntryClickListener(new OnEntryClickListener() {
+            @Override
+            public void onClick(int setIndex, int entryIndex) {
+                Toast.makeText(getActivity(), "Test Toast click on char/dot setIndex: " + setIndex + " entryIndex: " + entryIndex, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        chartView.setAnimation(new Animation());
+
         chartView.show();
+
 
         return v;
     }

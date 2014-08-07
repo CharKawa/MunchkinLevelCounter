@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
@@ -32,7 +33,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private View view;
     private boolean contAfterMaxLVL = false;
     final String TAG = "Munchkin";
-    private PlayersListUpdate mCallback;
+    private PlayersUpdate mCallback;
 
 
     public FragmentPlayer() {
@@ -40,8 +41,10 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
 
     // interface for communication between fragments
-    public interface PlayersListUpdate {
-        public void onPlayersListUpdate();
+    public interface PlayersUpdate {
+        public void onPlayersUpdate();
+
+        public boolean onNextTurnClick(Player player);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mCallback = (PlayersListUpdate) activity;
+            mCallback = (PlayersUpdate) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
@@ -152,16 +155,16 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnNextTurn:
                 Log.d(TAG, "btnNextTurn clicked");
-                selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
-                selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
-                selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getLvlStats().toString());
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getGearStats().toString());
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getPowerStats().toString());
+                if (mCallback.onNextTurnClick(selectedPlayer)) {
+                    Toast.makeText(getActivity(), " Data saved correctly! ", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "ERROR!!", Toast.LENGTH_LONG).show();
+                }
+
                 break;
         }
         setSelectedPlayer();
-        mCallback.onPlayersListUpdate();
+        mCallback.onPlayersUpdate();
     }
 
     public void doPositiveClick() {

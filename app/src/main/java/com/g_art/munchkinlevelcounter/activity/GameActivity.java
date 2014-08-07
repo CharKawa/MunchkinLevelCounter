@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by G_Art on 28/7/2014.
  */
-public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersListUpdate {
+public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
 
     private ArrayList<Player> playersList;
     final String PLAYER_KEY = "playersList";
@@ -82,13 +82,46 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
 
     @Override
-    public void onPlayersListUpdate() {
+    public void onPlayersUpdate() {
         FragmentPlayersList fragment = (FragmentPlayersList) getFragmentManager().findFragmentById(R.id.fragmentList);
         if (fragment == null) {
             Log.d(TAG, "fragmentPlayer is NULL");
         } else {
             fragment.listUpdate();
             Log.d(TAG, "List update");
+        }
+    }
+
+    @Override
+    public boolean onNextTurnClick(Player player) {
+        boolean result = false;
+        int i = 0;
+        try {
+            for (Player selectedPlayer : playersList) {
+                selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
+                selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
+                selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
+                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getLvlStats().toString());
+                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getGearStats().toString());
+                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getPowerStats().toString());
+                i++;
+                Log.d(TAG, "Value of int I#1: " + i);
+                if (selectedPlayer.equals(player)) {
+                    if (i == playersList.size()) {
+                        i = 0;
+                        Log.d(TAG, "Value of int I#2: " + i);
+                    }
+                    Log.d(TAG, "Value of int I#3: " + i);
+                    onPlayerSelected(playersList.get(i));
+                    Log.d(TAG, "Sending next player");
+                }
+            }
+
+            result = true;
+        } catch (Exception ex) {
+            result = false;
+        } finally {
+            return result;
         }
     }
 
