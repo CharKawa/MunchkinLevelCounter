@@ -1,7 +1,7 @@
 package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +21,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private ArrayList<Player> playersList;
     final String PLAYER_KEY = "playersList";
     final int FIRST_PLAYER = 0;
+    private FragmentPlayersList fr;
+    private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
 
-    final String TAG = "Munchkin";
+    final String TAG = "GameActivity_Munchkin_Test";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +35,18 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
         Log.d(TAG, "List of player: " + playersList);
 
-        Fragment fr = new FragmentPlayersList();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYER_KEY, playersList);
-        fr.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(R.id.fragmentList, fr).commit();
+
+        FragmentManager fm = getFragmentManager();
+        fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
+        Log.d(TAG, "fr: " + fr);
+
+        if (fr == null) {
+            fr = new FragmentPlayersList();
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(PLAYER_KEY, playersList);
+            fr.setArguments(bundle);
+            fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
+        }
 
         onPlayerSelected(playersList.get(FIRST_PLAYER));
     }
@@ -105,13 +114,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
                 Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getGearStats().toString());
                 Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getPowerStats().toString());
                 i++;
-                Log.d(TAG, "Value of int I#1: " + i);
                 if (selectedPlayer.equals(player)) {
                     if (i == playersList.size()) {
                         i = 0;
-                        Log.d(TAG, "Value of int I#2: " + i);
                     }
-                    Log.d(TAG, "Value of int I#3: " + i);
                     onPlayerSelected(playersList.get(i));
                     Log.d(TAG, "Sending next player");
                 }

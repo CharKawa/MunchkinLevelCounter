@@ -32,7 +32,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private final int MIN_STAT = 0;
     private View view;
     private boolean contAfterMaxLVL = false;
-    final String TAG = "Munchkin";
+    //    final String TAG = "Munchkin";
+    final String TAG = "GameActivity_Munchkin_Test";
     private PlayersUpdate mCallback;
 
 
