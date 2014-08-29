@@ -1,6 +1,7 @@
 package com.g_art.munchkinlevelcounter.fragments;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 
 /**
@@ -25,9 +28,12 @@ import java.util.ArrayList;
  */
 public class LineFragment extends Fragment {
 
-    final String TAG = "Munchkin";
+    final String TAG = "GameActivity_Munchkin_Test";
     private ArrayList<Player> playersList;
     final String PLAYER_KEY = "playersList";
+    private Random rnd;
+    private LineChartView chartView;
+    private HashMap playersColor;
 
 
     @Override
@@ -36,10 +42,7 @@ public class LineFragment extends Fragment {
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-//            if(playersList.size()==0){
-//                playersList = new ArrayList<Player>();
-//                playersList.add(new Player("Test"));
-//            }
+
             Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
         }
     }
@@ -50,28 +53,34 @@ public class LineFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
 
-        LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
+
+        chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
         LineSet lineSet;
         ArrayList<ChartSet> lvlLines = new ArrayList<ChartSet>();
+        playersColor = new HashMap();
 
 
         for (Player player : playersList) {
             lineSet = new LineSet();
 
-            for (int i = 0; i < player.getLvlStats().size(); i++) {
-                lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
+
+            for (int i = 0; i < player.getPowerStats().size(); i++) {
+                lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
 
             }
 
             // Style dots
             lineSet.setDots(true);
+            rnd = new Random();
             lineSet.setDotsColor(getResources().getColor(R.color.blue));
             lineSet.setDotsStrokeColor(getResources().getColor(R.color.green_light));
 
             // Style line
 //        lineSet.setLineThickness(0.9f);
-            lineSet.setLineColor(getResources().getColor(R.color.green));
+            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            lineSet.setLineColor(color);
+            playersColor.put(color, player);
 
             // Style background fill
             lineSet.setFill(false);
@@ -83,12 +92,6 @@ public class LineFragment extends Fragment {
         }
 
         chartView.addData(lvlLines);
-
-//        ArrayList<String> firstPlayer = playersList.get(0).getLvlStats();
-//        if(!firstPlayer.isEmpty()){
-//            int length = firstPlayer.size();
-//
-//        }
 
 
         chartView.setOnEntryClickListener(new OnEntryClickListener() {
