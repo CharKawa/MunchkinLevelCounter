@@ -102,11 +102,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
     }
 
-//    @Override
-//    public void onViewStateRestored(Bundle savedInstanceState) {
-//        super.onViewStateRestored(savedInstanceState);
-//    }
-
 
     @Override
     public void setRetainInstance(boolean retain) {

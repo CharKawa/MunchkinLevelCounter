@@ -45,6 +45,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     public interface PlayersUpdate {
         public void onPlayersUpdate();
 
+        public boolean savePlayersStats();
         public boolean onNextTurnClick(Player player);
     }
 
@@ -124,44 +125,43 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                             Log.d(TAG, "End the game");
                         }
                     }
-
                 }
                 break;
+
             case R.id.btnLvlDwn:
                 Log.d(TAG, "btnLvlDwn clicked");
                 if (selectedPlayer.getLevel() != MIN_STAT + 1) {
                     selectedPlayer.setLevel(selectedPlayer.getLevel() - 1);
                 }
                 break;
+
             case R.id.btnGearUp:
                 selectedPlayer.setGear(selectedPlayer.getGear() + 1);
                 Log.d(TAG, "btnGearUp clicked");
                 break;
+
             case R.id.btnGearDwn:
                 Log.d(TAG, "btnGearDwn clicked");
                 if (selectedPlayer.getGear() != MIN_STAT) {
                     selectedPlayer.setGear(selectedPlayer.getGear() - 1);
                 }
                 break;
-            case R.id.btnDice:
-                Log.d(TAG, "btnDice clicked");
-                int Min = 1;
-                int Max = 6;
-                for (int i = 0; i <= 25; i++) {
-                    int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
-                    Log.d("DICE", String.valueOf(dice));
-                }
 
-//                Toast.makeText(getActivity(),String.valueOf(dice),Toast.LENGTH_SHORT).show();
+            case R.id.btnDice:
+                rollADice();
                 break;
+
             case R.id.btnNextTurn:
                 Log.d(TAG, "btnNextTurn clicked");
-                if (mCallback.onNextTurnClick(selectedPlayer)) {
-                    Toast.makeText(getActivity(), " Data saved correctly! ", Toast.LENGTH_SHORT).show();
+                if (mCallback.savePlayersStats()) {
+                    if (mCallback.onNextTurnClick(selectedPlayer)) {
+                        Toast.makeText(getActivity(), " Data saved correctly! ", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getActivity(), "ERROR!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "It was error while trying to save players!", Toast.LENGTH_LONG).show();
                 }
-
                 break;
         }
         setSelectedPlayer();
@@ -203,6 +203,15 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.txtCurrentPlayerGear.setText(Integer.toString(selectedPlayer.getGear()));
         holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
         Log.d(TAG, "Setting player");
+    }
+
+    private void rollADice() {
+        Log.d(TAG, "btnDice clicked");
+        int Min = 1;
+        int Max = 6;
+        int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
+        Log.d("DICE", String.valueOf(dice));
+//                Toast.makeText(getActivity(),String.valueOf(dice),Toast.LENGTH_SHORT).show();
     }
 
 

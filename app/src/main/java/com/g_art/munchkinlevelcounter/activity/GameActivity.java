@@ -10,6 +10,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.FragmentPlayersList;
+import com.g_art.munchkinlevelcounter.tasks.SavePlayersStatsTask;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     final int FIRST_PLAYER = 0;
     private FragmentPlayersList fr;
     private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
+    private SavePlayersStatsTask saveTask;
 
     final String TAG = "GameActivity_Munchkin_Test";
 
@@ -48,6 +50,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
         }
 
+        /*
+        Saving first players stats
+         */
+        savePlayersStats();
+
+        /*
+        Setting the first player chosen
+         */
         onPlayerSelected(playersList.get(FIRST_PLAYER));
     }
 
@@ -107,12 +117,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         int i = 0;
         try {
             for (Player selectedPlayer : playersList) {
-                selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
-                selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
-                selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getLvlStats().toString());
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getGearStats().toString());
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getPowerStats().toString());
                 i++;
                 if (selectedPlayer.equals(player)) {
                     if (i == playersList.size()) {
@@ -126,9 +130,23 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             result = true;
         } catch (Exception ex) {
             result = false;
-        } finally {
-            return result;
         }
+        return result;
+    }
+
+    public boolean savePlayersStats() {
+        boolean result;
+        saveTask = new SavePlayersStatsTask();
+
+        try {
+            saveTask.execute(playersList);
+            result = true;
+
+        } catch (Exception ex) {
+            result = false;
+        }
+
+        return result;
     }
 
 
