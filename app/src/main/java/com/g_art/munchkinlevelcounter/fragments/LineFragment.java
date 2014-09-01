@@ -1,6 +1,8 @@
 package com.g_art.munchkinlevelcounter.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,9 @@ import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -31,20 +36,34 @@ public class LineFragment extends Fragment {
     final String TAG = "GameActivity_Munchkin_Test";
     private ArrayList<Player> playersList;
     final String PLAYER_KEY = "playersList";
+    final String PREFS_PLAYERS_KEY = "players";
+    final String PREFS_NO_DATA = "Sorry, No Data!";
     private Random rnd;
     private LineChartView chartView;
     private HashMap playersColor;
+    private SharedPreferences mPrefs;
+    private SharedPreferences.Editor prefsEditor;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        prefsEditor = mPrefs.edit();
+
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-
             Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
+
+            clearSharedPrefs();
+            savePlayersToSharedPrefs();
+
+        } else {
+            mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
+
         }
+
     }
 
 
@@ -108,5 +127,51 @@ public class LineFragment extends Fragment {
 
 
         return v;
+    }
+
+    private boolean clearSharedPrefs() {
+        boolean result;
+
+        prefsEditor.clear();
+        try {
+            prefsEditor.apply();
+            result = true;
+        } catch (Exception ex) {
+            result = false;
+        }
+        return result;
+
+    }
+
+    private boolean savePlayersToSharedPrefs() {
+        JSONObject json = new JSONObject();
+        boolean result;
+        try {
+            for (Player player : playersList) {
+                json.put(player.getName(), player);
+            }
+            prefsEditor.putString(PREFS_PLAYERS_KEY, json.toString());
+            result = prefsEditor.commit();
+            Log.d(TAG, "Saving stats into file: " + result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            result = false;
+        }
+        Log.d(TAG, json.toString());
+        return result;
+    }
+
+    private void getPlayersFromSharedPrefs(String jsonString) {
+
+        playersList = new ArrayList<Player>();
+
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

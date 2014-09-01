@@ -140,7 +140,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
         try {
             saveTask.execute(playersList);
-            result = true;
+            result = saveTask.get();
 
         } catch (Exception ex) {
             result = false;

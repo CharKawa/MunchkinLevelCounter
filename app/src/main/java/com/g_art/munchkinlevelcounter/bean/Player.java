@@ -104,6 +104,9 @@ public class Player implements Parcelable {
                 "name='" + name + '\'' +
                 ", level=" + level +
                 ", gear=" + gear +
+                ", lvlStats=" + lvlStats +
+                ", gearStats=" + gearStats +
+                ", powerStats=" + powerStats +
                 '}';
     }
 
