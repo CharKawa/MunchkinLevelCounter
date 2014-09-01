@@ -19,10 +19,10 @@ import com.db.chart.view.LineChartView;
 import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -54,14 +54,14 @@ public class LineFragment extends Fragment {
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
+            if (playersList != null) {
+                Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
 
-            clearSharedPrefs();
-            savePlayersToSharedPrefs();
-
-        } else {
-            mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
-
+                clearSharedPrefs();
+                savePlayersToSharedPrefs();
+            } else {
+                getPlayersFromSharedPrefs();
+            }
         }
 
     }
@@ -144,34 +144,26 @@ public class LineFragment extends Fragment {
     }
 
     private boolean savePlayersToSharedPrefs() {
-        JSONObject json = new JSONObject();
+        Gson gson = new Gson();
         boolean result;
-        try {
-            for (Player player : playersList) {
-                json.put(player.getName(), player);
-            }
-            prefsEditor.putString(PREFS_PLAYERS_KEY, json.toString());
-            result = prefsEditor.commit();
-            Log.d(TAG, "Saving stats into file: " + result);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            result = false;
-        }
-        Log.d(TAG, json.toString());
+
+        String json = gson.toJson(playersList);
+        Log.d(TAG, json);
+        prefsEditor.putString(PREFS_PLAYERS_KEY, json);
+        result = prefsEditor.commit();
+
+
         return result;
     }
 
-    private void getPlayersFromSharedPrefs(String jsonString) {
-
+    private void getPlayersFromSharedPrefs() {
         playersList = new ArrayList<Player>();
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonString);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        Gson gson = new Gson();
+        String json = mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
+        Type type = new TypeToken<ArrayList<Player>>() {
+        }.getType();
+        playersList = gson.fromJson(json, type);
+        Log.d(TAG, playersList.toString());
 
     }
 }
