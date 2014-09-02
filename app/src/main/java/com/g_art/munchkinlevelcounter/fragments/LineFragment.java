@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.db.chart.OnEntryClickListener;
@@ -19,7 +20,9 @@ import com.db.chart.view.LineChartView;
 import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.listadapter.InStatsPlayerListAdapter;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -35,14 +38,17 @@ public class LineFragment extends Fragment {
 
     final String TAG = "GameActivity_Munchkin_Test";
     private ArrayList<Player> playersList;
-    final String PLAYER_KEY = "playersList";
-    final String PREFS_PLAYERS_KEY = "players";
-    final String PREFS_NO_DATA = "Sorry, No Data!";
+    final static String PLAYER_KEY = "playersList";
+    final static String PREFS_PLAYERS_KEY = "players";
+    public final static String PREFS_NO_DATA = "Sorry, No Data!";
     private Random rnd;
     private LineChartView chartView;
     private HashMap playersColor;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
+    private boolean isDataPresent;
+    private InStatsPlayerListAdapter inStatsAdapter;
+    private ListView inStatsPlayersList;
 
 
     @Override
@@ -51,16 +57,22 @@ public class LineFragment extends Fragment {
 
         mPrefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
+        isDataPresent = false;
+        rnd = new Random();
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
             if (playersList != null) {
                 Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
-
+                isDataPresent = true;
                 clearSharedPrefs();
+                Log.d(TAG, "Deleting prev stats from shared prefs");
                 savePlayersToSharedPrefs();
+                Log.d(TAG, "Saving stats to shared prefs");
             } else {
-                getPlayersFromSharedPrefs();
+                isDataPresent = getPlayersFromSharedPrefs();
+                Log.d(TAG, "Getting stats from shared prefs");
+
             }
         }
 
@@ -71,68 +83,78 @@ public class LineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
-
-
-        chartView = (LineChartView) v.findViewById(R.id.LineChart);
-
-        LineSet lineSet;
-        ArrayList<ChartSet> lvlLines = new ArrayList<ChartSet>();
         playersColor = new HashMap();
 
+        if (isDataPresent) {
+            chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
-        for (Player player : playersList) {
-            lineSet = new LineSet();
+            LineSet lineSet;
+            ArrayList<ChartSet> lvlLines = new ArrayList<ChartSet>();
 
 
-            for (int i = 0; i < player.getPowerStats().size(); i++) {
-                lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
+            for (Player player : playersList) {
+                lineSet = new LineSet();
 
+
+                for (int i = 0; i < player.getLvlStats().size(); i++) {
+                    lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
+                }
+
+                // Style dots
+                lineSet.setDots(true);
+                lineSet.setDotsColor(getResources().getColor(R.color.blue));
+                lineSet.setDotsStrokeColor(getResources().getColor(R.color.green_light));
+
+                // Style line
+//        lineSet.setLineThickness(0.9f);
+
+                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                lineSet.setLineColor(color);
+                playersColor.put(color, player.getName());
+
+                // Style background fill
+                lineSet.setFill(false);
+
+                lineSet.setLineSmooth(true);
+                chartView.setGrid(true);
+
+                lvlLines.add(lineSet);
             }
 
-            // Style dots
-            lineSet.setDots(true);
-            rnd = new Random();
-            lineSet.setDotsColor(getResources().getColor(R.color.blue));
-            lineSet.setDotsStrokeColor(getResources().getColor(R.color.green_light));
+            chartView.addData(lvlLines);
 
-            // Style line
-//        lineSet.setLineThickness(0.9f);
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            lineSet.setLineColor(color);
-            playersColor.put(color, player);
 
-            // Style background fill
-            lineSet.setFill(false);
+            chartView.setOnEntryClickListener(new OnEntryClickListener() {
+                @Override
+                public void onClick(int setIndex, int entryIndex) {
+                    Toast.makeText(getActivity(), "Test Toast click on char/dot setIndex: " + setIndex + " entryIndex: " + entryIndex, Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            lineSet.setLineSmooth(true);
-            chartView.setGrid(true);
 
-            lvlLines.add(lineSet);
+            chartView.setAnimation(new Animation());
+
+            chartView.show();
+
+        } else {
+            Toast.makeText(getActivity(), PREFS_NO_DATA, Toast.LENGTH_SHORT).show();
         }
 
-        chartView.addData(lvlLines);
-
-
-        chartView.setOnEntryClickListener(new OnEntryClickListener() {
-            @Override
-            public void onClick(int setIndex, int entryIndex) {
-                Toast.makeText(getActivity(), "Test Toast click on char/dot setIndex: " + setIndex + " entryIndex: " + entryIndex, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        chartView.setAnimation(new Animation());
-
-        chartView.show();
-
+        inStatsAdapter = new InStatsPlayerListAdapter(getActivity(), playersColor);
+        inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
+        inStatsPlayersList.setAdapter(inStatsAdapter);
 
         return v;
     }
 
+    /**
+     * Removing previous results of statistic in shared prefs before storing new one
+     *
+     * @return boolean. True for success, false for failure.
+     */
     private boolean clearSharedPrefs() {
         boolean result;
-
-        prefsEditor.clear();
+        prefsEditor.remove(PREFS_PLAYERS_KEY);
         try {
             prefsEditor.apply();
             result = true;
@@ -143,6 +165,10 @@ public class LineFragment extends Fragment {
 
     }
 
+    /**
+     * Saving players stats to shared prefs in json format, using Gson from Google(deprecated)
+     * @return boolean. True for success, false for failure.
+     */
     private boolean savePlayersToSharedPrefs() {
         Gson gson = new Gson();
         boolean result;
@@ -156,14 +182,33 @@ public class LineFragment extends Fragment {
         return result;
     }
 
-    private void getPlayersFromSharedPrefs() {
+    /**
+     * Getting players stats from shared prefs.
+     *
+     * @return boolean. True for success, false for failure.
+     */
+    private boolean getPlayersFromSharedPrefs() {
+        boolean result = false;
         playersList = new ArrayList<Player>();
         Gson gson = new Gson();
         String json = mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
-        Type type = new TypeToken<ArrayList<Player>>() {
-        }.getType();
-        playersList = gson.fromJson(json, type);
-        Log.d(TAG, playersList.toString());
-
+        if (!json.equals(PREFS_NO_DATA)) {
+            Type type = new TypeToken<ArrayList<Player>>() {
+            }.getType();
+            try {
+                playersList = gson.fromJson(json, type);
+                Log.d(TAG, playersList.toString());
+                result = true;
+            } catch (JsonSyntaxException jsonSyntaxEx) {
+                Log.d(TAG, jsonSyntaxEx.toString());
+                result = false;
+            } catch (IllegalStateException illegalStateEx) {
+                Log.d(TAG, illegalStateEx.toString());
+                result = false;
+            }
+        } else {
+            result = false;
+        }
+        return result;
     }
 }

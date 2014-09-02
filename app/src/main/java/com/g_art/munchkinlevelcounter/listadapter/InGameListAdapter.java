@@ -21,7 +21,6 @@ public class InGameListAdapter extends BaseAdapter {
     private static LayoutInflater inflater = null;
     private Player player = null;
     private ArrayList data;
-    private int i = 0;
     private Activity activity;
 
 
@@ -30,7 +29,7 @@ public class InGameListAdapter extends BaseAdapter {
         this.data = arrayList;
 
         /***********  Layout inflator to call external xml layout () ***********/
-        inflater = (LayoutInflater) activity.
+        inflater = (LayoutInflater) this.activity.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
