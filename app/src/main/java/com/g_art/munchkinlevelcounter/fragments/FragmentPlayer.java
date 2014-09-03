@@ -18,6 +18,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
 import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
 
 
 /**
@@ -46,6 +47,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         public void onPlayersUpdate();
 
         public boolean savePlayersStats();
+
         public boolean onNextTurnClick(Player player);
     }
 

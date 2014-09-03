@@ -61,29 +61,9 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         onPlayerSelected(playersList.get(FIRST_PLAYER));
     }
 
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "GameActivity onStart");
-    }
-
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "GameActivity onResume");
-    }
-
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "GameActivity onPause");
-    }
-
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "GameActivity onStop");
-    }
-
-    protected void onDestroy() {
-        Log.d(TAG, "GameActivity onDestroy");
-        super.onDestroy();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

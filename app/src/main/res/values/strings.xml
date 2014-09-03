@@ -34,5 +34,8 @@
     <string name="message_for_dialog_cont">You Win the Game! Do you continue further or Quit?</string>
     <string name="ok_btn_for_dialog_cont">Continue</string>
     <string name="cancel_btn_for_dialog_cont">End</string>
+    <string name="lvl_tab">LVL</string>
+    <string name="gear_tab">GEAR</string>
+    <string name="power_tab">Power</string>
 
 </resources>

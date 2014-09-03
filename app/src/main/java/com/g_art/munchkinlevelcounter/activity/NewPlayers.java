@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.fragments.NewPlayerDialog;
+import com.g_art.munchkinlevelcounter.fragments.dialog.NewPlayerDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 
 import java.util.ArrayList;

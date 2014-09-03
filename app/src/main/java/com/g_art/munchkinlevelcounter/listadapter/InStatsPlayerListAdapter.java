@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.fragments.LineFragment;
+import com.g_art.munchkinlevelcounter.activity.Stats;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +85,7 @@ public class InStatsPlayerListAdapter extends BaseAdapter {
         }
 
         if (playersMap.size() <= 0) {
-            holder.txtPlayerName.setText(LineFragment.PREFS_NO_DATA);
+            holder.txtPlayerName.setText(Stats.PREFS_NO_DATA);
         } else {
             Map.Entry<Integer, String> item = getItem(playerPosition);
             holder.viewPlayerColor.setBackgroundColor(item.getKey());
