@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.fragments.stats.datahandler;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.db.chart.OnEntryClickListener;
@@ -26,9 +27,9 @@ public class StatsHandler {
     private LineChartView chartView;
     private Random rnd;
     private HashMap playersColor;
-    public final static int LVL_STATS = 1;
-    public final static int GEAR_STATS = 2;
-    public final static int POWER_STATS = 3;
+    public final static int LVL_STATS = 0;
+    public final static int GEAR_STATS = 1;
+    public final static int POWER_STATS = 2;
 
 
     public StatsHandler(ArrayList<Player> playersList, LineChartView chartView) {
@@ -43,69 +44,82 @@ public class StatsHandler {
         playersColor = new HashMap();
 
         LineSet lineSet;
-        ArrayList<ChartSet> lvlLines = new ArrayList<ChartSet>();
+        ArrayList<ChartSet> statLines = new ArrayList<ChartSet>();
 
-        for (Player player : playersList) {
+        if (playersList != null) {
+            for (Player player : playersList) {
 
-            lineSet = new LineSet();
+                lineSet = new LineSet();
 
-            switch (stats) {
-                case LVL_STATS:
-                    for (int i = 0; i < player.getLvlStats().size(); i++) {
-                        lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
-                    }
-                    break;
-                case GEAR_STATS:
-                    for (int i = 0; i < player.getGearStats().size(); i++) {
-                        lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getGearStats().get(i))));
-                    }
-                    break;
-                case POWER_STATS:
-                    for (int i = 0; i < player.getPowerStats().size(); i++) {
-                        lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
-                    }
-                    break;
-                default:
-                    for (int i = 0; i < player.getLvlStats().size(); i++) {
-                        lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
-                    }
-                    break;
+                switch (stats) {
+                    case LVL_STATS:
+                        Log.d(TAG, "getLvlStats: " + player.getLvlStats().size());
+                        for (int i = 0; i < player.getLvlStats().size(); i++) {
+                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
+                        }
+                        break;
+                    case GEAR_STATS:
+                        Log.d(TAG, "getGearStats: " + player.getGearStats().size());
+                        for (int i = 0; i < player.getGearStats().size(); i++) {
+                            Log.d(TAG, "Integer.parseInt: " + Integer.parseInt(player.getGearStats().get(i)));
+                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getGearStats().get(i))));
+                        }
+                        break;
+                    case POWER_STATS:
+                        Log.d(TAG, "getPowerStats: " + player.getPowerStats());
+                        for (int i = 0; i < player.getPowerStats().size(); i++) {
+                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
+                        }
+                        break;
+                    default:
+                        for (int i = 0; i < player.getLvlStats().size(); i++) {
+                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
+                        }
+                        break;
+                }
+
+                // Style dots
+                lineSet.setDots(true);
+                lineSet.setDotsColor(context.getResources().getColor(R.color.blue));
+                lineSet.setDotsStrokeColor(context.getResources().getColor(R.color.green_light));
+
+                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                lineSet.setLineColor(color);
+                playersColor.put(color, player.getName());
+
+                // Style background fill
+                lineSet.setFill(false);
+
+                lineSet.setLineSmooth(true);
+                chartView.setGrid(true);
+
+                Log.d(TAG, "lineSet trying to add");
+
+                statLines.add(lineSet);
+                Log.d(TAG, "lineSet added");
+
+
             }
 
-            // Style dots
-            lineSet.setDots(true);
-            lineSet.setDotsColor(context.getResources().getColor(R.color.blue));
-            lineSet.setDotsStrokeColor(context.getResources().getColor(R.color.green_light));
+            Log.d(TAG, "statLines trying to add");
 
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            lineSet.setLineColor(color);
-            playersColor.put(color, player.getName());
+            chartView.addData(statLines);
+            Log.d(TAG, "statLines added");
 
-            // Style background fill
-            lineSet.setFill(false);
 
-            lineSet.setLineSmooth(true);
-            chartView.setGrid(true);
+            chartView.setOnEntryClickListener(new OnEntryClickListener() {
+                @Override
+                public void onClick(int setIndex, int entryIndex) {
+                    Toast.makeText(context, "Test Toast click on char/dot setIndex: " + setIndex + " entryIndex: " + entryIndex, Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            lvlLines.add(lineSet);
 
+            chartView.setAnimation(new Animation());
+            return chartView;
         }
 
-        chartView.addData(lvlLines);
-
-
-        chartView.setOnEntryClickListener(new OnEntryClickListener() {
-            @Override
-            public void onClick(int setIndex, int entryIndex) {
-                Toast.makeText(context, "Test Toast click on char/dot setIndex: " + setIndex + " entryIndex: " + entryIndex, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        chartView.setAnimation(new Animation());
-
-
-        return chartView;
+        return null;
     }
 
     public HashMap getPlayersColor() {

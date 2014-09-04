@@ -27,14 +27,14 @@ public class ContinueDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FragmentPlayer fragment = (FragmentPlayer) getActivity().getFragmentManager().findFragmentById(R.id.currentPlayer_Fragment);
-                        fragment.doPositiveClick();
+                        fragment.doPositiveClickContinueDialog();
                     }
                 })
                 .setNegativeButton(R.string.cancel_btn_for_dialog_cont, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FragmentPlayer fragment = (FragmentPlayer) getActivity().getFragmentManager().findFragmentById(R.id.currentPlayer_Fragment);
-                        fragment.doNegativeClick();
+                        fragment.doNegativeClickContinueDialog();
                     }
                 });
 

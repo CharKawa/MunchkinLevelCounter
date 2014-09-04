@@ -37,7 +37,7 @@ public class InStatsPlayerListAdapter extends BaseAdapter {
         this.playersMap = playersMap;
         mData = new ArrayList();
 
-        if (!playersMap.isEmpty()) {
+        if (playersMap != null) {
             mData.addAll(playersMap.entrySet());
         }
 
@@ -48,7 +48,7 @@ public class InStatsPlayerListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (playersMap.size() <= 0) {
+        if (playersMap == null || playersMap.size() <= 0) {
             return 1;
         } else {
             return playersMap.size();
@@ -84,7 +84,7 @@ public class InStatsPlayerListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        if (playersMap.size() <= 0) {
+        if (playersMap == null || playersMap.size() <= 0) {
             holder.txtPlayerName.setText(Stats.PREFS_NO_DATA);
         } else {
             Map.Entry<Integer, String> item = getItem(playerPosition);

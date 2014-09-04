@@ -26,7 +26,7 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
  */
 public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
-    ViewHolder holder;
+    private ViewHolder holder;
     private Player selectedPlayer;
     private static final String PLAYER_KEY = "playersList";
     private final int MAX_LVL = 10;
@@ -119,7 +119,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                     } else {
                         DialogFragment continueDialog = new ContinueDialog();
-                        continueDialog.show(getActivity().getFragmentManager(), "dialog");
+                        continueDialog.show(getActivity().getFragmentManager(), "continueDialog");
                         if (contAfterMaxLVL) {
                             selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                             Log.d(TAG, "Continue the game");
@@ -170,13 +170,13 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         mCallback.onPlayersUpdate();
     }
 
-    public void doPositiveClick() {
+    public void doPositiveClickContinueDialog() {
         contAfterMaxLVL = true;
         onClick(view.findViewById(R.id.btnLvlUp));
         Log.d(TAG, "Continue the game");
     }
 
-    public void doNegativeClick() {
+    public void doNegativeClickContinueDialog() {
         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
         onClick(view.findViewById(R.id.btnNextTurn));
         Intent intent = new Intent(getActivity(), Stats.class);
@@ -212,8 +212,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         int Min = 1;
         int Max = 6;
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
-        Log.d("DICE", String.valueOf(dice));
-//                Toast.makeText(getActivity(),String.valueOf(dice),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), String.valueOf(dice), Toast.LENGTH_SHORT).show();
     }
 
 

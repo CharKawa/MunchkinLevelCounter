@@ -1,7 +1,7 @@
 package com.g_art.munchkinlevelcounter.fragments.stats;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +45,7 @@ public class LvlStatsFragment extends Fragment {
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            if (playersList != null) {
+            if (playersList.size() > 0) {
                 Log.d(TAG, "LvlStatsFr gets playersList: " + playersList.toString());
                 isDataPresent = true;
             } else {
@@ -61,23 +61,28 @@ public class LvlStatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
+        Log.d(TAG, "isDataPresent: " + isDataPresent);
 
         if (isDataPresent) {
             chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
             StatsHandler statsHandler = new StatsHandler(playersList, chartView);
             chartView = statsHandler.getStats(getActivity(), StatsHandler.LVL_STATS);
-            playersColor = statsHandler.getPlayersColor();
-            chartView.show();
+            if (chartView != null) {
+                playersColor = statsHandler.getPlayersColor();
+                chartView.show();
+
+
+            }
 
         } else {
             Toast.makeText(getActivity(), Stats.PREFS_NO_DATA, Toast.LENGTH_SHORT).show();
         }
 
+
         inStatsAdapter = new InStatsPlayerListAdapter(getActivity(), playersColor);
         inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
         inStatsPlayersList.setAdapter(inStatsAdapter);
-
         return v;
     }
 }

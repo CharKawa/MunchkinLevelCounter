@@ -43,13 +43,13 @@ public class NewPlayerDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String name = playerName.getText().toString();
                         Log.d(TAG, "Player name: " + name);
-                        ((NewPlayers) getActivity()).doPositiveClick(name);
+                        ((NewPlayers) getActivity()).doPositiveClickNewPlayerDialog(name);
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((NewPlayers) getActivity()).doNegativeClick();
+                        ((NewPlayers) getActivity()).doNegativeClickNewPlayerDialog();
                     }
                 });
 

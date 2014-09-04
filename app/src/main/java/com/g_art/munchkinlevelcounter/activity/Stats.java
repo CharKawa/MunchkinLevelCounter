@@ -1,16 +1,18 @@
 package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.activity.listeners.StatsTabListener;
+import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.stats.GearStatsFragment;
 import com.g_art.munchkinlevelcounter.fragments.stats.LvlStatsFragment;
@@ -23,7 +25,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-public class Stats extends Activity {
+public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
     private ArrayList<Player> playersList;
     final String PLAYER_KEY = "playersList";
@@ -38,6 +40,9 @@ public class Stats extends Activity {
     private SharedPreferences.Editor prefsEditor;
     final String TAG = "GameActivity_Munchkin_Test";
     private static final String TAG_STATS_FRAGMENT = "Fragment_Players_Stats";
+    private ViewPager viewPager;
+    private StatsPageAdapter statsAdapter;
+    private ActionBar actionBar;
 
 
     @Override
@@ -58,63 +63,84 @@ public class Stats extends Activity {
             savePlayersToSharedPrefs();
             Log.d(TAG, "Saving stats to shared prefs");
         } else {
-            getPlayersFromSharedPrefs();
-            Log.d(TAG, "Getting stats from shared prefs");
+            if (getPlayersFromSharedPrefs()) {
+                Log.d(TAG, "Getting stats from shared prefs");
+            } else {
+                Log.d(TAG, "No saved stats");
+            }
+
         }
 
 
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(PLAYER_KEY, playersList);
 
-        fm = getFragmentManager();
-        lvlFr = (LvlStatsFragment) fm.findFragmentById(R.id.statsFram);
 
-        if (lvlFr == null) {
-            Log.d(TAG, "lvlFR is null");
-            lvlFr = new LvlStatsFragment();
-            lvlFr.setArguments(bundle);
-        }
+        // Initilization
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        actionBar = getActionBar();
+        statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), bundle);
 
-        gearFr = (GearStatsFragment) fm.findFragmentById(R.id.statsFram);
+        viewPager.setAdapter(statsAdapter);
 
-        if (gearFr == null) {
-            Log.d(TAG, "gearFr is null");
-            gearFr = new GearStatsFragment();
-            gearFr.setArguments(bundle);
-        }
+        /**
+         * on swiping the viewpager make respective tab selected
+         * */
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
-        powerFr = (PowerStatsFragment) fm.findFragmentById(R.id.statsFram);
+            @Override
+            public void onPageSelected(int position) {
+                // on changing the page
+                // make respected tab selected
+                actionBar.setSelectedNavigationItem(position);
+            }
 
-        if (powerFr == null) {
-            Log.d(TAG, "powerFr is null");
-            powerFr = new PowerStatsFragment();
-            powerFr.setArguments(bundle);
-        }
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
+            }
+        });
 
-        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         lvlTab = actionBar.newTab().setText(getResources().getText(R.string.lvl_tab));
-        lvlTab.setTabListener(new StatsTabListener(lvlFr));
+        lvlTab.setTabListener(this);
 
         gearTab = actionBar.newTab().setText(getResources().getText(R.string.gear_tab));
-        gearTab.setTabListener(new StatsTabListener(gearFr));
+        gearTab.setTabListener(this);
 
         powerTab = actionBar.newTab().setText(getResources().getText(R.string.power_tab));
-        powerTab.setTabListener(new StatsTabListener(powerFr));
+        powerTab.setTabListener(this);
 
         actionBar.addTab(lvlTab);
         actionBar.addTab(gearTab);
         actionBar.addTab(powerTab);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
 
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
     }
 
     /**
@@ -182,7 +208,5 @@ public class Stats extends Activity {
         }
         return result;
     }
-
-
 
 }

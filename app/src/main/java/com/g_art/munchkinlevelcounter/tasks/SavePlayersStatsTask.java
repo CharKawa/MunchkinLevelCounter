@@ -29,9 +29,7 @@ public class SavePlayersStatsTask extends AsyncTask<ArrayList<Player>, Void, Boo
                 selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
                 selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
                 selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getLvlStats().toString());
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getGearStats().toString());
-                Log.d(TAG, " Stas from player: " + selectedPlayer.getName() + " :" + selectedPlayer.getPowerStats().toString());
+                Log.d(TAG, " Stas saved in memory");
             }
             result = true;
         } catch (Exception ex) {

@@ -1,7 +1,7 @@
 package com.g_art.munchkinlevelcounter.fragments.stats;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import com.g_art.munchkinlevelcounter.listadapter.InStatsPlayerListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 
 /**
@@ -29,8 +28,6 @@ public class GearStatsFragment extends Fragment {
     final String TAG = "GameActivity_Munchkin_Test";
     private ArrayList<Player> playersList;
     final static String PLAYER_KEY = "playersList";
-
-    private Random rnd;
     private LineChartView chartView;
     private HashMap playersColor;
     private boolean isDataPresent;
@@ -43,12 +40,11 @@ public class GearStatsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         isDataPresent = false;
-        rnd = new Random();
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            if (playersList != null) {
-                Log.d(TAG, "FragmentPlayersList get beans: " + playersList.toString());
+            if (playersList.size() > 0) {
+                Log.d(TAG, "GearStatsFragment get beans: " + playersList.toString());
                 isDataPresent = true;
             } else {
                 isDataPresent = false;
@@ -70,8 +66,12 @@ public class GearStatsFragment extends Fragment {
 
             StatsHandler statsHandler = new StatsHandler(playersList, chartView);
             chartView = statsHandler.getStats(getActivity(), StatsHandler.GEAR_STATS);
-            playersColor = statsHandler.getPlayersColor();
-            chartView.show();
+            if (chartView != null) {
+                playersColor = statsHandler.getPlayersColor();
+                chartView.show();
+
+
+            }
 
         } else {
             Toast.makeText(getActivity(), Stats.PREFS_NO_DATA, Toast.LENGTH_SHORT).show();

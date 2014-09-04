@@ -31,16 +31,12 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        Log.d(TAG, "GameActivity onCreate");
 
         Intent intent = getIntent();
         playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
-        Log.d(TAG, "List of player: " + playersList);
-
 
         FragmentManager fm = getFragmentManager();
         fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
-        Log.d(TAG, "fr: " + fr);
 
         if (fr == null) {
             fr = new FragmentPlayersList();

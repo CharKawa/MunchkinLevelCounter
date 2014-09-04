@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.NewPlayerDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 
@@ -61,51 +62,27 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     }
 
 
-    void showDialog() {
+    void showNewPlayerDialog() {
         DialogFragment newFragment = new NewPlayerDialog();
         newFragment.show(getFragmentManager(), "dialog");
     }
 
-    public void doPositiveClick(String name) {
+    void showConfirmDialog() {
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        confirmDialog.show(getFragmentManager(), "confirmDialog");
+    }
+
+    public void doPositiveClickNewPlayerDialog(String name) {
         Log.d(TAG, "Positive click! Player name: " + name);
         listPlayers.add(new Player(name));
         customListAdapter.notifyDataSetChanged();
     }
 
-    public void doNegativeClick() {
+    public void doNegativeClickNewPlayerDialog() {
         // Do stuff here.
         Log.d(TAG, "Negative click!");
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "NewPlayers Activity: onStart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "NewPlayers Activity: onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "NewPlayers Activity: onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "NewPlayers Activity: onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "NewPlayers Activity: onDestroy()");
-        super.onDestroy();
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -124,7 +101,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btnAddPlayer:
                 Log.d(TAG, "Adding player");
-                showDialog();
+                showNewPlayerDialog();
                 break;
             case R.id.btnClear:
                 Log.d(TAG, "Clearing list of players");
