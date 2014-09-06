@@ -10,6 +10,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.FragmentPlayersList;
+import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.tasks.SavePlayersStatsTask;
 
 import java.util.ArrayList;
@@ -25,17 +26,20 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private FragmentPlayersList fr;
     private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
     private SavePlayersStatsTask saveTask;
+    private FragmentManager fm;
+    private ConfirmDialog confirmDialog;
 
     final String TAG = "GameActivity_Munchkin_Test";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        confirmDialog = new ConfirmDialog();
 
         Intent intent = getIntent();
         playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
 
-        FragmentManager fm = getFragmentManager();
+        fm = getFragmentManager();
         fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
 
         if (fr == null) {
@@ -59,13 +63,21 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
     @Override
     public void onBackPressed() {
+        confirmDialog.show(fm, "confirmDialog");
+    }
+
+    public void onPositiveClickConfirmDialog() {
         super.onBackPressed();
+    }
+
+    public void onNegativeClickConfirmDialog() {
+        confirmDialog.dismiss();
     }
 
     @Override
     public void onPlayerSelected(Player player) {
 
-        FragmentPlayer fragmentPlayer = (FragmentPlayer) getFragmentManager().findFragmentById(R.id.currentPlayer_Fragment);
+        FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
 
         if (fragmentPlayer == null) {
             Log.d(TAG, "fragmentPlayer is NULL");
@@ -78,7 +90,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
     @Override
     public void onPlayersUpdate() {
-        FragmentPlayersList fragment = (FragmentPlayersList) getFragmentManager().findFragmentById(R.id.fragmentList);
+        FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
         if (fragment == null) {
             Log.d(TAG, "fragmentPlayer is NULL");
         } else {

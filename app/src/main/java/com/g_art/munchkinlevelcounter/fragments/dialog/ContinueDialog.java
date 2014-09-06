@@ -20,7 +20,7 @@ public class ContinueDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 
-        builder.setTitle(R.string.title_dialog_new_Player)
+        builder.setTitle(R.string.title_dialog_continue)
                 .setCancelable(false)
                 .setMessage(R.string.message_for_dialog_cont)
                 .setPositiveButton(R.string.ok_btn_for_dialog_cont, new DialogInterface.OnClickListener() {
