@@ -2,21 +2,19 @@ package com.g_art.munchkinlevelcounter.fragments.stats;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.db.chart.view.LineChartView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.SparseStringsAdapter;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.StatsHandler;
-import com.g_art.munchkinlevelcounter.listadapter.InStatsPlayerListAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -24,14 +22,12 @@ import java.util.HashMap;
  */
 public class PowerStatsFragment extends Fragment {
 
-    final String TAG = "GameActivity_Munchkin_Test";
     private ArrayList<Player> playersList;
     final static String PLAYER_KEY = "playersList";
-    public final static String PREFS_NO_DATA = "Sorry, No Data!";
     private LineChartView chartView;
-    private HashMap playersColor;
+    private SparseArray playersColors;
     private boolean isDataPresent;
-    private InStatsPlayerListAdapter inStatsAdapter;
+    private SparseStringsAdapter sparseStringsAdapter;
     private ListView inStatsPlayersList;
 
 
@@ -40,17 +36,16 @@ public class PowerStatsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         isDataPresent = false;
+        playersColors = new SparseArray();
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            if (playersList.size() > 0) {
-                Log.d(TAG, "PowerStatsFr gets playerList: " + playersList.toString());
+            if (playersList != null && !playersList.isEmpty()) {
                 isDataPresent = true;
             } else {
                 isDataPresent = false;
             }
         }
-
     }
 
 
@@ -63,22 +58,17 @@ public class PowerStatsFragment extends Fragment {
             chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
             StatsHandler statsHandler = new StatsHandler(playersList, chartView);
-            chartView = statsHandler.getStats(getActivity(), StatsHandler.POWER_STATS);
+            chartView = statsHandler.getStats(getActivity(), StatsHandler.LVL_STATS);
             if (chartView != null) {
-                playersColor = statsHandler.getPlayersColor();
+                playersColors = statsHandler.getPlayersColorSparse();
                 chartView.show();
-
-
             }
 
-        } else {
-            Toast.makeText(getActivity(), PREFS_NO_DATA, Toast.LENGTH_SHORT).show();
         }
 
-        inStatsAdapter = new InStatsPlayerListAdapter(getActivity(), playersColor);
+        sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
         inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
-        inStatsPlayersList.setAdapter(inStatsAdapter);
-
+        inStatsPlayersList.setAdapter(sparseStringsAdapter);
         return v;
     }
 }

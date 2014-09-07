@@ -29,8 +29,7 @@
 
         <activity
             android:name=".activity.GameActivity"
-            android:label="@string/game_screen"
-            android:parentActivityName=".activity.MyActivity"></activity>
+            android:label="@string/game_screen"></activity>
 
         <activity
             android:name=".activity.Settings"

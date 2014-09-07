@@ -34,6 +34,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         confirmDialog = new ConfirmDialog();
 
         Intent intent = getIntent();
@@ -73,6 +74,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public void onNegativeClickConfirmDialog() {
         confirmDialog.dismiss();
     }
+
 
     @Override
     public void onPlayerSelected(Player player) {

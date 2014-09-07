@@ -37,7 +37,7 @@ public class InStatsPlayerListAdapter extends BaseAdapter {
         this.playersMap = playersMap;
         mData = new ArrayList();
 
-        if (playersMap != null) {
+        if (playersMap != null && !playersMap.isEmpty()) {
             mData.addAll(playersMap.entrySet());
         }
 

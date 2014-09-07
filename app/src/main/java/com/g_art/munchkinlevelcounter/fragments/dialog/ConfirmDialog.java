@@ -36,6 +36,6 @@ public class ConfirmDialog extends DialogFragment {
                         gameActivity.onPositiveClickConfirmDialog();
                     }
                 });
-        return super.onCreateDialog(savedInstanceState);
+        return builder.create();
     }
 }

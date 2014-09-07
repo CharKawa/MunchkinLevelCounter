@@ -1,7 +1,6 @@
 package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.ActionBar;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +13,6 @@ import android.util.Log;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
 import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.fragments.stats.GearStatsFragment;
-import com.g_art.munchkinlevelcounter.fragments.stats.LvlStatsFragment;
-import com.g_art.munchkinlevelcounter.fragments.stats.PowerStatsFragment;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -32,14 +28,9 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
     final static String PREFS_PLAYERS_KEY = "players";
     public final static String PREFS_NO_DATA = "Sorry, No Data!";
     private ActionBar.Tab lvlTab, gearTab, powerTab;
-    private LvlStatsFragment lvlFr;
-    private GearStatsFragment gearFr;
-    private PowerStatsFragment powerFr;
-    private FragmentManager fm;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
     final String TAG = "GameActivity_Munchkin_Test";
-    private static final String TAG_STATS_FRAGMENT = "Fragment_Players_Stats";
     private ViewPager viewPager;
     private StatsPageAdapter statsAdapter;
     private ActionBar actionBar;
@@ -80,6 +71,7 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), bundle);
+        Log.d(TAG, "Setting pager adapter");
 
         viewPager.setAdapter(statsAdapter);
 
@@ -186,9 +178,13 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
      */
     private boolean getPlayersFromSharedPrefs() {
         boolean result = false;
+
         playersList = new ArrayList<Player>();
+
         Gson gson = new Gson();
+
         String json = mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
+
         if (!json.equals(PREFS_NO_DATA)) {
             Type type = new TypeToken<ArrayList<Player>>() {
             }.getType();

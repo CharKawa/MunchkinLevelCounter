@@ -13,6 +13,7 @@ public class Player implements Parcelable {
     private String name;
     private int level;
     private int gear;
+    private boolean winner;
     private ArrayList<String> lvlStats;
     private ArrayList<String> gearStats;
     private ArrayList<String> powerStats;
@@ -27,6 +28,7 @@ public class Player implements Parcelable {
         this.name = name;
         this.level = 1;
         this.gear = 0;
+        this.winner = false;
     }
 
     public Player(String name, int lvl, int gear) {
@@ -36,6 +38,8 @@ public class Player implements Parcelable {
         this.name = name;
         this.level = lvl;
         this.gear = gear;
+        this.winner = false;
+
     }
 
     public Player(Parcel in) {
@@ -45,6 +49,7 @@ public class Player implements Parcelable {
         this.name = in.readString();
         this.level = in.readInt();
         this.gear = in.readInt();
+        this.winner = in.readByte() != 0;
         in.readStringList(lvlStats);
         in.readStringList(gearStats);
         in.readStringList(powerStats);
@@ -72,6 +77,14 @@ public class Player implements Parcelable {
 
     public void setGear(int gear) {
         this.gear = gear;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
     }
 
     public ArrayList<String> getLvlStats() {
@@ -104,6 +117,7 @@ public class Player implements Parcelable {
                 "name='" + name + '\'' +
                 ", level=" + level +
                 ", gear=" + gear +
+                ", isWinner=" + winner +
                 ", lvlStats=" + lvlStats +
                 ", gearStats=" + gearStats +
                 ", powerStats=" + powerStats +
@@ -119,6 +133,7 @@ public class Player implements Parcelable {
 
         if (gear != player.gear) return false;
         if (level != player.level) return false;
+        if (winner != player.winner) return false;
         if (!name.equals(player.name)) return false;
 
         return true;
@@ -129,8 +144,10 @@ public class Player implements Parcelable {
         int result = name.hashCode();
         result = 31 * result + level;
         result = 31 * result + gear;
+        result = 31 * result + (winner ? 1 : 0);
         return result;
     }
+
 
     @Override
     public int describeContents() {
@@ -142,6 +159,7 @@ public class Player implements Parcelable {
         dest.writeString(name);
         dest.writeInt(level);
         dest.writeInt(gear);
+        dest.writeByte((byte) (winner ? 1 : 0));
         dest.writeStringList(lvlStats);
         dest.writeStringList(gearStats);
         dest.writeStringList(powerStats);

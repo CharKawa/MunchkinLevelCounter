@@ -3,6 +3,7 @@ package com.g_art.munchkinlevelcounter.fragments.stats.datahandler;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
+import android.util.SparseArray;
 import android.widget.Toast;
 
 import com.db.chart.OnEntryClickListener;
@@ -15,7 +16,6 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -26,7 +26,7 @@ public class StatsHandler {
     private ArrayList<Player> playersList;
     private LineChartView chartView;
     private Random rnd;
-    private HashMap playersColor;
+    private SparseArray<String> playersColorSparse;
     public final static int LVL_STATS = 0;
     public final static int GEAR_STATS = 1;
     public final static int POWER_STATS = 2;
@@ -41,7 +41,7 @@ public class StatsHandler {
 
     public LineChartView getStats(final Context context, int stats) {
 
-        playersColor = new HashMap();
+        playersColorSparse = new SparseArray<String>();
 
         LineSet lineSet;
         ArrayList<ChartSet> statLines = new ArrayList<ChartSet>();
@@ -53,20 +53,16 @@ public class StatsHandler {
 
                 switch (stats) {
                     case LVL_STATS:
-                        Log.d(TAG, "getLvlStats: " + player.getLvlStats().size());
                         for (int i = 0; i < player.getLvlStats().size(); i++) {
                             lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
                         }
                         break;
                     case GEAR_STATS:
-                        Log.d(TAG, "getGearStats: " + player.getGearStats().size());
                         for (int i = 0; i < player.getGearStats().size(); i++) {
-                            Log.d(TAG, "Integer.parseInt: " + Integer.parseInt(player.getGearStats().get(i)));
                             lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getGearStats().get(i))));
                         }
                         break;
                     case POWER_STATS:
-                        Log.d(TAG, "getPowerStats: " + player.getPowerStats());
                         for (int i = 0; i < player.getPowerStats().size(); i++) {
                             lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
                         }
@@ -85,7 +81,9 @@ public class StatsHandler {
 
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 lineSet.setLineColor(color);
-                playersColor.put(color, player.getName());
+                playersColorSparse.put(color, player.getName() + " - " + context.getString((player.isWinner() ? R.string.winner : R.string.loser)));
+                Log.d(TAG, "Player: " + player.getName() + " is winner? " + player.isWinner());
+
 
                 // Style background fill
                 lineSet.setFill(false);
@@ -122,7 +120,8 @@ public class StatsHandler {
         return null;
     }
 
-    public HashMap getPlayersColor() {
-        return playersColor;
+
+    public SparseArray getPlayersColorSparse() {
+        return playersColorSparse;
     }
 }

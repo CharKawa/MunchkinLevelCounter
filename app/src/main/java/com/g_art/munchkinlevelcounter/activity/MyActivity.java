@@ -15,7 +15,6 @@ import com.g_art.munchkinlevelcounter.R;
 
 public class MyActivity extends Activity {
 
-    final String TAG = "Munchkin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +29,6 @@ public class MyActivity extends Activity {
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "MainActivity: onStart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "MainActivity: onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "MainActivity: onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "MainActivity: onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "MainActivity: onDestroy()");
-        super.onDestroy();
-    }
 
     /**
      * A placeholder fragment containing a simple view.

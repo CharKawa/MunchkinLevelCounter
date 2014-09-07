@@ -118,6 +118,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                     if (contAfterMaxLVL) {
                         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                     } else {
+                        selectedPlayer.setWinner(true);
                         DialogFragment continueDialog = new ContinueDialog();
                         continueDialog.show(getActivity().getFragmentManager(), "continueDialog");
                         if (contAfterMaxLVL) {

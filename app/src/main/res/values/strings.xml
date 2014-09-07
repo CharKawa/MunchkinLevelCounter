@@ -41,5 +41,7 @@
     <string name="lvl_tab">LVL</string>
     <string name="gear_tab">GEAR</string>
     <string name="power_tab">Power</string>
+    <string name="winner">Winner</string>
+    <string name="loser">Loser</string>
 
 </resources>
