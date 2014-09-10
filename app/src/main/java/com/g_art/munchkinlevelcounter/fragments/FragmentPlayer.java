@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +32,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private final int MIN_STAT = 0;
     private View view;
     private boolean contAfterMaxLVL = false;
-    //    final String TAG = "Munchkin";
     final String TAG = "GameActivity_Munchkin_Test";
     private PlayersUpdate mCallback;
+    private boolean collectStats;
 
 
     public FragmentPlayer() {
@@ -44,11 +43,14 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     // interface for communication between fragments
     public interface PlayersUpdate {
+
         public void onPlayersUpdate();
 
         public boolean savePlayersStats();
 
         public boolean onNextTurnClick(Player player);
+
+        public boolean collectStats();
     }
 
     @Override
@@ -108,10 +110,19 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        if (!mCallback.collectStats()) {
+            holder.btnNextTurn.setVisibility(View.INVISIBLE);
+        } else {
+            holder.btnNextTurn.setVisibility(View.VISIBLE);
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLvlUp:
-                Log.d(TAG, "btnLvlUp clicked");
                 if (!isMaxLvlReached(selectedPlayer.getLevel())) {
                     selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                 } else {
@@ -123,16 +134,14 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                         continueDialog.show(getActivity().getFragmentManager(), "continueDialog");
                         if (contAfterMaxLVL) {
                             selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
-                            Log.d(TAG, "Continue the game");
                         } else {
-                            Log.d(TAG, "End the game");
+                            //endGame
                         }
                     }
                 }
                 break;
 
             case R.id.btnLvlDwn:
-                Log.d(TAG, "btnLvlDwn clicked");
                 if (selectedPlayer.getLevel() != MIN_STAT + 1) {
                     selectedPlayer.setLevel(selectedPlayer.getLevel() - 1);
                 }
@@ -140,11 +149,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
             case R.id.btnGearUp:
                 selectedPlayer.setGear(selectedPlayer.getGear() + 1);
-                Log.d(TAG, "btnGearUp clicked");
                 break;
 
             case R.id.btnGearDwn:
-                Log.d(TAG, "btnGearDwn clicked");
                 if (selectedPlayer.getGear() != MIN_STAT) {
                     selectedPlayer.setGear(selectedPlayer.getGear() - 1);
                 }
@@ -155,10 +162,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnNextTurn:
-                Log.d(TAG, "btnNextTurn clicked");
                 if (mCallback.savePlayersStats()) {
                     if (mCallback.onNextTurnClick(selectedPlayer)) {
-                        Toast.makeText(getActivity(), " Data saved correctly! ", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
                     }
@@ -174,7 +179,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     public void doPositiveClickContinueDialog() {
         contAfterMaxLVL = true;
         onClick(view.findViewById(R.id.btnLvlUp));
-        Log.d(TAG, "Continue the game");
     }
 
     public void doNegativeClickContinueDialog() {
@@ -183,7 +187,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(getActivity(), Stats.class);
         intent.putParcelableArrayListExtra(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
         startActivity(intent);
-        Log.d(TAG, "Negative click!");
     }
 
     private boolean isMaxLvlReached(int currentLvl) {
@@ -196,7 +199,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     public void changeSelectedPlayer(Player player) {
         selectedPlayer = player;
-        Log.d(TAG, "Getting the position of the player: " + selectedPlayer);
         setSelectedPlayer();
     }
 
@@ -205,11 +207,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.txtCurrentPlayerLvl.setText(Integer.toString(selectedPlayer.getLevel()));
         holder.txtCurrentPlayerGear.setText(Integer.toString(selectedPlayer.getGear()));
         holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
-        Log.d(TAG, "Setting player");
     }
 
     private void rollADice() {
-        Log.d(TAG, "btnDice clicked");
         int Min = 1;
         int Max = 6;
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));

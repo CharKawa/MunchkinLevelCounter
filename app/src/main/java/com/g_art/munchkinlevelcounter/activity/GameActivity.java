@@ -3,8 +3,9 @@ package com.g_art.munchkinlevelcounter.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
@@ -28,12 +29,21 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private SavePlayersStatsTask saveTask;
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
+    private SharedPreferences mPrefs;
+
+    private boolean collectStats;
 
     final String TAG = "GameActivity_Munchkin_Test";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        if (mPrefs.contains(Settings.STATS_SETTINGS)) {
+            collectStats = mPrefs.getBoolean(Settings.STATS_SETTINGS, true);
+        }
 
         confirmDialog = new ConfirmDialog();
 
@@ -47,6 +57,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             fr = new FragmentPlayersList();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(PLAYER_KEY, playersList);
+            bundle.putBoolean(Settings.STATS_SETTINGS, collectStats);
             fr.setArguments(bundle);
             fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
         }
@@ -60,6 +71,12 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         Setting the first player chosen
          */
         onPlayerSelected(playersList.get(FIRST_PLAYER));
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -82,10 +99,8 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
 
         if (fragmentPlayer == null) {
-            Log.d(TAG, "fragmentPlayer is NULL");
         } else {
             fragmentPlayer.changeSelectedPlayer(player);
-            Log.d(TAG, "Selected player on position: " + player);
         }
 
     }
@@ -94,10 +109,8 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public void onPlayersUpdate() {
         FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
         if (fragment == null) {
-            Log.d(TAG, "fragmentPlayer is NULL");
         } else {
             fragment.listUpdate();
-            Log.d(TAG, "List update");
         }
     }
 
@@ -113,7 +126,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
                         i = 0;
                     }
                     onPlayerSelected(playersList.get(i));
-                    Log.d(TAG, "Sending next player");
                 }
             }
 
@@ -122,6 +134,11 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             result = false;
         }
         return result;
+    }
+
+    @Override
+    public boolean collectStats() {
+        return collectStats;
     }
 
     public boolean savePlayersStats() {

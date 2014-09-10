@@ -1,9 +1,9 @@
 package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -17,14 +17,15 @@ public class Settings extends Activity {
     private Switch statsSwitch;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
-    private final String STATS_SETTINGS = "stats_settings";
+    final String TAG = "GameActivity_Munchkin_Test";
+    public static final String STATS_SETTINGS = "stats_settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        mPrefs = getPreferences(Context.MODE_PRIVATE);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefsEditor = mPrefs.edit();
 
         statsSwitch = (Switch) findViewById(R.id.switchStats);
