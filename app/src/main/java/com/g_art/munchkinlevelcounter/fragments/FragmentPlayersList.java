@@ -100,6 +100,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
         // Set the adapter
         inGamePlayersList = (ListView) view.findViewById(R.id.inGamePlayersList);
+        inGamePlayersList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         inGamePlayersList.setAdapter(inGameAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
@@ -113,6 +114,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         player = playersList.get(position);
+        inGamePlayersList.setItemChecked(position, true);
         mCallback.onPlayerSelected(player);
 
     }

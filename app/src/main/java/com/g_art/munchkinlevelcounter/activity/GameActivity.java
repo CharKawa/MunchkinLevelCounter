@@ -98,8 +98,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
         FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
 
-        if (fragmentPlayer == null) {
-        } else {
+        if (fragmentPlayer != null) {
             fragmentPlayer.changeSelectedPlayer(player);
         }
 
@@ -108,8 +107,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     @Override
     public void onPlayersUpdate() {
         FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
-        if (fragment == null) {
-        } else {
+        if (fragment != null) {
             fragment.listUpdate();
         }
     }

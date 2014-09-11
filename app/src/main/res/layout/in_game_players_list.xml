@@ -1,86 +1,78 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:layout_gravity="top">
+    android:layout_gravity="top"
+    android:padding="10dp">
 
-    <TableRow>
+    <TextView
+        android:id="@+id/InGameListPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/InGameListPlayerLvL"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_vertical|left|top"
+        android:layout_marginBottom="0.5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/InGameListPlayerLvL"
+        android:layout_toRightOf="@+id/InGameListPlayerLvL"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
+    <TextView
+        android:id="@+id/InGameListPlayerLvL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/InGameListPlayerTotal"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_gravity="center_vertical|left|top"
+        android:layout_marginBottom="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/InGameListPlayerLvLValue"
+        android:text="@string/level"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/InGameListPlayerName"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical|left|top"
-                android:textSize="20dp"
-                android:layout_marginLeft="5dp"
-                android:textColor="#000000"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/InGameListPlayerLvL"
-                android:layout_alignBottom="@+id/InGameListPlayerLvL"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="0.5dp"
-                android:layout_toRightOf="@+id/InGameListPlayerLvL" />
+    <TextView
+        android:id="@+id/InGameListPlayerLvLValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/InGameListPlayerTotalValue"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentStart="false"
+        android:layout_gravity="center_vertical|left|top"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/InGameListPlayerTotal"
+        android:textColor="#000000"
+        android:textIsSelectable="false"
+        android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/InGameListPlayerLvL"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical|left|top"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:text="@string/level"
-                android:layout_alignBottom="@+id/InGameListPlayerTotal"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentRight="false"
-                android:layout_marginBottom="0.5dp"
-                android:layout_toLeftOf="@+id/InGameListPlayerLvLValue"
-                android:layout_marginLeft="10dp" />
+    <TextView
+        android:id="@+id/InGameListPlayerTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/InGameListPlayerTotalValue"
+        android:layout_gravity="center_vertical|left|top"
+        android:layout_marginBottom="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/InGameListPlayerTotalValue"
+        android:text="@string/total"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/InGameListPlayerLvLValue"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical|left|top"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:layout_alignParentEnd="false"
-                android:layout_alignBottom="@+id/InGameListPlayerTotalValue"
-                android:textIsSelectable="false"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentRight="false"
-                android:layout_toLeftOf="@+id/InGameListPlayerTotal"
-                android:layout_marginLeft="10dp" />
+    <TextView
+        android:id="@+id/InGameListPlayerTotalValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_vertical|left|top"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="12dp"
+        android:textColor="#000000"
+        android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/InGameListPlayerTotal"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical|left|top"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:text="@string/total"
-                android:layout_alignBottom="@+id/InGameListPlayerTotalValue"
-                android:layout_marginBottom="0.5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toLeftOf="@+id/InGameListPlayerTotalValue" />
-
-            <TextView
-                android:id="@+id/InGameListPlayerTotalValue"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_vertical|left|top"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="12dp" />
-
-        </RelativeLayout>
-    </TableRow>
-</TableLayout>
+</RelativeLayout>
