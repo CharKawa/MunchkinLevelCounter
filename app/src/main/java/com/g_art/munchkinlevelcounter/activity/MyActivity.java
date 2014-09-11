@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ public class MyActivity extends Activity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        final String LOG_TAG = "mainFrag";
 
         public PlaceholderFragment() {
         }
@@ -52,22 +50,18 @@ public class MyActivity extends Activity {
                     Intent intent = null;
                     switch (v.getId()) {
                         case R.id.btnPlayers:
-                            Log.d(LOG_TAG, "Button Players clicked");
                             intent = new Intent(getActivity(), NewPlayers.class);
                             startActivity(intent);
                             break;
                         case R.id.btnStats:
                             intent = new Intent(getActivity(), Stats.class);
                             startActivity(intent);
-                            Log.d(LOG_TAG, "Button Stats clicked");
                             break;
                         case R.id.btnSett:
                             intent = new Intent(getActivity(), Settings.class);
                             startActivity(intent);
-                            Log.d(LOG_TAG, "Button Settings clicked");
                             break;
                         case R.id.btnAbout:
-                            Log.d(LOG_TAG, "Button About clicked");
                             break;
                     }
                 }

@@ -2,16 +2,12 @@ package com.g_art.munchkinlevelcounter.fragments.stats.datahandler;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.util.SparseArray;
-import android.widget.Toast;
 
-import com.db.chart.OnEntryClickListener;
 import com.db.chart.model.ChartSet;
 import com.db.chart.model.LineSet;
 import com.db.chart.model.Point;
 import com.db.chart.view.LineChartView;
-import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
@@ -23,10 +19,12 @@ import java.util.Random;
  */
 public class StatsHandler {
     final String TAG = "GameActivity_Munchkin_Test";
+    private final static int CLEAR_STRING_BULDER = 0;
     private ArrayList<Player> playersList;
     private LineChartView chartView;
-    private Random rnd;
+    private static final Random rnd = new Random();
     private SparseArray<String> playersColorSparse;
+    private StringBuilder s;
     public final static int LVL_STATS = 0;
     public final static int GEAR_STATS = 1;
     public final static int POWER_STATS = 2;
@@ -35,8 +33,7 @@ public class StatsHandler {
     public StatsHandler(ArrayList<Player> playersList, LineChartView chartView) {
         this.playersList = playersList;
         this.chartView = chartView;
-        rnd = new Random();
-
+        s = new StringBuilder();
     }
 
     public LineChartView getStats(final Context context, int stats) {
@@ -81,39 +78,25 @@ public class StatsHandler {
 
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 lineSet.setLineColor(color);
-                playersColorSparse.put(color, player.getName() + " - " + context.getString((player.isWinner() ? R.string.winner : R.string.loser)));
-                Log.d(TAG, "Player: " + player.getName() + " is winner? " + player.isWinner());
 
+                s.append(player.getName());
+                s.append(" - ");
+                s.append(context.getString((player.isWinner() ? R.string.winner : R.string.loser)));
+                playersColorSparse.put(color, s.toString());
+                s.setLength(CLEAR_STRING_BULDER);
 
                 // Style background fill
                 lineSet.setFill(false);
 
                 lineSet.setLineSmooth(true);
-                chartView.setGrid(true);
-
-                Log.d(TAG, "lineSet trying to add");
-
                 statLines.add(lineSet);
-                Log.d(TAG, "lineSet added");
-
-
             }
 
-            Log.d(TAG, "statLines trying to add");
-
+            chartView.setLabels(true);
+            chartView.setGrid(true);
             chartView.addData(statLines);
-            Log.d(TAG, "statLines added");
 
-
-            chartView.setOnEntryClickListener(new OnEntryClickListener() {
-                @Override
-                public void onClick(int setIndex, int entryIndex) {
-                    Toast.makeText(context, "Test Toast click on char/dot setIndex: " + setIndex + " entryIndex: " + entryIndex, Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-            chartView.setAnimation(new Animation());
+//            chartView.setAnimation(new Animation(1000));
             return chartView;
         }
 
