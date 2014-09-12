@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/scrollView">
+
+    <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+        android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <TextView
+
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -30,20 +36,21 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/AG"
-        android:id="@+id/AG"
+        android:id="@+id/txtAG"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtDev_by" />
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/developed"
-        android:id="@+id/dev_by"
-        android:layout_above="@+id/AG"
-        android:layout_centerHorizontal="true" />
+            android:id="@+id/txtDev_by"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/btn_donate_999" />
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -62,17 +69,15 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_rate"
         android:id="@+id/btn_Rate"
-        android:layout_alignBottom="@+id/txtRate"
-        android:layout_toRightOf="@+id/txtRate"
-        android:layout_toEndOf="@+id/txtRate" />
+        android:layout_below="@+id/txtRate" />
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/thanks"
         android:id="@+id/txtDonate"
-        android:layout_below="@+id/txtRate"
+            android:layout_below="@+id/btn_Rate"
         android:layout_alignLeft="@+id/txtRate"
         android:layout_alignStart="@+id/txtRate"
         android:padding="5dp" />
@@ -112,4 +117,8 @@
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/btn_donate_399" />
-</RelativeLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -10,9 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.activity.Settings;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.listadapter.InGameListAdapter;
+import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
 
 import java.util.ArrayList;
 
@@ -59,7 +59,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            collectStats = getArguments().getBoolean(Settings.STATS_SETTINGS, true);
+            collectStats = getArguments().getBoolean(SettingsHandler.STATS_SETTINGS, true);
         }
         inGameAdapter = new InGameListAdapter(getActivity(), playersList);
 

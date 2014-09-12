@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 
@@ -39,6 +40,20 @@ public class About extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_Rate:
+                break;
+            case R.id.btn_donate_099:
+                break;
+            case R.id.btn_donate_199:
+                break;
+            case R.id.btn_donate_399:
+                break;
+            case R.id.btn_donate_999:
+                break;
+        }
+
+        Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show();
 
     }
 }

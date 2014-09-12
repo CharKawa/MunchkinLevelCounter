@@ -8,17 +8,17 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
 
 /**
  * Created by G_Art on 1/8/2014.
  */
-public class Settings extends Activity {
+public class Settings extends Activity implements CompoundButton.OnCheckedChangeListener {
 
     private Switch statsSwitch;
     private SharedPreferences mPrefs;
-    private SharedPreferences.Editor prefsEditor;
-    final String TAG = "GameActivity_Munchkin_Test";
-    public static final String STATS_SETTINGS = "stats_settings";
+    private SettingsHandler setHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,37 +26,21 @@ public class Settings extends Activity {
         setContentView(R.layout.activity_settings);
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefsEditor = mPrefs.edit();
+        setHandler = SettingsHandler.getInstance(mPrefs);
 
         statsSwitch = (Switch) findViewById(R.id.switchStats);
-        statsSwitch.setChecked(loadSettings());
+        statsSwitch.setChecked(setHandler.loadSettings());
 
-        statsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-                    saveSettings(true);
-                } else {
-                    saveSettings(false);
-                }
-            }
-        });
+        statsSwitch.setOnCheckedChangeListener(this);
     }
 
-    private boolean loadSettings() {
-        if (!mPrefs.contains(STATS_SETTINGS)) {
-            saveSettings(true);
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            setHandler.saveSettings(true);
+        } else {
+            setHandler.saveSettings(false);
         }
-        boolean result = mPrefs.getBoolean(STATS_SETTINGS, true);
-        return result;
     }
-
-    private boolean saveSettings(boolean checked) {
-        prefsEditor.putBoolean(STATS_SETTINGS, checked);
-        boolean result = prefsEditor.commit();
-        return result;
-    }
-
-
 }

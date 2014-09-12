@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
+import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
 import com.g_art.munchkinlevelcounter.tasks.SavePlayersStatsTask;
 
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
     private SharedPreferences mPrefs;
+    private SettingsHandler setHandler;
+
 
     private boolean collectStats;
 
@@ -41,9 +45,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        if (mPrefs.contains(Settings.STATS_SETTINGS)) {
-            collectStats = mPrefs.getBoolean(Settings.STATS_SETTINGS, true);
-        }
+        setHandler = SettingsHandler.getInstance(mPrefs);
+
+        collectStats = setHandler.loadSettings();
+        Log.d(TAG, "Settings test: " + collectStats);
 
         confirmDialog = new ConfirmDialog();
 
@@ -57,7 +62,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             fr = new FragmentPlayersList();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(PLAYER_KEY, playersList);
-            bundle.putBoolean(Settings.STATS_SETTINGS, collectStats);
+            bundle.putBoolean(SettingsHandler.STATS_SETTINGS, collectStats);
             fr.setArguments(bundle);
             fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
         }
