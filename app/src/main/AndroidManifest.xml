@@ -35,6 +35,10 @@
             android:name=".activity.Settings"
             android:label="@string/main_screen_Settings"
             android:parentActivityName=".activity.MyActivity"></activity>
+        <activity
+            android:name=".activity.About"
+            android:label="@string/main_screen_About"
+            android:parentActivityName=".activity.MyActivity"></activity>
     </application>
 
 </manifest>

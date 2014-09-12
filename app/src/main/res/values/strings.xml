@@ -32,7 +32,7 @@
     <string name="no_players">Please, Add Players.</string>
     <string name="Lang">Language:</string>
     <string name="statsOnOff">Collect game statistic?</string>
-    <string name="message_for_dialog_cont">You Win the Game! Do you continue further or Quit?</string>
+    <string name="message_for_dialog_cont">You Win the Game! Do you want to continue further or quit?</string>
     <string name="message_for_dialog_confirm">If you exit this window, your progress will be lost.</string>
     <string name="ok_btn_for_dialog_confirm">Stay</string>
     <string name="cancel_btn_for_dialog_confirm">Exit</string>
@@ -43,5 +43,16 @@
     <string name="power_tab">Power</string>
     <string name="winner">Winner</string>
     <string name="loser">Loser</string>
+    <string name="developed">Developed by:</string>
+    <string name="AG">Artem Gulia</string>
+    <string name="about">About: </string>
+    <string name="about_the_app">Level counter for Munchkin card game. With statistic of game.</string>
+    <string name="rate">Rate this app on GooglePlay: </string>
+    <string name="btn_rate">Rate</string>
+    <string name="thanks">Buy me a beer: </string>
+    <string name="donate_0.99">One Bottle 0.99$</string>
+    <string name="donate_1.99">Good beer 1.99$</string>
+    <string name="donate_3.99">Excellent beer 3.99$</string>
+    <string name="donate_9.99">A case of beer 9.99$</string>
 
 </resources>

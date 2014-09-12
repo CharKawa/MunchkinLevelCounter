@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.fragments.stats.datahandler;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.db.chart.model.ChartSet;
@@ -55,8 +56,14 @@ public class StatsHandler {
                         }
                         break;
                     case GEAR_STATS:
+                        Log.d("TEST GEAR_STATS", player.getGearStats().toString() + " size = " + player.getGearStats().size());
                         for (int i = 0; i < player.getGearStats().size(); i++) {
-                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getGearStats().get(i))));
+                            if (Integer.parseInt(player.getGearStats().get(i)) == 0) {
+                                lineSet.addPoint(new Point(String.valueOf(i), 0));
+                            } else {
+                                lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getGearStats().get(i))));
+                            }
+
                         }
                         break;
                     case POWER_STATS:

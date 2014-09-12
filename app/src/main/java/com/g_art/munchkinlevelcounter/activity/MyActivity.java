@@ -62,6 +62,8 @@ public class MyActivity extends Activity {
                             startActivity(intent);
                             break;
                         case R.id.btnAbout:
+                            intent = new Intent(getActivity(), About.class);
+                            startActivity(intent);
                             break;
                     }
                 }
