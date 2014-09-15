@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
@@ -48,7 +47,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         setHandler = SettingsHandler.getInstance(mPrefs);
 
         collectStats = setHandler.loadSettings();
-        Log.d(TAG, "Settings test: " + collectStats);
 
         confirmDialog = new ConfirmDialog();
 
