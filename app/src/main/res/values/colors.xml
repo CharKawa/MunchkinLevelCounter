@@ -10,6 +10,8 @@
     <color name="purple">#FFAA66CC</color>
     <color name="axis">#37474f</color>
     <color name="grid">#b0bec5</color>
+    <color name="actionBarBackground">#4A1914</color>
     <color name="background">#FBCE97</color>
     <color name="text_color">#4A1914</color>
+    <color name="actionBarText_color">#FBCE97</color>
 </resources>

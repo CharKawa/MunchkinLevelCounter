@@ -8,18 +8,23 @@
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
         <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTab.Munchkin</item>
     </style>
 
-    <!-- general styles for the action bar -->
+    <!-- styles for the action bar -->
     <style name="ActionBarMunchkin" parent="android:Widget.ActionBar">
-        <item name="android:background">@color/background</item>
+        <item name="android:background">@color/actionBarBackground</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+    </style>
 
+    <!-- styles for the action bar tab -->
+    <style name="ActionBarTab.Munchkin" parent="android:Widget.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator</item>
     </style>
 
     <!-- action bar title text -->
     <style name="TitleTextStyle" parent="android:Widget.ActionBar.TabText">
-        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColor">@color/actionBarText_color</item>
     </style>
 
     <!-- action bar tab text -->
