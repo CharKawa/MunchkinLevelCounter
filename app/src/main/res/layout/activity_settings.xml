@@ -12,6 +12,9 @@
         android:text="@string/statsOnOff"
         android:id="@+id/switchStats"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:thumb="@drawable/munchkin_switch_inner_holo_light"
+        android:track="@drawable/munchkin_switch_track_holo_light"
+        android:textColor="@color/text_color" />
 
 </RelativeLayout>

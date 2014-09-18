@@ -167,7 +167,6 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         prefsEditor.putString(PREFS_PLAYERS_KEY, json);
         result = prefsEditor.commit();
 
-
         return result;
     }
 

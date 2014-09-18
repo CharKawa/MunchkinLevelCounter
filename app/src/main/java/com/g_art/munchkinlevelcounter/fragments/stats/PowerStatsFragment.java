@@ -58,7 +58,7 @@ public class PowerStatsFragment extends Fragment {
             chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
             StatsHandler statsHandler = new StatsHandler(playersList, chartView);
-            chartView = statsHandler.getStats(getActivity(), StatsHandler.LVL_STATS);
+            chartView = statsHandler.getStats(getActivity(), StatsHandler.POWER_STATS);
             if (chartView != null) {
                 playersColors = statsHandler.getPlayersColorSparse();
                 chartView.show();

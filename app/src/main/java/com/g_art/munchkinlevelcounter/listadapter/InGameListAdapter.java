@@ -98,9 +98,12 @@ public class InGameListAdapter extends BaseAdapter {
 
             /************  Set Model values in Holder elements ***********/
             holder.txtPlayerName.setText(player.getName());
-            holder.txtPlayerLvlValue.setText(Integer.toString(player.getLevel()));
-            int totalPower = player.getGear() + player.getLevel();
-            holder.txtPlayerTotalValue.setText(Integer.toString(totalPower));
+            if (holder.txtPlayerTotalValue != null) {
+                holder.txtPlayerLvlValue.setText(Integer.toString(player.getLevel()));
+                int totalPower = player.getGear() + player.getLevel();
+                holder.txtPlayerTotalValue.setText(Integer.toString(totalPower));
+            }
+
         }
 
         return view;

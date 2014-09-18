@@ -47,9 +47,9 @@
     <string name="AG">Artem Gulia</string>
     <string name="about">About: </string>
     <string name="about_the_app">Level counter for Munchkin card game. With statistic of game.</string>
-    <string name="rate">Rate this app on GooglePlay: </string>
+    <string name="rate">If you like it, please, rate this app on GooglePlay: </string>
     <string name="btn_rate">Rate</string>
-    <string name="thanks">Buy me a beer: </string>
+    <string name="thanks">Also, you can buy me a beer: </string>
     <string name="donate_0.99">One Bottle 0.99$</string>
     <string name="donate_1.99">Good beer 1.99$</string>
     <string name="donate_3.99">Excellent beer 3.99$</string>

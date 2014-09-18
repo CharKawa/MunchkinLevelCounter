@@ -31,7 +31,7 @@
 
     <!-- action bar tab text -->
     <style name="TabTextStyle" parent="android:Widget.ActionBar.TabText">
-        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColor">@color/actionBarText_color</item>
     </style>
 
     <style name="CustomButton" parent="android:Widget.Holo.Light.Button">
