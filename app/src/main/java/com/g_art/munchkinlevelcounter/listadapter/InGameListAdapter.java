@@ -103,9 +103,7 @@ public class InGameListAdapter extends BaseAdapter {
                 int totalPower = player.getGear() + player.getLevel();
                 holder.txtPlayerTotalValue.setText(Integer.toString(totalPower));
             }
-
         }
-
         return view;
     }
 }
