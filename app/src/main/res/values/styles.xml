@@ -4,13 +4,12 @@
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowBackground">@color/actionBarText_color</item>
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
         <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTab.Munchkin</item>
         <item name="android:buttonStyleToggle">@style/CustomSwitch</item>
-        <!--<item name="android:homeAsUpIndicator">@color/actionBarText_color</item>-->
     </style>
 
     <!-- styles for the action bar -->

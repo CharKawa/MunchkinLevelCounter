@@ -29,7 +29,7 @@
         android:id="@+id/isStatsPlayersList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp" />
+        android:divider="@color/text_color"
+        android:dividerHeight="2dp" />
 
 </LinearLayout>

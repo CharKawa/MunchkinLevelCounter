@@ -16,7 +16,8 @@
             android:id="@+id/listVPlayers"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
-            android:dividerHeight="1dp"></ListView>
+            android:divider="@color/text_color"
+            android:dividerHeight="2dp" />
 
     </LinearLayout>
 

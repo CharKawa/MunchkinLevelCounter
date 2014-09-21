@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:text="@string/main_screen_Players"
         android:id="@+id/btnPlayers"
-        android:textColor="@drawable/custom_button_text"
         android:layout_above="@+id/btnStats"
         android:layout_centerInParent="true"
         android:layout_alignLeft="@+id/btnStats"

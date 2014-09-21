@@ -34,7 +34,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private boolean contAfterMaxLVL = false;
     final String TAG = "GameActivity_Munchkin_Test";
     private PlayersUpdate mCallback;
-    private boolean collectStats;
+    private static boolean showStatsMessage = false;
 
 
     public FragmentPlayer() {
@@ -112,9 +112,11 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         if (!mCallback.collectStats()) {
-            holder.btnNextTurn.setVisibility(View.INVISIBLE);
+//            holder.btnNextTurn.setEnabled(false);
+            holder.btnNextTurn.setActivated(false);
         } else {
-            holder.btnNextTurn.setVisibility(View.VISIBLE);
+            holder.btnNextTurn.setActivated(true);
+//            holder.btnNextTurn.setEnabled(true);
         }
         super.onResume();
     }
@@ -162,14 +164,23 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnNextTurn:
-                if (mCallback.savePlayersStats()) {
-                    if (mCallback.onNextTurnClick(selectedPlayer)) {
+                if (holder.btnNextTurn.isActivated()) {
+                    if (mCallback.savePlayersStats()) {
+                        if (mCallback.onNextTurnClick(selectedPlayer)) {
+                        } else {
+                            Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
+                        }
                     } else {
-                        Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "It was error while trying to save players!", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "It was error while trying to save players!", Toast.LENGTH_LONG).show();
+                    if (!showStatsMessage) {
+                        Toast.makeText(getActivity(), "Statistic is off, now it's just switch players", Toast.LENGTH_SHORT).show();
+                        showStatsMessage = true;
+                    }
+                    mCallback.onNextTurnClick(selectedPlayer);
                 }
+
                 break;
         }
         setSelectedPlayer();
@@ -179,6 +190,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     public void doPositiveClickContinueDialog() {
         contAfterMaxLVL = true;
         onClick(view.findViewById(R.id.btnLvlUp));
+        holder.btnNextTurn.setImageResource(R.drawable.munchkin_in_game_end);
     }
 
     public void doNegativeClickContinueDialog() {
