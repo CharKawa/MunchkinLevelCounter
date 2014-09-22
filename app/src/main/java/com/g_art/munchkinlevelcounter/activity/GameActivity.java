@@ -76,12 +76,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         onPlayerSelected(playersList.get(FIRST_PLAYER));
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     @Override
     public void onBackPressed() {
         confirmDialog.show(fm, "confirmDialog");

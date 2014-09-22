@@ -4,7 +4,7 @@
     android:paddingBottom="10dp">
 
 
-<TextView
+    <TextView
         android:id="@+id/currentPlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/btnGearUp"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="116dp"
+        android:layout_marginRight="115dp"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="25dp" />
 

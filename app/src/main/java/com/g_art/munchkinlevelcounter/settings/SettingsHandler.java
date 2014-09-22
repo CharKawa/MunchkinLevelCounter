@@ -34,7 +34,13 @@ public class SettingsHandler {
     public boolean saveSettings(boolean checked) {
         prefsEditor = mPrefs.edit();
         prefsEditor.putBoolean(STATS_SETTINGS, checked);
-        boolean result = prefsEditor.commit();
+        boolean result;
+        try {
+            prefsEditor.apply();
+            result = true;
+        } catch (Exception ex) {
+            result = false;
+        }
         return result;
     }
 

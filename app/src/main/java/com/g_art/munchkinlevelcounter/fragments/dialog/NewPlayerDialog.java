@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.NewPlayers;
@@ -42,8 +43,14 @@ public class NewPlayerDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String name = playerName.getText().toString();
-                        Log.d(TAG, "Player name: " + name);
-                        ((NewPlayers) getActivity()).doPositiveClickNewPlayerDialog(name);
+                        if (name.isEmpty()) {
+                            Log.d(TAG, "Name empty");
+                            Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d(TAG, "Player name: " + name);
+                            ((NewPlayers) getActivity()).doPositiveClickNewPlayerDialog(name);
+                        }
+
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel_btn, new DialogInterface.OnClickListener() {

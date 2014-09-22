@@ -27,7 +27,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     private ViewHolder holder;
     private Player selectedPlayer;
-    private static final String PLAYER_KEY = "playersList";
+    private final String PLAYER_KEY = "playersList";
+    private final String STATS_KEY = "collectStats";
+    private final String BUNDLE_STATS_KEY = "bundleStats";
     private final int MAX_LVL = 10;
     private final int MIN_STAT = 0;
     private View view;
@@ -67,7 +69,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         }
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         public TextView txtCurrentPlayerName;
         public TextView txtCurrentPlayerPower;
         public TextView txtCurrentPlayerLvl;
@@ -104,7 +106,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnRollDice.setOnClickListener(this);
         holder.btnNextTurn = (ImageButton) view.findViewById(R.id.btnNextTurn);
         holder.btnNextTurn.setOnClickListener(this);
-        view.setTag(holder);
 
         return view;
     }
@@ -131,7 +132,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                     if (contAfterMaxLVL) {
                         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                     } else {
-                        selectedPlayer.setWinner(true);
                         DialogFragment continueDialog = new ContinueDialog();
                         continueDialog.show(getActivity().getFragmentManager(), "continueDialog");
                         if (contAfterMaxLVL) {
@@ -164,23 +164,27 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnNextTurn:
-                if (holder.btnNextTurn.isActivated()) {
-                    if (mCallback.savePlayersStats()) {
-                        if (mCallback.onNextTurnClick(selectedPlayer)) {
+                if (contAfterMaxLVL) {
+                    mCallback.savePlayersStats();
+                    openStatsActivity();
+                } else {
+                    if (holder.btnNextTurn.isActivated()) {
+                        if (mCallback.savePlayersStats()) {
+                            if (mCallback.onNextTurnClick(selectedPlayer)) {
+                            } else {
+                                Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
+                            }
                         } else {
-                            Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "It was error while trying to save players!", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(getActivity(), "It was error while trying to save players!", Toast.LENGTH_LONG).show();
+                        if (!showStatsMessage) {
+                            Toast.makeText(getActivity(), "Statistic is off, now it's just switch players", Toast.LENGTH_SHORT).show();
+                            showStatsMessage = true;
+                        }
+                        mCallback.onNextTurnClick(selectedPlayer);
                     }
-                } else {
-                    if (!showStatsMessage) {
-                        Toast.makeText(getActivity(), "Statistic is off, now it's just switch players", Toast.LENGTH_SHORT).show();
-                        showStatsMessage = true;
-                    }
-                    mCallback.onNextTurnClick(selectedPlayer);
                 }
-
                 break;
         }
         setSelectedPlayer();
@@ -189,15 +193,24 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     public void doPositiveClickContinueDialog() {
         contAfterMaxLVL = true;
+        selectedPlayer.setWinner(true);
         onClick(view.findViewById(R.id.btnLvlUp));
         holder.btnNextTurn.setImageResource(R.drawable.munchkin_in_game_end);
     }
 
     public void doNegativeClickContinueDialog() {
+        selectedPlayer.setWinner(true);
         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
         onClick(view.findViewById(R.id.btnNextTurn));
+        openStatsActivity();
+    }
+
+    private void openStatsActivity() {
         Intent intent = new Intent(getActivity(), Stats.class);
-        intent.putParcelableArrayListExtra(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
+        bundle.putBoolean(STATS_KEY, mCallback.collectStats());
+        intent.putExtra(BUNDLE_STATS_KEY, bundle);
         startActivity(intent);
     }
 
@@ -212,6 +225,10 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     public void changeSelectedPlayer(Player player) {
         selectedPlayer = player;
         setSelectedPlayer();
+
+        if (mCallback.collectStats()) {
+            mCallback.savePlayersStats();
+        }
     }
 
     private void setSelectedPlayer() {
@@ -227,6 +244,4 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
         Toast.makeText(getActivity(), String.valueOf(dice), Toast.LENGTH_SHORT).show();
     }
-
-
 }

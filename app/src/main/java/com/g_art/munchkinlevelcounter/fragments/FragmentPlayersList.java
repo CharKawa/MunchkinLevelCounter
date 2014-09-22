@@ -94,9 +94,9 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        if(view==null){
+
         view = inflater.inflate(R.layout.fragment_players_list, container, false);
-//        }
+
 
         // Set the adapter
         inGamePlayersList = (ListView) view.findViewById(R.id.inGamePlayersList);

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.NewPlayerDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 
@@ -63,11 +62,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     void showNewPlayerDialog() {
         DialogFragment newFragment = new NewPlayerDialog();
         newFragment.show(getFragmentManager(), "dialog");
-    }
-
-    void showConfirmDialog() {
-        ConfirmDialog confirmDialog = new ConfirmDialog();
-        confirmDialog.show(getFragmentManager(), "confirmDialog");
     }
 
     public void doPositiveClickNewPlayerDialog(String name) {

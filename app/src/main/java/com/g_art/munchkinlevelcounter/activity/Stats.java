@@ -23,17 +23,24 @@ import java.util.ArrayList;
 
 public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
-    private ArrayList<Player> playersList;
-    final String PLAYER_KEY = "playersList";
-    final static String PREFS_PLAYERS_KEY = "players";
+    final String TAG = "GameActivity_Munchkin_Test";
+    private final String PLAYER_KEY = "playersList";
+    private final String STATS_KEY = "collectStats";
+    private final String BUNDLE_STATS_KEY = "bundleStats";
+    private final String PREFS_PLAYERS_KEY = "players";
     public final static String PREFS_NO_DATA = "Sorry, No Data!";
+
+    private ArrayList<Player> playersList;
     private ActionBar.Tab lvlTab, gearTab, powerTab;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
-    final String TAG = "GameActivity_Munchkin_Test";
     private ViewPager viewPager;
     private StatsPageAdapter statsAdapter;
     private ActionBar actionBar;
+    private boolean statsCollect;
+    private Gson gson;
+    private String json;
+    private Bundle bundle;
 
 
     @Override
@@ -45,32 +52,40 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         prefsEditor = mPrefs.edit();
 
         Intent intent = getIntent();
-        playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
-
-        if (playersList != null) {
-            Log.d(TAG, "StatsActivity gets playersList: " + playersList.toString());
-            clearSharedPrefs();
-            Log.d(TAG, "Deleting prev stats from shared prefs");
-            savePlayersToSharedPrefs();
-            Log.d(TAG, "Saving stats to shared prefs");
+        bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
+        if (bundle != null && !bundle.isEmpty()) {
+            playersList = bundle.getParcelableArrayList(PLAYER_KEY);
+            statsCollect = bundle.getBoolean(STATS_KEY, true);
+            if (statsCollect) {
+                if (playersList != null) {
+                    Log.d(TAG, "StatsActivity gets playersList: " + playersList.toString());
+                    clearSharedPrefs();
+                    Log.d(TAG, "Deleting prev stats from shared prefs");
+                    savePlayersToSharedPrefs();
+                    Log.d(TAG, "Saving stats to shared prefs");
+                }
+            } else {
+                if (getPlayersFromSharedPrefs()) {
+                    Log.d(TAG, "Getting stats from shared prefs");
+                } else {
+                    Log.d(TAG, "No saved stats");
+                }
+            }
         } else {
             if (getPlayersFromSharedPrefs()) {
                 Log.d(TAG, "Getting stats from shared prefs");
             } else {
                 Log.d(TAG, "No saved stats");
             }
-
         }
 
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYER_KEY, playersList);
-
+        Bundle fragBundle = new Bundle();
+        fragBundle.putParcelableArrayList(PLAYER_KEY, playersList);
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), bundle);
+        statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), fragBundle);
         Log.d(TAG, "Setting pager adapter");
 
         viewPager.setAdapter(statsAdapter);
@@ -159,13 +174,18 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
      * @return boolean. True for success, false for failure.
      */
     private boolean savePlayersToSharedPrefs() {
-        Gson gson = new Gson();
+        gson = new Gson();
         boolean result;
 
-        String json = gson.toJson(playersList);
+        json = gson.toJson(playersList);
         Log.d(TAG, json);
         prefsEditor.putString(PREFS_PLAYERS_KEY, json);
-        result = prefsEditor.commit();
+        try {
+            prefsEditor.apply();
+            result = true;
+        } catch (Exception ex) {
+            result = false;
+        }
 
         return result;
     }
@@ -180,9 +200,9 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         playersList = new ArrayList<Player>();
 
-        Gson gson = new Gson();
+        gson = new Gson();
 
-        String json = mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
+        json = mPrefs.getString(PREFS_PLAYERS_KEY, PREFS_NO_DATA);
 
         if (!json.equals(PREFS_NO_DATA)) {
             Type type = new TypeToken<ArrayList<Player>>() {
@@ -203,5 +223,4 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         }
         return result;
     }
-
 }
