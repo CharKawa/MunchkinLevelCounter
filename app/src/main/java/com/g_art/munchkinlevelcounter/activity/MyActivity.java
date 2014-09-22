@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.g_art.munchkinlevelcounter.R;
 
@@ -69,16 +69,16 @@ public class MyActivity extends Activity {
                 }
             };
 
-            Button btnPlayers = (Button) rootView.findViewById(R.id.btnPlayers);
+            ImageButton btnPlayers = (ImageButton) rootView.findViewById(R.id.btnPlayers);
             btnPlayers.setOnClickListener(clickListener);
 
-            Button btnStats = (Button) rootView.findViewById(R.id.btnStats);
+            ImageButton btnStats = (ImageButton) rootView.findViewById(R.id.btnStats);
             btnStats.setOnClickListener(clickListener);
 
-            Button btnSett = (Button) rootView.findViewById(R.id.btnSett);
+            ImageButton btnSett = (ImageButton) rootView.findViewById(R.id.btnSett);
             btnSett.setOnClickListener(clickListener);
 
-            Button btnAbout = (Button) rootView.findViewById(R.id.btnAbout);
+            ImageButton btnAbout = (ImageButton) rootView.findViewById(R.id.btnAbout);
             btnAbout.setOnClickListener(clickListener);
 
             return rootView;

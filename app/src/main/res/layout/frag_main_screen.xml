@@ -5,42 +5,52 @@
     tools:context=".MyActivity$PlaceholderFragment">
 
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_screen_Players"
         android:id="@+id/btnPlayers"
-        android:layout_above="@+id/btnStats"
+        android:src="@drawable/munchkin_main_screen_players"
+        android:background="@null"
+        android:contentDescription="@string/main_screen_Players"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
         android:layout_centerInParent="true"
-        android:layout_alignLeft="@+id/btnStats"
-        android:layout_alignRight="@+id/btnStats" />
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_screen_Stats"
         android:id="@+id/btnStats"
-        android:layout_centerInParent="true" />
+        android:src="@drawable/munchkin_main_screen_stats"
+        android:background="@null"
+        android:contentDescription="@string/main_screen_Stats"
+        android:layout_toRightOf="@+id/btnPlayers"
+        android:layout_alignTop="@+id/btnPlayers" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/main_screen_Settings"
         android:id="@+id/btnSett"
-        android:layout_below="@+id/btnStats"
-        android:layout_centerInParent="true"
-        android:layout_alignLeft="@+id/btnStats"
-        android:layout_alignRight="@+id/btnStats" />
+        android:src="@drawable/munchkin_main_screen_settings"
+        android:background="@null"
+        android:contentDescription="@string/main_screen_Settings"
+        android:layout_below="@+id/btnPlayers"
+        android:layout_alignLeft="@+id/btnPlayers" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_screen_About"
         android:id="@+id/btnAbout"
-        android:layout_below="@+id/btnSett"
-        android:layout_alignRight="@+id/btnSett"
-        android:layout_alignEnd="@+id/btnSett"
-        android:layout_alignLeft="@+id/btnSett"
-        android:layout_alignStart="@+id/btnSett"
-        android:layout_centerInParent="true" />
+        android:src="@drawable/munchkin_main_screen_about"
+        android:background="@null"
+        android:contentDescription="@string/main_screen_About"
+        android:layout_toRightOf="@+id/btnSett"
+        android:layout_alignTop="@+id/btnSett" />
+
 </RelativeLayout>
