@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyActivity$PlaceholderFragment"
-    android:id="@+id/">
+    tools:context=".MyActivity$PlaceholderFragment">
 
 
     <ImageButton
@@ -14,14 +13,10 @@
         android:src="@drawable/munchkin_main_screen_players"
         android:background="@null"
         android:contentDescription="@string/main_screen_Players"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="false"
-        android:layout_centerInParent="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -31,9 +26,10 @@
         android:src="@drawable/munchkin_main_screen_stats"
         android:background="@null"
         android:contentDescription="@string/main_screen_Stats"
-        android:layout_toRightOf="@+id/btnPlayers"
-        android:layout_alignTop="@+id/btnPlayers"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -43,9 +39,11 @@
         android:src="@drawable/munchkin_main_screen_settings"
         android:background="@null"
         android:contentDescription="@string/main_screen_Settings"
-        android:layout_below="@+id/btnPlayers"
-        android:layout_alignLeft="@+id/btnPlayers"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -54,8 +52,10 @@
         android:src="@drawable/munchkin_main_screen_about"
         android:background="@null"
         android:contentDescription="@string/main_screen_About"
-        android:layout_toRightOf="@+id/btnSett"
-        android:layout_alignTop="@+id/btnSett"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
