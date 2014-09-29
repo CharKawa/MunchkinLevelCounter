@@ -2,6 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MyActivity">
     <item
+        android:id="@+id/action_stats"
+        android:title="@string/main_screen_Stats"
+        android:icon="@drawable/stats"
+        android:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/about"
+        android:icon="@drawable/about"
+        android:showAsAction="ifRoom|withText" />
+    <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"

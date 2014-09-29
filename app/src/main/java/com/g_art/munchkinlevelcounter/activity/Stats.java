@@ -31,16 +31,12 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
     public final static String PREFS_NO_DATA = "Sorry, No Data!";
 
     private ArrayList<Player> playersList;
-    private ActionBar.Tab lvlTab, gearTab, powerTab;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
     private ViewPager viewPager;
-    private StatsPageAdapter statsAdapter;
     private ActionBar actionBar;
-    private boolean statsCollect;
     private Gson gson;
     private String json;
-    private Bundle bundle;
 
 
     @Override
@@ -48,14 +44,16 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
 
+        ActionBar.Tab lvlTab, gearTab, powerTab;
+
         mPrefs = getPreferences(Context.MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
 
         Intent intent = getIntent();
-        bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
+        Bundle bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
         if (bundle != null && !bundle.isEmpty()) {
             playersList = bundle.getParcelableArrayList(PLAYER_KEY);
-            statsCollect = bundle.getBoolean(STATS_KEY, true);
+            boolean statsCollect = bundle.getBoolean(STATS_KEY, true);
             if (statsCollect) {
                 if (playersList != null) {
                     Log.d(TAG, "StatsActivity gets playersList: " + playersList.toString());
@@ -85,7 +83,7 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), fragBundle);
+        StatsPageAdapter statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), fragBundle);
         Log.d(TAG, "Setting pager adapter");
 
         viewPager.setAdapter(statsAdapter);

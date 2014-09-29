@@ -10,8 +10,17 @@
         <item name="android:buttonStyle">@style/CustomButton</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTab.Munchkin</item>
         <item name="android:buttonStyleToggle">@style/CustomSwitch</item>
-        <!--<item name="android:homeAsUpIndicator">@color/actionBarText_color</item>-->
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_munchkin</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Munchkin</item>
+        <item name="android:actionMenuTextColor">@color/actionBarText_color</item>
+
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/AppTheme.Widget</item>
     </style>
+
 
     <!-- styles for the action bar -->
     <style name="ActionBarMunchkin" parent="android:Widget.ActionBar">
@@ -44,5 +53,25 @@
         <item name="android:track">@drawable/munchkin_switch_track_holo_light</item>
     </style>
 
+    <style name="PopupMenu.Munchkin" parent="@android:style/Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
+    </style>
+
+    <style name="DropDownListView.Munchkin" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_munchkin</item>
+    </style>
+
+    <style name="DropDownNav.Munchkin" parent="@android:style/Widget.Holo.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_munchkin</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_munchkin</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="AppTheme.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
+        <item name="android:textColor">@color/actionBarText_color</item>
+    </style>
 
 </resources>

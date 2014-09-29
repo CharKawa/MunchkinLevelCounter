@@ -4,44 +4,72 @@
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:windowBackground">@color/actionBarText_color</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
         <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTab.Munchkin</item>
         <item name="android:buttonStyleToggle">@style/CustomSwitch</item>
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_munchkin</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Munchkin</item>
+        <item name="android:actionMenuTextColor">@color/actionBarText_color</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/AppTheme.Widget</item>
     </style>
 
     <!-- styles for the action bar -->
-    <style name="ActionBarMunchkin" parent="android:Widget.ActionBar">
-        <item name="android:background">@color/actionBarBackground</item>
+    <style name="ActionBarMunchkin" parent="@android:style/android:Widget.ActionBar">
+    <item name="android:background">@color/actionBarBackground</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
     </style>
 
     <!-- styles for the action bar tab -->
-    <style name="ActionBarTab.Munchkin" parent="android:Widget.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator</item>
+    <style name="ActionBarTab.Munchkin" parent="@android:style/android:Widget.ActionBar.TabView">
+    <item name="android:background">@drawable/tab_indicator</item>
     </style>
 
     <!-- action bar title text -->
-    <style name="TitleTextStyle" parent="android:Widget.ActionBar.TabText">
-        <item name="android:textColor">@color/actionBarText_color</item>
+    <style name="TitleTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
+    <item name="android:textColor">@color/actionBarText_color</item>
     </style>
 
     <!-- action bar tab text -->
-    <style name="TabTextStyle" parent="android:Widget.ActionBar.TabText">
-        <item name="android:textColor">@color/text_color</item>
+    <style name="TabTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
+    <item name="android:textColor">@color/text_color</item>
     </style>
 
-    <style name="CustomButton" parent="android:Widget.Holo.Light.Button">
-        <item name="android:textColor">@drawable/custom_button_text</item>
+    <style name="CustomButton" parent="@android:style/android:Widget.Holo.Light.Button">
+    <item name="android:textColor">@drawable/custom_button_text</item>
         <item name="android:background">@drawable/munchkin_btn_default_holo_light</item>
     </style>
 
-    <style name="CustomSwitch" parent="android:Widget.Holo.Light.Button.Toggle">
-        <item name="android:thumb">@drawable/munchkin_switch_inner_holo_light</item>
+    <style name="CustomSwitch" parent="@android:style/android:Widget.Holo.Light.Button.Toggle">
+    <item name="android:thumb">@drawable/munchkin_switch_inner_holo_light</item>
         <item name="android:track">@drawable/munchkin_switch_track_holo_light</item>
     </style>
 
+    <style name="PopupMenu.Munchkin" parent="@android:style/android:Widget.Holo.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
+    </style>
+
+    <style name="DropDownListView.Munchkin" parent="@android:style/android:Widget.Holo.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_munchkin</item>
+    </style>
+
+    <style name="DropDownNav.Munchkin" parent="@android:style/Widget.Holo.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_munchkin</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_munchkin</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="AppTheme.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
+        <item name="android:textColor">@color/actionBarText_color</item>
+    </style>
 
 </resources>

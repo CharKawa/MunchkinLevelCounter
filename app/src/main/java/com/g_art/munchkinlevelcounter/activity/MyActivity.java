@@ -5,6 +5,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -28,6 +31,34 @@ public class MyActivity extends Activity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_stats:
+                intent = new Intent(this, Stats.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_settings:
+                intent = new Intent(this, Settings.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_about:
+                intent = new Intent(this, About.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -44,42 +75,14 @@ public class MyActivity extends Activity {
 
             View rootView = inflater.inflate(R.layout.frag_main_screen, container, false);
 
-            View.OnClickListener clickListener = new View.OnClickListener() {
+            ImageButton btnPlayers = (ImageButton) rootView.findViewById(R.id.btnPlayers);
+            btnPlayers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = null;
-                    switch (v.getId()) {
-                        case R.id.btnPlayers:
-                            intent = new Intent(getActivity(), NewPlayers.class);
-                            startActivity(intent);
-                            break;
-                        case R.id.btnStats:
-                            intent = new Intent(getActivity(), Stats.class);
-                            startActivity(intent);
-                            break;
-                        case R.id.btnSett:
-                            intent = new Intent(getActivity(), Settings.class);
-                            startActivity(intent);
-                            break;
-                        case R.id.btnAbout:
-                            intent = new Intent(getActivity(), About.class);
-                            startActivity(intent);
-                            break;
-                    }
+                    Intent intent = new Intent(getActivity(), NewPlayers.class);
+                    startActivity(intent);
                 }
-            };
-
-            ImageButton btnPlayers = (ImageButton) rootView.findViewById(R.id.btnPlayers);
-            btnPlayers.setOnClickListener(clickListener);
-
-            ImageButton btnStats = (ImageButton) rootView.findViewById(R.id.btnStats);
-            btnStats.setOnClickListener(clickListener);
-
-            ImageButton btnSett = (ImageButton) rootView.findViewById(R.id.btnSett);
-            btnSett.setOnClickListener(clickListener);
-
-            ImageButton btnAbout = (ImageButton) rootView.findViewById(R.id.btnAbout);
-            btnAbout.setOnClickListener(clickListener);
+            });
 
             return rootView;
         }
