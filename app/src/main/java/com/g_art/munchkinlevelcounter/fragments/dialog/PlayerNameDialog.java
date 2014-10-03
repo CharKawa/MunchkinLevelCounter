@@ -17,7 +17,7 @@ import com.g_art.munchkinlevelcounter.activity.NewPlayers;
 /**
  * Created by G_Art on 21/7/2014.
  */
-public class NewPlayerDialog extends DialogFragment {
+public class PlayerNameDialog extends DialogFragment {
 
     final String TAG = "Munchkin";
 
@@ -35,7 +35,9 @@ public class NewPlayerDialog extends DialogFragment {
 
         builder.setView(v);
 
+
         playerName = (EditText) v.findViewById(R.id.playerName);
+        playerName.setText(getArguments().getString(NewPlayers.PLAYER_NAME));
 
         builder.setTitle(R.string.title_dialog_new_Player)
                 .setCancelable(false)
@@ -48,7 +50,7 @@ public class NewPlayerDialog extends DialogFragment {
                             Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
                         } else {
                             Log.d(TAG, "Player name: " + name);
-                            ((NewPlayers) getActivity()).doPositiveClickNewPlayerDialog(name);
+                            ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name);
                         }
 
                     }
@@ -56,7 +58,7 @@ public class NewPlayerDialog extends DialogFragment {
                 .setNegativeButton(R.string.dialog_cancel_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((NewPlayers) getActivity()).doNegativeClickNewPlayerDialog();
+                        ((NewPlayers) getActivity()).doNegativeClickPlayerNameDialog();
                     }
                 });
 

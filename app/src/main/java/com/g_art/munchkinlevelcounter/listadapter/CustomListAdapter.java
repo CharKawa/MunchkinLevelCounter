@@ -64,6 +64,7 @@ public class CustomListAdapter extends BaseAdapter {
     public static class ViewHolder {
 
         public TextView text;
+        public ImageButton imEdit;
         public ImageButton imBtnDel;
 
     }
@@ -83,6 +84,7 @@ public class CustomListAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.text = (TextView) vi.findViewById(R.id.newPlayerName);
+            holder.imEdit = (ImageButton) vi.findViewById(R.id.imBtnEdit);
             holder.imBtnDel = (ImageButton) vi.findViewById(R.id.imBtnDel);
 
             /************  Set holder with LayoutInflater ************/
@@ -93,6 +95,7 @@ public class CustomListAdapter extends BaseAdapter {
         if (data.size() <= 0) {
             holder.text.setText(R.string.no_players);
             holder.imBtnDel.setVisibility(View.INVISIBLE);
+            holder.imEdit.setVisibility(View.INVISIBLE);
 
         } else {
             /***** Get each Model object from Arraylist ********/
@@ -103,14 +106,24 @@ public class CustomListAdapter extends BaseAdapter {
 
             holder.text.setText(player.getName());
 
+            holder.imEdit.setVisibility(View.VISIBLE);
+            holder.imEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NewPlayers sct = (NewPlayers) activity;
+                    sct.playerEdit(playerPosition);
+                }
+            });
+
             holder.imBtnDel.setVisibility(View.VISIBLE);
             holder.imBtnDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     NewPlayers sct = (NewPlayers) activity;
-                    sct.onItemClick(playerPosition);
+                    sct.playerDelete(playerPosition);
                 }
             });
+
 
         }
         return vi;

@@ -20,6 +20,16 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/imBtnEdit"
+            android:src="@drawable/ic_action_edit"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/list_players_Edit"
+            android:layout_gravity="center_vertical|bottom|right"
+            android:layout_marginRight="10dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/imBtnDel"
             android:src="@drawable/ic_action_remove"
             android:background="@android:color/transparent"

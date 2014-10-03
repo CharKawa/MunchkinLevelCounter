@@ -54,5 +54,6 @@
     <string name="donate_1.99">Good beer 1.99$</string>
     <string name="donate_3.99">Excellent beer 3.99$</string>
     <string name="donate_9.99">A case of beer 9.99$</string>
+    <string name="list_players_Edit">Edit</string>
 
 </resources>

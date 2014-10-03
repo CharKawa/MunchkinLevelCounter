@@ -5,15 +5,17 @@
         android:id="@+id/action_stats"
         android:title="@string/main_screen_Stats"
         android:icon="@drawable/stats"
-        android:showAsAction="ifRoom|withText" />
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/about"
-        android:icon="@drawable/about"
+        android:background="@null"
         android:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/main_screen_About"
+        android:orderInCategory="101"
         android:showAsAction="never" />
 </menu>

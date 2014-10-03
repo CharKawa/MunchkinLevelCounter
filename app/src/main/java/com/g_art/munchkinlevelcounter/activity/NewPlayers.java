@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.fragments.dialog.NewPlayerDialog;
+import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 
 import java.util.ArrayList;
@@ -21,8 +21,11 @@ import java.util.ArrayList;
  */
 public class NewPlayers extends Activity implements View.OnClickListener {
 
-    final String PLAYER_KEY = "playersList";
+    public final static String PLAYER_KEY = "playersList";
+    public final static String PLAYER_NAME = "playerName";
     final int MIN_PLAYER_QUANTITY = 2;
+    private static int playerIndex = 1;
+    private static boolean newPlayer = false;
 
     ListView listVPlayers;
     Button btnAddPlayers;
@@ -49,6 +52,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
             listPlayers = new ArrayList<Player>();
+            listPlayers.add(new Player("Player #1"));
+            listPlayers.add(new Player("Player #2"));
         } else {
             listPlayers = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
         }
@@ -59,17 +64,36 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     }
 
 
-    void showNewPlayerDialog() {
-        DialogFragment newFragment = new NewPlayerDialog();
+    void showPlayerNameDialog(String name) {
+        DialogFragment newFragment = new PlayerNameDialog();
+        Bundle nBundle = new Bundle();
+        nBundle.putString(PLAYER_NAME, name);
+        newFragment.setArguments(nBundle);
         newFragment.show(getFragmentManager(), "dialog");
     }
 
-    public void doPositiveClickNewPlayerDialog(String name) {
-        listPlayers.add(new Player(name));
+    public void doPositiveClickPlayerNameDialog(String name) {
+        if (newPlayer) {
+            listPlayers.add(new Player(name));
+            Toast.makeText(this,
+                    "Player: " + name +
+                            " added",
+                    Toast.LENGTH_SHORT
+            ).show();
+        } else {
+            Player player = listPlayers.get(playerIndex);
+            player.setName(name);
+            Toast.makeText(this,
+                    "Player: " + player.getName() +
+                            " renamed",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+
         customListAdapter.notifyDataSetChanged();
     }
 
-    public void doNegativeClickNewPlayerDialog() {
+    public void doNegativeClickPlayerNameDialog() {
         // Do stuff here.
     }
 
@@ -88,7 +112,9 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAddPlayer:
-                showNewPlayerDialog();
+                String name = "";
+                showPlayerNameDialog(name);
+                newPlayer = true;
                 break;
             case R.id.btnClear:
                 listPlayers.clear();
@@ -112,18 +138,25 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     /**
      * **************  This function used by adapter ***************
      */
-    public void onItemClick(int mPosition) {
+    public void playerDelete(int mPosition) {
         Player player = listPlayers.get(mPosition);
 
         // SHOW ALERT
 
         Toast.makeText(this,
-                "Name: " + player.getName() +
+                "Player: " + player.getName() +
                         " deleted",
                 Toast.LENGTH_SHORT
         ).show();
 
         listPlayers.remove(mPosition);
         customListAdapter.notifyDataSetChanged();
+    }
+
+    public void playerEdit(int playerPosition) {
+        Player player = listPlayers.get(playerPosition);
+        playerIndex = playerPosition;
+        newPlayer = false;
+        showPlayerNameDialog(player.getName());
     }
 }
