@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.fragments.FragmentPlayer;
+import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 
 /**
  * Created by G_Art on 5/8/2014.

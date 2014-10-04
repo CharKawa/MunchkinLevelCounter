@@ -9,9 +9,9 @@ import android.preference.PreferenceManager;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.fragments.FragmentPlayer;
-import com.g_art.munchkinlevelcounter.fragments.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
+import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
+import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
 import com.g_art.munchkinlevelcounter.tasks.SavePlayersStatsTask;
 

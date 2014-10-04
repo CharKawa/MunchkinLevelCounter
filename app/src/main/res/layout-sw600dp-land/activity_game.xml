@@ -25,7 +25,7 @@
         <fragment
             android:layout_width="400dp"
             android:layout_height="match_parent"
-            android:name="com.g_art.munchkinlevelcounter.fragments.FragmentPlayer"
+            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
             android:id="@+id/currentPlayer_Fragment"
             tools:layout="@layout/fragment_player" />
 

@@ -1,4 +1,4 @@
-package com.g_art.munchkinlevelcounter.fragments;
+package com.g_art.munchkinlevelcounter.fragments.game;
 
 import android.app.Activity;
 import android.app.Fragment;

@@ -2,7 +2,6 @@ package com.g_art.munchkinlevelcounter.fragments.stats.datahandler;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.db.chart.model.ChartSet;
@@ -44,8 +43,16 @@ public class StatsHandler {
         LineSet lineSet;
         ArrayList<ChartSet> statLines = new ArrayList<ChartSet>();
 
+        String lvl = context.getString(R.string.level);
+        String gear = context.getString(R.string.gear);
+        String power = context.getString(R.string.power_tab);
+
         if (playersList != null) {
             for (Player player : playersList) {
+
+                s.append(player.getName());
+                s.append(" - ");
+                s.append(context.getString((player.isWinner() ? R.string.winner : R.string.loser)));
 
                 lineSet = new LineSet();
 
@@ -54,22 +61,28 @@ public class StatsHandler {
                         for (int i = 0; i < player.getLvlStats().size(); i++) {
                             lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
                         }
+                        s.append(" ").append(lvl).append(": ").append(player.getLevel());
                         break;
                     case GEAR_STATS:
-                        Log.d("TEST GEAR_STATS", player.getGearStats().toString() + " size = " + player.getGearStats().size());
+                        boolean gearChanged = false;
                         for (int i = 0; i < player.getGearStats().size(); i++) {
-                            if (Integer.parseInt(player.getGearStats().get(i)) == 0) {
-                                lineSet.addPoint(new Point(String.valueOf(i), 0));
-                            } else {
-                                lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getGearStats().get(i))));
-                            }
+                            int gearStat = Integer.parseInt(player.getGearStats().get(i));
+                            lineSet.addPoint(new Point(String.valueOf(i), gearStat));
 
+                            if (gearStat != 0) {
+                                gearChanged = true;
+                            }
                         }
+                        if (!gearChanged) {
+                            lineSet.addPoint(new Point(String.valueOf(player.getGearStats().size()), GEAR_STATS));
+                        }
+                        s.append(" ").append(gear).append(": ").append(player.getGear());
                         break;
                     case POWER_STATS:
                         for (int i = 0; i < player.getPowerStats().size(); i++) {
                             lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
                         }
+                        s.append(" ").append(power).append(": ").append(player.getLevel() + player.getGear());
                         break;
                     default:
                         for (int i = 0; i < player.getLvlStats().size(); i++) {
@@ -86,9 +99,7 @@ public class StatsHandler {
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 lineSet.setLineColor(color);
 
-                s.append(player.getName());
-                s.append(" - ");
-                s.append(context.getString((player.isWinner() ? R.string.winner : R.string.loser)));
+
                 playersColorSparse.put(color, s.toString());
                 s.setLength(CLEAR_STRING_BULDER);
 
