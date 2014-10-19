@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
@@ -128,9 +129,13 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
     }
 
+
+    /**
+     * Navigates to parent activity
+     */
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     @Override
