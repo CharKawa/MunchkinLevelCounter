@@ -31,12 +31,12 @@
     <string name="total">TOTAL</string>
     <string name="no_players">Please, Add Players.</string>
     <string name="statsOnOff">Collect game statistic?</string>
-    <string name="message_for_dialog_cont">You Win the Game! Do you want to continue further or quit?</string>
+    <string name="message_for_dialog_cont">You Win the Game! Continue further or quit?</string>
     <string name="message_for_dialog_confirm">You will lose your progress!</string>
     <string name="ok_btn_for_dialog_confirm">Stay</string>
     <string name="cancel_btn_for_dialog_confirm">Exit</string>
     <string name="ok_btn_for_dialog_cont">Continue</string>
-    <string name="cancel_btn_for_dialog_cont">End</string>
+    <string name="cancel_btn_for_dialog_cont">Quit</string>
     <string name="lvl_tab">LVL</string>
     <string name="gear_tab">GEAR</string>
     <string name="power_tab">POWER</string>
