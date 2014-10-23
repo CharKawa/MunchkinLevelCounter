@@ -59,7 +59,7 @@ public class StatsHandler {
                 switch (stats) {
                     case LVL_STATS:
                         for (int i = 0; i < player.getLvlStats().size(); i++) {
-                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
+                            lineSet.addPoint(new Point(String.valueOf(" "), Integer.parseInt(player.getLvlStats().get(i))));
                         }
                         s.append(" ").append(lvl).append(": ").append(player.getLevel());
                         break;
@@ -67,34 +67,27 @@ public class StatsHandler {
                         boolean gearChanged = false;
                         for (int i = 0; i < player.getGearStats().size(); i++) {
                             int gearStat = Integer.parseInt(player.getGearStats().get(i));
-                            lineSet.addPoint(new Point(String.valueOf(i), gearStat));
+                            lineSet.addPoint(new Point(String.valueOf(" "), gearStat));
 
                             if (gearStat != 0) {
                                 gearChanged = true;
                             }
                         }
                         if (!gearChanged) {
-                            lineSet.addPoint(new Point(String.valueOf(player.getGearStats().size()), GEAR_STATS));
+                            lineSet.addPoint(new Point(String.valueOf(" "), GEAR_STATS));
                         }
                         s.append(" ").append(gear).append(": ").append(player.getGear());
                         break;
                     case POWER_STATS:
                         for (int i = 0; i < player.getPowerStats().size(); i++) {
-                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getPowerStats().get(i))));
+                            lineSet.addPoint(new Point(String.valueOf(" "), Integer.parseInt(player.getPowerStats().get(i))));
                         }
                         s.append(" ").append(power).append(": ").append(player.getLevel() + player.getGear());
-                        break;
-                    default:
-                        for (int i = 0; i < player.getLvlStats().size(); i++) {
-                            lineSet.addPoint(new Point(String.valueOf(i), Integer.parseInt(player.getLvlStats().get(i))));
-                        }
                         break;
                 }
 
                 // Style dots
-                lineSet.setDots(true);
-                lineSet.setDotsColor(context.getResources().getColor(R.color.blue));
-                lineSet.setDotsStrokeColor(context.getResources().getColor(R.color.green_light));
+                lineSet.setDots(false);
 
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 lineSet.setLineColor(color);
@@ -110,7 +103,7 @@ public class StatsHandler {
                 statLines.add(lineSet);
             }
 
-            chartView.setLabels(true);
+            chartView.setLabels(false);
             chartView.setGrid(true);
             chartView.addData(statLines);
 
