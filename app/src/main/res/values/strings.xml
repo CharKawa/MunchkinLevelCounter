@@ -4,14 +4,14 @@
     <string name="app_name">Munchkin Level Counter</string>
     <string name="action_settings">Settings</string>
     <string name="main_screen_Players">Players</string>
-    <string name="main_screen_Stats">Statistic</string>
+    <string name="main_screen_Stats"> Statistic</string>
     <string name="main_screen_Settings">Settings</string>
     <string name="main_screen_About">About</string>
     <string name="players_screen_Add_Player">Add Player</string>
     <string name="players_screen_Start_Game">Play!</string>
     <string name="players_screen_Clear_All">Clear All</string>
     <string name="title_activity_stats">Stats</string>
-    <string name="title_activity_newPlayers">Add players for the game</string>
+    <string name="title_activity_newPlayers">Players for the game</string>
     <string name="title_dialog_new_Player">Enter the name:</string>
     <string name="title_dialog_continue">Congratulations!</string>
     <string name="title_dialog_confirm">Are you sure?</string>

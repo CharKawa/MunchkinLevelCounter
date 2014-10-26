@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Munchkin Level Counter</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="main_screen_Players">Гравці</string>
+    <string name="main_screen_Stats"> Статистика</string>
+    <string name="main_screen_Settings">Налаштування</string>
+    <string name="main_screen_About">Про програму</string>
+    <string name="players_screen_Add_Player">Додати</string>
+    <string name="players_screen_Start_Game">Грати!</string>
+    <string name="players_screen_Clear_All">Видалити всіх</string>
+    <string name="title_activity_stats">Статистика</string>
+    <string name="title_activity_newPlayers">Гравці для гри</string>
+    <string name="title_dialog_new_Player">Введіть ім\'я:</string>
+    <string name="title_dialog_continue">Вітання!</string>
+    <string name="title_dialog_confirm">Ві впевненні?</string>
+    <string name="dialog_ok_btn">OK</string>
+    <string name="dialog_cancel_btn">Cancel</string>
+    <string name="list_players_Delete">Видалити</string>
+    <string name="total_power">Power:</string>
+    <string name="level">LVL</string>
+    <string name="gear">GEAR</string>
+    <string name="roll_dice">Roll A Dice</string>
+    <string name="next_turn">Next Turn</string>
+    <string name="gear_dwn">Gear Dwn</string>
+    <string name="gear_up">Gear Up</string>
+    <string name="lvl_dwn">lvl Dwn</string>
+    <string name="lvl_up">lvl Up</string>
+    <string name="game_screen">Munchkin</string>
+    <string name="total">TOTAL</string>
+    <string name="no_players">Будь ласка, додайте гравців.</string>
+    <string name="statsOnOff">Збирати статистику гри?</string>
+    <string name="message_for_dialog_cont">Ви виграли! Продовжити далі гру чи закінчити?</string>
+    <string name="message_for_dialog_confirm">Ви втратите увесь прогрес!</string>
+    <string name="ok_btn_for_dialog_confirm">Залишитись</string>
+    <string name="cancel_btn_for_dialog_confirm">Вийти</string>
+    <string name="ok_btn_for_dialog_cont">Продовжити</string>
+    <string name="cancel_btn_for_dialog_cont">Закінчити</string>
+    <string name="lvl_tab">LVL</string>
+    <string name="gear_tab">GEAR</string>
+    <string name="power_tab">POWER</string>
+    <string name="winner">Переможець</string>
+    <string name="loser">Лузер</string>
+    <string name="developed">Developed by:</string>
+    <string name="AG">Artem Gulia</string>
+    <string name="about">Про програму: </string>
+    <string name="about_the_app">Лічильник рівнів для настільної гри Манчкін. Зі статистикою партії.</string>
+    <string name="rate">Якщо Вам сподобалось, будь ласка, поставте оцінку у маркеті: </string>
+    <string name="btn_rate">Оцінити</string>
+    <string name="thanks">Також, Ви можете придбати мені пива: </string>
+    <string name="donate_0.99">Одна пляшка 0.99$</string>
+    <string name="donate_1.99">Гарне пиво 1.99$</string>
+    <string name="donate_3.99">Відмінне 3.99$</string>
+    <string name="donate_9.99">Ящик пива! 9.99$</string>
+    <string name="list_players_Edit">Edit</string>
+
+</resources>
