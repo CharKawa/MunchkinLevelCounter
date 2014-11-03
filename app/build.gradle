@@ -24,6 +24,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
     compile project(':gson-2.2.4')
-    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.android.support:support-v4:18.0+'
     compile 'org.solovyev.android:checkout:0.6.0@aar'
 }
