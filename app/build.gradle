@@ -8,7 +8,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 18
         versionCode 1
-        versionName '1.0'
+        versionName '0.9'
     }
     buildTypes {
         release {
@@ -22,10 +22,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    //compile project(':library')
+    compile project(':library')
     //compile project(':gson-2.2.4')
     compile 'com.android.support:support-v4:18.0+'
     compile 'org.solovyev.android:checkout:0.6.0@aar'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'com.db.williamchart:williamchart:1.0.0'
+//    compile 'com.db.williamchart:williamchart:1.0.0'
 }
