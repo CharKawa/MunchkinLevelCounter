@@ -31,7 +31,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
     private SharedPreferences mPrefs;
-    private SettingsHandler setHandler;
+    private SettingsHandler settingsHandler;
 
 
     private boolean collectStats;
@@ -44,9 +44,9 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        setHandler = SettingsHandler.getInstance(mPrefs);
+        settingsHandler = SettingsHandler.getInstance(mPrefs);
 
-        collectStats = setHandler.loadSettings();
+        collectStats = settingsHandler.loadSettings();
 
         confirmDialog = new ConfirmDialog();
 
@@ -155,5 +155,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public ArrayList<Player> getPlayersList() {
         return playersList;
     }
+    
+    @Override
+	protected void onDestroy() {
+		if (confirmDialog != null) {
+			confirmDialog.dismiss();
+			confirmDialog = null;
+		}
+		super.onDestroy();
+	}
 
 }
