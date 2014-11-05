@@ -26,6 +26,7 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
 public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     private ViewHolder holder;
+    private DialogFragment continueDialog;
     private Player selectedPlayer;
     private final String PLAYER_KEY = "playersList";
     private final String STATS_KEY = "collectStats";
@@ -106,7 +107,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnRollDice.setOnClickListener(this);
         holder.btnNextTurn = (ImageButton) view.findViewById(R.id.btnNextTurn);
         holder.btnNextTurn.setOnClickListener(this);
-
+        
         return view;
     }
 
@@ -132,12 +133,15 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                     if (contAfterMaxLVL) {
                         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                     } else {
-                        DialogFragment continueDialog = new ContinueDialog();
+                        continueDialog = new ContinueDialog();
                         continueDialog.show(getActivity().getFragmentManager(), "continueDialog");
                         if (contAfterMaxLVL) {
                             selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
                         } else {
                             //endGame
+                            if (continueDialog !=null){
+                                dismissDialog();
+                            }
                         }
                     }
                 }
@@ -196,13 +200,23 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         selectedPlayer.setWinner(true);
         onClick(view.findViewById(R.id.btnLvlUp));
         holder.btnNextTurn.setImageResource(R.drawable.munchkin_in_game_end);
+
+        dismissDialog();
     }
 
     public void doNegativeClickContinueDialog() {
         selectedPlayer.setWinner(true);
         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
         onClick(view.findViewById(R.id.btnNextTurn));
+        
+        dismissDialog();
+        
         openStatsActivity();
+    }
+    
+    private void dismissDialog(){
+        continueDialog.dismiss();
+        continueDialog = null;
     }
 
     private void openStatsActivity() {
@@ -243,5 +257,13 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         int Max = 6;
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
         Toast.makeText(getActivity(), String.valueOf(dice), Toast.LENGTH_SHORT).show();
+    }
+    
+    @Override
+    protected void onDestroy(){
+        if (continueDialog !=null){
+            dismissDialog();
+        }
+        super.onDestroy();
     }
 }
