@@ -200,17 +200,12 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         selectedPlayer.setWinner(true);
         onClick(view.findViewById(R.id.btnLvlUp));
         holder.btnNextTurn.setImageResource(R.drawable.munchkin_in_game_end);
-
-        dismissDialog();
     }
 
     public void doNegativeClickContinueDialog() {
         selectedPlayer.setWinner(true);
         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
         onClick(view.findViewById(R.id.btnNextTurn));
-        
-        dismissDialog();
-        
         openStatsActivity();
     }
     
@@ -260,7 +255,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
     
     @Override
-    protected void onDestroy(){
+    public void onDestroy() {
         if (continueDialog !=null){
             dismissDialog();
         }
