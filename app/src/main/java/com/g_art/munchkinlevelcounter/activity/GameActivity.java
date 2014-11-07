@@ -157,12 +157,13 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
     
     @Override
-	protected void onDestroy() {
+    protected void onDestroy() {
 		if (confirmDialog != null) {
 			confirmDialog.dismiss();
 			confirmDialog = null;
 		}
+	
 		super.onDestroy();
-	}
+    }
 
 }
