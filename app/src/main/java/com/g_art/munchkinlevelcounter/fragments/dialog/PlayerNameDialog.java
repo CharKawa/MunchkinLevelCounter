@@ -19,9 +19,6 @@ import com.g_art.munchkinlevelcounter.activity.NewPlayers;
  */
 public class PlayerNameDialog extends DialogFragment {
 
-    final String TAG = "Munchkin";
-
-
     private EditText playerName;
 
     @Override
@@ -46,10 +43,8 @@ public class PlayerNameDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String name = playerName.getText().toString();
                         if (name.isEmpty()) {
-                            Log.d(TAG, "Name empty");
                             Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
                         } else {
-                            Log.d(TAG, "Player name: " + name);
                             ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name);
                         }
 
