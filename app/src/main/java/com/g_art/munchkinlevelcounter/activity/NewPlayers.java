@@ -31,6 +31,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     Button btnAddPlayers;
     Button btnClear;
     Button btnStartGame;
+    private DialogFragment playerDialog;
+    private Bundle nBundle;
 
     private ArrayList<Player> listPlayers;
     CustomListAdapter customListAdapter;
@@ -42,6 +44,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         listVPlayers = (ListView) findViewById(R.id.listVPlayers);
         btnAddPlayers = (Button) findViewById(R.id.btnAddPlayer);
+        
+        playerDialog = new PlayerNameDialog();
 
         btnAddPlayers.setOnClickListener(this);
         btnClear = (Button) findViewById(R.id.btnClear);
@@ -65,11 +69,10 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
 
     void showPlayerNameDialog(String name) {
-        DialogFragment newFragment = new PlayerNameDialog();
-        Bundle nBundle = new Bundle();
+        nBundle = new Bundle();
         nBundle.putString(PLAYER_NAME, name);
-        newFragment.setArguments(nBundle);
-        newFragment.show(getFragmentManager(), "dialog");
+        playerDialog.setArguments(nBundle);
+        playerDialog.show(getFragmentManager(), "dialog");
     }
 
     public void doPositiveClickPlayerNameDialog(String name) {
@@ -121,7 +124,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 customListAdapter.notifyDataSetChanged();
                 break;
             case R.id.btnStartGame:
-
                 int playersQuant = listPlayers.size();
                 if (playersQuant < MIN_PLAYER_QUANTITY) {
                     Toast.makeText(this, "Please, add more players for game", Toast.LENGTH_SHORT).show();
@@ -134,6 +136,16 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 break;
         }
     }
+    
+    @Override
+    protected void onDestroy() {
+		if (playerDialog != null) {
+			playerDialog.dismiss();
+			playerDialog = null;
+		}
+	
+		super.onDestroy();
+    }
 
     /**
      * **************  This function used by adapter ***************
@@ -141,7 +153,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public void playerDelete(int mPosition) {
         Player player = listPlayers.get(mPosition);
 
-        // SHOW ALERT
+        //TODO: SHOW ALERT
 
         Toast.makeText(this,
                 "Player: " + player.getName() +
