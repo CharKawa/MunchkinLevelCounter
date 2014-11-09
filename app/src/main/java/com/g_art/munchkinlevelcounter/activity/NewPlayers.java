@@ -44,7 +44,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         listVPlayers = (ListView) findViewById(R.id.listVPlayers);
         btnAddPlayers = (Button) findViewById(R.id.btnAddPlayer);
-        
+
         playerDialog = new PlayerNameDialog();
 
         btnAddPlayers.setOnClickListener(this);
@@ -136,15 +136,14 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 break;
         }
     }
-    
+
     @Override
     protected void onDestroy() {
-		if (playerDialog != null) {
-			playerDialog.dismiss();
-			playerDialog = null;
-		}
-	
-		super.onDestroy();
+        if (playerDialog != null) {
+            playerDialog = null;
+        }
+
+        super.onDestroy();
     }
 
     /**

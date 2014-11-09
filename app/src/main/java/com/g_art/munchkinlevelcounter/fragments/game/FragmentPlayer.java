@@ -107,7 +107,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnRollDice.setOnClickListener(this);
         holder.btnNextTurn = (ImageButton) view.findViewById(R.id.btnNextTurn);
         holder.btnNextTurn.setOnClickListener(this);
-        
+
         return view;
     }
 
@@ -137,11 +137,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                         continueDialog.show(getActivity().getFragmentManager(), "continueDialog");
                         if (contAfterMaxLVL) {
                             selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
-                        } else {
-                            //endGame
-                            if (continueDialog !=null){
-                                dismissDialog();
-                            }
                         }
                     }
                 }
@@ -174,8 +169,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 } else {
                     if (holder.btnNextTurn.isActivated()) {
                         if (mCallback.savePlayersStats()) {
-                            if (mCallback.onNextTurnClick(selectedPlayer)) {
-                            } else {
+                            if (!mCallback.onNextTurnClick(selectedPlayer)) {
                                 Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
                             }
                         } else {
@@ -208,13 +202,13 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         onClick(view.findViewById(R.id.btnNextTurn));
         openStatsActivity();
     }
-    
-    private void dismissDialog(){
-        continueDialog.dismiss();
+
+    private void dismissDialog() {
         continueDialog = null;
     }
 
     private void openStatsActivity() {
+
         Intent intent = new Intent(getActivity(), Stats.class);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
@@ -253,10 +247,10 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
         Toast.makeText(getActivity(), String.valueOf(dice), Toast.LENGTH_SHORT).show();
     }
-    
+
     @Override
     public void onDestroy() {
-        if (continueDialog !=null){
+        if (continueDialog != null) {
             dismissDialog();
         }
         super.onDestroy();

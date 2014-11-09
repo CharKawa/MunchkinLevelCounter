@@ -155,15 +155,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public ArrayList<Player> getPlayersList() {
         return playersList;
     }
-    
+
     @Override
     protected void onDestroy() {
-		if (confirmDialog != null) {
-			confirmDialog.dismiss();
-			confirmDialog = null;
-		}
-	
-		super.onDestroy();
+        if (confirmDialog != null) {
+            confirmDialog = null;
+        }
+
+        super.onDestroy();
     }
 
 }

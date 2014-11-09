@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
@@ -64,6 +65,8 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
                     Log.d(TAG, "Saving stats to shared prefs");
                 }
             } else {
+                //TODO: Create string value for stats from prev game
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
                 if (getPlayersFromSharedPrefs()) {
                     Log.d(TAG, "Getting stats from shared prefs");
                 } else {
