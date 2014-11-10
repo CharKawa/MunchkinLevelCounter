@@ -20,7 +20,7 @@
     <string name="list_players_Delete">Удалить</string>
     <string name="total_power">Сила:</string>
     <string name="level">Уровень</string>
-    <string name="gear">Броня</string>
+    <string name="gear">Шмотки</string>
     <string name="game_screen">Munchkin</string>
     <string name="total">Сила</string>
     <string name="no_players">Пожалуйста, добавьте игроков</string>
@@ -32,7 +32,7 @@
     <string name="ok_btn_for_dialog_cont">Продолжить</string>
     <string name="cancel_btn_for_dialog_cont">Закончить</string>
     <string name="lvl_tab">Уровень</string>
-    <string name="gear_tab">Броня</string>
+    <string name="gear_tab">Шмотки</string>
     <string name="power_tab">Сила</string>
     <string name="winner">Победитель</string>
     <string name="loser">Проигравший</string>
