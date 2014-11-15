@@ -34,8 +34,8 @@
     <string name="lvl_tab">Уровень</string>
     <string name="gear_tab">Шмотки</string>
     <string name="power_tab">Сила</string>
-    <string name="winner">Победитель</string>
-    <string name="loser">Проигравший</string>
+    <string name="winner">Победитель.</string>
+    <string name="loser">Проигравший.</string>
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
     <string name="about">О приложении: </string>

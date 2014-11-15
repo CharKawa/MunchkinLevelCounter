@@ -9,6 +9,8 @@ import org.solovyev.android.checkout.Checkout;
 import org.solovyev.android.checkout.Inventory;
 import org.solovyev.android.checkout.Products;
 import org.solovyev.android.checkout.PurchaseVerifier;
+import org.solovyev.android.checkout.RobotmediaDatabase;
+import org.solovyev.android.checkout.RobotmediaInventory;
 
 import java.util.concurrent.Executor;
 
@@ -22,7 +24,6 @@ import static org.solovyev.android.checkout.ProductTypes.IN_APP;
 public class MyApplication extends Application {
 
     private static final Products products = Products.create().add(IN_APP, asList("donate_099", "donate_199", "donate_399", "donate_999"));
-
 
     private final Billing billing = new Billing(this, new Billing.Configuration() {
         @Override
@@ -47,7 +48,11 @@ public class MyApplication extends Application {
 
         @Override
         public Inventory getFallbackInventory(Checkout checkout, Executor executor) {
-            return null;
+            if (RobotmediaDatabase.exists(billing.getContext())) {
+                return new RobotmediaInventory(checkout, executor);
+            } else {
+                return null;
+            }
         }
     });
 

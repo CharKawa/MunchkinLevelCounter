@@ -46,21 +46,23 @@ public class About extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_about);
 
         checkout.start();
-        inventory = checkout.loadInventory();
-
-        // you only need this if this activity starts purchase process
         checkout.createPurchaseFlow(new PurchaseListener());
 
+        inventory = checkout.loadInventory();
         inventory.whenLoaded(new InventoryLoadedListener());
 
         btnRate = (Button) findViewById(R.id.btn_Rate);
         btnRate.setOnClickListener(this);
+
         btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
         btnDonate099.setOnClickListener(this);
+
         btnDonate199 = (Button) findViewById(R.id.btn_donate_199);
         btnDonate199.setOnClickListener(this);
+
         btnDonate399 = (Button) findViewById(R.id.btn_donate_399);
         btnDonate399.setOnClickListener(this);
+
         btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
         btnDonate999.setOnClickListener(this);
 
@@ -73,7 +75,7 @@ public class About extends Activity implements View.OnClickListener {
             case R.id.btn_Rate:
                 break;
             case R.id.btn_donate_099:
-                purchase(skuList.get(0));
+                purchase(inventory.getProducts().get(IN_APP).getSkus().get(0));
                 break;
             case R.id.btn_donate_199:
                 break;
@@ -95,6 +97,7 @@ public class About extends Activity implements View.OnClickListener {
         checkout.whenReady(new Checkout.ListenerAdapter() {
             @Override
             public void onReady(BillingRequests requests) {
+                Log.d("Tag", "onPurchased ");
                 requests.purchase(sku, null, checkout.getPurchaseFlow());
             }
         });
@@ -115,6 +118,7 @@ public class About extends Activity implements View.OnClickListener {
 
 
         public void onPurchased() {
+            Log.d("Tag", "onPurchased ");
             inventory.load().whenLoaded(new InventoryLoadedListener());
             Toast.makeText(getApplicationContext(), R.string.msg_thank_you_for_purchase, Toast.LENGTH_SHORT).show();
         }
@@ -134,13 +138,19 @@ public class About extends Activity implements View.OnClickListener {
         @Override
         public void onLoaded(Inventory.Products products) {
             skuList = new ArrayList<Sku>();
-            Log.d("Tag", "products " + inventory.getProducts().get(IN_APP));
-            Inventory.Product product = inventory.getProducts().get(IN_APP);
+            Log.d("Tag", "products " + products.get(IN_APP));
+            final Inventory.Product product = products.get(IN_APP);
             Log.d("Tag", "Skus " + product.getSkus());
-            for (Sku sku : product.getSkus()) {
-                skuList.add(sku);
-                Log.d("Tag", "Sku! " + sku.title);
+            if (product.supported) {
+                for (Sku sku : product.getSkus()) {
+                    final Purchase purchase = product.getPurchaseInState(sku, Purchase.State.PURCHASED);
+                    Log.d("Tag", "purchase! " + purchase);
+                    skuList.add(sku);
+                    Log.d("Tag", "Sku! " + sku.title);
 
+                }
+            } else {
+                Log.d("Tag", "product.supported: " + product.supported);
             }
 
         }

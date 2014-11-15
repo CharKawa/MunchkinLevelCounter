@@ -21,12 +21,6 @@
     <string name="total_power">Power:</string>
     <string name="level">LVL</string>
     <string name="gear">GEAR</string>
-    <string name="roll_dice">Roll A Dice</string>
-    <string name="next_turn">Next Turn</string>
-    <string name="gear_dwn">Gear Dwn</string>
-    <string name="gear_up">Gear Up</string>
-    <string name="lvl_dwn">lvl Dwn</string>
-    <string name="lvl_up">lvl Up</string>
     <string name="game_screen">Munchkin</string>
     <string name="total">TOTAL</string>
     <string name="no_players">Please, Add Players.</string>
@@ -40,8 +34,8 @@
     <string name="lvl_tab">LVL</string>
     <string name="gear_tab">GEAR</string>
     <string name="power_tab">POWER</string>
-    <string name="winner">Winner</string>
-    <string name="loser">Loser</string>
+    <string name="winner">Winner.</string>
+    <string name="loser">Loser.</string>
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
     <string name="about">About: </string>

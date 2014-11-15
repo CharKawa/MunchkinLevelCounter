@@ -47,8 +47,7 @@
         android:layout_alignTop="@+id/txtPlayerLvl"
         android:layout_marginLeft="36dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="25dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/txtPlayerLvl"
@@ -57,7 +56,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/btnLvlUp"
         android:layout_alignParentEnd="false"
-        android:layout_toRightOf="@+id/txtLevel" />
+        android:layout_toRightOf="@+id/txtLevel"
+        android:layout_marginLeft="25dp" />
 
     <TextView
         android:id="@+id/txtGear"
@@ -84,44 +84,42 @@
         android:id="@+id/btnLvlUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/lvl_up"
         android:layout_below="@+id/currentPlayer"
-        android:layout_marginLeft="70dp"
         android:layout_marginTop="25dp"
         android:src="@drawable/munchkin_in_game_up_btn"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_toRightOf="@+id/txtLevel"
+        android:layout_marginLeft="2dp" />
 
     <ImageButton
         android:id="@+id/btnLvlDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/lvl_dwn"
         android:layout_below="@+id/txtPlayerLvl"
-        android:layout_marginLeft="70dp"
         android:src="@drawable/munchkin_in_game_dwn_btn"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_toRightOf="@+id/txtLevel"
+        android:layout_marginLeft="2dp" />
 
     <ImageButton
         android:id="@+id/btnGearUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/gear_up"
         android:layout_marginTop="25dp"
         android:layout_below="@+id/currentPlayer"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="70dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/munchkin_in_game_up_btn"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_marginRight="65dp" />
 
     <ImageButton
         android:id="@+id/btnGearDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/gear_dwn"
         android:layout_below="@+id/txtPlayerGear"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="70dp"
+        android:layout_marginRight="65dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/munchkin_in_game_dwn_btn"
         android:background="@null" />
@@ -131,7 +129,6 @@
         android:id="@+id/btnDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/roll_dice"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/btnLvlDwn"
         android:layout_marginLeft="10dp"
@@ -142,7 +139,6 @@
         android:id="@+id/btnNextTurn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/next_turn"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
         android:layout_alignBottom="@+id/btnDice"
