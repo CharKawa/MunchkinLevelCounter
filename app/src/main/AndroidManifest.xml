@@ -23,25 +23,25 @@
         <activity
             android:name=".activity.Stats"
             android:label="@string/title_activity_stats"
-            android:parentActivityName=".activity.MyActivity"></activity>
+            android:parentActivityName=".activity.MyActivity" />
 
         <activity
             android:name=".activity.NewPlayers"
             android:label="@string/title_activity_newPlayers"
-            android:parentActivityName=".activity.MyActivity"></activity>
+            android:parentActivityName=".activity.MyActivity" />
 
         <activity
             android:name=".activity.GameActivity"
-            android:label="@string/game_screen"></activity>
+            android:label="@string/game_screen" />
 
         <activity
             android:name=".activity.Settings"
             android:label="@string/main_screen_Settings"
-            android:parentActivityName=".activity.MyActivity"></activity>
+            android:parentActivityName=".activity.MyActivity" />
         <activity
             android:name=".activity.About"
             android:label="@string/main_screen_About"
-            android:parentActivityName=".activity.MyActivity"></activity>
+            android:parentActivityName=".activity.MyActivity" />
     </application>
 
 </manifest>
