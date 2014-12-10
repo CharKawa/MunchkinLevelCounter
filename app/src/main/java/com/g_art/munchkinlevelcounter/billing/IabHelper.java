@@ -128,6 +128,19 @@ public class IabHelper {
         logDebug("IAB helper created.");
     }
 
+    /**
+     * Enables or disable debug logging through LogCat.
+     */
+    public void enableDebugLogging(boolean enable, String tag) {
+        checkNotDisposed();
+        mDebugLog = enable;
+        mDebugTag = tag;
+    }
+
+    public void enableDebugLogging(boolean enable) {
+        checkNotDisposed();
+        mDebugLog = enable;
+    }
 
     /**
      * Callback for setup process. This listener's {@link #onIabSetupFinished} method is called
