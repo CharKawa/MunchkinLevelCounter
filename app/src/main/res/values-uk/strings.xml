@@ -50,5 +50,6 @@
     <string name="list_players_Edit">Edit</string>
     <string name="msg_error_during_purchase">Щось пішло не так, спробуйте пізніше</string>
     <string name="msg_thank_you_for_purchase">Дякую за покупку!</string>
+    <string name="base64">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkRwCg3RouBZQwBKzlAuvzby1Dwy5DgujGtsv0tBLTQB91lxSeBF7pW5c6KN2wKxwclQFJN7NgnoicY+lckrfpnsMWPPwYQdgMNqqyIxR8I7gbCGCb7jvVyafRWuwUQJt/+znOIyLOrbuqQTGsm0Z9Yv1tkne9wi0d358BT7r/2hGZ5N+jAjK5D2xXWVL1BRu7sB0mFpNVICOv/8RrqxcvaSL4FtyLh8SpkQHcq/zK2jQus2hGpQWaFTCSWgiv0Y9X5hFYN9P9GGuCPp4dhs6w61LlnaKVmKTuulvoPvtt1BzYq3lOMtPUBhYPkM35DyO/YTv0N14PXH+mTh00AUPtQIDAQAB</string>
 
 </resources>
