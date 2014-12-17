@@ -28,6 +28,8 @@ public class About extends Activity implements View.OnClickListener {
     private Button btnDonate399;
     private Button btnDonate999;
 
+    private boolean isDonate = false;
+
     // The helper object
     IabHelper mHelper;
 
@@ -61,40 +63,47 @@ public class About extends Activity implements View.OnClickListener {
         // Start setup. This is asynchronous and the specified listener
         // will be called once setup completes.
         Log.d(TAG, "Starting setup.");
-        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-            public void onIabSetupFinished(IabResult result) {
-                Log.d(TAG, "Setup finished.");
+        try {
+            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                public void onIabSetupFinished(IabResult result) {
+                    Log.d(TAG, "Setup finished.");
 
-                if (!result.isSuccess()) {
-                    // Oh noes, there was a problem.
-                    complain("Problem setting up in-app billing: " + result);
-                    return;
+                    if (!result.isSuccess()) {
+                        // Oh noes, there was a problem.
+                        complain("Problem setting up in-app billing: " + result);
+                        return;
+                    }
+
+                    // Have we been disposed of in the meantime? If so, quit.
+                    if (mHelper == null) return;
+
+                    // IAB is fully set up. Now, let's get an inventory of stuff we own.
+                    Log.d(TAG, "Setup successful. Querying inventory.");
+                    mHelper.queryInventoryAsync(mGotInventoryListener);
+                    isDonate = true;
                 }
-
-                // Have we been disposed of in the meantime? If so, quit.
-                if (mHelper == null) return;
-
-                // IAB is fully set up. Now, let's get an inventory of stuff we own.
-                Log.d(TAG, "Setup successful. Querying inventory.");
-                mHelper.queryInventoryAsync(mGotInventoryListener);
-            }
-        });
+            });
+        } catch (Exception e) {
+            Log.d(TAG, "Exception in Billing");
+            isDonate = false;
+        }
 
         btnRate = (Button) findViewById(R.id.btn_Rate);
         btnRate.setOnClickListener(this);
 
-        btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
-        btnDonate099.setOnClickListener(this);
+        if (isDonate) {
+            btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
+            btnDonate099.setOnClickListener(this);
 
-        btnDonate199 = (Button) findViewById(R.id.btn_donate_199);
-        btnDonate199.setOnClickListener(this);
+            btnDonate199 = (Button) findViewById(R.id.btn_donate_199);
+            btnDonate199.setOnClickListener(this);
 
-        btnDonate399 = (Button) findViewById(R.id.btn_donate_399);
-        btnDonate399.setOnClickListener(this);
+            btnDonate399 = (Button) findViewById(R.id.btn_donate_399);
+            btnDonate399.setOnClickListener(this);
 
-        btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
-        btnDonate999.setOnClickListener(this);
-
+            btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
+            btnDonate999.setOnClickListener(this);
+        }
     }
 
     // Listener that's called when we finish querying the items and subscriptions we own
@@ -158,16 +167,24 @@ public class About extends Activity implements View.OnClickListener {
             case R.id.btn_Rate:
                 break;
             case R.id.btn_donate_099:
-                onDonateBtnClicked(SKU_DONATE_099);
+                if (isDonate) {
+                    onDonateBtnClicked(SKU_DONATE_099);
+                }
                 break;
             case R.id.btn_donate_199:
-                onDonateBtnClicked(SKU_DONATE_199);
+                if (isDonate) {
+                    onDonateBtnClicked(SKU_DONATE_199);
+                }
                 break;
             case R.id.btn_donate_399:
-                onDonateBtnClicked(SKU_DONATE_399);
+                if (isDonate) {
+                    onDonateBtnClicked(SKU_DONATE_399);
+                }
                 break;
             case R.id.btn_donate_999:
-                onDonateBtnClicked(SKU_DONATE_999);
+                if (isDonate) {
+                    onDonateBtnClicked(SKU_DONATE_999);
+                }
                 break;
         }
     }
@@ -314,7 +331,9 @@ public class About extends Activity implements View.OnClickListener {
         // very important:
         Log.d(TAG, "Destroying helper.");
         if (mHelper != null) {
-            mHelper.dispose();
+            if (isDonate) {
+                mHelper.dispose();
+            }
             mHelper = null;
         }
     }
