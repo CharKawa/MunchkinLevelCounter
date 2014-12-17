@@ -22,32 +22,32 @@
 
     <!-- styles for the action bar -->
     <style name="ActionBarMunchkin" parent="@android:style/android:Widget.ActionBar">
-    <item name="android:background">@color/actionBarBackground</item>
+        <item name="android:background">@color/actionBarBackground</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
     </style>
 
     <!-- styles for the action bar tab -->
     <style name="ActionBarTab.Munchkin" parent="@android:style/android:Widget.ActionBar.TabView">
-    <item name="android:background">@drawable/tab_indicator</item>
+        <item name="android:background">@drawable/tab_indicator</item>
     </style>
 
     <!-- action bar title text -->
     <style name="TitleTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
-    <item name="android:textColor">@color/actionBarText_color</item>
+        <item name="android:textColor">@color/actionBarText_color</item>
     </style>
 
     <!-- action bar tab text -->
     <style name="TabTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
-    <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <style name="CustomButton" parent="@android:style/android:Widget.Holo.Light.Button">
-    <item name="android:textColor">@drawable/custom_button_text</item>
+        <item name="android:textColor">@drawable/custom_button_text</item>
         <item name="android:background">@drawable/munchkin_btn_default_holo_light</item>
     </style>
 
     <style name="CustomSwitch" parent="@android:style/android:Widget.Holo.Light.Button.Toggle">
-    <item name="android:thumb">@drawable/munchkin_switch_inner_holo_light</item>
+        <item name="android:thumb">@drawable/munchkin_switch_inner_holo_light</item>
         <item name="android:track">@drawable/munchkin_switch_track_holo_light</item>
     </style>
 
