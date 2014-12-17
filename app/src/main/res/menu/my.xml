@@ -6,7 +6,7 @@
         android:title="@string/main_screen_Stats"
         android:icon="@drawable/stats"
         android:background="@null"
-        android:showAsAction="ifRoom|withText" />
+        android:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
