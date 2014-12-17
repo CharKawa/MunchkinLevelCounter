@@ -66,7 +66,9 @@
         android:text="@string/gear"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignTop="@+id/txtPlayerGear"
-        android:layout_toLeftOf="@+id/txtPlayerGear" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="36dp"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:id="@+id/txtPlayerGear"
@@ -74,10 +76,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/btnGearUp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="94dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="25dp" />
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_toLeftOf="@+id/txtGear"
+        android:layout_marginRight="26dp" />
 
 
     <ImageButton
@@ -107,22 +109,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_below="@+id/currentPlayer"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
         android:src="@drawable/munchkin_in_game_up_btn"
         android:background="@null"
-        android:layout_marginRight="65dp" />
+        android:layout_marginRight="2dp"
+        android:layout_toLeftOf="@+id/txtGear" />
 
     <ImageButton
         android:id="@+id/btnGearDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPlayerGear"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="65dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="2dp"
+        android:layout_alignParentRight="false"
         android:src="@drawable/munchkin_in_game_dwn_btn"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_toLeftOf="@+id/txtGear" />
 
 
     <ImageButton
