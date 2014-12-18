@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId 'com.g_art.munchkinlevelcounter'
         minSdkVersion 15
-        targetSdkVersion 18
+        targetSdkVersion 20
         versionCode 1
         versionName '0.9'
     }
@@ -23,7 +23,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
-    compile 'com.android.support:support-v4:18.0+'
+    compile 'com.android.support:support-v4:21.0.+'
     compile 'com.google.code.gson:gson:2.3'
 //    compile 'com.db.williamchart:williamchart:1.0.0'
 }
