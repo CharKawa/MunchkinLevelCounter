@@ -2,11 +2,14 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.billing.IabHelper;
@@ -165,6 +168,17 @@ public class About extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_Rate:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                //Try Google Play
+                intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
+                if (!MyStartActivity(intent)) {
+                    //Market (Google play) app seems not installed, let's try to open a webbrowser
+                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.g_art.munchkinlevelcounter"));
+                    if (!MyStartActivity(intent)) {
+                        //Well if this also fails, we have run out of options, inform the user.
+                        Toast.makeText(this, "Could not open Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 break;
             case R.id.btn_donate_099:
                 if (isDonate) {
@@ -186,6 +200,15 @@ public class About extends Activity implements View.OnClickListener {
                     onDonateBtnClicked(SKU_DONATE_999);
                 }
                 break;
+        }
+    }
+
+    private boolean MyStartActivity(Intent intent) {
+        try {
+            startActivity(intent);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            return false;
         }
     }
 
