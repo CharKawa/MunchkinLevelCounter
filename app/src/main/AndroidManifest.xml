@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.g_art.munchkinlevelcounter">
 
-    <uses-permission android:name="com.android.vending.BILLING" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
