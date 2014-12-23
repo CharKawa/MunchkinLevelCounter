@@ -94,7 +94,6 @@ public class About extends Activity implements View.OnClickListener {
         btnRate = (Button) findViewById(R.id.btn_Rate);
         btnRate.setOnClickListener(this);
 
-        if (isDonate) {
             btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
             btnDonate099.setOnClickListener(this);
 
@@ -106,7 +105,6 @@ public class About extends Activity implements View.OnClickListener {
 
             btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
             btnDonate999.setOnClickListener(this);
-        }
     }
 
     // Listener that's called when we finish querying the items and subscriptions we own
