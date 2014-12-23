@@ -94,17 +94,17 @@ public class About extends Activity implements View.OnClickListener {
         btnRate = (Button) findViewById(R.id.btn_Rate);
         btnRate.setOnClickListener(this);
 
-            btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
-            btnDonate099.setOnClickListener(this);
+        btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
+        btnDonate099.setOnClickListener(this);
 
-            btnDonate199 = (Button) findViewById(R.id.btn_donate_199);
-            btnDonate199.setOnClickListener(this);
+        btnDonate199 = (Button) findViewById(R.id.btn_donate_199);
+        btnDonate199.setOnClickListener(this);
 
-            btnDonate399 = (Button) findViewById(R.id.btn_donate_399);
-            btnDonate399.setOnClickListener(this);
+        btnDonate399 = (Button) findViewById(R.id.btn_donate_399);
+        btnDonate399.setOnClickListener(this);
 
-            btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
-            btnDonate999.setOnClickListener(this);
+        btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
+        btnDonate999.setOnClickListener(this);
     }
 
     // Listener that's called when we finish querying the items and subscriptions we own
