@@ -181,21 +181,29 @@ public class About extends Activity implements View.OnClickListener {
             case R.id.btn_donate_099:
                 if (isDonate) {
                     onDonateBtnClicked(SKU_DONATE_099);
+                } else {
+                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_donate_199:
                 if (isDonate) {
                     onDonateBtnClicked(SKU_DONATE_199);
+                } else {
+                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_donate_399:
                 if (isDonate) {
                     onDonateBtnClicked(SKU_DONATE_399);
+                } else {
+                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_donate_999:
                 if (isDonate) {
                     onDonateBtnClicked(SKU_DONATE_999);
+                } else {
+                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
