@@ -42,5 +42,14 @@
     <string name="about_the_app">Лічильник рівнів для настільної гри Манчкін. Зі статистикою партії.</string>
     <string name="rate">Якщо Вам сподобалось, будь ласка, поставте оцінку у маркеті: </string>
     <string name="btn_rate">Оцінити</string>
-    <string name="list_players_Edit">Редагувати</string>
+    <string name="thanks">Також, Ви можете придбати мені пива: </string>
+    <string name="donate_0.99">Одна пляшка 0.99$</string>
+    <string name="donate_1.99">Гарне пиво 1.99$</string>
+    <string name="donate_3.99">Відмінне 3.99$</string>
+    <string name="donate_9.99">Ящик пива! 9.99$</string>
+    <string name="list_players_Edit">Edit</string>
+    <string name="msg_error_during_purchase">Щось пішло не так, спробуйте пізніше</string>
+    <string name="msg_thank_you_for_purchase">Дякую за покупку!</string>
+    <string name="base64">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkRwCg3RouBZQwBKzlAuvzby1Dwy5DgujGtsv0tBLTQB91lxSeBF7pW5c6KN2wKxwclQFJN7NgnoicY+lckrfpnsMWPPwYQdgMNqqyIxR8I7gbCGCb7jvVyafRWuwUQJt/+znOIyLOrbuqQTGsm0Z9Yv1tkne9wi0d358BT7r/2hGZ5N+jAjK5D2xXWVL1BRu7sB0mFpNVICOv/8RrqxcvaSL4FtyLh8SpkQHcq/zK2jQus2hGpQWaFTCSWgiv0Y9X5hFYN9P9GGuCPp4dhs6w61LlnaKVmKTuulvoPvtt1BzYq3lOMtPUBhYPkM35DyO/YTv0N14PXH+mTh00AUPtQIDAQAB</string>
+
 </resources>
