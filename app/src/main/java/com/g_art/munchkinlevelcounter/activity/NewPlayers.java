@@ -56,8 +56,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
             listPlayers = new ArrayList<Player>();
-            listPlayers.add(new Player("Player #1"));
-            listPlayers.add(new Player("Player #2"));
+            listPlayers.add(new Player(getString(R.string.player_1)));
+            listPlayers.add(new Player(getString(R.string.player_1)));
         } else {
             listPlayers = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
         }

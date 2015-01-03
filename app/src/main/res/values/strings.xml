@@ -15,6 +15,7 @@
     <string name="title_dialog_new_Player">Enter the name:</string>
     <string name="title_dialog_continue">Congratulations!</string>
     <string name="title_dialog_confirm">Are you sure?</string>
+    <string name="txt_max_lvl">Max LVL</string>
     <string name="dialog_ok_btn">OK</string>
     <string name="dialog_cancel_btn">Cancel</string>
     <string name="list_players_Delete">Delete</string>
@@ -51,5 +52,7 @@
     <string name="msg_error_during_purchase">Something wrong, please try later</string>
     <string name="msg_thank_you_for_purchase">Thanks for donating!</string>
     <string name="base64">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkRwCg3RouBZQwBKzlAuvzby1Dwy5DgujGtsv0tBLTQB91lxSeBF7pW5c6KN2wKxwclQFJN7NgnoicY+lckrfpnsMWPPwYQdgMNqqyIxR8I7gbCGCb7jvVyafRWuwUQJt/+znOIyLOrbuqQTGsm0Z9Yv1tkne9wi0d358BT7r/2hGZ5N+jAjK5D2xXWVL1BRu7sB0mFpNVICOv/8RrqxcvaSL4FtyLh8SpkQHcq/zK2jQus2hGpQWaFTCSWgiv0Y9X5hFYN9P9GGuCPp4dhs6w61LlnaKVmKTuulvoPvtt1BzYq3lOMtPUBhYPkM35DyO/YTv0N14PXH+mTh00AUPtQIDAQAB</string>
+    <string name="player_1">Player #1</string>
+    <string name="player_2">Player #1</string>
 
 </resources>
