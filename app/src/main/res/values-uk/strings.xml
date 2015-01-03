@@ -54,5 +54,8 @@
     <string name="txt_max_lvl">Максимальний рівень</string>
     <string name="player_1">Гравець №1</string>
     <string name="player_2">Гравець №2</string>
+    <string name="error_max_lvl_settings">Виникла помилка.</string>
+    <string name="settings_saved">Налаштування збережено.</string>
+    <string name="error_max_level_one">Максимальний ріень не може бути 1.</string>
 
 </resources>
