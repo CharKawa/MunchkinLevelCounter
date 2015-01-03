@@ -78,19 +78,9 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public void doPositiveClickPlayerNameDialog(String name) {
         if (newPlayer) {
             listPlayers.add(new Player(name));
-            Toast.makeText(this,
-                    "Player: " + name +
-                            " added",
-                    Toast.LENGTH_SHORT
-            ).show();
         } else {
             Player player = listPlayers.get(playerIndex);
             player.setName(name);
-            Toast.makeText(this,
-                    "Player: " + player.getName() +
-                            " renamed",
-                    Toast.LENGTH_SHORT
-            ).show();
         }
 
         customListAdapter.notifyDataSetChanged();
