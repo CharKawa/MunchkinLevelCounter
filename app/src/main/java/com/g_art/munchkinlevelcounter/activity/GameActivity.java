@@ -33,7 +33,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private SharedPreferences mPrefs;
     private SettingsHandler settingsHandler;
 
-
+    private int maxLvl;
     private boolean collectStats;
 
     final String TAG = "GameActivity_Munchkin_Test";
@@ -46,7 +46,9 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         settingsHandler = SettingsHandler.getInstance(mPrefs);
 
-        collectStats = settingsHandler.loadSettings();
+        settingsHandler.loadSettings();
+        collectStats = settingsHandler.isStats();
+        maxLvl = settingsHandler.getMaxLvl();
 
         confirmDialog = new ConfirmDialog();
 
@@ -134,6 +136,11 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     @Override
     public boolean collectStats() {
         return collectStats;
+    }
+
+    @Override
+    public int maxLvl() {
+        return maxLvl;
     }
 
     public boolean savePlayersStats() {

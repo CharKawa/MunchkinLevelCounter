@@ -31,7 +31,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private final String PLAYER_KEY = "playersList";
     private final String STATS_KEY = "collectStats";
     private final String BUNDLE_STATS_KEY = "bundleStats";
-    private final int MAX_LVL = 10;
+    private int MAX_LVL;
     private final int MIN_STAT = 0;
     private View view;
     private boolean contAfterMaxLVL = false;
@@ -54,6 +54,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         public boolean onNextTurnClick(Player player);
 
         public boolean collectStats();
+
+        public int maxLvl();
     }
 
     @Override
@@ -120,6 +122,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
             holder.btnNextTurn.setActivated(true);
 //            holder.btnNextTurn.setEnabled(true);
         }
+        MAX_LVL = mCallback.maxLvl();
         super.onResume();
     }
 
