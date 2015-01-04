@@ -31,7 +31,8 @@
         android:layout_alignEnd="@+id/switchStats"
         android:autoText="false"
         android:layout_toRightOf="@+id/txtMaxLvl"
-        android:layout_toEndOf="@+id/txtMaxLvl" />
+        android:layout_toEndOf="@+id/txtMaxLvl"
+        android:numeric="integer" />
 
     <TextView
         android:layout_width="wrap_content"
