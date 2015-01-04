@@ -57,5 +57,6 @@
     <string name="error_max_lvl_settings">Ошибка при выставлении максимального уровня.</string>
     <string name="settings_saved">Настройки сохранены.</string>
     <string name="error_max_level_one">Максимальный уровень не может быть равным 1.</string>
+    <string name="dice">Кубик</string>
 
 </resources>
