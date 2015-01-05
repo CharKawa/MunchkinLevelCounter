@@ -18,6 +18,7 @@ import com.g_art.munchkinlevelcounter.activity.GameActivity;
 import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
+import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
 
 
 /**
@@ -31,6 +32,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     private final String PLAYER_KEY = "playersList";
     private final String STATS_KEY = "collectStats";
     private final String BUNDLE_STATS_KEY = "bundleStats";
+    public static final String DICE_KEY = "dice_key";
     private int MAX_LVL;
     private final int MIN_STAT = 0;
     private View view;
@@ -173,14 +175,14 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                     if (holder.btnNextTurn.isActivated()) {
                         if (mCallback.savePlayersStats()) {
                             if (!mCallback.onNextTurnClick(selectedPlayer)) {
-                                Toast.makeText(getActivity(), "Error in the next turn!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getActivity(), "It was error while trying to save players!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), getString(R.string.error_save_players), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         if (!showStatsMessage) {
-                            Toast.makeText(getActivity(), "Statistic is off, now it's just switch players", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), getString(R.string.stats_off), Toast.LENGTH_SHORT).show();
                             showStatsMessage = true;
                         }
                         mCallback.onNextTurnClick(selectedPlayer);
@@ -245,10 +247,36 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
 
     private void rollADice() {
+        int resId = 1;
         int Min = 1;
         int Max = 6;
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
-        Toast.makeText(getActivity(), String.valueOf(dice), Toast.LENGTH_SHORT).show();
+        switch (dice) {
+            case 1:
+                resId = R.drawable.dice_1;
+                break;
+            case 2:
+                resId = R.drawable.dice_2;
+                break;
+            case 3:
+                resId = R.drawable.dice_3;
+                break;
+            case 4:
+                resId = R.drawable.dice_4;
+                break;
+            case 5:
+                resId = R.drawable.dice_5;
+                break;
+            case 6:
+                resId = R.drawable.dice_6;
+                break;
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(DICE_KEY, resId);
+        DiceDialog diceDialog = new DiceDialog();
+        diceDialog.setArguments(bundle);
+        diceDialog.show(getActivity().getFragmentManager(), "dice");
     }
 
     @Override

@@ -59,5 +59,8 @@
     <string name="error_max_level_one">Max level cannot be equal 1.</string>
     <string name="dice">Dice</string>
     <string name="more_players">Please, add more players.</string>
+    <string name="error_next_turn">Error in the next turn!</string>
+    <string name="error_save_players">It was error while trying to save players!</string>
+    <string name="stats_off">Statistic is off, now it's just switch players</string>
 
 </resources>

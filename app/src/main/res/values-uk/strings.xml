@@ -59,5 +59,8 @@
     <string name="error_max_level_one">Максимальний ріень не може бути 1.</string>
     <string name="dice">Кубик</string>
     <string name="more_players">Не вистачає гравців.</string>
+    <string name="error_next_turn">Виникла помилка.</string>
+    <string name="error_save_players">Виникла помилка.</string>
+    <string name="stats_off">Статистика вимкнена.</string>
 
 </resources>

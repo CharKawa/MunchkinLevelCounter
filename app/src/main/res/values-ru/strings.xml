@@ -59,5 +59,8 @@
     <string name="error_max_level_one">Максимальный уровень не может быть равным 1.</string>
     <string name="dice">Кубик</string>
     <string name="more_players">Игроков недостаточно.</string>
+    <string name="error_next_turn">Произошла ошибка при переключении игрока.</string>
+    <string name="error_save_players">Произошла ошибка при сохранении игрока.</string>
+    <string name="stats_off">Статистика выключена.</string>
 
 </resources>
