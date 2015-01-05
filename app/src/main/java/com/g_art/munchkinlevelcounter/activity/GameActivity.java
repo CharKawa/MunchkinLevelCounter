@@ -36,8 +36,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private int maxLvl;
     private boolean collectStats;
 
-    final String TAG = "GameActivity_Munchkin_Test";
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
