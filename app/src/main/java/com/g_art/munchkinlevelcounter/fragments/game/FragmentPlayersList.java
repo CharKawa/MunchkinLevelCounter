@@ -98,11 +98,9 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         view = inflater.inflate(R.layout.fragment_players_list, container, false);
 
 
-        // Set the adapter
         inGamePlayersList = (ListView) view.findViewById(R.id.inGamePlayersList);
         inGamePlayersList.setAdapter(inGameAdapter);
 
-        // Set OnItemClickListener so we can be notified on item clicks
         inGamePlayersList.setOnItemClickListener(this);
 
         return view;
