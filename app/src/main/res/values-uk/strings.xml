@@ -62,6 +62,6 @@
     <string name="error_next_turn">Виникла помилка.</string>
     <string name="error_save_players">Виникла помилка.</string>
     <string name="stats_off">Статистика вимкнена.</string>
-    <string name="error_empty_name">Будь ласка, введіть ім'я</string>
+    <string name="error_empty_name">Будь ласка, введіть ім\'я</string>
 
 </resources>
