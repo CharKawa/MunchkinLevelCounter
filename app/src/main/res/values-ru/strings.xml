@@ -25,8 +25,8 @@
     <string name="total">Сила</string>
     <string name="no_players">Пожалуйста, добавьте игроков</string>
     <string name="statsOnOff">Собирать статистику во время игры?</string>
-    <string name="message_for_dialog_cont">Вы победили! Пролжить играть или закончить?</string>
-    <string name="message_for_dialog_confirm">Вы потеряее весь прогресс!</string>
+    <string name="message_for_dialog_cont">Вы победили! Продолжить играть или закончить?</string>
+    <string name="message_for_dialog_confirm">Вы потеряете весь прогресс!</string>
     <string name="ok_btn_for_dialog_confirm">Остаться</string>
     <string name="cancel_btn_for_dialog_confirm">Выйти</string>
     <string name="ok_btn_for_dialog_cont">Продолжить</string>
