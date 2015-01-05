@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -43,7 +42,7 @@ public class PlayerNameDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String name = playerName.getText().toString();
                         if (name.isEmpty()) {
-                            Toast.makeText(getActivity(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), getString(R.string.error_empty_name), Toast.LENGTH_SHORT).show();
                         } else {
                             ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name);
                         }
