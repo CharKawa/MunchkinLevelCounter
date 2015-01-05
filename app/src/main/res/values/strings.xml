@@ -57,6 +57,6 @@
     <string name="error_max_lvl_settings">Error setting max level</string>
     <string name="settings_saved">Settings are saved.</string>
     <string name="error_max_level_one">Max level cannot be equal 1.</string>
-    <string name="dice">dice</string>
+    <string name="dice">Dice</string>
 
 </resources>
