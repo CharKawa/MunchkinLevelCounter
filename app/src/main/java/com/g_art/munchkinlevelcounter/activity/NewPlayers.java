@@ -116,7 +116,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
             case R.id.btnStartGame:
                 int playersQuant = listPlayers.size();
                 if (playersQuant < MIN_PLAYER_QUANTITY) {
-                    Toast.makeText(this, "Please, add more players for game", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(this, GameActivity.class);
                     intent.putParcelableArrayListExtra(PLAYER_KEY, listPlayers);
