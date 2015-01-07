@@ -137,7 +137,8 @@
         android:layout_below="@+id/btnLvlDwn"
         android:layout_marginLeft="10dp"
         android:src="@drawable/munchkin_in_game_dice_btn"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_marginTop="1dp" />
 
     <ImageButton
         android:id="@+id/btnNextTurn"
