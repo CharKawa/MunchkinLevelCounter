@@ -6,7 +6,7 @@ MunchkinLevelCounter
        src="http://developer.android.com/images/brand/en_app_rgb_wo_60.png" />
 </a>
 
-<a href="http://www.amazon.com/g-art-Munchkin-Level-Counter/dp/B00ROZUCLQ/ref=pd_sim_sbs_mas_1?ie=UTF8&refRID=18T6V2AFQBBX994GRV8C">
+<a href="http://www.amazon.com/g-art-Munchkin-Level-Counter/dp/B00ROZUCLQ">
   <img alt="Get it on Google Play"
        src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonMobileApps/amazon-apps-store-us-white.png" />
 </a>
