@@ -23,12 +23,22 @@
         <activity
             android:name=".activity.Stats"
             android:label="@string/title_activity_stats"
-            android:parentActivityName=".activity.MyActivity" />
+            android:parentActivityName=".activity.MyActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MyActivity" />
+        </activity>
 
         <activity
             android:name=".activity.NewPlayers"
             android:label="@string/title_activity_newPlayers"
-            android:parentActivityName=".activity.MyActivity" />
+            android:parentActivityName=".activity.MyActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MyActivity" />
+        </activity>
 
         <activity
             android:name=".activity.GameActivity"
@@ -37,11 +47,21 @@
         <activity
             android:name=".activity.Settings"
             android:label="@string/main_screen_Settings"
-            android:parentActivityName=".activity.MyActivity" />
+            android:parentActivityName=".activity.MyActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MyActivity" />
+        </activity>
         <activity
             android:name=".activity.About"
             android:label="@string/main_screen_About"
-            android:parentActivityName=".activity.MyActivity" />
+            android:parentActivityName=".activity.MyActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MyActivity" />
+        </activity>
     </application>
 
 </manifest>
