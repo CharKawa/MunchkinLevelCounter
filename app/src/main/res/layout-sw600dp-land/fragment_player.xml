@@ -16,7 +16,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/txtTotal"
-        android:layout_marginRight="15dp" />
+        android:layout_marginRight="15dp"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/txtTotal"
@@ -26,7 +27,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignTop="@+id/total"
         android:layout_toLeftOf="@+id/total"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentEnd="false"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/total"
@@ -37,7 +39,8 @@
         android:layout_marginRight="12dp"
         android:layout_marginTop="15dp"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="20dp"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/txtLevel"
@@ -46,7 +49,8 @@
         android:text="@string/level"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@id/currentPlayer"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp" />
 
     <TextView
         android:id="@+id/txtPlayerLvl"
@@ -55,7 +59,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@+id/txtLevel"
         android:layout_centerHorizontal="true"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textSize="35dp" />
 
     <TextView
         android:id="@+id/txtGear"
@@ -65,7 +70,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@+id/txtPlayerLvl"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:textSize="50dp" />
 
     <TextView
         android:id="@+id/txtPlayerGear"
@@ -74,7 +80,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_below="@+id/txtGear"
         android:layout_centerHorizontal="true"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textSize="35dp" />
 
 
     <ImageButton
