@@ -30,7 +30,7 @@ public class Settings extends Activity implements CompoundButton.OnCheckedChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setHandler = SettingsHandler.getInstance(mPrefs);
 
         statsSwitch = (Switch) findViewById(R.id.switchStats);
