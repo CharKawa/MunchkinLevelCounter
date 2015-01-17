@@ -1,4 +1,4 @@
-package com.g_art.munchkinlevelcounter.settings;
+package com.g_art.munchkinlevelcounter.util;
 
 import android.content.SharedPreferences;
 

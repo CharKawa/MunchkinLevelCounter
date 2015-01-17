@@ -12,7 +12,7 @@ import android.widget.ListView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.listadapter.InGameListAdapter;
-import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
+import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
 import java.util.ArrayList;
 

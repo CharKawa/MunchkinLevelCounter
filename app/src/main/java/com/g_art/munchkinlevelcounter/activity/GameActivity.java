@@ -12,8 +12,8 @@ import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
-import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
-import com.g_art.munchkinlevelcounter.tasks.SavePlayersStatsTask;
+import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
+import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
 import java.util.ArrayList;
 

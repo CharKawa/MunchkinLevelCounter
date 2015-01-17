@@ -1,4 +1,4 @@
-package com.g_art.munchkinlevelcounter.tasks;
+package com.g_art.munchkinlevelcounter.util;
 
 import android.os.AsyncTask;
 import android.util.Log;

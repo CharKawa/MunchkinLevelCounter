@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.settings.SettingsHandler;
+import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
 /**
  * Created by G_Art on 1/8/2014.
