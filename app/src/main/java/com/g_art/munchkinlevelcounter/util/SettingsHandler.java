@@ -22,6 +22,8 @@ public class SettingsHandler {
     public static SettingsHandler getInstance(SharedPreferences mPrefs) {
         if (settingsInstance == null) {
             settingsInstance = new SettingsHandler(mPrefs);
+        } else {
+            settingsInstance.setSharedPreferences(mPrefs);
         }
         return settingsInstance;
     }
@@ -78,5 +80,9 @@ public class SettingsHandler {
 
     public void setMaxLvl(int maxLvl) {
         this.maxLvl = maxLvl;
+    }
+
+    public void setSharedPreferences(SharedPreferences sharedPreferences) {
+        this.mPrefs = sharedPreferences;
     }
 }
