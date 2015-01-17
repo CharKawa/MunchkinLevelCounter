@@ -17,7 +17,7 @@ public class SettingsHandler {
     private SharedPreferences.Editor prefsEditor;
 
     private boolean isStats = false;
-    private int maxLvl = 10;
+    private int maxLvl = DEFAULT_MAX_LVL;
 
     public static SettingsHandler getInstance(SharedPreferences mPrefs) {
         if (settingsInstance == null) {
