@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.activity.Stats;
 
 /**
  * Created by G_Art on 7/9/2014.
@@ -47,7 +46,7 @@ public class SparseStringsAdapter extends SparseArrayAdapter<String> {
         }
 
         if (getCount() == 1) {
-            holder.txtPlayerName.setText(Stats.PREFS_NO_DATA);
+            holder.txtPlayerName.setText(view.getContext().getString(R.string.no_data));
             holder.viewPlayerColor.setVisibility(View.INVISIBLE);
         } else {
             holder.viewPlayerColor.setBackgroundColor((int) getItemId(position));

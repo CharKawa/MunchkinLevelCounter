@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
+import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
     public final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
+    private String PREFS_NO_DATA;
     final int MIN_PLAYER_QUANTITY = 2;
     private static int playerIndex = 1;
     private static boolean newPlayer = false;
@@ -33,6 +36,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     Button btnStartGame;
     private DialogFragment playerDialog;
     private Bundle nBundle;
+    private StoredPlayers mStored;
+
 
     private ArrayList<Player> listPlayers;
     CustomListAdapter customListAdapter;
@@ -41,6 +46,10 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_players);
+
+        PREFS_NO_DATA = getString(R.string.no_data);
+
+        mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
         listVPlayers = (ListView) findViewById(R.id.listVPlayers);
         btnAddPlayers = (Button) findViewById(R.id.btnAddPlayer);
@@ -55,9 +64,13 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
-            listPlayers = new ArrayList<Player>();
-            listPlayers.add(new Player(getString(R.string.player_1)));
-            listPlayers.add(new Player(getString(R.string.player_2)));
+            if (mStored.isPlayersStored()) {
+                getPlayersForNewGame();
+            } else {
+                listPlayers = new ArrayList<Player>();
+                listPlayers.add(new Player(getString(R.string.player_1)));
+                listPlayers.add(new Player(getString(R.string.player_2)));
+            }
         } else {
             listPlayers = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
         }
@@ -65,6 +78,16 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         customListAdapter = new CustomListAdapter(this, listPlayers);
         listVPlayers.setAdapter(customListAdapter);
+    }
+
+    private void getPlayersForNewGame() {
+        ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
+        listPlayers = new ArrayList<Player>();
+        if (!tList.isEmpty()) {
+            for (Player player : tList) {
+                listPlayers.add(player.cloneWithoutStats());
+            }
+        }
     }
 
 
