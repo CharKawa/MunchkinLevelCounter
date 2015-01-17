@@ -42,6 +42,10 @@ public class Player implements Parcelable {
 
     }
 
+    public Player cloneWithoutStats() {
+        return new Player(this.name);
+    }
+
     public Player(Parcel in) {
         lvlStats = new ArrayList<String>();
         gearStats = new ArrayList<String>();
