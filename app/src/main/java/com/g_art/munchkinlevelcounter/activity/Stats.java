@@ -55,8 +55,7 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
                     mStored.savePlayers(playersList);
                 }
             } else {
-                //TODO: Create string value for stats from prev game
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.prev_stas), Toast.LENGTH_SHORT).show();
                 playersList = mStored.loadPlayers(PREFS_NO_DATA);
             }
         } else {

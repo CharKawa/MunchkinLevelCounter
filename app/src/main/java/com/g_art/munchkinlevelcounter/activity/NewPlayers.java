@@ -168,8 +168,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         //TODO: SHOW ALERT
 
         Toast.makeText(this,
-                "Player: " + player.getName() +
-                        " deleted",
+                player.getName() +
+                        getString(R.string.deleted),
                 Toast.LENGTH_SHORT
         ).show();
 
