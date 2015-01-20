@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,9 +31,9 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     private static boolean newPlayer = false;
 
     ListView listVPlayers;
-    Button btnAddPlayers;
-    Button btnClear;
-    Button btnStartGame;
+    ImageButton btnAddPlayers;
+    ImageButton btnClear;
+    ImageButton btnStartGame;
     private DialogFragment playerDialog;
     private Bundle nBundle;
     private StoredPlayers mStored;
@@ -52,14 +52,14 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
         listVPlayers = (ListView) findViewById(R.id.listVPlayers);
-        btnAddPlayers = (Button) findViewById(R.id.btnAddPlayer);
+        btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
         playerDialog = new PlayerNameDialog();
 
         btnAddPlayers.setOnClickListener(this);
-        btnClear = (Button) findViewById(R.id.btnClear);
+        btnClear = (ImageButton) findViewById(R.id.imgBtnClear);
         btnClear.setOnClickListener(this);
-        btnStartGame = (Button) findViewById(R.id.btnStartGame);
+        btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
 
 
@@ -137,8 +137,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 customListAdapter.notifyDataSetChanged();
                 break;
             case R.id.btnStartGame:
-                int playersQuant = listPlayers.size();
-                if (playersQuant < MIN_PLAYER_QUANTITY) {
+                if (listPlayers.size() < MIN_PLAYER_QUANTITY) {
                     Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(this, GameActivity.class);
@@ -162,7 +161,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     /**
      * **************  This function used by adapter ***************
      */
-    public void playerDelete(int mPosition) {
+    private void playerDelete(int mPosition) {
         Player player = listPlayers.get(mPosition);
 
         //TODO: SHOW ALERT
@@ -177,7 +176,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         customListAdapter.notifyDataSetChanged();
     }
 
-    public void playerEdit(int playerPosition) {
+    private void playerEdit(int playerPosition) {
         Player player = listPlayers.get(playerPosition);
         playerIndex = playerPosition;
         newPlayer = false;
