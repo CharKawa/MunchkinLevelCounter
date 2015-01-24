@@ -61,13 +61,13 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         btnClear.setOnClickListener(this);
         btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
+        listPlayers = new ArrayList<Player>();
 
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
             if (mStored.isPlayersStored()) {
                 getPlayersForNewGame();
             } else {
-                listPlayers = new ArrayList<Player>();
                 listPlayers.add(new Player(getString(R.string.player_1)));
                 listPlayers.add(new Player(getString(R.string.player_2)));
             }
@@ -82,7 +82,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
     private void getPlayersForNewGame() {
         ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
-        listPlayers = new ArrayList<Player>();
         if (!tList.isEmpty()) {
             for (Player player : tList) {
                 listPlayers.add(player.cloneWithoutStats());
@@ -161,10 +160,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     /**
      * **************  This function used by adapter ***************
      */
-    private void playerDelete(int mPosition) {
+    public void playerDelete(int mPosition) {
         Player player = listPlayers.get(mPosition);
-
-        //TODO: SHOW ALERT
 
         Toast.makeText(this,
                 player.getName() +
@@ -176,7 +173,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         customListAdapter.notifyDataSetChanged();
     }
 
-    private void playerEdit(int playerPosition) {
+    public void playerEdit(int playerPosition) {
         Player player = listPlayers.get(playerPosition);
         playerIndex = playerPosition;
         newPlayer = false;
