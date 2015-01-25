@@ -35,7 +35,7 @@
             android:id="@+id/txtDev_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_donate_999"
+            android:layout_below="@+id/imgBtnContact"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="@string/developed"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imgBtnRate"
             android:layout_below="@+id/txtRate"
-            android:src="@drawable/rate_APP"
+            android:src="@drawable/rate"
             android:background="@null"
             android:contentDescription="@string/btn_rate"
             android:layout_margin="5dp" />
@@ -128,6 +128,25 @@
             android:layout_toRightOf="@+id/btn_donate_399"
             android:layout_below="@+id/txtDonate"
             android:layout_margin="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/contact"
+            android:id="@+id/txtContact"
+            android:layout_below="@+id/btn_donate_999"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBtnContact"
+            android:layout_below="@+id/txtContact"
+            android:layout_margin="5dp"
+            android:src="@drawable/contact"
+            android:background="@null" />
     </RelativeLayout>
 
 </ScrollView>

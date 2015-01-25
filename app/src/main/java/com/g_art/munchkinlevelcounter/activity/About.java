@@ -30,6 +30,7 @@ public class About extends Activity implements View.OnClickListener {
     private ImageButton btnDonate199;
     private ImageButton btnDonate399;
     private ImageButton btnDonate999;
+    private ImageButton imgBtnContact;
 
     private boolean isDonate = false;
 
@@ -93,6 +94,9 @@ public class About extends Activity implements View.OnClickListener {
 
         btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
         btnRate.setOnClickListener(this);
+
+        imgBtnContact = (ImageButton) findViewById(R.id.imgBtnContact);
+        imgBtnContact.setOnClickListener(this);
 
         btnDonate099 = (ImageButton) findViewById(R.id.btn_donate_099);
         btnDonate099.setOnClickListener(this);
@@ -165,7 +169,7 @@ public class About extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_Rate:
+            case R.id.imgBtnRate:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 //Try Google Play
                 intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
@@ -177,6 +181,14 @@ public class About extends Activity implements View.OnClickListener {
                         Toast.makeText(this, "Could not open Android market, please install the market app.", Toast.LENGTH_SHORT).show();
                     }
                 }
+                break;
+            case R.id.imgBtnContact:
+                Intent Email = new Intent(Intent.ACTION_SEND);
+                Email.setType("text/email");
+                Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
+                Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                Email.putExtra(Intent.EXTRA_TEXT, "Dear ...," + "");
+                startActivity(Intent.createChooser(Email, "Send Feedback:"));
                 break;
             case R.id.btn_donate_099:
                 if (isDonate) {
