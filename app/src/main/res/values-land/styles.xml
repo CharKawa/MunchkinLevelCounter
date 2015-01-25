@@ -54,7 +54,7 @@
     </style>
 
     <style name="PopupMenu.Munchkin" parent="@android:style/Widget.Holo.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_munchkin</item>
     </style>
 
     <style name="DropDownListView.Munchkin" parent="@android:style/Widget.Holo.ListView.DropDown">
@@ -63,7 +63,7 @@
 
     <style name="DropDownNav.Munchkin" parent="@android:style/Widget.Holo.Spinner">
         <item name="android:background">@drawable/spinner_background_ab_munchkin</item>
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_munchkin</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_munchkin</item>
     </style>
 
