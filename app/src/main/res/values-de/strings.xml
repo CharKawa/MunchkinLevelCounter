@@ -3,9 +3,9 @@
 
     <string name="app_name">Munchkin Level Counter</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="main_screen_Players">Players</string>
+    <string name="main_screen_Players">Spieler</string>
     <string name="main_screen_Stats">Statistisch</string>
-    <string name="main_screen_Settings">Settings</string>
+    <string name="main_screen_Settings">Einstellungen</string>
     <string name="main_screen_About">Über</string>
     <string name="players_screen_Add_Player">Spieler hinzufügen</string>
     <string name="players_screen_Start_Game">Spielen!</string>
@@ -66,5 +66,6 @@
     <string name="no_data">Leider keine daten.</string>
     <string name="prev_stas">Dies ist Statistik für vorherigen spiel.</string>
     <string name="deleted">gelöscht</string>
+    <string name="contact">Haben Sie Fragen? Sie können sich jederzeit an mich:</string>
 
 </resources>
