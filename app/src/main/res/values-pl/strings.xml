@@ -63,9 +63,7 @@
     <string name="error_save_players">It was error while trying to save players!</string>
     <string name="stats_off">Statistic is off, now it\'s just switch players</string>
     <string name="error_empty_name">Name cannot be empty</string>
-    <string name="no_data">There are no statistic, please play a game to have one.</string>
-    <string name="prev_stas">This is statistic for previous game.</string>
-    <string name="deleted">deleted</string>
-    <string name="contact">Have questions? You can always contact me:</string>
+    <string name="no_data">Sorry, no data.</string>
+    <string name="prev_stas">To jest statystyka w poprzedniej grze.</string>
 
 </resources>

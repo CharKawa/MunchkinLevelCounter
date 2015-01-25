@@ -63,5 +63,9 @@
     <string name="error_save_players">Произошла ошибка при сохранении игрока.</string>
     <string name="stats_off">Статистика выключена.</string>
     <string name="error_empty_name">Пожалуйста, введите имя.</string>
+    <string name="no_data">Статистика отсутствует. Сыграйте игру.</string>
+    <string name="prev_stas">Статистика предыдущей игры.</string>
+    <string name="deleted">Удален</string>
+    <string name="contact">Есть вопросы? Вы всегда можете написать мне:</string>
 
 </resources>
