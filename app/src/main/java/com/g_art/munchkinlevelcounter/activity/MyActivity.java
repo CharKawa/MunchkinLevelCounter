@@ -51,7 +51,7 @@ public class MyActivity extends Activity {
                     intent = new Intent(this, Stats.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(this, R.string.no_data, Toast.LENGTH_SHORT);
+                    Toast.makeText(this, R.string.no_data, Toast.LENGTH_SHORT).show();
                 }
                 return true;
             case R.id.action_settings:
