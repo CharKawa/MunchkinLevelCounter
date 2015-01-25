@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
+import com.g_art.munchkinlevelcounter.activity.MyActivity;
 import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
@@ -213,13 +214,18 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
 
     private void openStatsActivity() {
-
-        Intent intent = new Intent(getActivity(), Stats.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
-        bundle.putBoolean(STATS_KEY, mCallback.collectStats());
-        intent.putExtra(BUNDLE_STATS_KEY, bundle);
-        startActivity(intent);
+        if (mCallback.collectStats()) {
+            Intent intent = new Intent(getActivity(), Stats.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
+            bundle.putBoolean(STATS_KEY, mCallback.collectStats());
+            intent.putExtra(BUNDLE_STATS_KEY, bundle);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getActivity(), MyActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 
     private boolean isMaxLvlReached(int currentLvl) {
