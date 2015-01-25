@@ -126,16 +126,16 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnAddPlayer:
+            case R.id.imgBtnAddPlayer:
                 String name = "";
                 showPlayerNameDialog(name);
                 newPlayer = true;
                 break;
-            case R.id.btnClear:
+            case R.id.imgBtnClear:
                 listPlayers.clear();
                 customListAdapter.notifyDataSetChanged();
                 break;
-            case R.id.btnStartGame:
+            case R.id.imgBtnStart:
                 if (listPlayers.size() < MIN_PLAYER_QUANTITY) {
                     Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
                 } else {
