@@ -92,7 +92,8 @@
         android:background="@null"
         android:layout_toLeftOf="@+id/txtPlayerLvl"
         android:layout_alignTop="@+id/txtPlayerLvl"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp" />
 
     <ImageButton
         android:id="@+id/btnLvlDwn"
@@ -102,7 +103,8 @@
         android:background="@null"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/txtPlayerLvl"
-        android:layout_alignTop="@+id/txtPlayerLvl" />
+        android:layout_alignTop="@+id/txtPlayerLvl"
+        android:layout_marginTop="5dp" />
 
     <ImageButton
         android:id="@+id/btnGearUp"
@@ -112,7 +114,8 @@
         android:background="@null"
         android:layout_alignTop="@+id/txtPlayerGear"
         android:layout_toLeftOf="@+id/txtPlayerGear"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp" />
 
     <ImageButton
         android:id="@+id/btnGearDwn"
@@ -122,7 +125,8 @@
         android:background="@null"
         android:layout_marginLeft="20dp"
         android:layout_alignTop="@+id/txtPlayerGear"
-        android:layout_toRightOf="@+id/txtPlayerGear" />
+        android:layout_toRightOf="@+id/txtPlayerGear"
+        android:layout_marginTop="5dp" />
 
 
     <ImageButton

@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
@@ -25,11 +25,11 @@ public class About extends Activity implements View.OnClickListener {
     // Debug tag, for logging
     static final String TAG = "AboutActivity";
 
-    private Button btnRate;
-    private Button btnDonate099;
-    private Button btnDonate199;
-    private Button btnDonate399;
-    private Button btnDonate999;
+    private ImageButton btnRate;
+    private ImageButton btnDonate099;
+    private ImageButton btnDonate199;
+    private ImageButton btnDonate399;
+    private ImageButton btnDonate999;
 
     private boolean isDonate = false;
 
@@ -91,19 +91,19 @@ public class About extends Activity implements View.OnClickListener {
             isDonate = false;
         }
 
-        btnRate = (Button) findViewById(R.id.btn_Rate);
+        btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
         btnRate.setOnClickListener(this);
 
-        btnDonate099 = (Button) findViewById(R.id.btn_donate_099);
+        btnDonate099 = (ImageButton) findViewById(R.id.btn_donate_099);
         btnDonate099.setOnClickListener(this);
 
-        btnDonate199 = (Button) findViewById(R.id.btn_donate_199);
+        btnDonate199 = (ImageButton) findViewById(R.id.btn_donate_199);
         btnDonate199.setOnClickListener(this);
 
-        btnDonate399 = (Button) findViewById(R.id.btn_donate_399);
+        btnDonate399 = (ImageButton) findViewById(R.id.btn_donate_399);
         btnDonate399.setOnClickListener(this);
 
-        btnDonate999 = (Button) findViewById(R.id.btn_donate_999);
+        btnDonate999 = (ImageButton) findViewById(R.id.btn_donate_999);
         btnDonate999.setOnClickListener(this);
     }
 
