@@ -22,7 +22,6 @@ import java.util.ArrayList;
  */
 public class LvlStatsFragment extends Fragment {
 
-    final String TAG = "GameActivity_Munchkin_Test";
     private ArrayList<Player> playersList;
     final static String PLAYER_KEY = "playersList";
     private LineChartView chartView;
