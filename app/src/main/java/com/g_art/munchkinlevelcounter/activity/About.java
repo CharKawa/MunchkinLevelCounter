@@ -188,7 +188,7 @@ public class About extends Activity implements View.OnClickListener {
                 Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
                 Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
                 Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
-                startActivity(Intent.createChooser(Email, "Send Feedback:"));
+                startActivity(Intent.createChooser(Email, "Choose your Email App:"));
                 break;
             case R.id.btn_donate_099:
                 if (isDonate) {
