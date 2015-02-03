@@ -184,10 +184,10 @@ public class About extends Activity implements View.OnClickListener {
                 break;
             case R.id.imgBtnContact:
                 Intent Email = new Intent(Intent.ACTION_SEND);
-                Email.setType("text/email");
+                Email.setType("message/rfc822");
                 Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
                 Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
-                Email.putExtra(Intent.EXTRA_TEXT, "Dear ...," + "");
+                Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
                 startActivity(Intent.createChooser(Email, "Send Feedback:"));
                 break;
             case R.id.btn_donate_099:
