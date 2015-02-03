@@ -134,7 +134,7 @@ public class StatsHandler {
             chartView.setXAxis(true).setYAxis(true).setGrid(LineChartView.GridType.FULL, mLineGridPaint);
             chartView.setAxisBorderValues(MIN_VALUE, MAX_VALUE, STEP);
 
-            chartView.setFontSize(10);
+            chartView.setFontSize(30);
 
             chartView.addData(statLines);
 
