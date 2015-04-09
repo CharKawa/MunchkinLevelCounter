@@ -1,63 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".activity.Settings">
 
 
     <Switch
+        android:id="@+id/switchStats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/statsOnOff"
-        android:id="@+id/switchStats"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:thumb="@drawable/munchkin_switch_inner_holo_light"
-        android:track="@drawable/munchkin_switch_track_holo_light"
-        android:textColor="@color/text_color"
-        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/statsOnOff"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_color"
+        android:thumb="@drawable/munchkin_switch_inner_holo_light"
+        android:track="@drawable/munchkin_switch_track_holo_light" />
 
     <EditText
+        android:id="@+id/edTextMaxLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/edTextMaxLvl"
-        android:layout_below="@+id/switchStats"
-        android:layout_alignRight="@+id/switchStats"
         android:layout_alignEnd="@+id/switchStats"
-        android:autoText="false"
-        android:layout_toRightOf="@+id/txtMaxLvl"
+        android:layout_alignRight="@+id/switchStats"
+        android:layout_below="@+id/switchStats"
         android:layout_toEndOf="@+id/txtMaxLvl"
+        android:layout_toRightOf="@+id/txtMaxLvl"
+        android:autoText="false"
+        android:ems="10"
+        android:inputType="number"
         android:numeric="integer" />
 
     <TextView
+        android:id="@+id/txtMaxLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtMaxLvl"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignBottom="@+id/edTextMaxLvl"
         android:layout_alignLeft="@+id/switchStats"
         android:layout_alignStart="@+id/switchStats"
-        android:text="@string/txt_max_lvl" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/switch_stand_by_mode"
-        android:id="@+id/switchStandBy"
-        android:layout_above="@+id/switchStats"
-        android:thumb="@drawable/munchkin_switch_inner_holo_light"
-        android:track="@drawable/munchkin_switch_track_holo_light"
-        android:textColor="@color/text_color"
-        android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@+id/switchStats"
-        android:layout_alignRight="@+id/switchStats"
+        android:text="@string/txt_max_lvl"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
