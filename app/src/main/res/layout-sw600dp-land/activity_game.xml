@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -17,19 +18,19 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/currentPlayer_container"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:id="@+id/currentPlayer_container"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true">
 
         <fragment
+            android:id="@+id/currentPlayer_Fragment"
+            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
-            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
-            android:id="@+id/currentPlayer_Fragment"
-            tools:layout="@layout/fragment_player"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            tools:layout="@layout/fragment_player" />
 
     </RelativeLayout>
 

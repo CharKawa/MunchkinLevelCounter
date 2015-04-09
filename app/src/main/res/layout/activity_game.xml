@@ -4,29 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:orientation="vertical"
     tools:context=".activity.GameActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/fragmentList"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:id="@+id/fragmentList">
+        android:orientation="horizontal">
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/currentPlayer_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/currentPlayer_container">
+        android:orientation="horizontal">
 
         <fragment
+            android:id="@+id/currentPlayer_Fragment"
+            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
-            android:id="@+id/currentPlayer_Fragment"
             tools:layout="@layout/fragment_player" />
 
     </LinearLayout>
