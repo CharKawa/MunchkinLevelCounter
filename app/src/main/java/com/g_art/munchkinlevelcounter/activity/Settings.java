@@ -68,10 +68,6 @@ public class Settings extends Activity implements CompoundButton.OnCheckedChange
             case R.id.edTextMaxLvl:
                 try {
                     saveSettings(statsSwitch.isChecked(), parseLevel());
-                    Toast.makeText(this,
-                            getString(R.string.settings_saved),
-                            Toast.LENGTH_SHORT
-                    ).show();
                     break;
                 } catch (NumberFormatException ex) {
                     Toast.makeText(this,
