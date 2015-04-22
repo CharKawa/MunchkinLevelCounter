@@ -80,8 +80,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnGearDwn.setOnClickListener(this);
         holder.btnRollDice = (ImageButton) view.findViewById(R.id.btnDice);
         holder.btnRollDice.setOnClickListener(this);
-        holder.btnNextTurn = (ImageButton) view.findViewById(R.id.btnNextTurn);
-        holder.btnNextTurn.setOnClickListener(this);
+        holder.btnFinish = (ImageButton) view.findViewById(R.id.btnFinish);
+        holder.btnFinish.setOnClickListener(this);
         holder.btnNextPlayer = (Button) view.findViewById(R.id.btnNextPlayer);
         holder.btnNextPlayer.setOnClickListener(this);
 
@@ -133,7 +133,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 rollADice();
                 break;
 
-            case R.id.btnNextTurn:
+            case R.id.btnFinish:
                 mCallback.savePlayersStats();
                 openStatsActivity();
                 break;
@@ -146,7 +146,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.error_save_players), Toast.LENGTH_LONG).show();
                 }
-
                 break;
         }
         setSelectedPlayer();
@@ -157,13 +156,13 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         contAfterMaxLVL = true;
         selectedPlayer.setWinner(true);
         onClick(view.findViewById(R.id.btnLvlUp));
-        holder.btnNextTurn.setImageResource(R.drawable.munchkin_in_game_end);
+        holder.btnFinish.setImageResource(R.drawable.munchkin_in_game_end);
     }
 
     public void doNegativeClickContinueDialog() {
         selectedPlayer.setWinner(true);
         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
-        onClick(view.findViewById(R.id.btnNextTurn));
+        onClick(view.findViewById(R.id.btnFinish));
         openStatsActivity();
     }
 
@@ -264,7 +263,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         public ImageButton btnGearUp;
         public ImageButton btnGearDwn;
         public ImageButton btnRollDice;
-        public ImageButton btnNextTurn;
+        public ImageButton btnFinish;
         public Button btnNextPlayer;
     }
 }
