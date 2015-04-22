@@ -12,19 +12,16 @@ import android.widget.ListView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.listadapter.InGameListAdapter;
-import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
 import java.util.ArrayList;
 
 public class FragmentPlayersList extends Fragment implements AdapterView.OnItemClickListener {
 
-    private ArrayList<Player> playersList;
     private static final String PLAYER_KEY = "playersList";
     final String TAG = "GameActivity_Munchkin_Test";
+    private ArrayList<Player> playersList;
     private Player player;
     private View view;
-    private boolean collectStats;
-
 
     /**
      * The fragment's ListView/GridView.
@@ -45,11 +42,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
     public FragmentPlayersList() {
     }
 
-    // interface for communication between fragments
-    public interface OnPlayerSelectedListener {
-        public void onPlayerSelected(Player player);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +51,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            collectStats = getArguments().getBoolean(SettingsHandler.STATS_SETTINGS, true);
         }
         inGameAdapter = new InGameListAdapter(getActivity(), playersList);
 
@@ -84,7 +75,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         outState.putParcelableArrayList(PLAYER_KEY, playersList);
     }
 
-
     @Override
     public void setRetainInstance(boolean retain) {
         super.setRetainInstance(retain);
@@ -106,7 +96,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         return view;
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         player = playersList.get(position);
@@ -115,6 +104,11 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
     public void listUpdate() {
         inGameAdapter.notifyDataSetChanged();
+    }
+
+    // interface for communication between fragments
+    public interface OnPlayerSelectedListener {
+        public void onPlayerSelected(Player player);
     }
 
 

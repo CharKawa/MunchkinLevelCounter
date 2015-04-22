@@ -9,13 +9,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
-import com.g_art.munchkinlevelcounter.activity.MyActivity;
 import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
@@ -27,38 +27,21 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
  */
 public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
+    public static final String DICE_KEY = "dice_key";
+    final String TAG = "GameActivity_Munchkin_Test";
+    private final String PLAYER_KEY = "playersList";
+    private final String BUNDLE_STATS_KEY = "bundleStats";
+    private final int MIN_STAT = 0;
     private ViewHolder holder;
     private DialogFragment continueDialog;
     private Player selectedPlayer;
-    private final String PLAYER_KEY = "playersList";
-    private final String STATS_KEY = "collectStats";
-    private final String BUNDLE_STATS_KEY = "bundleStats";
-    public static final String DICE_KEY = "dice_key";
     private int MAX_LVL;
-    private final int MIN_STAT = 0;
     private View view;
     private boolean contAfterMaxLVL = false;
-    final String TAG = "GameActivity_Munchkin_Test";
     private PlayersUpdate mCallback;
-    private static boolean showStatsMessage = false;
-
 
     public FragmentPlayer() {
         // Required empty public constructor
-    }
-
-    // interface for communication between fragments
-    public interface PlayersUpdate {
-
-        public void onPlayersUpdate();
-
-        public boolean savePlayersStats();
-
-        public boolean onNextTurnClick(Player player);
-
-        public boolean collectStats();
-
-        public int maxLvl();
     }
 
     @Override
@@ -73,19 +56,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
         }
-    }
-
-    public class ViewHolder {
-        public TextView txtCurrentPlayerName;
-        public TextView txtCurrentPlayerPower;
-        public TextView txtCurrentPlayerLvl;
-        public TextView txtCurrentPlayerGear;
-        public ImageButton btnLvlUp;
-        public ImageButton btnLvlDwn;
-        public ImageButton btnGearUp;
-        public ImageButton btnGearDwn;
-        public ImageButton btnRollDice;
-        public ImageButton btnNextTurn;
     }
 
     @Override
@@ -112,19 +82,14 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnRollDice.setOnClickListener(this);
         holder.btnNextTurn = (ImageButton) view.findViewById(R.id.btnNextTurn);
         holder.btnNextTurn.setOnClickListener(this);
+        holder.btnNextPlayer = (Button) view.findViewById(R.id.btnNextPlayer);
+        holder.btnNextPlayer.setOnClickListener(this);
 
         return view;
     }
 
     @Override
     public void onResume() {
-        if (!mCallback.collectStats()) {
-//            holder.btnNextTurn.setEnabled(false);
-            holder.btnNextTurn.setActivated(false);
-        } else {
-            holder.btnNextTurn.setActivated(true);
-//            holder.btnNextTurn.setEnabled(true);
-        }
         MAX_LVL = mCallback.maxLvl();
         super.onResume();
     }
@@ -169,26 +134,19 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnNextTurn:
-                if (contAfterMaxLVL) {
-                    mCallback.savePlayersStats();
-                    openStatsActivity();
-                } else {
-                    if (holder.btnNextTurn.isActivated()) {
-                        if (mCallback.savePlayersStats()) {
-                            if (!mCallback.onNextTurnClick(selectedPlayer)) {
-                                Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(getActivity(), getString(R.string.error_save_players), Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        if (!showStatsMessage) {
-                            Toast.makeText(getActivity(), getString(R.string.stats_off), Toast.LENGTH_SHORT).show();
-                            showStatsMessage = true;
-                        }
-                        mCallback.onNextTurnClick(selectedPlayer);
+                mCallback.savePlayersStats();
+                openStatsActivity();
+                break;
+
+            case R.id.btnNextPlayer:
+                if (mCallback.savePlayersStats()) {
+                    if (!mCallback.onNextTurnClick(selectedPlayer)) {
+                        Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
                     }
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.error_save_players), Toast.LENGTH_LONG).show();
                 }
+
                 break;
         }
         setSelectedPlayer();
@@ -214,18 +172,11 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
 
     private void openStatsActivity() {
-        if (mCallback.collectStats()) {
-            Intent intent = new Intent(getActivity(), Stats.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
-            bundle.putBoolean(STATS_KEY, mCallback.collectStats());
-            intent.putExtra(BUNDLE_STATS_KEY, bundle);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getActivity(), MyActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(getActivity(), Stats.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
+        intent.putExtra(BUNDLE_STATS_KEY, bundle);
+        startActivity(intent);
     }
 
     private boolean isMaxLvlReached(int currentLvl) {
@@ -240,9 +191,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         selectedPlayer = player;
         setSelectedPlayer();
 
-        if (mCallback.collectStats()) {
-            mCallback.savePlayersStats();
-        }
+        mCallback.savePlayersStats();
     }
 
     private void setSelectedPlayer() {
@@ -291,5 +240,31 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
             dismissDialog();
         }
         super.onDestroy();
+    }
+
+    // interface for communication between fragments
+    public interface PlayersUpdate {
+
+        void onPlayersUpdate();
+
+        boolean savePlayersStats();
+
+        boolean onNextTurnClick(Player player);
+
+        int maxLvl();
+    }
+
+    public class ViewHolder {
+        public TextView txtCurrentPlayerName;
+        public TextView txtCurrentPlayerPower;
+        public TextView txtCurrentPlayerLvl;
+        public TextView txtCurrentPlayerGear;
+        public ImageButton btnLvlUp;
+        public ImageButton btnLvlDwn;
+        public ImageButton btnGearUp;
+        public ImageButton btnGearDwn;
+        public ImageButton btnRollDice;
+        public ImageButton btnNextTurn;
+        public Button btnNextPlayer;
     }
 }

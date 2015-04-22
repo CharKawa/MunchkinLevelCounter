@@ -22,7 +22,6 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
     final String TAG = "GameActivity_Munchkin_Test";
     private final String PLAYER_KEY = "playersList";
-    private final String STATS_KEY = "collectStats";
     private final String BUNDLE_STATS_KEY = "bundleStats";
     private String PREFS_NO_DATA;
 
@@ -48,12 +47,9 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         Bundle bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
         if (bundle != null && !bundle.isEmpty()) {
             playersList = bundle.getParcelableArrayList(PLAYER_KEY);
-            boolean statsCollect = bundle.getBoolean(STATS_KEY, true);
-            if (statsCollect) {
-                if (playersList != null) {
-                    mStored.clearStoredPlayers();
-                    mStored.savePlayers(playersList);
-                }
+            if (playersList != null) {
+                mStored.clearStoredPlayers();
+                mStored.savePlayers(playersList);
             } else {
                 Toast.makeText(this, getString(R.string.prev_stas), Toast.LENGTH_SHORT).show();
                 playersList = mStored.loadPlayers(PREFS_NO_DATA);

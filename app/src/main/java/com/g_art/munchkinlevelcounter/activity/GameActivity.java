@@ -22,11 +22,11 @@ import java.util.ArrayList;
  */
 public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
 
-    private ArrayList<Player> playersList;
+    private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
     final String PLAYER_KEY = "playersList";
     final int FIRST_PLAYER = 0;
+    private ArrayList<Player> playersList;
     private FragmentPlayersList fr;
-    private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
     private SavePlayersStatsTask saveTask;
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
@@ -45,7 +45,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         settingsHandler = SettingsHandler.getInstance(mPrefs);
 
         settingsHandler.loadSettings();
-        collectStats = settingsHandler.isStats();
         maxLvl = settingsHandler.getMaxLvl();
 
         confirmDialog = new ConfirmDialog();
@@ -60,7 +59,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             fr = new FragmentPlayersList();
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(PLAYER_KEY, playersList);
-            bundle.putBoolean(SettingsHandler.STATS_SETTINGS, collectStats);
             fr.setArguments(bundle);
             fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
         }
@@ -129,11 +127,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             result = false;
         }
         return result;
-    }
-
-    @Override
-    public boolean collectStats() {
-        return collectStats;
     }
 
     @Override
