@@ -20,20 +20,18 @@ import java.util.Random;
  * Created by G_Art on 3/9/2014.
  */
 public class StatsHandler {
-    private final static int CLEAR_STRING_BULDER = 0;
-    private ArrayList<Player> playersList;
-
-    private LineChartView chartView;
-
-    private static final Random rnd = new Random();
-    private SparseArray<String> playersColorSparse;
-    private StringBuilder s;
     public final static int LVL_STATS = 0;
     public final static int GEAR_STATS = 1;
     public final static int POWER_STATS = 2;
+    private final static int CLEAR_STRING_BULDER = 0;
+    private static final Random rnd = new Random();
+    private final int STEP = 1;
+    private ArrayList<Player> playersList;
+    private LineChartView chartView;
+    private SparseArray<String> playersColorSparse;
+    private StringBuilder s;
     private int MIN_VALUE = 0;
     private int MAX_VALUE;
-    private final int STEP = 1;
 
 
     public StatsHandler(ArrayList<Player> playersList, LineChartView chartView) {
@@ -132,7 +130,7 @@ public class StatsHandler {
             mLineGridPaint.setStrokeWidth(Tools.fromDpToPx(.10f));
 
             chartView.setXAxis(true).setYAxis(true).setGrid(LineChartView.GridType.FULL, mLineGridPaint);
-            chartView.setAxisBorderValues(MIN_VALUE, MAX_VALUE, STEP);
+            chartView.setAxisBorderValues(MIN_VALUE, MAX_VALUE + 1, STEP);
 
             chartView.setFontSize(30);
 
