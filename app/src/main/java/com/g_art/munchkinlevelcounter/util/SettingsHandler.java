@@ -6,18 +6,19 @@ import android.content.SharedPreferences;
  * Created by G_Art on 12/9/2014.
  */
 public class SettingsHandler {
-    private static SettingsHandler settingsInstance;
-
-    public static final String STATS_SETTINGS = "stats_settings";
     public static final String MAX_LVL_SETTINGS = "max_lvl_settings";
     public static final int DEFAULT_MAX_LVL = 10;
     public static final int MIN_LVL = 1;
-
+    private static SettingsHandler settingsInstance;
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
 
     private boolean isStats = false;
     private int maxLvl = DEFAULT_MAX_LVL;
+
+    private SettingsHandler(SharedPreferences mPrefs) {
+        this.mPrefs = mPrefs;
+    }
 
     public static SettingsHandler getInstance(SharedPreferences mPrefs) {
         if (settingsInstance == null) {
@@ -28,25 +29,17 @@ public class SettingsHandler {
         return settingsInstance;
     }
 
-    private SettingsHandler(SharedPreferences mPrefs) {
-        this.mPrefs = mPrefs;
-    }
-
-
     public boolean loadSettings() {
-        if (!mPrefs.contains(STATS_SETTINGS) || !mPrefs.contains(MAX_LVL_SETTINGS)) {
+        if (!mPrefs.contains(MAX_LVL_SETTINGS)) {
             saveDefaultSettings();
         }
 
-        isStats = mPrefs.getBoolean(STATS_SETTINGS, true);
         maxLvl = mPrefs.getInt(MAX_LVL_SETTINGS, DEFAULT_MAX_LVL);
-        boolean result = true;
-        return result;
+        return true;
     }
 
-    public boolean saveSettings(boolean isChecked, int maxLvl) {
+    public boolean saveSettings(int maxLvl) {
         prefsEditor = mPrefs.edit();
-        prefsEditor.putBoolean(STATS_SETTINGS, isChecked);
         prefsEditor.putInt(MAX_LVL_SETTINGS, maxLvl);
         boolean result;
         try {
@@ -59,19 +52,11 @@ public class SettingsHandler {
     }
 
     public boolean saveSettings() {
-        return saveSettings(isStats(), getMaxLvl());
+        return saveSettings(getMaxLvl());
     }
 
     public boolean saveDefaultSettings() {
-        return saveSettings(true, DEFAULT_MAX_LVL);
-    }
-
-    public boolean isStats() {
-        return isStats;
-    }
-
-    public void setStats(boolean isStats) {
-        this.isStats = isStats;
+        return saveSettings(DEFAULT_MAX_LVL);
     }
 
     public int getMaxLvl() {

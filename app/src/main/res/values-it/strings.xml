@@ -67,5 +67,6 @@
     <string name="app_name">Munchkin Level Counter</string>
     <string name="deleted">cancellato</string>
     <string name="contact">Hai domande? Si può sempre contattarmi:</string>
+    <string name="btnNextPlayer">Next Player</string>
 
 </resources>

@@ -67,5 +67,6 @@
     <string name="prev_stas">Статистика попередньої гри.</string>
     <string name="deleted">Видален</string>
     <string name="contact">Є питання? Ви завжди можете написати мені:</string>
+    <string name="btnNextPlayer">Next Player</string>
 
 </resources>

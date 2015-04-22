@@ -67,5 +67,6 @@
     <string name="ok_btn_for_dialog_confirm">Quedarse</string>
     <string name="power_tab">PODER</string>
     <string name="title_activity_newPlayers">Los jugadores para el juego</string>
+    <string name="btnNextPlayer">Next Player</string>
 
 </resources>

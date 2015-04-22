@@ -67,5 +67,6 @@
     <string name="prev_stas">To jest statystyka w poprzedniej grze.</string>
     <string name="contact">Masz pytania? Zawsze możesz skontaktować się ze mną:</string>
     <string name="deleted">skreślony</string>
+    <string name="btnNextPlayer">Next Player</string>
 
 </resources>

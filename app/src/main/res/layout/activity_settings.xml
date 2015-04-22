@@ -7,29 +7,11 @@
     tools:context=".activity.Settings">
 
 
-    <Switch
-        android:id="@+id/switchStats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/statsOnOff"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/text_color"
-        android:thumb="@drawable/munchkin_switch_inner_holo_light"
-        android:track="@drawable/munchkin_switch_track_holo_light" />
-
     <EditText
         android:id="@+id/edTextMaxLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/switchStats"
-        android:layout_alignRight="@+id/switchStats"
-        android:layout_below="@+id/switchStats"
-        android:layout_toEndOf="@+id/txtMaxLvl"
+        android:layout_alignBottom="@+id/txtMaxLvl"
         android:layout_toRightOf="@+id/txtMaxLvl"
         android:autoText="false"
         android:ems="10"
@@ -40,9 +22,11 @@
         android:id="@+id/txtMaxLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edTextMaxLvl"
-        android:layout_alignLeft="@+id/switchStats"
-        android:layout_alignStart="@+id/switchStats"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
         android:text="@string/txt_max_lvl"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

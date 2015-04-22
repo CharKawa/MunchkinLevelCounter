@@ -67,5 +67,6 @@
     <string name="prev_stas">Dies ist Statistik für vorherigen spiel.</string>
     <string name="deleted">gelöscht</string>
     <string name="contact">Haben Sie Fragen? Sie können sich jederzeit an mich:</string>
+    <string name="btnNextPlayer">Next Player</string>
 
 </resources>

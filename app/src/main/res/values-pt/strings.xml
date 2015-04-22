@@ -67,5 +67,6 @@
     <string name="deleted">suprimido</string>
     <string name="stats_off">Estatística é off, agora é só mudar jogadores</string>
     <string name="title_dialog_continue">Parabéns!</string>
+    <string name="btnNextPlayer">Next Player</string>
 
 </resources>
