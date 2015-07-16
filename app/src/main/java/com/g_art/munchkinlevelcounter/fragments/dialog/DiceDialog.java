@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 
 /**
  * MunchinLevelCounter
  * Created by G_Art on 4/1/2015.
  */
 public class DiceDialog extends DialogFragment {
+
+    public static final String DICE_KEY = "dice_key";
 
     private ImageView imageView;
 
@@ -31,7 +32,7 @@ public class DiceDialog extends DialogFragment {
         imageView = (ImageView) v.findViewById(R.id.imgDice);
 
         Bundle bundle = getArguments();
-        int resId = bundle.getInt(FragmentPlayer.DICE_KEY);
+        int resId = bundle.getInt(DICE_KEY);
         imageView.setImageResource(resId);
         builder.setTitle(R.string.dice);
         builder.setPositiveButton(R.string.dialog_ok_btn, new DialogInterface.OnClickListener() {
