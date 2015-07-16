@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -34,10 +35,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     private SettingsHandler settingsHandler;
 
     private int maxLvl;
-    private boolean collectStats;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getResources().getBoolean(R.bool.portrait_only)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         setContentView(R.layout.activity_game);
 
 
@@ -46,8 +51,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
         settingsHandler.loadSettings();
         maxLvl = settingsHandler.getMaxLvl();
-
-        confirmDialog = new ConfirmDialog();
 
         Intent intent = getIntent();
         playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
@@ -76,6 +79,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
     @Override
     public void onBackPressed() {
+        Bundle bundle = new Bundle();
+        bundle.putString(ConfirmDialog.SOURCE_KEY, "GameActivity");
+        bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
+        bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
+        bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
+        bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+        confirmDialog = new ConfirmDialog();
+        confirmDialog.setArguments(bundle);
         confirmDialog.show(fm, "confirmDialog");
     }
 
@@ -156,10 +167,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
     @Override
     protected void onDestroy() {
-        if (confirmDialog != null) {
-            confirmDialog = null;
-        }
-
         super.onDestroy();
     }
 

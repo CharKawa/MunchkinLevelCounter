@@ -18,6 +18,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
 import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
 
@@ -27,7 +28,6 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
  */
 public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
-    public static final String DICE_KEY = "dice_key";
     final String TAG = "GameActivity_Munchkin_Test";
     private final String PLAYER_KEY = "playersList";
     private final String BUNDLE_STATS_KEY = "bundleStats";
@@ -135,16 +135,12 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
             case R.id.btnFinish:
                 mCallback.savePlayersStats();
-                openStatsActivity();
+                finishGame();
                 break;
 
             case R.id.btnNextPlayer:
-                if (mCallback.savePlayersStats()) {
-                    if (!mCallback.onNextTurnClick(selectedPlayer)) {
-                        Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.error_save_players), Toast.LENGTH_LONG).show();
+                if (!mCallback.onNextTurnClick(selectedPlayer)) {
+                    Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -168,6 +164,26 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     private void dismissDialog() {
         continueDialog = null;
+    }
+
+    private void finishGame() {
+        Bundle bundle = new Bundle();
+        bundle.putString(ConfirmDialog.SOURCE_KEY, "FragmentPlayer");
+        bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_finish);
+        bundle.putInt(ConfirmDialog.MSG_KEY, R.string.msg_finish_game);
+        bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_finish);
+        bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_finish);
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        confirmDialog.setArguments(bundle);
+        confirmDialog.show(getActivity().getFragmentManager(), "confirmDialog");
+    }
+
+    public void onPositiveClickContinueDialog() {
+        openStatsActivity();
+    }
+
+    public void onNegativeClickContinueDialog() {
+        //do nothing
     }
 
     private void openStatsActivity() {
@@ -227,7 +243,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         }
 
         Bundle bundle = new Bundle();
-        bundle.putInt(DICE_KEY, resId);
+        bundle.putInt(DiceDialog.DICE_KEY, resId);
         DiceDialog diceDialog = new DiceDialog();
         diceDialog.setArguments(bundle);
         diceDialog.show(getActivity().getFragmentManager(), "dice");
