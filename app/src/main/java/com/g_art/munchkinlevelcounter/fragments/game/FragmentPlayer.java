@@ -4,7 +4,6 @@ package com.g_art.munchkinlevelcounter.fragments.game;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.activity.GameActivity;
-import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
-import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
 
 
 /**
@@ -28,9 +23,6 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
  */
 public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
-    final String TAG = "GameActivity_Munchkin_Test";
-    private final String PLAYER_KEY = "playersList";
-    private final String BUNDLE_STATS_KEY = "bundleStats";
     private final int MIN_STAT = 0;
     private ViewHolder holder;
     private DialogFragment continueDialog;
@@ -78,10 +70,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnGearUp.setOnClickListener(this);
         holder.btnGearDwn = (ImageButton) view.findViewById(R.id.btnGearDwn);
         holder.btnGearDwn.setOnClickListener(this);
-        holder.btnRollDice = (ImageButton) view.findViewById(R.id.btnDice);
-        holder.btnRollDice.setOnClickListener(this);
-        holder.btnFinish = (ImageButton) view.findViewById(R.id.btnFinish);
-        holder.btnFinish.setOnClickListener(this);
         holder.btnNextPlayer = (Button) view.findViewById(R.id.btnNextPlayer);
         holder.btnNextPlayer.setOnClickListener(this);
 
@@ -129,15 +117,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 }
                 break;
 
-            case R.id.btnDice:
-                rollADice();
-                break;
-
-            case R.id.btnFinish:
-                mCallback.savePlayersStats();
-                finishGame();
-                break;
-
             case R.id.btnNextPlayer:
                 if (!mCallback.onNextTurnClick(selectedPlayer)) {
                     Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
@@ -152,46 +131,16 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         contAfterMaxLVL = true;
         selectedPlayer.setWinner(true);
         onClick(view.findViewById(R.id.btnLvlUp));
-        holder.btnFinish.setImageResource(R.drawable.munchkin_in_game_end);
     }
 
     public void doNegativeClickContinueDialog() {
         selectedPlayer.setWinner(true);
         selectedPlayer.setLevel(selectedPlayer.getLevel() + 1);
-        onClick(view.findViewById(R.id.btnFinish));
-        openStatsActivity();
+        mCallback.finishClick();
     }
 
     private void dismissDialog() {
         continueDialog = null;
-    }
-
-    private void finishGame() {
-        Bundle bundle = new Bundle();
-        bundle.putString(ConfirmDialog.SOURCE_KEY, "FragmentPlayer");
-        bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_finish);
-        bundle.putInt(ConfirmDialog.MSG_KEY, R.string.msg_finish_game);
-        bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_finish);
-        bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_finish);
-        ConfirmDialog confirmDialog = new ConfirmDialog();
-        confirmDialog.setArguments(bundle);
-        confirmDialog.show(getActivity().getFragmentManager(), "confirmDialog");
-    }
-
-    public void onPositiveClickContinueDialog() {
-        openStatsActivity();
-    }
-
-    public void onNegativeClickContinueDialog() {
-        //do nothing
-    }
-
-    private void openStatsActivity() {
-        Intent intent = new Intent(getActivity(), Stats.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYER_KEY, ((GameActivity) getActivity()).getPlayersList());
-        intent.putExtra(BUNDLE_STATS_KEY, bundle);
-        startActivity(intent);
     }
 
     private boolean isMaxLvlReached(int currentLvl) {
@@ -216,38 +165,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
     }
 
-    private void rollADice() {
-        int resId = 1;
-        int Min = 1;
-        int Max = 6;
-        int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
-        switch (dice) {
-            case 1:
-                resId = R.drawable.dice_1;
-                break;
-            case 2:
-                resId = R.drawable.dice_2;
-                break;
-            case 3:
-                resId = R.drawable.dice_3;
-                break;
-            case 4:
-                resId = R.drawable.dice_4;
-                break;
-            case 5:
-                resId = R.drawable.dice_5;
-                break;
-            case 6:
-                resId = R.drawable.dice_6;
-                break;
-        }
 
-        Bundle bundle = new Bundle();
-        bundle.putInt(DiceDialog.DICE_KEY, resId);
-        DiceDialog diceDialog = new DiceDialog();
-        diceDialog.setArguments(bundle);
-        diceDialog.show(getActivity().getFragmentManager(), "dice");
-    }
 
     @Override
     public void onDestroy() {
@@ -259,6 +177,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     // interface for communication between fragments
     public interface PlayersUpdate {
+
+        void finishClick();
 
         void onPlayersUpdate();
 

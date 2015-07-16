@@ -6,9 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
-import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 
 /**
  * Created by G_Art on 4/9/2014.
@@ -38,8 +36,8 @@ public class ConfirmDialog extends DialogFragment {
                             GameActivity gameActivity = (GameActivity) getActivity();
                             gameActivity.onNegativeClickConfirmDialog();
                         } else {
-                            FragmentPlayer fragmentPlayer = (FragmentPlayer) getActivity().getFragmentManager().findFragmentById(R.id.currentPlayer_Fragment);
-                            fragmentPlayer.onPositiveClickContinueDialog();
+                            GameActivity gameActivity = (GameActivity) getActivity();
+                            gameActivity.onPositiveClickContinueDialog();
                         }
 
                     }

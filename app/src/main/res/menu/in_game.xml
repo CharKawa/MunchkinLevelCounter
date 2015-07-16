@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_dice"
+        android:background="@null"
+        android:icon="@drawable/dice"
+        android:showAsAction="ifRoom"
+        android:title="@string/dice" />
+    <item
+        android:id="@+id/action_finish"
+        android:background="@null"
+        android:icon="@drawable/end"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_finish" />
+</menu>

@@ -130,31 +130,6 @@
         android:src="@drawable/munchkin_in_game_dwn_btn" />
 
 
-    <ImageButton
-        android:id="@+id/btnDice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnLvlDwn"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_dice_btn" />
-
-    <ImageButton
-        android:id="@+id/btnFinish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnDice"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignTop="@+id/btnDice"
-        android:layout_marginRight="10dp"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_end" />
-
     <Button
         android:id="@+id/btnNextPlayer"
         android:layout_width="wrap_content"
