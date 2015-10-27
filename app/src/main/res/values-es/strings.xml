@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Munchkin Level Counter</string>
+    <string name="app_name"> Level Counter</string>
     <string name="action_settings">Ajustes</string>
     <string name="main_screen_Players">Jugadores</string>
     <string name="main_screen_Stats">Estadística</string>
@@ -21,7 +21,7 @@
     <string name="total_power">Poder:</string>
     <string name="level">NIVEL</string>
     <string name="gear">OBJETOS</string>
-    <string name="game_screen">Munchkin</string>
+    <string name="game_screen">Level Counter</string>
     <string name="total">TOTAL</string>
     <string name="no_players">Por favor, añade a los jugadores.</string>
     <string name="statsOnOff">¿Recojer una estadistica?</string>
@@ -34,7 +34,7 @@
     <string name="loser">Perdedor.</string>
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
-    <string name="about_the_app">Contador de niveles para el juego de naipes Munchkin. Con la estadística de la partida. </string>
+    <string name="about_the_app">Contador de niveles para el juego de naipes. Con la estadística de la partida.</string>
     <string name="rate">Si te gusta, por favor, justiprecias la app:</string>
     <string name="btn_rate">Rate</string>
     <string name="thanks">Además, puedes comprarme una cerveza:</string>

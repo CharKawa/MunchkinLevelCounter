@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Munchkin Level Counter</string>
+    <string name="app_name"> Level Counter</string>
     <string name="action_settings">Einstellungen</string>
     <string name="main_screen_Players">Spieler</string>
     <string name="main_screen_Stats">Statistisch</string>
@@ -22,7 +22,7 @@
     <string name="total_power">Power:</string>
     <string name="level">LVL</string>
     <string name="gear">GEAR</string>
-    <string name="game_screen">Munchkin</string>
+    <string name="game_screen">Level Counter</string>
     <string name="total">TOTAL</string>
     <string name="no_players">Bitte, Add-spieler.</string>
     <string name="statsOnOff">Sammeln spiel-statistik?</string>
@@ -40,7 +40,7 @@
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
     <string name="about">Über</string>
-    <string name="about_the_app">Stufe zähler für Munchkin kartenspiel. Mit statistik des spiels.</string>
+    <string name="about_the_app">Stufe zähler für kartenspiel. Mit statistik des spiels.</string>
     <string name="rate">Wenn es ihnen gefällt, bitte bewerten sie diese App:</string>
     <string name="btn_rate">Preis</string>
     <string name="thanks">Auch können sie auf mich kaufen können ein bier:</string>

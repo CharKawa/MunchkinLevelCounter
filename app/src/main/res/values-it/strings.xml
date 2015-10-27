@@ -21,7 +21,7 @@
     <string name="total_power">Potenza:</string>
     <string name="level">LVL</string>
     <string name="gear">GEAR</string>
-    <string name="game_screen">Munchkin</string>
+    <string name="game_screen">Level Counter</string>
     <string name="total">TOTALE</string>
     <string name="no_players">Per favore, aggiungere giocatori.</string>
     <string name="statsOnOff">Raccogliere gioco statistica?</string>
@@ -39,7 +39,7 @@
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
     <string name="about">A proposito di:</string>
-    <string name="about_the_app">Level counter for Munchkin card game. With statistic of the game.</string>
+    <string name="about_the_app">Contatore compagno di livello per il gioco di carte. </string>
     <string name="rate">Se ti piace, ti preghiamo, votare questa app:</string>
     <string name="btn_rate">Tasso</string>
     <string name="thanks">Inoltre, è possibile acquistare una birra:</string>
@@ -64,7 +64,7 @@
     <string name="error_empty_name">Nome non può essere vuoto</string>
     <string name="no_data">Siamo spiacenti, non ci sono dati.</string>
     <string name="prev_stas">Statistica per il gioco precedente.</string>
-    <string name="app_name">Munchkin Level Counter</string>
+    <string name="app_name"> Level Counter</string>
     <string name="deleted">cancellato</string>
     <string name="contact">Hai domande? Si può sempre contattarmi:</string>
     <string name="btnNextPlayer">Next Player</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Munchkin Level Counter</string>
+    <string name="app_name"> Level Counter</string>
     <string name="action_settings">Налаштування</string>
     <string name="main_screen_Players">Гравці</string>
     <string name="main_screen_Stats"> Статистика</string>
@@ -21,7 +21,7 @@
     <string name="total_power">Сила:</string>
     <string name="level">Рівень</string>
     <string name="gear">Манатки</string>
-    <string name="game_screen">Munchkin</string>
+    <string name="game_screen">Level Counter</string>
     <string name="total">Сила</string>
     <string name="no_players">Будь ласка, додайте гравців.</string>
     <string name="statsOnOff">Збирати статистику гри?</string>
@@ -39,7 +39,7 @@
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
     <string name="about">Про програму: </string>
-    <string name="about_the_app">Лічильник рівнів для настільної гри Манчкін. Зі статистикою партії.</string>
+    <string name="about_the_app">Лічильник рівнів для настільної гри. Зі статистикою партії.</string>
     <string name="rate">Якщо Вам сподобалось, будь ласка, поставте оцінку у маркеті: </string>
     <string name="btn_rate">Оцінити</string>
     <string name="thanks">Також, Ви можете придбати мені пива: </string>
