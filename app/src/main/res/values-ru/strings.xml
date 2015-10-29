@@ -68,5 +68,10 @@
     <string name="deleted">Удален</string>
     <string name="contact">Есть вопросы? Вы всегда можете связаться со мной:</string>
     <string name="btnNextPlayer">Next Player</string>
+    <string name="action_finish">Закончить</string>
+    <string name="cancel_btn_for_dialog_finish">Остаться</string>
+    <string name="msg_finish_game">Вы закончите текущую партию</string>
+    <string name="ok_btn_for_dialog_finish">Да</string>
+    <string name="title_dialog_finish">Закончить игру</string>
 
 </resources>

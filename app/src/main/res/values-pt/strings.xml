@@ -68,5 +68,10 @@
     <string name="stats_off">Estatística é off, agora é só mudar jogadores</string>
     <string name="title_dialog_continue">Parabéns!</string>
     <string name="btnNextPlayer">Next Player</string>
+    <string name="action_finish">Terminar</string>
+    <string name="cancel_btn_for_dialog_finish">Fique</string>
+    <string name="msg_finish_game">Você vai terminar jogo atual</string>
+    <string name="ok_btn_for_dialog_finish">Sim</string>
+    <string name="title_dialog_finish">Termine o jogo</string>
 
 </resources>

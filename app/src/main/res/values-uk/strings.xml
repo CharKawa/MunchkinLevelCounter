@@ -68,5 +68,10 @@
     <string name="deleted">Видален</string>
     <string name="contact">Є питання? Ви завжди можете написати мені:</string>
     <string name="btnNextPlayer">Next Player</string>
+    <string name="action_finish">Закінчити</string>
+    <string name="cancel_btn_for_dialog_finish">Залишить</string>
+    <string name="msg_finish_game">Ви закінчите партію</string>
+    <string name="ok_btn_for_dialog_finish">Так</string>
+    <string name="title_dialog_finish">Закінчити гру</string>
 
 </resources>

@@ -68,5 +68,10 @@
     <string name="deleted">skreślony</string>
     <string name="btnNextPlayer">Next Player</string>
     <string name="about_the_app">Poziom licznik towarzyszem dla gry w karty.</string>
+    <string name="action_finish">Wykończenie</string>
+    <string name="cancel_btn_for_dialog_finish">Pobyt</string>
+    <string name="msg_finish_game">Będziesz zakończyć bieżącą grę</string>
+    <string name="ok_btn_for_dialog_finish">Tak</string>
+    <string name="title_dialog_finish">Zakończ grę</string>
 
 </resources>
