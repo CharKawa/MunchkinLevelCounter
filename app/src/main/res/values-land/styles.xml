@@ -19,6 +19,8 @@
 
         <!-- Light.DarkActionBar specific -->
         <item name="android:actionBarWidgetTheme">@style/AppTheme.Widget</item>
+        <item name="android:colorForeground">@color/actionBarBackground</item>
+        <item name="android:colorBackground">@color/background</item>
     </style>
 
 
