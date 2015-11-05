@@ -66,7 +66,7 @@
     <string name="prev_stas">To jest statystyka w poprzedniej grze.</string>
     <string name="contact">Masz pytania? Zawsze możesz skontaktować się ze mną:</string>
     <string name="deleted">skreślony</string>
-    <string name="btnNextPlayer">Next Player</string>
+    <string name="btnNextPlayer">Nast. gracza</string>
     <string name="about_the_app">Poziom licznik towarzyszem dla gry w karty.</string>
     <string name="action_finish">Wykończenie</string>
     <string name="cancel_btn_for_dialog_finish">Pobyt</string>
