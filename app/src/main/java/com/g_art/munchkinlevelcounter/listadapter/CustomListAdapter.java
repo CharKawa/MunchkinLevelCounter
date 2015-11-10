@@ -20,10 +20,9 @@ import java.util.ArrayList;
  */
 public class CustomListAdapter extends BaseAdapter {
 
+    private static LayoutInflater inflater = null;
     private Activity activity;
     private ArrayList data;
-    private static LayoutInflater inflater = null;
-    private Player player = null;
     private int i = 0;
 
     public CustomListAdapter(Activity a, ArrayList d) {
@@ -59,17 +58,6 @@ public class CustomListAdapter extends BaseAdapter {
     }
 
     /**
-     * ****** Holder Class to contain inflated xml file elements ********
-     */
-    public static class ViewHolder {
-
-        public TextView text;
-        public ImageButton imEdit;
-        public ImageButton imBtnDel;
-
-    }
-
-    /**
      * *** Depends upon data size called for each row , Create each ListView row ****
      */
     @Override
@@ -99,8 +87,9 @@ public class CustomListAdapter extends BaseAdapter {
 
         } else {
             /***** Get each Model object from Arraylist ********/
-            player = null;
+            Player player = null;
             player = (Player) data.get(playerPosition);
+            player.setPosition(playerPosition);
 
             /************  Set Model values in Holder elements ***********/
 
@@ -127,6 +116,17 @@ public class CustomListAdapter extends BaseAdapter {
 
         }
         return vi;
+    }
+
+    /**
+     * ****** Holder Class to contain inflated xml file elements ********
+     */
+    public static class ViewHolder {
+
+        public TextView text;
+        public ImageButton imEdit;
+        public ImageButton imBtnDel;
+
     }
 
 }

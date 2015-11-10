@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
+    android:background="@drawable/list_state"
     android:padding="10dp">
 
 
@@ -9,12 +10,14 @@
         android:id="@+id/InGameListPlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginBottom="0.5dp"
         android:layout_marginLeft="5dp"
-        android:textSize="20dp"
         android:layout_toLeftOf="@+id/InGameListPlayerLvL"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:duplicateParentState="true"
+        android:textColor="@drawable/list_item_text_state"
+        android:textSize="20sp" />
 
 
     <TextView
@@ -28,8 +31,10 @@
         android:layout_marginBottom="0.5dp"
         android:layout_marginLeft="10dp"
         android:layout_toLeftOf="@+id/InGameListPlayerLvLValue"
+        android:duplicateParentState="true"
         android:text="@string/level"
-        android:textSize="20dp" />
+        android:textColor="@drawable/list_item_text_state"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/InGameListPlayerLvLValue"
@@ -43,8 +48,10 @@
         android:layout_gravity="center_vertical|left|top"
         android:layout_marginLeft="10dp"
         android:layout_toLeftOf="@+id/InGameListPlayerTotal"
+        android:duplicateParentState="true"
+        android:textColor="@drawable/list_item_text_state"
         android:textIsSelectable="false"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/InGameListPlayerTotal"
@@ -55,8 +62,10 @@
         android:layout_marginBottom="0.5dp"
         android:layout_marginLeft="10dp"
         android:layout_toLeftOf="@+id/InGameListPlayerTotalValue"
+        android:duplicateParentState="true"
         android:text="@string/total"
-        android:textSize="20dp" />
+        android:textColor="@drawable/list_item_text_state"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/InGameListPlayerTotalValue"
@@ -67,6 +76,8 @@
         android:layout_gravity="center_vertical|left|top"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="12dp"
-        android:textSize="20dp" />
+        android:duplicateParentState="true"
+        android:textColor="@drawable/list_item_text_state"
+        android:textSize="20sp" />
 
 </RelativeLayout>

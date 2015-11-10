@@ -14,4 +14,7 @@
     <color name="background">#FBCE97</color>
     <color name="text_color">#4A1914</color>
     <color name="actionBarText_color">#FBCE97</color>
+    <color name="list_focused">#4a1914</color>
+    <color name="list_selected">#4a1914</color>
+    <color name="list_default">#FBCE97</color>
 </resources>

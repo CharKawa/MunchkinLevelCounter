@@ -79,7 +79,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         /*
         Setting the first player chosen
          */
-        onPlayerSelected(playersList.get(FIRST_PLAYER));
+        onPlayerSelected(FIRST_PLAYER);
     }
 
 
@@ -128,14 +128,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
 
     @Override
-    public void onPlayerSelected(Player player) {
+    public void onPlayerSelected(int position) {
 
         FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
 
         if (fragmentPlayer != null) {
-            fragmentPlayer.changeSelectedPlayer(player);
+            fragmentPlayer.changeSelectedPlayer(playersList.get(position));
+            scrollToPlayer(position);
         }
-
     }
 
     @Override
@@ -152,20 +152,35 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         }
     }
 
+    private void scrollToPlayer(int position) {
+
+        FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+        if (fragment != null) {
+            fragment.scrollToPlayer(position);
+        }
+    }
+
     @Override
     public boolean onNextTurnClick(Player player) {
         boolean result = false;
-        int i = 0;
         try {
-            for (Player selectedPlayer : playersList) {
-                i++;
-                if (selectedPlayer.equals(player)) {
-                    if (i == playersList.size()) {
-                        i = 0;
-                    }
-                    onPlayerSelected(playersList.get(i));
-                }
+            int i = player.getPosition();
+            i++;
+            if (i == playersList.size()) {
+                i = 0;
             }
+
+            onPlayerSelected(i);
+
+//            for (Player selectedPlayer : playersList) {
+//                i++;
+//                if (selectedPlayer.equals(player)) {
+//                    if (i == playersList.size()) {
+//                        i = 0;
+//                    }
+//                    onPlayerSelected(playersList.get(i));
+//                }
+//            }
 
             result = true;
         } catch (Exception ex) {

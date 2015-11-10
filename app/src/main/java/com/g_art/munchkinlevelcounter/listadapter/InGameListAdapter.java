@@ -19,17 +19,14 @@ import java.util.ArrayList;
 public class InGameListAdapter extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
-    private Player player = null;
     private ArrayList data;
-    private Activity activity;
 
 
     public InGameListAdapter(Activity activity, ArrayList arrayList) {
-        this.activity = activity;
         this.data = arrayList;
 
         /***********  Layout inflator to call external xml layout () ***********/
-        inflater = (LayoutInflater) this.activity.
+        inflater = (LayoutInflater) activity.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -50,17 +47,6 @@ public class InGameListAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
-    }
-
-    /**
-     * ****** Holder Class to contain inflated xml file elements ********
-     */
-    public static class ViewHolder {
-        public TextView txtPlayerName;
-        public TextView txtPlayerLvl;
-        public TextView txtPlayerLvlValue;
-        public TextView txtPlayerTotal;
-        public TextView txtPlayerTotalValue;
     }
 
     /**
@@ -89,12 +75,9 @@ public class InGameListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        if (data.size() <= 0) {
-
-        } else {
+        if (data.size() > 0) {
             /***** Get each Model object from Arraylist ********/
-            player = null;
-            player = (Player) data.get(playerPosition);
+            Player player = (Player) data.get(playerPosition);
 
             /************  Set Model values in Holder elements ***********/
             holder.txtPlayerName.setText(player.getName());
@@ -103,7 +86,19 @@ public class InGameListAdapter extends BaseAdapter {
                 int totalPower = player.getGear() + player.getLevel();
                 holder.txtPlayerTotalValue.setText(Integer.toString(totalPower));
             }
+
         }
         return view;
+    }
+
+    /**
+     * ****** Holder Class to contain inflated xml file elements ********
+     */
+    public static class ViewHolder {
+        public TextView txtPlayerName;
+        public TextView txtPlayerLvl;
+        public TextView txtPlayerLvlValue;
+        public TextView txtPlayerTotal;
+        public TextView txtPlayerTotalValue;
     }
 }

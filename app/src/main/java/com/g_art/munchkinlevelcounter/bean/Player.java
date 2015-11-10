@@ -10,7 +10,17 @@ import java.util.ArrayList;
  */
 public class Player implements Parcelable {
 
+    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
+        public Player createFromParcel(Parcel in) {
+            return new Player(in);
+        }
+
+        public Player[] newArray(int size) {
+            return new Player[size];
+        }
+    };
     private String name;
+    private int position;
     private int level;
     private int gear;
     private boolean winner;
@@ -31,6 +41,17 @@ public class Player implements Parcelable {
         this.winner = false;
     }
 
+    public Player(String name, int position) {
+        lvlStats = new ArrayList<String>();
+        gearStats = new ArrayList<String>();
+        powerStats = new ArrayList<String>();
+        this.name = name;
+        this.level = 1;
+        this.gear = 0;
+        this.position = position;
+        this.winner = false;
+    }
+
     public Player(String name, int lvl, int gear) {
         lvlStats = new ArrayList<String>();
         gearStats = new ArrayList<String>();
@@ -42,10 +63,6 @@ public class Player implements Parcelable {
 
     }
 
-    public Player cloneWithoutStats() {
-        return new Player(this.name);
-    }
-
     public Player(Parcel in) {
         lvlStats = new ArrayList<String>();
         gearStats = new ArrayList<String>();
@@ -53,10 +70,15 @@ public class Player implements Parcelable {
         this.name = in.readString();
         this.level = in.readInt();
         this.gear = in.readInt();
+        this.position = in.readInt();
         this.winner = in.readByte() != 0;
         in.readStringList(lvlStats);
         in.readStringList(gearStats);
         in.readStringList(powerStats);
+    }
+
+    public Player cloneWithoutStats() {
+        return new Player(this.name);
     }
 
     public String getName() {
@@ -115,6 +137,14 @@ public class Player implements Parcelable {
         this.powerStats = powerStats;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -138,6 +168,7 @@ public class Player implements Parcelable {
         if (gear != player.gear) return false;
         if (level != player.level) return false;
         if (winner != player.winner) return false;
+        if (position != player.position) return false;
         if (!name.equals(player.name)) return false;
 
         return true;
@@ -148,10 +179,10 @@ public class Player implements Parcelable {
         int result = name.hashCode();
         result = 31 * result + level;
         result = 31 * result + gear;
+        result = 31 * result + position;
         result = 31 * result + (winner ? 1 : 0);
         return result;
     }
-
 
     @Override
     public int describeContents() {
@@ -163,19 +194,10 @@ public class Player implements Parcelable {
         dest.writeString(name);
         dest.writeInt(level);
         dest.writeInt(gear);
+        dest.writeInt(position);
         dest.writeByte((byte) (winner ? 1 : 0));
         dest.writeStringList(lvlStats);
         dest.writeStringList(gearStats);
         dest.writeStringList(powerStats);
     }
-
-    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
-        public Player createFromParcel(Parcel in) {
-            return new Player(in);
-        }
-
-        public Player[] newArray(int size) {
-            return new Player[size];
-        }
-    };
 }
