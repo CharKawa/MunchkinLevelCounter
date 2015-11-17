@@ -33,7 +33,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     final int FIRST_PLAYER = 0;
     private ArrayList<Player> playersList;
     private FragmentPlayersList fr;
-    private SavePlayersStatsTask saveTask;
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
     private SharedPreferences mPrefs;
@@ -100,6 +99,9 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
                 savePlayersStats();
                 finishGame();
                 return true;
+            case R.id.action_settings:
+                //todo show dialog with max lvl
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -125,7 +127,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public void onNegativeClickConfirmDialog() {
         confirmDialog.dismiss();
     }
-
 
     @Override
     public void onPlayerSelected(int position) {
@@ -190,7 +191,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
     public boolean savePlayersStats() {
         boolean result;
-        saveTask = new SavePlayersStatsTask();
+        SavePlayersStatsTask saveTask = new SavePlayersStatsTask();
 
         try {
             saveTask.execute(playersList);
@@ -236,7 +237,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         diceDialog.show(fm, "dice");
     }
 
-
     private void finishGame() {
         Bundle bundle = new Bundle();
         bundle.putString(ConfirmDialog.SOURCE_KEY, "FragmentPlayer");
@@ -252,7 +252,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public void onPositiveClickContinueDialog() {
         openStatsActivity();
     }
-
 
     private void openStatsActivity() {
         Intent intent = new Intent(this, Stats.class);
@@ -271,4 +270,11 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         super.onDestroy();
     }
 
+    private int updateMaxLVL(int newMaxLVL) {
+        if (settingsHandler.saveSettings(newMaxLVL)) {
+            //todo toast OK
+        }
+
+        return settingsHandler.getMaxLvl();
+    }
 }

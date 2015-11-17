@@ -25,7 +25,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
     private static final String PLAYER_KEY = "playersList";
     private ArrayList<Player> playersList;
     private View view;
-    private int selectedPlayer;
     private View currentlySelected;
     private Boolean firstTimeStartup = true;
 
@@ -98,7 +97,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         inGamePlayersList.setAdapter(inGameAdapter);
         inGamePlayersList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         inGamePlayersList.setOnItemClickListener(this);
-        inGamePlayersList.setSelection(0);
 
         return view;
     }
@@ -182,7 +180,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         }
 
         currentlySelected = view;
-        selectedPlayer = position;
         highlightSelection(currentlySelected);
     }
 
