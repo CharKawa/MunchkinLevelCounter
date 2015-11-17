@@ -20,7 +20,6 @@ public class Player implements Parcelable {
         }
     };
     private String name;
-    private int position;
     private int level;
     private int gear;
     private boolean winner;
@@ -48,7 +47,6 @@ public class Player implements Parcelable {
         this.name = name;
         this.level = 1;
         this.gear = 0;
-        this.position = position;
         this.winner = false;
     }
 
@@ -70,7 +68,6 @@ public class Player implements Parcelable {
         this.name = in.readString();
         this.level = in.readInt();
         this.gear = in.readInt();
-        this.position = in.readInt();
         this.winner = in.readByte() != 0;
         in.readStringList(lvlStats);
         in.readStringList(gearStats);
@@ -137,14 +134,6 @@ public class Player implements Parcelable {
         this.powerStats = powerStats;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     @Override
     public String toString() {
         return "Player{" +
@@ -168,7 +157,6 @@ public class Player implements Parcelable {
         if (gear != player.gear) return false;
         if (level != player.level) return false;
         if (winner != player.winner) return false;
-        if (position != player.position) return false;
         if (!name.equals(player.name)) return false;
 
         return true;
@@ -179,7 +167,6 @@ public class Player implements Parcelable {
         int result = name.hashCode();
         result = 31 * result + level;
         result = 31 * result + gear;
-        result = 31 * result + position;
         result = 31 * result + (winner ? 1 : 0);
         return result;
     }
@@ -194,7 +181,6 @@ public class Player implements Parcelable {
         dest.writeString(name);
         dest.writeInt(level);
         dest.writeInt(gear);
-        dest.writeInt(position);
         dest.writeByte((byte) (winner ? 1 : 0));
         dest.writeStringList(lvlStats);
         dest.writeStringList(gearStats);

@@ -164,27 +164,21 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     public boolean onNextTurnClick(Player player) {
         boolean result = false;
         try {
-            int i = player.getPosition();
-            i++;
-            if (i == playersList.size()) {
-                i = 0;
+            int i = 0;
+            for (Player selectedPlayer : playersList) {
+                i++;
+                if (selectedPlayer.equals(player)) {
+                    if (i == playersList.size()) {
+                        i = 0;
+                    }
+                    onPlayerSelected(i);
+                }
             }
-
-            onPlayerSelected(i);
-
-//            for (Player selectedPlayer : playersList) {
-//                i++;
-//                if (selectedPlayer.equals(player)) {
-//                    if (i == playersList.size()) {
-//                        i = 0;
-//                    }
-//                    onPlayerSelected(playersList.get(i));
-//                }
-//            }
 
             result = true;
         } catch (Exception ex) {
             result = false;
+            throw ex;
         }
         return result;
     }

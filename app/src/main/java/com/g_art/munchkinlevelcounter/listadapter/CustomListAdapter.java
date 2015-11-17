@@ -89,7 +89,6 @@ public class CustomListAdapter extends BaseAdapter {
             /***** Get each Model object from Arraylist ********/
             Player player = null;
             player = (Player) data.get(playerPosition);
-            player.setPosition(playerPosition);
 
             /************  Set Model values in Holder elements ***********/
 

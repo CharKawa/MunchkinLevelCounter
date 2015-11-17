@@ -25,22 +25,20 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
     public final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
-    private String PREFS_NO_DATA;
-    final int MIN_PLAYER_QUANTITY = 2;
+    public static final String EMPTY_STRING = " ";
     private static int playerIndex = 1;
     private static boolean newPlayer = false;
-
+    final int MIN_PLAYER_QUANTITY = 2;
     ListView listVPlayers;
     ImageButton btnAddPlayers;
     ImageButton btnClear;
     ImageButton btnStartGame;
+    CustomListAdapter customListAdapter;
+    private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
     private Bundle nBundle;
     private StoredPlayers mStored;
-
-
     private ArrayList<Player> listPlayers;
-    CustomListAdapter customListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,10 +160,12 @@ public class NewPlayers extends Activity implements View.OnClickListener {
      */
     public void playerDelete(int mPosition) {
         Player player = listPlayers.get(mPosition);
+        StringBuilder message = new StringBuilder();
+        message.append(player.getName())
+                .append(EMPTY_STRING)
+                .append(getString(R.string.deleted));
 
-        Toast.makeText(this,
-                player.getName() +
-                        getString(R.string.deleted),
+        Toast.makeText(this, message.toString(),
                 Toast.LENGTH_SHORT
         ).show();
 
