@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 public class LvlStatsFragment extends Fragment {
 
-    private ArrayList<Player> playersList;
     final static String PLAYER_KEY = "playersList";
+    private ArrayList<Player> playersList;
     private LineChartView chartView;
     private SparseArray playersColors;
     private boolean isDataPresent;
@@ -43,10 +43,8 @@ public class LvlStatsFragment extends Fragment {
                 isDataPresent = true;
             } else {
                 isDataPresent = false;
-
             }
         }
-
     }
 
 

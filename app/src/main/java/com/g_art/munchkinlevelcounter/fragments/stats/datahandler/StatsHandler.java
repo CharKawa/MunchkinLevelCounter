@@ -14,6 +14,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -50,6 +51,8 @@ public class StatsHandler {
         String lvl = context.getString(R.string.level);
         String gear = context.getString(R.string.gear);
         String power = context.getString(R.string.power_tab);
+
+        Collections.sort(playersList);
 
         if (playersList != null) {
             for (Player player : playersList) {
@@ -110,7 +113,11 @@ public class StatsHandler {
                 // Style dots
                 lineSet.setDots(false);
 
-                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                int color = player.getColor();
+                if (color == 0) {
+                    player.setColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+                    color = player.getColor();
+                }
                 lineSet.setLineColor(color);
 
 

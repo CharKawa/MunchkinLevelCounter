@@ -1,14 +1,16 @@
 package com.g_art.munchkinlevelcounter.bean;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class Player implements Parcelable {
+public class Player implements Parcelable, Comparable {
 
     public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
         public Player createFromParcel(Parcel in) {
@@ -22,6 +24,7 @@ public class Player implements Parcelable {
     private String name;
     private int level;
     private int gear;
+    private int color;
     private boolean winner;
     private ArrayList<String> lvlStats;
     private ArrayList<String> gearStats;
@@ -38,6 +41,8 @@ public class Player implements Parcelable {
         this.level = 1;
         this.gear = 0;
         this.winner = false;
+        Random rnd = new Random();
+        this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
     public Player(String name, int position) {
@@ -48,6 +53,8 @@ public class Player implements Parcelable {
         this.level = 1;
         this.gear = 0;
         this.winner = false;
+        Random rnd = new Random();
+        this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
     public Player(String name, int lvl, int gear) {
@@ -58,6 +65,8 @@ public class Player implements Parcelable {
         this.level = lvl;
         this.gear = gear;
         this.winner = false;
+        Random rnd = new Random();
+        this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 
     }
 
@@ -68,6 +77,7 @@ public class Player implements Parcelable {
         this.name = in.readString();
         this.level = in.readInt();
         this.gear = in.readInt();
+        this.color = in.readInt();
         this.winner = in.readByte() != 0;
         in.readStringList(lvlStats);
         in.readStringList(gearStats);
@@ -134,6 +144,14 @@ public class Player implements Parcelable {
         this.powerStats = powerStats;
     }
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -156,6 +174,7 @@ public class Player implements Parcelable {
 
         if (gear != player.gear) return false;
         if (level != player.level) return false;
+        if (color != player.color) return false;
         if (winner != player.winner) return false;
         if (!name.equals(player.name)) return false;
 
@@ -181,9 +200,23 @@ public class Player implements Parcelable {
         dest.writeString(name);
         dest.writeInt(level);
         dest.writeInt(gear);
+        dest.writeInt(color);
         dest.writeByte((byte) (winner ? 1 : 0));
         dest.writeStringList(lvlStats);
         dest.writeStringList(gearStats);
         dest.writeStringList(powerStats);
+    }
+
+    @Override
+    public int compareTo(Object another) {
+        Player pl1 = this;
+        Player pl2 = (Player) another;
+        Boolean pl1W = pl1.isWinner();
+        Boolean pl2W = pl2.isWinner();
+        int colorCompare = pl2W.compareTo(pl1W);
+        if (colorCompare == 0) {
+            return pl1.getLevel() - pl2.getLevel();
+        }
+        return colorCompare;
     }
 }
