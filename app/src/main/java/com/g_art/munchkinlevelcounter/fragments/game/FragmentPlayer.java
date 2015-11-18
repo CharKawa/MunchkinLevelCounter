@@ -145,6 +145,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
     private boolean isMaxLvlReached(int currentLvl) {
         boolean maxLvlReached = false;
+        MAX_LVL = mCallback.maxLvl();
         if (currentLvl + 1 == MAX_LVL) {
             maxLvlReached = true;
         }

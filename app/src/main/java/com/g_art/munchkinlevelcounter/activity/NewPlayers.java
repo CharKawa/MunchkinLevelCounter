@@ -36,7 +36,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     CustomListAdapter customListAdapter;
     private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
-    private Bundle nBundle;
     private StoredPlayers mStored;
     private ArrayList<Player> listPlayers;
 
@@ -89,7 +88,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
 
     void showPlayerNameDialog(String name) {
-        nBundle = new Bundle();
+        Bundle nBundle = new Bundle();
         nBundle.putString(PLAYER_NAME, name);
         playerDialog.setArguments(nBundle);
         playerDialog.show(getFragmentManager(), "dialog");

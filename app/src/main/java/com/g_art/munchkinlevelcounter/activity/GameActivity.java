@@ -1,6 +1,7 @@
 package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,11 +11,13 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
+import com.g_art.munchkinlevelcounter.fragments.dialog.MaxLvlDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
@@ -27,15 +30,15 @@ import java.util.ArrayList;
  */
 public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
 
+    public final static String CURR_LVL = "currentLVL";
     private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
     final String PLAYER_KEY = "playersList";
     final String BUNDLE_STATS_KEY = "bundleStats";
     final int FIRST_PLAYER = 0;
     private ArrayList<Player> playersList;
-    private FragmentPlayersList fr;
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
-    private SharedPreferences mPrefs;
+    private DialogFragment lvlDialog;
     private SettingsHandler settingsHandler;
 
     private int maxLvl;
@@ -50,7 +53,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         setContentView(R.layout.activity_game);
 
 
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         settingsHandler = SettingsHandler.getInstance(mPrefs);
 
         settingsHandler.loadSettings();
@@ -60,7 +63,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
 
         fm = getFragmentManager();
-        fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
+        FragmentPlayersList fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
 
         if (fr == null) {
             fr = new FragmentPlayersList();
@@ -100,7 +103,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
                 finishGame();
                 return true;
             case R.id.action_settings:
-                //todo show dialog with max lvl
+                showMaxLvLDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -186,7 +189,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
     @Override
     public int maxLvl() {
-        return maxLvl;
+        return settingsHandler.getMaxLvl();
     }
 
     public boolean savePlayersStats() {
@@ -270,11 +273,31 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         super.onDestroy();
     }
 
+    private void showMaxLvLDialog() {
+        Bundle nBundle = new Bundle();
+        nBundle.putInt(CURR_LVL, maxLvl);
+        if (lvlDialog == null) {
+            lvlDialog = new MaxLvlDialog();
+        }
+        lvlDialog.setArguments(nBundle);
+        lvlDialog.show(getFragmentManager(), "LvLDialog");
+    }
+
+    public void doPositiveClickLvLDialog(int newMaxLvl) {
+        if (maxLvl == newMaxLvl) {
+            // do nothing
+        } else {
+            maxLvl = updateMaxLVL(newMaxLvl);
+        }
+    }
+
     private int updateMaxLVL(int newMaxLVL) {
         if (settingsHandler.saveSettings(newMaxLVL)) {
-            //todo toast OK
+            Toast.makeText(this,
+                    getString(R.string.settings_saved),
+                    Toast.LENGTH_SHORT
+            ).show();
         }
-
         return settingsHandler.getMaxLvl();
     }
 }

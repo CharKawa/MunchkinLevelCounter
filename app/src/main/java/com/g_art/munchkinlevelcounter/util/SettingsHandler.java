@@ -13,7 +13,6 @@ public class SettingsHandler {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
 
-    private boolean isStats = false;
     private int maxLvl = DEFAULT_MAX_LVL;
 
     private SettingsHandler(SharedPreferences mPrefs) {
@@ -51,20 +50,13 @@ public class SettingsHandler {
         return result;
     }
 
-    public boolean saveSettings() {
-        return saveSettings(getMaxLvl());
-    }
-
     public boolean saveDefaultSettings() {
         return saveSettings(DEFAULT_MAX_LVL);
     }
 
     public int getMaxLvl() {
+        loadSettings();
         return maxLvl;
-    }
-
-    public void setMaxLvl(int maxLvl) {
-        this.maxLvl = maxLvl;
     }
 
     public void setSharedPreferences(SharedPreferences sharedPreferences) {
