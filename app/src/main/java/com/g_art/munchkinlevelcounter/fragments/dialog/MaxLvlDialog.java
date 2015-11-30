@@ -44,7 +44,7 @@ public class MaxLvlDialog extends DialogFragment {
         final int currMax = getArguments().getInt(GameActivity.CURR_LVL);
         maxLvlEditText.setText(Integer.toString(currMax), TextView.BufferType.EDITABLE);
 
-        builder.setTitle(R.string.title_dialog_new_Player)
+        builder.setTitle(R.string.txt_max_lvl)
                 .setCancelable(true)
                 .setPositiveButton(R.string.dialog_ok_btn, new DialogInterface.OnClickListener() {
                     @Override
