@@ -112,9 +112,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnGearDwn:
-                if (selectedPlayer.getGear() != MIN_STAT) {
                     selectedPlayer.setGear(selectedPlayer.getGear() - 1);
-                }
                 break;
 
             case R.id.btnNextPlayer:

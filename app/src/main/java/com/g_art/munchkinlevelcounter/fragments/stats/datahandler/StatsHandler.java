@@ -90,6 +90,9 @@ public class StatsHandler {
                             if (gearValue != 0) {
                                 gearChanged = true;
                             }
+                            if (MIN_VALUE > gearValue) {
+                                MIN_VALUE = gearValue;
+                            }
                         }
                         if (!gearChanged) {
                             MAX_VALUE = GEAR_STATS;
@@ -97,13 +100,16 @@ public class StatsHandler {
                         s.append(" ").append(gear).append(": ").append(player.getGear());
                         break;
                     case POWER_STATS:
-                        MIN_VALUE = 1;
+                        MIN_VALUE = 0;
                         for (int i = 0; i < player.getPowerStats().size(); i++) {
                             int powerValue = Integer.parseInt(player.getPowerStats().get(i));
                             lineSet.addPoint(new Point(String.valueOf(" "), powerValue));
 
                             if (MAX_VALUE < powerValue) {
                                 MAX_VALUE = powerValue;
+                            }
+                            if (MIN_VALUE > powerValue) {
+                                MIN_VALUE = powerValue;
                             }
                         }
                         s.append(" ").append(power).append(": ").append(player.getLevel() + player.getGear());
