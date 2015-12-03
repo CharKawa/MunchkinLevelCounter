@@ -20,6 +20,7 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.MaxLvlDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
+import com.g_art.munchkinlevelcounter.fragments.info.ThanksPopup;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
@@ -257,11 +258,18 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
 
     private void openStatsActivity() {
-        Intent intent = new Intent(this, Stats.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYER_KEY, getPlayersList());
-        intent.putExtra(BUNDLE_STATS_KEY, bundle);
-        startActivity(intent);
+//        Intent intent = new Intent(this, Stats.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelableArrayList(PLAYER_KEY, getPlayersList());
+//        intent.putExtra(BUNDLE_STATS_KEY, bundle);
+//        startActivity(intent);
+
+        ThanksPopup fr = (ThanksPopup) fm.findFragmentByTag("thanks");
+
+        if (fr == null) {
+            fr = new ThanksPopup();
+            fm.beginTransaction().add(R.id.thanks_popup, fr, "thanks").commit();
+        }
     }
 
     public ArrayList<Player> getPlayersList() {
