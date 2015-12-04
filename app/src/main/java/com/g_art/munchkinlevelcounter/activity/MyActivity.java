@@ -39,6 +39,8 @@ public class MyActivity extends Activity {
     }
 
     public void showDialog() {
+        //todo check for first open
+
         FragmentManager fragmentManager = getFragmentManager();
         ThanksPopup newFragment = new ThanksPopup();
 

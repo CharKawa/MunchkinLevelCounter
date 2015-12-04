@@ -3,6 +3,7 @@
     android:id="@+id/thanks_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <TextView
@@ -17,24 +18,61 @@
         android:text="@string/txtThanks"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/txtRatePopup"
+    <ImageButton
+        android:id="@+id/imgBtnRatePopip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtThanks"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@null"
+        android:contentDescription="@string/btn_rate"
+        android:src="@drawable/rate" />
 
     <TextView
         android:id="@+id/txtDonatePopup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtRatePopup"
+        android:layout_below="@+id/imgBtnRatePopip"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
-        android:text="Medium Text"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:text="@string/contact"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDonatePopup"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@null"
+        android:src="@drawable/contact" />
+
+    <Button
+        android:id="@+id/btnLater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_below="@+id/imageButton"
+        android:layout_toLeftOf="@+id/btnMore"
+        android:text="New Button" />
+
+    <Button
+        android:id="@+id/btnMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButton"
+        android:layout_centerInParent="true"
+        android:text="New Button" />
+
+    <Button
+        android:id="@+id/btnNeverShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageButton"
+        android:layout_toRightOf="@+id/btnMore"
+        android:text="New Button" />
 
 </RelativeLayout>
