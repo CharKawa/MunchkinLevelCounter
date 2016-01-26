@@ -154,6 +154,9 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
     }
 
     public View getChildAtPosition(final AdapterView view, final int position) {
+        if (null == view) {
+            return null;
+        }
         final int index = position - view.getFirstVisiblePosition();
         if ((index >= 0) && (index < view.getChildCount())) {
             return view.getChildAt(index);
