@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
@@ -22,6 +23,8 @@ import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -29,12 +32,12 @@ import java.util.ArrayList;
  * Created by G_Art on 28/7/2014.
  */
 public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
-
     public final static String CURR_LVL = "currentLVL";
     private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
     final String PLAYER_KEY = "playersList";
     final String BUNDLE_STATS_KEY = "bundleStats";
     final int FIRST_PLAYER = 0;
+    private Tracker mTracker;
     private ArrayList<Player> playersList;
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
@@ -52,6 +55,14 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
 
         setContentView(R.layout.activity_game);
 
+        // Obtain the shared Tracker instance.
+        MyApplication application = (MyApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setAction("GameStarted")
+                .setCategory("Screen")
+                .setLabel("GameActivity")
+                .build());
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         settingsHandler = SettingsHandler.getInstance(mPrefs);

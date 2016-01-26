@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
+import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -30,12 +33,22 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
     private ViewPager viewPager;
     private ActionBar actionBar;
     private StoredPlayers mStored;
+    private Tracker mTracker;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+
+        // Obtain the shared Tracker instance.
+        MyApplication application = (MyApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setAction("Stats opened")
+                .setCategory("Screen")
+                .setLabel("Stats")
+                .build());
 
         ActionBar.Tab lvlTab, gearTab, powerTab;
 

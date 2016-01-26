@@ -11,10 +11,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,6 @@ import java.util.ArrayList;
  * Created by G_Art on 16/7/2014.
  */
 public class NewPlayers extends Activity implements View.OnClickListener {
-
     public final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     public static final String EMPTY_STRING = " ";
@@ -34,6 +36,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     ImageButton btnClear;
     ImageButton btnStartGame;
     CustomListAdapter customListAdapter;
+    private Tracker mTracker;
     private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
     private StoredPlayers mStored;
@@ -43,6 +46,15 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_players);
+
+        // Obtain the shared Tracker instance.
+        MyApplication application = (MyApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setAction("Setting Players")
+                .setCategory("Screen")
+                .setLabel("NewPlayers")
+                .build());
 
         PREFS_NO_DATA = getString(R.string.no_data);
 
@@ -138,6 +150,14 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 } else {
                     Intent intent = new Intent(this, GameActivity.class);
                     intent.putParcelableArrayListExtra(PLAYER_KEY, listPlayers);
+
+                    mTracker.send(new HitBuilders.EventBuilder()
+                            .setAction("Starting Game")
+                            .setCategory("Button")
+                            .setLabel("Number of players")
+                            .setValue(listPlayers.size())
+                            .build());
+
                     startActivity(intent);
                 }
 
