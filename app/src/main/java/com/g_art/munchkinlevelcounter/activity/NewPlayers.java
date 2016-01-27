@@ -143,6 +143,11 @@ public class NewPlayers extends Activity implements View.OnClickListener {
             case R.id.imgBtnClear:
                 listPlayers.clear();
                 customListAdapter.notifyDataSetChanged();
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setAction("ClearPlayers")
+                        .setCategory("Action")
+                        .setLabel("MyActivity")
+                        .build());
                 break;
             case R.id.imgBtnStart:
                 if (listPlayers.size() < MIN_PLAYER_QUANTITY) {
@@ -153,7 +158,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
                     mTracker.send(new HitBuilders.EventBuilder()
                             .setAction("Starting Game")
-                            .setCategory("Button")
+                            .setCategory("Action")
                             .setLabel("Number of players")
                             .setValue(listPlayers.size())
                             .build());

@@ -135,6 +135,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
 
     public void onPositiveClickConfirmDialog() {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setAction("GameTerminated")
+                .setLabel("GameActivity")
+                .build());
         super.onBackPressed();
     }
 
@@ -219,6 +223,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
 
     private void rollADice() {
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setAction("DiceRolled")
+                .setLabel("GameActivity")
+                .build());
         int resId = 1;
         int Min = 1;
         int Max = 6;
