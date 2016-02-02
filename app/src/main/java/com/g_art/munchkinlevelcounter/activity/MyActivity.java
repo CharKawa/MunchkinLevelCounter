@@ -2,8 +2,6 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.fragments.info.ThanksPopup;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 
 
@@ -40,18 +37,8 @@ public class MyActivity extends Activity {
 
     public void showDialog() {
         //todo check for first open
-
-        FragmentManager fragmentManager = getFragmentManager();
-        ThanksPopup newFragment = new ThanksPopup();
-
-        // The device is smaller, so show the fragment fullscreen
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // For a little polish, specify a transition animation
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        // To make it fullscreen, use the 'content' root view as the container
-        // for the fragment, which is always the root view for the activity
-        transaction.add(android.R.id.content, newFragment)
-                .addToBackStack(null).commit();
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
 
     }
 

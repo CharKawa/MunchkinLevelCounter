@@ -74,5 +74,10 @@
     <string name="cancel_btn_for_dialog_finish">Stay</string>
     <string name="action_finish">Finish</string>
     <string name="txtThanks" translatable="false">Hello! Thank You for using my app. I hope You enjoyed it. If You like it, please rate.</string>
+    <string name="txtRated" translatable="false">Alredy rate it? Send me screenshot and I\'ll give promocode for paid version!</string>
+    <string name="btn_showLater" translatable="false">Ask later</string>
+    <string name="btn_donate" translatable="false">Donate</string>
+    <string name="btn_neverAsk" translatable="false">Never ask</string>
+    <string name="info_activity" translatable="false">Thank You!</string>
 
 </resources>
