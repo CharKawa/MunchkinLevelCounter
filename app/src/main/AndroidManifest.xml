@@ -65,6 +65,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MyActivity" />
         </activity>
+        <activity
+            android:name=".activity.InfoActivity"
+            android:label="@string/info_activity"
+            android:parentActivityName=".activity.InfoActivity">
+          
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MyActivity"/>
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -3,6 +3,7 @@ package com.g_art.munchkinlevelcounter.activity;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -15,10 +16,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+
+import java.util.Date;
 
 
 public class MyActivity extends Activity {
@@ -38,11 +42,31 @@ public class MyActivity extends Activity {
                 .setLabel("MyActivity")
                 .build());
 
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SettingsHandler settingsHandler = SettingsHandler.getInstance(mPrefs);
+        int popupStatus = settingsHandler.getPopupStatus();
+
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        if (popupStatus == SettingsHandler.FIRST_SHOW) {
+            showDialog();
+        } else if (popupStatus == SettingsHandler.ASK_LATER) {
+            Date dateOfShow = settingsHandler.getStatusDate();
+            long DAY_IN_MS = 1000 * 60 * 60 * 24;
+            Date currentDate = new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
+            if (dateOfShow.before(currentDate)) {
+                showDialog();
+            }
+        }
+    }
+
+    public void showDialog() {
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
     }
 
     @Override
