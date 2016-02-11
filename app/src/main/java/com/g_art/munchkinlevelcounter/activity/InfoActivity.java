@@ -3,22 +3,31 @@ package com.g_art.munchkinlevelcounter.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.fragments.info.ThanksPopup;
+import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
 /**
- * MunchinLevelCounter
+ * LevelCounter
  * Created by G_Art on 2/2/2016.
  */
-public class InfoActivity extends Activity {
+public class InfoActivity extends Activity implements ThanksPopup.PopupStatusUpdate {
+
+    private SettingsHandler settingsHandler;
+    private int popupStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        settingsHandler = SettingsHandler.getInstance(mPrefs);
+        popupStatus = settingsHandler.getPopupStatus();
 
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getFragmentManager();
@@ -32,5 +41,10 @@ public class InfoActivity extends Activity {
             // for the fragment, which is always the root view for the activity
             transaction.add(android.R.id.content, newFragment).commit();
         }
+    }
+
+    @Override
+    public boolean updateStatus(int updateStatus) {
+        return settingsHandler.updateStatus(updateStatus);
     }
 }

@@ -11,7 +11,7 @@
         android:id="@+id/txtThanks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imgBtnRatePopip"
+        android:layout_above="@+id/imgBtnRatePopup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:paddingLeft="15dp"
@@ -20,7 +20,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <ImageButton
-        android:id="@+id/imgBtnRatePopip"
+        android:id="@+id/imgBtnRatePopup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/txtDonatePopup"
@@ -41,7 +41,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imgBtnSendScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtDonatePopup"
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="false"
-        android:layout_below="@+id/imageButton"
+        android:layout_below="@+id/imgBtnSendScreen"
         android:layout_toLeftOf="@+id/btnMore"
         android:gravity="center"
         android:text="@string/btn_showLater"
@@ -66,7 +66,7 @@
         android:id="@+id/btnMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton"
+        android:layout_below="@+id/imgBtnSendScreen"
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="@string/btn_donate"/>
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="false"
-        android:layout_below="@+id/imageButton"
+        android:layout_below="@+id/imgBtnSendScreen"
         android:layout_toRightOf="@+id/btnMore"
         android:gravity="center"
         android:text="@string/btn_neverAsk"
