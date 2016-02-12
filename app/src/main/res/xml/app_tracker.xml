@@ -6,6 +6,28 @@
     <!-- Enable automatic Activity measurement -->
     <bool name="ga_autoActivityTracking">true</bool>
 
+    <screenName name="com.g_art.munchkinlevelcounter.activity.MyActivity">
+        LevelCounter StartScreen
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.About">
+        LevelCounter About
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.InfoActivity">
+        LevelCounter InfoActivity
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.NewPlayers">
+        LevelCounter NewPlayers
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.Settings">
+        LevelCounter Settings
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.Stats">
+        LevelCounter Stats
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.GameActivity">
+        LevelCounter GameActivity
+    </screenName>
+
     <!--  The property id associated with this analytics tracker -->
     <string name="ga_trackingId">UA-34888722-1</string>
 

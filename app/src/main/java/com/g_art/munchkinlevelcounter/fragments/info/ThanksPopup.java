@@ -16,7 +16,10 @@ import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.About;
 import com.g_art.munchkinlevelcounter.activity.InfoActivity;
+import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * LevelCounter
@@ -24,12 +27,14 @@ import com.g_art.munchkinlevelcounter.util.SettingsHandler;
  */
 public class ThanksPopup extends Fragment implements View.OnClickListener {
 
-    private InfoActivity mCallback;
+    private PopupStatusUpdate mCallback;
     private ImageButton imgBtnRatePopup;
     private ImageButton imgBtnSendScreen;
     private Button btnMore;
     private Button btnLater;
     private Button btnNeverShow;
+    private Tracker mTracker;
+
     /**
      * The system calls this to get the DialogFragment's layout, regardless
      * of whether it's being displayed as a dialog or an embedded fragment.
@@ -60,6 +65,11 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
         // the callback interface. If not, it throws an exception
         try {
             mCallback = (InfoActivity) activity;
+            // Obtain the shared Tracker instance.
+            MyApplication application = (MyApplication) activity.getApplication();
+
+            mTracker = application.getDefaultTracker();
+
             mCallback.updateStatus(SettingsHandler.ASK_LATER);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
@@ -71,6 +81,12 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBtnRatePopup:
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setAction("BtnRateClicked")
+                        .setCategory("Button")
+                        .setLabel("Thanks.Rate")
+                        .build());
+
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 //Try Google Play
                 intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
@@ -79,11 +95,17 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
                     intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.g_art.munchkinlevelcounter"));
                     if (!mayStartActivity(intent)) {
                         //Well if this also fails, we have run out of options, inform the user.
-                        Toast.makeText(mCallback, "Could not open Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText((InfoActivity) mCallback, "Could not open Android market, " +
+                                "please install the market app.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
             case R.id.imgBtnSendScreen:
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setAction("BtnSendScreen")
+                        .setCategory("Button")
+                        .setLabel("Thanks.Send")
+                        .build());
                 Intent Email = new Intent(Intent.ACTION_SEND);
                 Email.setType("message/rfc822");
                 Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
@@ -92,14 +114,30 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
                 startActivity(Intent.createChooser(Email, "Choose your Email App:"));
                 break;
             case R.id.btnMore:
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setAction("BtnMore")
+                        .setCategory("Button")
+                        .setLabel("Thanks.More")
+                        .build());
                 Intent aboutIntent = new Intent(getActivity(), About.class);
+                mCallback.updateStatus(SettingsHandler.NEVER_ASK);
                 startActivity(aboutIntent);
                 break;
             case R.id.btnLater:
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setAction("BtnLater")
+                        .setCategory("Button")
+                        .setLabel("Thanks.ASK_LATER")
+                        .build());
                 mCallback.updateStatus(SettingsHandler.ASK_LATER);
                 getActivity().finish();
                 break;
             case R.id.btnNeverShow:
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setAction("BtnNeverAsk")
+                        .setCategory("Button")
+                        .setLabel("Thanks.NEVER_ASK")
+                        .build());
                 mCallback.updateStatus(SettingsHandler.NEVER_ASK);
                 getActivity().finish();
                 break;

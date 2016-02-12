@@ -16,8 +16,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
+import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -42,19 +42,32 @@ public class MyActivity extends Activity {
                 .setLabel("MyActivity")
                 .build());
 
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        SettingsHandler settingsHandler = SettingsHandler.getInstance(mPrefs);
-        int popupStatus = settingsHandler.getPopupStatus();
-
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
 
+        doNeedToOpenThanks();
+    }
+
+    private void doNeedToOpenThanks() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SettingsHandler settingsHandler = SettingsHandler.getInstance(mPrefs);
+        int popupStatus = settingsHandler.getPopupStatus();
         if (popupStatus == SettingsHandler.FIRST_SHOW) {
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setAction("OpenThanksScreen")
+                    .setCategory("Screen")
+                    .setLabel("FIRST_SHOW")
+                    .build());
             showDialog();
         } else if (popupStatus == SettingsHandler.ASK_LATER) {
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setAction("OpenThanksScreen")
+                    .setCategory("Screen")
+                    .setLabel("ASK_LATER")
+                    .build());
             Date dateOfShow = settingsHandler.getStatusDate();
             long DAY_IN_MS = 1000 * 60 * 60 * 24;
             Date currentDate = new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
@@ -64,7 +77,7 @@ public class MyActivity extends Activity {
         }
     }
 
-    public void showDialog() {
+    private void showDialog() {
         Intent intent = new Intent(this, InfoActivity.class);
         startActivity(intent);
     }
