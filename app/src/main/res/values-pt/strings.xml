@@ -73,5 +73,11 @@
     <string name="msg_finish_game">Você vai terminar jogo atual</string>
     <string name="ok_btn_for_dialog_finish">Sim</string>
     <string name="title_dialog_finish">Termine o jogo</string>
+    <string name="txtRated">Já classificá-lo? Envie-me captura de tela e eu vou dar o código promocional para a versão paga!</string>
+    <string name="txtThanks">Olá! Obrigado por usar meu aplicativo. Espero que tenha gostado. Se você gosta dele, por favor classifique.</string>
+    <string name="info_activity">Obrigado!</string>
+    <string name="btn_showLater">Pergunte mais tarde</string>
+    <string name="btn_neverAsk">Nunca peça</string>
+    <string name="btn_donate">Doar</string>
 
 </resources>

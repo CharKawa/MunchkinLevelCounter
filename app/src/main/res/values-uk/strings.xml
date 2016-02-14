@@ -73,5 +73,11 @@
     <string name="msg_finish_game">Ви закінчите партію</string>
     <string name="ok_btn_for_dialog_finish">Так</string>
     <string name="title_dialog_finish">Закінчити гру</string>
+    <string name="txtRated">Вже оцінили? Надішліть скіншот, та отримайте промокод на платну версію!</string>
+    <string name="txtThanks">Привіт! Дякую, що користуєтесь моєю програмою. Якщо Вам сподобалось, поставте оцінку, будь ласка!</string>
+    <string name="info_activity">Дякую!</string>
+    <string name="btn_showLater">Пізніше</string>
+    <string name="btn_neverAsk">Ніколи</string>
+    <string name="btn_donate">Donate</string>
 
 </resources>

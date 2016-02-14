@@ -73,5 +73,11 @@
     <string name="msg_finish_game">Si finirà partita in corso</string>
     <string name="ok_btn_for_dialog_finish">Sì</string>
     <string name="title_dialog_finish">Termina il gioco</string>
+    <string name="txtRated">Già votarla? Mandami screenshot e darò il codice promozionale per la versione a pagamento!</string>
+    <string name="txtThanks">Ciao! Grazie per usando il mio app. Spero ti sia piaciuto. Se ti piace, si prega di tasso.</string>
+    <string name="info_activity">Grazie!</string>
+    <string name="btn_showLater">Chiedi tardi</string>
+    <string name="btn_neverAsk">Mai</string>
+    <string name="btn_donate">Donare</string>
 
 </resources>

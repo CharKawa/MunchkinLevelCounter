@@ -73,5 +73,11 @@
     <string name="msg_finish_game">Sie erhalten aktuelle Spiel beenden</string>
     <string name="ok_btn_for_dialog_finish">Ja</string>
     <string name="title_dialog_finish">Beenden Sie das Spiel</string>
+    <string name="txtRated">Bewerte es bereits? Senden Sie mir Screenshot und ich werde diesen Gutscheincode für kostenpflichtige Version geben!</string>
+    <string name="txtThanks">Hallo! Vielen Dank für die Verwendung meiner App. Ich hoffe, dass es Ihnen gefallen hat. Wenn es Ihnen gefällt, bitte bewerten.</string>
+    <string name="info_activity">Danke!</string>
+    <string name="btn_showLater">Frag später</string>
+    <string name="btn_neverAsk">Nie fragen</string>
+    <string name="btn_donate">Spenden</string>
 
 </resources>
