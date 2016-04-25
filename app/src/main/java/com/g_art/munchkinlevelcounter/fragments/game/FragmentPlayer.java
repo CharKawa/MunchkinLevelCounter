@@ -72,6 +72,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnGearDwn.setOnClickListener(this);
         holder.btnNextPlayer = (Button) view.findViewById(R.id.btnNextPlayer);
         holder.btnNextPlayer.setOnClickListener(this);
+        holder.btnChangeSex = (Button) view.findViewById(R.id.btnChangeSex);
+        holder.btnChangeSex.setOnClickListener(this);
 
         return view;
     }
@@ -197,8 +199,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         public ImageButton btnLvlDwn;
         public ImageButton btnGearUp;
         public ImageButton btnGearDwn;
-        public ImageButton btnRollDice;
-        public ImageButton btnFinish;
         public Button btnNextPlayer;
+        public Button btnChangeSex;
     }
 }

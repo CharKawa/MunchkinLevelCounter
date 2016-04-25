@@ -102,15 +102,14 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
                 break;
             case R.id.imgBtnSendScreen:
                 mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnSendScreen")
+                        .setAction("BtnAsskQuestion")
                         .setCategory("Button")
                         .setLabel("Thanks.Send")
                         .build());
                 Intent Email = new Intent(Intent.ACTION_SEND);
                 Email.setType("message/rfc822");
                 Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
-                Email.putExtra(Intent.EXTRA_SUBJECT, "Rate Screenshot");
-                Email.putExtra(Intent.EXTRA_TEXT, "Screenshot:");
+                Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
                 startActivity(Intent.createChooser(Email, "Choose your Email App:"));
                 break;
             case R.id.btnMore:

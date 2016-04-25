@@ -10,6 +10,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:inputType="number"
-        android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 </LinearLayout>

@@ -8,30 +8,31 @@
     android:keepScreenOn="true"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/fragmentList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@id/currentPlayer_container">
+        android:layout_toLeftOf="@id/currentPlayer_container"
+        android:orientation="vertical">
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/currentPlayer_container"
         android:layout_width="400dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
 
         <fragment
             android:id="@+id/currentPlayer_Fragment"
             android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
             android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_height="match_parent"
             tools:layout="@layout/fragment_player" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

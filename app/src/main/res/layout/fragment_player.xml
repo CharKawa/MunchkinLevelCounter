@@ -18,9 +18,20 @@
         android:layout_marginRight="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
+        android:layout_toLeftOf="@+id/player_sex"
+        android:layout_toStartOf="@+id/player_sex"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/player_sex"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/currentPlayer"
+        android:layout_alignTop="@+id/currentPlayer"
         android:layout_toLeftOf="@+id/txtTotal"
         android:layout_toStartOf="@+id/txtTotal"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/man"/>
 
     <TextView
         android:id="@+id/txtTotal"

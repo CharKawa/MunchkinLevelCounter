@@ -73,11 +73,11 @@
     <string name="msg_finish_game">Będziesz zakończyć bieżącą grę</string>
     <string name="ok_btn_for_dialog_finish">Tak</string>
     <string name="title_dialog_finish">Zakończ grę</string>
-    <string name="txtRated">Już oceń go? Wyślij mi zrzut ekranu i dam kod promocyjny dla wersji płatnej!</string>
     <string name="txtThanks">Witaj! Dziękujemy za korzystanie z mojej aplikacji. Mam nadzieję, że ci się podobało. Jeśli Ci się spodoba, proszę ocenić.</string>
     <string name="info_activity">Dziękuję Ci!</string>
     <string name="btn_showLater">Zapytaj później</string>
     <string name="btn_neverAsk">Nigdy nie pytaj</string>
     <string name="btn_donate">Podarować</string>
+    <string name="action_battle">Bitwa</string>
 
 </resources>

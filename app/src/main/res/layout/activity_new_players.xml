@@ -2,68 +2,68 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1">
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
 
         <ListView
             android:id="@+id/listVPlayers"
-            android:layout_height="fill_parent"
             android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:divider="@color/text_color"
-            android:dividerHeight="2dp" />
+            android:dividerHeight="2dp"/>
 
     </LinearLayout>
 
     <RelativeLayout
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
 
-    <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
             android:id="@+id/imgBtnAddPlayer"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/players_screen_Add_Player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/add_player"
-        android:layout_margin="15dp"
-        android:layout_alignParentLeft="true" />
+            android:contentDescription="@string/players_screen_Add_Player"
+            android:src="@drawable/add_player"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/imgBtnClear"
-            android:contentDescription="@string/players_screen_Clear_All"
-            android:layout_gravity="left"
-            android:layout_centerHorizontal="true"
-            android:background="@android:color/transparent"
-            android:src="@drawable/clear"
-            android:layout_margin="15dp" />
-
-        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="left"
+            android:layout_margin="15dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/players_screen_Clear_All"
+            android:src="@drawable/clear"/>
+
+        <ImageButton
             android:id="@+id/imgBtnStart"
-            android:contentDescription="@string/players_screen_Start_Game"
-            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_margin="15dp"
             android:layout_marginRight="15dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/start"
-            android:layout_margin="15dp"
-            android:layout_alignParentRight="true" />
+            android:contentDescription="@string/players_screen_Start_Game"
+            android:src="@drawable/start"/>
 
     </RelativeLayout>
 </LinearLayout>

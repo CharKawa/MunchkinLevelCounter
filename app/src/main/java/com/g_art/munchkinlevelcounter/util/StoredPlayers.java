@@ -16,17 +16,19 @@ import java.util.List;
  * Created by G_Art on 17/1/2015.
  */
 public class StoredPlayers {
-    private final String PREFS_PLAYERS_KEY = "players";
-
     private static StoredPlayers instance;
-
+    private final String PREFS_PLAYERS_KEY = "players";
     private SharedPreferences mPrefs;
     private boolean result = false;
-    private ArrayList<Player> playersList;
     private String json;
 
     private Gson gson;
 
+
+    private StoredPlayers(SharedPreferences sharedPreferences) {
+        this.gson = new Gson();
+        this.mPrefs = sharedPreferences;
+    }
 
     public static StoredPlayers getInstance(SharedPreferences sharedPreferences) {
         if (instance == null) {
@@ -35,11 +37,6 @@ public class StoredPlayers {
             instance.setSharedPreferences(sharedPreferences);
         }
         return instance;
-    }
-
-    private StoredPlayers(SharedPreferences sharedPreferences) {
-        this.gson = new Gson();
-        this.mPrefs = sharedPreferences;
     }
 
     /**
@@ -66,7 +63,7 @@ public class StoredPlayers {
      * @return ArrayList<Player>
      */
     public ArrayList<Player> loadPlayers(String noData) {
-        playersList = new ArrayList<Player>();
+        ArrayList<Player> playersList = new ArrayList<Player>();
 
         if (isPlayersStored()) {
             json = mPrefs.getString(PREFS_PLAYERS_KEY, noData);
@@ -77,8 +74,6 @@ public class StoredPlayers {
                     playersList = gson.fromJson(json, type);
                     result = true;
                 } catch (JsonSyntaxException jsonSyntaxEx) {
-                    result = false;
-                } catch (IllegalStateException illegalStateEx) {
                     result = false;
                 }
             } else {
