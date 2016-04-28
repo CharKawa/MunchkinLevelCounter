@@ -116,9 +116,6 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             case R.id.action_settings:
                 showMaxLvLDialog();
                 return true;
-            case R.id.action_battle:
-                showBattle();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

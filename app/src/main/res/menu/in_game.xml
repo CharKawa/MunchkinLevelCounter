@@ -6,12 +6,6 @@
         android:showAsAction="ifRoom"
         android:title="@string/dice" />
     <item
-        android:id="@+id/action_battle"
-        android:background="@null"
-        android:icon="@drawable/dice"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_battle"/>
-    <item
         android:id="@+id/action_finish"
         android:background="@null"
         android:icon="@drawable/end"
