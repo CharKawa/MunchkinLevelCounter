@@ -124,6 +124,12 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.player_sex:
+                if (selectedPlayer.getSex() == Sex.MAN) {
+                    selectedPlayer.setSex(Sex.WOMAN);
+                } else {
+                    selectedPlayer.setSex(Sex.MAN);
+                }
+                updatePlayerSex();
                 break;
         }
         setSelectedPlayer();
@@ -168,14 +174,17 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
             holder.txtCurrentPlayerLvl.setText(Integer.toString(selectedPlayer.getLevel()));
             holder.txtCurrentPlayerGear.setText(Integer.toString(selectedPlayer.getGear()));
             holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
-            if (Sex.MAN == selectedPlayer.getSex()) {
-                holder.btnSexType.setImageResource(R.drawable.man);
-            } else {
-                holder.btnSexType.setImageResource(R.drawable.woman);
-            }
+            updatePlayerSex();
         }
     }
 
+    private void updatePlayerSex() {
+        if (Sex.MAN == selectedPlayer.getSex()) {
+            holder.btnSexType.setImageResource(R.drawable.man);
+        } else {
+            holder.btnSexType.setImageResource(R.drawable.woman);
+        }
+    }
 
 
     @Override
