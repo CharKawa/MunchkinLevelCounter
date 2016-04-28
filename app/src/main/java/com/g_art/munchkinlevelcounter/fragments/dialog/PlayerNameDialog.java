@@ -8,22 +8,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.NewPlayers;
+import com.g_art.munchkinlevelcounter.bean.Sex;
 
 /**
  * Created by G_Art on 21/7/2014.
  */
-public class PlayerNameDialog extends DialogFragment {
+public class PlayerNameDialog extends DialogFragment implements View.OnClickListener {
 
     private EditText playerName;
+    private ImageButton btnPlayerSex;
+    private Sex playerSex;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setStyle(DialogFragment.STYLE_NORMAL, R.style.alertDialog);
     }
 
     @Override
@@ -37,8 +40,14 @@ public class PlayerNameDialog extends DialogFragment {
 
         builder.setView(v);
 
-
         playerName = (EditText) v.findViewById(R.id.playerName);
+        btnPlayerSex = (ImageButton) v.findViewById(R.id.new_player_sex);
+
+        playerSex = (Sex) getArguments().getSerializable(NewPlayers.PLAYER_SEX);
+        updateBtnSex();
+
+        btnPlayerSex.setOnClickListener(this);
+
         playerName.setText(getArguments().getString(NewPlayers.PLAYER_NAME));
 
         builder.setTitle(R.string.title_dialog_new_Player)
@@ -50,7 +59,7 @@ public class PlayerNameDialog extends DialogFragment {
                         if (name.isEmpty()) {
                             Toast.makeText(getActivity(), getString(R.string.error_empty_name), Toast.LENGTH_SHORT).show();
                         } else {
-                            ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name);
+                            ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name, playerSex);
                         }
 
                     }
@@ -66,4 +75,29 @@ public class PlayerNameDialog extends DialogFragment {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.new_player_sex :
+                if (playerSex == Sex.MAN) {
+                    playerSex = Sex.WOMAN;
+                } else {
+                    playerSex = Sex.MAN;
+                }
+                updateBtnSex();
+                break;
+        }
+    }
+
+    private void updateBtnSex() {
+        if (playerSex == null) {
+            playerSex = Sex.MAN;
+        }
+        if (playerSex == Sex.MAN) {
+            btnPlayerSex.setImageResource(R.drawable.man);
+        } else {
+            btnPlayerSex.setImageResource(R.drawable.woman);
+        }
+    }
 }

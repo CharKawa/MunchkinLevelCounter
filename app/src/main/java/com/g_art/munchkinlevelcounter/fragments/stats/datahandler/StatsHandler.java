@@ -10,6 +10,7 @@ import com.db.chart.model.ChartSet;
 import com.db.chart.model.LineSet;
 import com.db.chart.model.Point;
 import com.db.chart.view.LineChartView;
+import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 
@@ -116,22 +117,19 @@ public class StatsHandler {
                         break;
                 }
 
-                // Style dots
-                lineSet.setDots(false);
-
                 int color = player.getColor();
                 if (color == 0) {
                     player.setColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
                     color = player.getColor();
                 }
-                lineSet.setLineColor(color);
+                lineSet.setColor(color);
 
 
                 playersColorSparse.put(color, s.toString());
                 s.setLength(CLEAR_STRING_BULDER);
 
                 // Style background fill
-                lineSet.setFill(false);
+//                lineSet.setFill(context.getResources().getColor(R.color.transparent));
                 lineSet.setSmooth(true);
 
                 statLines.add(lineSet);

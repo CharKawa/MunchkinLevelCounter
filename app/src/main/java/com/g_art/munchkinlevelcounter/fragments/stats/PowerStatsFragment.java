@@ -24,11 +24,8 @@ public class PowerStatsFragment extends Fragment {
 
     private ArrayList<Player> playersList;
     final static String PLAYER_KEY = "playersList";
-    private LineChartView chartView;
     private SparseArray playersColors;
     private boolean isDataPresent;
-    private SparseStringsAdapter sparseStringsAdapter;
-    private ListView inStatsPlayersList;
 
 
     @Override
@@ -55,7 +52,7 @@ public class PowerStatsFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
 
         if (isDataPresent) {
-            chartView = (LineChartView) v.findViewById(R.id.LineChart);
+            LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
             StatsHandler statsHandler = new StatsHandler(playersList, chartView);
             chartView = statsHandler.getStats(getActivity(), StatsHandler.POWER_STATS);
@@ -66,8 +63,8 @@ public class PowerStatsFragment extends Fragment {
 
         }
 
-        sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
-        inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
+        SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
+        ListView inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
         inStatsPlayersList.setAdapter(sparseStringsAdapter);
         return v;
     }

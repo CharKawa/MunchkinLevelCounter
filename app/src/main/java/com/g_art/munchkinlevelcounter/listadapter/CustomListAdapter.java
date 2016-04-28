@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.NewPlayers;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.bean.Sex;
 
 import java.util.ArrayList;
 
@@ -74,6 +76,7 @@ public class CustomListAdapter extends BaseAdapter {
             holder.text = (TextView) vi.findViewById(R.id.newPlayerName);
             holder.imEdit = (ImageButton) vi.findViewById(R.id.imBtnEdit);
             holder.imBtnDel = (ImageButton) vi.findViewById(R.id.imBtnDel);
+            holder.imvPlayerSex = (ImageView) vi.findViewById(R.id.imvPlayerSex);
 
             /************  Set holder with LayoutInflater ************/
             vi.setTag(holder);
@@ -82,8 +85,9 @@ public class CustomListAdapter extends BaseAdapter {
 
         if (data.size() <= 0) {
             holder.text.setText(R.string.no_players);
-            holder.imBtnDel.setVisibility(View.INVISIBLE);
-            holder.imEdit.setVisibility(View.INVISIBLE);
+            holder.imBtnDel.setVisibility(View.GONE);
+            holder.imEdit.setVisibility(View.GONE);
+            holder.imvPlayerSex.setVisibility(View.GONE);
 
         } else {
             /***** Get each Model object from Arraylist ********/
@@ -112,6 +116,14 @@ public class CustomListAdapter extends BaseAdapter {
                 }
             });
 
+            holder.imvPlayerSex.setVisibility(View.VISIBLE);
+
+            if (player.getSex() == Sex.MAN) {
+                holder.imvPlayerSex.setImageResource(R.drawable.man);
+            } else {
+                holder.imvPlayerSex.setImageResource(R.drawable.woman);
+            }
+
 
         }
         return vi;
@@ -125,6 +137,7 @@ public class CustomListAdapter extends BaseAdapter {
         public TextView text;
         public ImageButton imEdit;
         public ImageButton imBtnDel;
+        public ImageView imvPlayerSex;
 
     }
 

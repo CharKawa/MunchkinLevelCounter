@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.db.chart.view.LineChartView;
+import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.SparseStringsAdapter;
@@ -25,11 +26,8 @@ public class GearStatsFragment extends Fragment {
 
     private ArrayList<Player> playersList;
     final static String PLAYER_KEY = "playersList";
-    private LineChartView chartView;
     private SparseArray playersColors;
     private boolean isDataPresent;
-    private SparseStringsAdapter sparseStringsAdapter;
-    private ListView inStatsPlayersList;
 
 
     @Override
@@ -59,7 +57,7 @@ public class GearStatsFragment extends Fragment {
 
         try {
             if (isDataPresent) {
-                chartView = (LineChartView) v.findViewById(R.id.LineChart);
+                LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
                 StatsHandler statsHandler = new StatsHandler(playersList, chartView);
                 chartView = statsHandler.getStats(getActivity(), StatsHandler.GEAR_STATS);
@@ -73,8 +71,8 @@ public class GearStatsFragment extends Fragment {
             Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
         }
 
-        sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
-        inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
+        SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
+        ListView inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
         inStatsPlayersList.setAdapter(sparseStringsAdapter);
 
         return v;

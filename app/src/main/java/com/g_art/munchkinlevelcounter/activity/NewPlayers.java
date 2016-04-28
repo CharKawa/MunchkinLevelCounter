@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.bean.Sex;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
@@ -28,14 +29,11 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     public static final String EMPTY_STRING = " ";
+    public static final String PLAYER_SEX = "player_sex";
     private static int playerIndex = 1;
     private static boolean newPlayer = false;
     final int MIN_PLAYER_QUANTITY = 2;
-    ListView listVPlayers;
-    ImageButton btnAddPlayers;
-    ImageButton btnClear;
-    ImageButton btnStartGame;
-    CustomListAdapter customListAdapter;
+    private CustomListAdapter customListAdapter;
     private Tracker mTracker;
     private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
@@ -60,15 +58,15 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
-        listVPlayers = (ListView) findViewById(R.id.listVPlayers);
-        btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
+        ListView listVPlayers = (ListView) findViewById(R.id.listVPlayers);
+        ImageButton btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
         playerDialog = new PlayerNameDialog();
 
         btnAddPlayers.setOnClickListener(this);
-        btnClear = (ImageButton) findViewById(R.id.imgBtnClear);
+        ImageButton btnClear = (ImageButton) findViewById(R.id.imgBtnClear);
         btnClear.setOnClickListener(this);
-        btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
+        ImageButton btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
         listPlayers = new ArrayList<Player>();
 
@@ -100,18 +98,26 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
 
     void showPlayerNameDialog(String name) {
+        showPlayerNameDialog(name, Sex.MAN);
+    }
+
+    void showPlayerNameDialog(String name, Sex sex) {
         Bundle nBundle = new Bundle();
         nBundle.putString(PLAYER_NAME, name);
+        nBundle.putSerializable(PLAYER_SEX, sex);
         playerDialog.setArguments(nBundle);
         playerDialog.show(getFragmentManager(), "dialog");
     }
 
-    public void doPositiveClickPlayerNameDialog(String name) {
+    public void doPositiveClickPlayerNameDialog(String name, Sex sex) {
         if (newPlayer) {
-            listPlayers.add(new Player(name));
+            Player newPlayer = new Player(name);
+            newPlayer.setSex(sex);
+            listPlayers.add(newPlayer);
         } else {
             Player player = listPlayers.get(playerIndex);
             player.setName(name);
+            player.setSex(sex);
         }
 
         customListAdapter.notifyDataSetChanged();
@@ -201,6 +207,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         Player player = listPlayers.get(playerPosition);
         playerIndex = playerPosition;
         newPlayer = false;
-        showPlayerNameDialog(player.getName());
+        showPlayerNameDialog(player.getName(), player.getSex());
     }
 }

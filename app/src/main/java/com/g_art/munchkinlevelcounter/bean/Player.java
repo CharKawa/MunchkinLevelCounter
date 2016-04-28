@@ -26,6 +26,7 @@ public class Player implements Parcelable, Comparable {
     private int gear;
     private int color;
     private boolean winner;
+    private Sex sex;
     private ArrayList<String> lvlStats;
     private ArrayList<String> gearStats;
     private ArrayList<String> powerStats;
@@ -40,6 +41,7 @@ public class Player implements Parcelable, Comparable {
         this.name = name;
         this.level = 1;
         this.gear = 0;
+        this.sex = Sex.MAN;
         this.winner = false;
         Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
@@ -53,6 +55,7 @@ public class Player implements Parcelable, Comparable {
         this.level = 1;
         this.gear = 0;
         this.winner = false;
+        this.sex = Sex.MAN;
         Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
@@ -65,6 +68,7 @@ public class Player implements Parcelable, Comparable {
         this.level = lvl;
         this.gear = gear;
         this.winner = false;
+        this.sex = Sex.MAN;
         Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 
@@ -78,6 +82,7 @@ public class Player implements Parcelable, Comparable {
         this.level = in.readInt();
         this.gear = in.readInt();
         this.color = in.readInt();
+        this.sex = (Sex) in.readSerializable();
         this.winner = in.readByte() != 0;
         in.readStringList(lvlStats);
         in.readStringList(gearStats);
@@ -152,6 +157,14 @@ public class Player implements Parcelable, Comparable {
         this.color = color;
     }
 
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -162,6 +175,7 @@ public class Player implements Parcelable, Comparable {
                 ", lvlStats=" + lvlStats +
                 ", gearStats=" + gearStats +
                 ", powerStats=" + powerStats +
+                ", sex=" + sex.toString() +
                 '}';
     }
 
@@ -177,6 +191,7 @@ public class Player implements Parcelable, Comparable {
         if (color != player.color) return false;
         if (winner != player.winner) return false;
         if (!name.equals(player.name)) return false;
+        if (!sex.equals(player.sex)) return false;
 
         return true;
     }
@@ -201,6 +216,7 @@ public class Player implements Parcelable, Comparable {
         dest.writeInt(level);
         dest.writeInt(gear);
         dest.writeInt(color);
+        dest.writeSerializable(sex);
         dest.writeByte((byte) (winner ? 1 : 0));
         dest.writeStringList(lvlStats);
         dest.writeStringList(gearStats);

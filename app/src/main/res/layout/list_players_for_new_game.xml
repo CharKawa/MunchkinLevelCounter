@@ -1,21 +1,33 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="top"
     android:padding="10dp">
-
-    <TableRow>
 
         <TextView
             android:id="@+id/newPlayerName"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical|left|top"
             android:textSize="25sp"
             android:layout_marginLeft="10dip"
             android:layout_marginTop="4dip"
-            android:layout_span="1" />
+            android:layout_toLeftOf="@+id/imvPlayerSex"
+            android:layout_alignParentStart="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imvPlayerSex"
+            android:src="@drawable/man"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/list_players_Edit"
+            android:layout_gravity="center_vertical|bottom|right"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imBtnEdit"
+            android:layout_alignTop="@+id/imBtnEdit"
+            android:layout_alignBottom="@+id/imBtnEdit"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -25,7 +37,8 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/list_players_Edit"
             android:layout_gravity="center_vertical|bottom|right"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imBtnDel"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -34,7 +47,7 @@
             android:src="@drawable/ic_action_remove"
             android:background="@android:color/transparent"
             android:contentDescription="@string/list_players_Delete"
-            android:layout_gravity="center_vertical|bottom|right" />
+            android:layout_gravity="center_vertical|bottom|right"
+            android:layout_alignParentEnd="true"/>
 
-    </TableRow>
-</TableLayout>
+</RelativeLayout>

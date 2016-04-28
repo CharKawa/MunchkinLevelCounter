@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.bean.Sex;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
 
 
@@ -70,10 +71,10 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.btnGearUp.setOnClickListener(this);
         holder.btnGearDwn = (ImageButton) view.findViewById(R.id.btnGearDwn);
         holder.btnGearDwn.setOnClickListener(this);
+        holder.btnSexType = (ImageButton) view.findViewById(R.id.player_sex);
+        holder.btnSexType.setOnClickListener(this);
         holder.btnNextPlayer = (Button) view.findViewById(R.id.btnNextPlayer);
         holder.btnNextPlayer.setOnClickListener(this);
-        holder.btnChangeSex = (Button) view.findViewById(R.id.btnChangeSex);
-        holder.btnChangeSex.setOnClickListener(this);
 
         return view;
     }
@@ -122,6 +123,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity(), getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
                 }
                 break;
+            case R.id.player_sex:
+                break;
         }
         setSelectedPlayer();
         mCallback.onPlayersUpdate();
@@ -160,10 +163,17 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
     }
 
     private void setSelectedPlayer() {
-        holder.txtCurrentPlayerName.setText(selectedPlayer.getName());
-        holder.txtCurrentPlayerLvl.setText(Integer.toString(selectedPlayer.getLevel()));
-        holder.txtCurrentPlayerGear.setText(Integer.toString(selectedPlayer.getGear()));
-        holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
+        if (selectedPlayer != null) {
+            holder.txtCurrentPlayerName.setText(selectedPlayer.getName());
+            holder.txtCurrentPlayerLvl.setText(Integer.toString(selectedPlayer.getLevel()));
+            holder.txtCurrentPlayerGear.setText(Integer.toString(selectedPlayer.getGear()));
+            holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
+            if (Sex.MAN == selectedPlayer.getSex()) {
+                holder.btnSexType.setImageResource(R.drawable.man);
+            } else {
+                holder.btnSexType.setImageResource(R.drawable.woman);
+            }
+        }
     }
 
 
@@ -195,11 +205,11 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         public TextView txtCurrentPlayerPower;
         public TextView txtCurrentPlayerLvl;
         public TextView txtCurrentPlayerGear;
+        public ImageButton btnSexType;
         public ImageButton btnLvlUp;
         public ImageButton btnLvlDwn;
         public ImageButton btnGearUp;
         public ImageButton btnGearDwn;
         public Button btnNextPlayer;
-        public Button btnChangeSex;
     }
 }

@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,6 @@
         android:layout_alignLeft="@+id/btnNextPlayer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="false"
         android:layout_alignStart="@+id/btnNextPlayer"
         android:layout_below="@+id/btnNextPlayer"
         android:layout_marginEnd="15dp"
@@ -20,17 +20,21 @@
         android:layout_marginTop="15dp"
         android:layout_toLeftOf="@+id/player_sex"
         android:layout_toStartOf="@+id/player_sex"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
         android:id="@+id/player_sex"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/currentPlayer"
         android:layout_alignTop="@+id/currentPlayer"
         android:layout_toLeftOf="@+id/txtTotal"
         android:layout_toStartOf="@+id/txtTotal"
         android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
         android:src="@drawable/man"/>
 
     <TextView
@@ -38,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/total"
+        android:layout_toStartOf="@+id/total"
         android:layout_toLeftOf="@+id/total"
         android:text="@string/total_power"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -51,6 +56,8 @@
         android:layout_below="@+id/btnNextPlayer"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="15dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -62,18 +69,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/txtPlayerLvl"
         android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:text="@string/level"
-        android:textAlignment="viewEnd"
+        android:gravity="end"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/txtPlayerLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
         android:layout_below="@+id/btnLvlUp"
         android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
         android:layout_toRightOf="@+id/txtLevel"
+        android:layout_toEndOf="@+id/txtLevel"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -138,7 +147,6 @@
         android:id="@+id/btnGearDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
         android:layout_below="@+id/txtPlayerGear"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/txtGear"

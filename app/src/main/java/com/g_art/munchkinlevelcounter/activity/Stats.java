@@ -28,12 +28,8 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
     private final String BUNDLE_STATS_KEY = "bundleStats";
     private String PREFS_NO_DATA;
 
-    private ArrayList<Player> playersList;
-
     private ViewPager viewPager;
     private ActionBar actionBar;
-    private StoredPlayers mStored;
-    private Tracker mTracker;
 
 
     @Override
@@ -43,7 +39,7 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         // Obtain the shared Tracker instance.
         MyApplication application = (MyApplication) getApplication();
-        mTracker = application.getDefaultTracker();
+        Tracker mTracker = application.getDefaultTracker();
         mTracker.send(new HitBuilders.EventBuilder()
                 .setAction("Stats opened")
                 .setCategory("Screen")
@@ -52,12 +48,13 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         ActionBar.Tab lvlTab, gearTab, powerTab;
 
-        mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
+        StoredPlayers mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
         PREFS_NO_DATA = getString(R.string.no_data);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
+        ArrayList<Player> playersList;
         if (bundle != null && !bundle.isEmpty()) {
             playersList = bundle.getParcelableArrayList(PLAYER_KEY);
             if (playersList != null) {
@@ -74,8 +71,9 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         Bundle fragBundle = new Bundle();
         fragBundle.putParcelableArrayList(PLAYER_KEY, playersList);
 
-        // Initilization
+        // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setOffscreenPageLimit(3);
         actionBar = getActionBar();
         StatsPageAdapter statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), fragBundle);
         viewPager.setAdapter(statsAdapter);
