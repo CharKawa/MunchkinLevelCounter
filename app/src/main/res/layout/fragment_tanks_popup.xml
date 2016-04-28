@@ -37,7 +37,7 @@
         android:layout_centerInParent="true"
         android:paddingLeft="15dp"
         android:paddingRight="10dp"
-        android:text="@string/txtRated"
+        android:text="@string/contact"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <ImageButton
