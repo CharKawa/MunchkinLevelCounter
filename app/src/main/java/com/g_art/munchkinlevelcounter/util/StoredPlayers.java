@@ -1,8 +1,9 @@
 package com.g_art.munchkinlevelcounter.util;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
-import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.model.Player;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -46,6 +47,7 @@ public class StoredPlayers {
      */
     public boolean savePlayers(List<Player> playersList) {
         json = gson.toJson(playersList);
+        Log.i("JSON", "savePlayers: "+ json);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         prefsEditor.putString(PREFS_PLAYERS_KEY, json);
         try {
@@ -67,6 +69,7 @@ public class StoredPlayers {
 
         if (isPlayersStored()) {
             json = mPrefs.getString(PREFS_PLAYERS_KEY, noData);
+            Log.i("JSON", "loadPlayers: "+ json);
             if (!json.equals(noData)) {
                 Type type = new TypeToken<ArrayList<Player>>() {
                 }.getType();

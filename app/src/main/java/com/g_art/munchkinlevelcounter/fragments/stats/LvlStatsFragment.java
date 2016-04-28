@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.db.chart.view.LineChartView;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.SparseStringsAdapter;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.StatsHandler;
 

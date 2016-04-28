@@ -10,9 +10,8 @@ import com.db.chart.model.ChartSet;
 import com.db.chart.model.LineSet;
 import com.db.chart.model.Point;
 import com.db.chart.view.LineChartView;
-import com.db.chart.view.animation.Animation;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.model.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;

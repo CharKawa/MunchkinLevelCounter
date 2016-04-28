@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.model.Player;
 
 import java.util.ArrayList;
 

@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.bean.Sex;
+import com.g_art.munchkinlevelcounter.model.Player;
+import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
@@ -208,5 +208,15 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         playerIndex = playerPosition;
         newPlayer = false;
         showPlayerNameDialog(player.getName(), player.getSex());
+    }
+
+    public void playerChangeSex(int playerPosition) {
+        Player player = listPlayers.get(playerPosition);
+        if (Sex.MAN == player.getSex()) {
+            player.setSex(Sex.WOMAN);
+        } else {
+            player.setSex(Sex.MAN);
+        }
+        customListAdapter.notifyDataSetChanged();
     }
 }

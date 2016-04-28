@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.NewPlayers;
-import com.g_art.munchkinlevelcounter.bean.Sex;
+import com.g_art.munchkinlevelcounter.model.Sex;
 
 /**
  * Created by G_Art on 21/7/2014.

@@ -1,4 +1,4 @@
-package com.g_art.munchkinlevelcounter.bean;
+package com.g_art.munchkinlevelcounter.model;
 
 import android.graphics.Color;
 import android.os.Parcel;
@@ -90,7 +90,9 @@ public class Player implements Parcelable, Comparable {
     }
 
     public Player cloneWithoutStats() {
-        return new Player(this.name);
+        Player newPlayer = new Player(this.name);
+        newPlayer.setSex(this.getSex());
+        return newPlayer;
     }
 
     public String getName() {

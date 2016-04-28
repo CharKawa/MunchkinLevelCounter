@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.NewPlayers;
-import com.g_art.munchkinlevelcounter.bean.Player;
-import com.g_art.munchkinlevelcounter.bean.Sex;
+import com.g_art.munchkinlevelcounter.model.Player;
+import com.g_art.munchkinlevelcounter.model.Sex;
 
 import java.util.ArrayList;
 
@@ -76,7 +76,7 @@ public class CustomListAdapter extends BaseAdapter {
             holder.text = (TextView) vi.findViewById(R.id.newPlayerName);
             holder.imEdit = (ImageButton) vi.findViewById(R.id.imBtnEdit);
             holder.imBtnDel = (ImageButton) vi.findViewById(R.id.imBtnDel);
-            holder.imvPlayerSex = (ImageView) vi.findViewById(R.id.imvPlayerSex);
+            holder.imBtnPlayerSex = (ImageButton) vi.findViewById(R.id.imvPlayerSex);
 
             /************  Set holder with LayoutInflater ************/
             vi.setTag(holder);
@@ -87,7 +87,7 @@ public class CustomListAdapter extends BaseAdapter {
             holder.text.setText(R.string.no_players);
             holder.imBtnDel.setVisibility(View.GONE);
             holder.imEdit.setVisibility(View.GONE);
-            holder.imvPlayerSex.setVisibility(View.GONE);
+            holder.imBtnPlayerSex.setVisibility(View.GONE);
 
         } else {
             /***** Get each Model object from Arraylist ********/
@@ -116,12 +116,19 @@ public class CustomListAdapter extends BaseAdapter {
                 }
             });
 
-            holder.imvPlayerSex.setVisibility(View.VISIBLE);
+            holder.imBtnPlayerSex.setVisibility(View.VISIBLE);
+            holder.imBtnPlayerSex.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NewPlayers sct = (NewPlayers) activity;
+                    sct.playerChangeSex(playerPosition);
+                }
+            });
 
             if (player.getSex() == Sex.MAN) {
-                holder.imvPlayerSex.setImageResource(R.drawable.man);
+                holder.imBtnPlayerSex.setImageResource(R.drawable.man);
             } else {
-                holder.imvPlayerSex.setImageResource(R.drawable.woman);
+                holder.imBtnPlayerSex.setImageResource(R.drawable.woman);
             }
 
 
@@ -137,7 +144,7 @@ public class CustomListAdapter extends BaseAdapter {
         public TextView text;
         public ImageButton imEdit;
         public ImageButton imBtnDel;
-        public ImageView imvPlayerSex;
+        public ImageButton imBtnPlayerSex;
 
     }
 

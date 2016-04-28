@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.MaxLvlDialog;

@@ -2,7 +2,7 @@ package com.g_art.munchkinlevelcounter.util;
 
 import android.os.AsyncTask;
 
-import com.g_art.munchkinlevelcounter.bean.Player;
+import com.g_art.munchkinlevelcounter.model.Player;
 
 import java.util.ArrayList;
 
