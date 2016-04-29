@@ -102,7 +102,7 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
                 break;
             case R.id.imgBtnSendScreen:
                 mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnAsskQuestion")
+                        .setAction("BtnAskQuestion")
                         .setCategory("Button")
                         .setLabel("Thanks.Send")
                         .build());

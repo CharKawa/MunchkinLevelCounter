@@ -29,7 +29,7 @@
     </screenName>
 
     <!--  The property id associated with this analytics tracker -->
-    <string name="ga_trackingId">UA-34888722-1</string>
+    <string name="ga_trackingId">UA-72556928-2</string>
 
     <!--
       See Project Structure -> Analytics -> Google Analytics -> Learn More

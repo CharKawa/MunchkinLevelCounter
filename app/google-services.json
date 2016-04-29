@@ -1,0 +1,34 @@
+{
+  "project_info": {
+    "project_number": "445959843854",
+    "project_id": "level-counter"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445959843854:android:0be3d4610998e981",
+        "android_client_info": {
+          "package_name": "com.g_art.munchkinlevelcounter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-72556928-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
