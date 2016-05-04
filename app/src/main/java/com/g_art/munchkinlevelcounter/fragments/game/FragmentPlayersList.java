@@ -111,9 +111,16 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
     }
 
     public void smoothScrollToPositionFromTop(final AbsListView view, final int position) {
+        if (view == null) {
+            return;
+        }
+
         View child = getChildAtPosition(view, position);
+        if (child == null) {
+            return;
+        }
         // There's no need to scroll if child is already at top or view is already scrolled to its end
-        if ((child != null) && ((child.getTop() == 0) || ((child.getTop() > 0) && !view.canScrollVertically(1)))) {
+        if (((child.getTop() == 0) || ((child.getTop() > 0) && !view.canScrollVertically(1)))) {
             return;
         }
 

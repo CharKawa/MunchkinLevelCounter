@@ -61,7 +61,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         ListView listVPlayers = (ListView) findViewById(R.id.listVPlayers);
         ImageButton btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
-        playerDialog = new PlayerNameDialog();
 
         btnAddPlayers.setOnClickListener(this);
         ImageButton btnClear = (ImageButton) findViewById(R.id.imgBtnClear);
@@ -102,6 +101,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     }
 
     void showPlayerNameDialog(String name, Sex sex) {
+        playerDialog = new PlayerNameDialog();
         Bundle nBundle = new Bundle();
         nBundle.putString(PLAYER_NAME, name);
         nBundle.putSerializable(PLAYER_SEX, sex);
