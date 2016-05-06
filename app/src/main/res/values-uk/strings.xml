@@ -79,6 +79,6 @@
     <string name="btn_neverAsk">Ніколи</string>
     <string name="btn_donate">Donate</string>
     <string name="action_battle">Бій</string>
-    <string name="txtRated" translatable="false"></string>
+    <string name="btnChangeSex">Change Sex</string>
 
 </resources>

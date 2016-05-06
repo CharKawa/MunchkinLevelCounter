@@ -79,6 +79,6 @@
     <string name="btn_neverAsk">Never ask</string>
     <string name="info_activity">Thank You!</string>
     <string name="action_battle">Battle</string>
-    <string name="btnChangeSex" translatable="false">Change Sex</string>
+    <string name="btnChangeSex">Change Sex</string>
 
 </resources>

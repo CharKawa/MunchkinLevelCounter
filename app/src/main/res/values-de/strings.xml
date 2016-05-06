@@ -79,5 +79,6 @@
     <string name="btn_neverAsk">Nie fragen</string>
     <string name="btn_donate">Spenden</string>
     <string name="action_battle">Schlacht</string>
+    <string name="btnChangeSex">Change Sex</string>
 
 </resources>
