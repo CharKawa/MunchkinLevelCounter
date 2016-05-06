@@ -45,6 +45,10 @@ public class InfoActivity extends Activity implements ThanksPopup.PopupStatusUpd
 
     @Override
     public boolean updateStatus(int updateStatus) {
+        if (settingsHandler == null) {
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            settingsHandler = SettingsHandler.getInstance(mPrefs);
+        }
         return settingsHandler.updateStatus(updateStatus);
     }
 }
