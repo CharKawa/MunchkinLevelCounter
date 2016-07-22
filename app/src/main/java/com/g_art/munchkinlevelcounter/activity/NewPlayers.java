@@ -32,7 +32,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public static final String PLAYER_SEX = "player_sex";
     private static int playerIndex = 1;
     private static boolean newPlayer = false;
-    final int MIN_PLAYER_QUANTITY = 2;
+    private final int MIN_PLAYER_QUANTITY = 1;
     private CustomListAdapter customListAdapter;
     private Tracker mTracker;
     private String PREFS_NO_DATA;

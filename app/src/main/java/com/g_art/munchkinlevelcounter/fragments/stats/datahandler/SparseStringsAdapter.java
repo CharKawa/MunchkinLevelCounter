@@ -45,7 +45,7 @@ public class SparseStringsAdapter extends SparseArrayAdapter<String> {
             holder = (ViewHolder) view.getTag();
         }
 
-        if (getCount() == 1) {
+        if (getCount() == 0) {
             holder.txtPlayerName.setText(view.getContext().getString(R.string.no_data));
             holder.viewPlayerColor.setVisibility(View.INVISIBLE);
         } else {
