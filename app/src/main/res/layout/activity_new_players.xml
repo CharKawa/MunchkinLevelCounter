@@ -12,7 +12,7 @@
         android:layout_weight="0.1"
         android:orientation="horizontal">
 
-        <ListView
+        <com.woxthebox.draglistview.DragListView
             android:id="@+id/listVPlayers"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

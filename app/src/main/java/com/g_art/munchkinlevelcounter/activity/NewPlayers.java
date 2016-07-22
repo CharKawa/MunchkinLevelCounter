@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.support.v4.util.Pair;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
@@ -19,26 +21,27 @@ import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.woxthebox.draglistview.DragListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by G_Art on 16/7/2014.
  */
 public class NewPlayers extends Activity implements View.OnClickListener {
-    public final static String PLAYER_KEY = "playersList";
+    private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
-    public static final String EMPTY_STRING = " ";
+    private static final String EMPTY_STRING = " ";
     public static final String PLAYER_SEX = "player_sex";
     private static int playerIndex = 1;
     private static boolean newPlayer = false;
-    private final int MIN_PLAYER_QUANTITY = 1;
-    private CustomListAdapter customListAdapter;
+	private CustomListAdapter customListAdapter;
     private Tracker mTracker;
     private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
     private StoredPlayers mStored;
-    private ArrayList<Player> listPlayers;
+	private ArrayList<Pair<Long, Player>> mPlayersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
-        ListView listVPlayers = (ListView) findViewById(R.id.listVPlayers);
+		DragListView mDragList = (DragListView) findViewById(R.id.listVPlayers);
         ImageButton btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
 
@@ -67,40 +70,42 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         btnClear.setOnClickListener(this);
         ImageButton btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
-        listPlayers = new ArrayList<Player>();
+		mPlayersList = new ArrayList<>();
 
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
             if (mStored.isPlayersStored()) {
                 getPlayersForNewGame();
             } else {
-                listPlayers.add(new Player(getString(R.string.player_1)));
-                listPlayers.add(new Player(getString(R.string.player_2)));
+				mPlayersList.add(new Pair<>(1L, new Player(getString(R.string.player_1))));
+				mPlayersList.add(new Pair<>(2L, new Player(getString(R.string.player_2))));
             }
         } else {
-            listPlayers = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
+			ArrayList<Player> tList = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
+			mPlayersList = toPairList(tList);
         }
 
 
-        customListAdapter = new CustomListAdapter(this, listPlayers);
-        listVPlayers.setAdapter(customListAdapter);
+        customListAdapter = new CustomListAdapter(mPlayersList, R.layout.list_players_for_new_game,
+				R.id.newPlayerName, true, this);
+		mDragList.setLayoutManager(new LinearLayoutManager(this));
+        mDragList.setAdapter(customListAdapter, true);
+		mDragList.setCanDragHorizontally(false);
     }
 
     private void getPlayersForNewGame() {
         ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
         if (!tList.isEmpty()) {
-            for (Player player : tList) {
-                listPlayers.add(player.cloneWithoutStats());
-            }
+			mPlayersList = toPairList(tList);
         }
     }
 
 
-    void showPlayerNameDialog(String name) {
+    private void showPlayerNameDialog(String name) {
         showPlayerNameDialog(name, Sex.MAN);
     }
 
-    void showPlayerNameDialog(String name, Sex sex) {
+	private void showPlayerNameDialog(String name, Sex sex) {
         playerDialog = new PlayerNameDialog();
         Bundle nBundle = new Bundle();
         nBundle.putString(PLAYER_NAME, name);
@@ -113,9 +118,9 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         if (newPlayer) {
             Player newPlayer = new Player(name);
             newPlayer.setSex(sex);
-            listPlayers.add(newPlayer);
-        } else {
-            Player player = listPlayers.get(playerIndex);
+			mPlayersList.add(new Pair<>((long) mPlayersList.size(), newPlayer));
+		} else {
+            Player player = mPlayersList.get(playerIndex).second;
             player.setName(name);
             player.setSex(sex);
         }
@@ -131,6 +136,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+		ArrayList<Player> listPlayers = toList();
         outState.putParcelableArrayList(PLAYER_KEY, listPlayers);
     }
 
@@ -147,7 +153,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 newPlayer = true;
                 break;
             case R.id.imgBtnClear:
-                listPlayers.clear();
+				mPlayersList.clear();
                 customListAdapter.notifyDataSetChanged();
                 mTracker.send(new HitBuilders.EventBuilder()
                         .setAction("ClearPlayers")
@@ -156,10 +162,12 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                         .build());
                 break;
             case R.id.imgBtnStart:
-                if (listPlayers.size() < MIN_PLAYER_QUANTITY) {
+				int MIN_PLAYER_QUANTITY = 1;
+				if (mPlayersList.size() < MIN_PLAYER_QUANTITY) {
                     Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(this, GameActivity.class);
+					ArrayList<Player> listPlayers = toList();
                     intent.putParcelableArrayListExtra(PLAYER_KEY, listPlayers);
 
                     mTracker.send(new HitBuilders.EventBuilder()
@@ -189,7 +197,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
      * **************  This function used by adapter ***************
      */
     public void playerDelete(int mPosition) {
-        Player player = listPlayers.get(mPosition);
+        Player player = mPlayersList.get(mPosition).second;
         StringBuilder message = new StringBuilder();
         message.append(player.getName())
                 .append(EMPTY_STRING)
@@ -199,19 +207,19 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 Toast.LENGTH_SHORT
         ).show();
 
-        listPlayers.remove(mPosition);
+		mPlayersList.remove(mPosition);
         customListAdapter.notifyDataSetChanged();
     }
 
     public void playerEdit(int playerPosition) {
-        Player player = listPlayers.get(playerPosition);
+        Player player = mPlayersList.get(playerPosition).second;
         playerIndex = playerPosition;
         newPlayer = false;
         showPlayerNameDialog(player.getName(), player.getSex());
     }
 
     public void playerChangeSex(int playerPosition) {
-        Player player = listPlayers.get(playerPosition);
+        Player player = mPlayersList.get(playerPosition).second;
         if (Sex.MAN == player.getSex()) {
             player.setSex(Sex.WOMAN);
         } else {
@@ -219,4 +227,20 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         }
         customListAdapter.notifyDataSetChanged();
     }
+
+	private ArrayList<Player> toList() {
+		ArrayList<Player> listPlayers = new ArrayList<>(mPlayersList.size());
+		for (Pair<Long, Player> pair: mPlayersList) {
+			listPlayers.add(pair.second);
+		}
+		return listPlayers;
+	}
+
+	private ArrayList<Pair<Long, Player>> toPairList(List<Player> playersList) {
+		ArrayList<Pair<Long, Player>> pairList = new ArrayList<>();
+		for (int i=0; i < playersList.size(); i++) {
+			pairList.add(new Pair<>((long) i, playersList.get(0)));
+		}
+		return pairList;
+	}
 }
