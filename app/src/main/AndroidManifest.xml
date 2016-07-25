@@ -30,7 +30,7 @@
         <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MyActivity" />
+                android:value="com.g_art.munchkinlevelcounter.activity.MyActivity" />
         </activity>
         <activity
             android:name=".activity.NewPlayers"
@@ -40,7 +40,7 @@
         <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MyActivity" />
+                android:value="com.g_art.munchkinlevelcounter.activity.MyActivity" />
         </activity>
         <activity
             android:name=".activity.GameActivity"
@@ -53,7 +53,7 @@
         <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MyActivity" />
+                android:value="com.g_art.munchkinlevelcounter.activity.MyActivity" />
         </activity>
         <activity
             android:name=".activity.About"
@@ -63,7 +63,7 @@
         <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MyActivity" />
+                android:value="com.g_art.munchkinlevelcounter.activity.MyActivity" />
         </activity>
         <activity
             android:name=".activity.InfoActivity"
@@ -73,7 +73,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MyActivity"/>
+                android:value="com.g_art.munchkinlevelcounter.activity.MyActivity"/>
         </activity>
 
         <meta-data
