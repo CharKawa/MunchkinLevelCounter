@@ -16,8 +16,9 @@ public class SavePlayersStatsTask extends AsyncTask<ArrayList<Player>, Void, Boo
         super.onPreExecute();
     }
 
+    @SafeVarargs
     @Override
-    protected Boolean doInBackground(ArrayList<Player>... params) {
+    protected final Boolean doInBackground(ArrayList<Player>... params) {
 
         boolean result = false;
 

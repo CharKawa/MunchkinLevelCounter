@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class PowerStatsFragment extends Fragment {
 
     private ArrayList<Player> playersList;
-    final static String PLAYER_KEY = "playersList";
+    private final static String PLAYER_KEY = "playersList";
     private SparseArray playersColors;
     private boolean isDataPresent;
 
@@ -38,11 +38,7 @@ public class PowerStatsFragment extends Fragment {
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            if (playersList != null && !playersList.isEmpty()) {
-                isDataPresent = true;
-            } else {
-                isDataPresent = false;
-            }
+            isDataPresent = playersList != null && !playersList.isEmpty();
         }
     }
 

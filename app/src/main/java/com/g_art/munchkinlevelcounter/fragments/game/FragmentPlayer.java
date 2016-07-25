@@ -24,7 +24,6 @@ import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
  */
 public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
-    private final int MIN_STAT = 0;
     private ViewHolder holder;
     private DialogFragment continueDialog;
     private Player selectedPlayer;
@@ -105,6 +104,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnLvlDwn:
+                int MIN_STAT = 0;
                 if (selectedPlayer.getLevel() != MIN_STAT + 1) {
                     selectedPlayer.setLevel(selectedPlayer.getLevel() - 1);
                 }

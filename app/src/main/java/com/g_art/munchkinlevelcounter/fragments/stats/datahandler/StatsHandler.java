@@ -26,7 +26,6 @@ public class StatsHandler {
     public final static int POWER_STATS = 2;
     private final static int CLEAR_STRING_BULDER = 0;
     private static final Random rnd = new Random();
-    private final int STEP = 1;
     private ArrayList<Player> playersList;
     private LineChartView chartView;
     private SparseArray<String> playersColorSparse;
@@ -43,10 +42,10 @@ public class StatsHandler {
 
     public LineChartView getStats(final Context context, int stats) {
 
-        playersColorSparse = new SparseArray<String>();
+        playersColorSparse = new SparseArray<>();
 
         LineSet lineSet;
-        ArrayList<ChartSet> statLines = new ArrayList<ChartSet>();
+        ArrayList<ChartSet> statLines = new ArrayList<>();
 
         String lvl = context.getString(R.string.level);
         String gear = context.getString(R.string.gear);
@@ -140,6 +139,7 @@ public class StatsHandler {
             mLineGridPaint.setStrokeWidth(Tools.fromDpToPx(.10f));
 
             chartView.setXAxis(true).setYAxis(true).setGrid(LineChartView.GridType.FULL, mLineGridPaint);
+            int STEP = 1;
             chartView.setAxisBorderValues(MIN_VALUE, MAX_VALUE + 1, STEP);
 
             chartView.setFontSize(30);

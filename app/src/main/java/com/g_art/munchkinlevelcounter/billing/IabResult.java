@@ -14,8 +14,8 @@ package com.g_art.munchkinlevelcounter.billing;
  * calling {@link #isSuccess()} and {@link #isFailure()}.
  */
 public class IabResult {
-    int mResponse;
-    String mMessage;
+    private int mResponse;
+    private String mMessage;
 
     public IabResult(int response, String message) {
         mResponse = response;
@@ -26,7 +26,7 @@ public class IabResult {
         }
     }
 
-    public int getResponse() {
+    private int getResponse() {
         return mResponse;
     }
 

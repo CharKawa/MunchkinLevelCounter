@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,7 +35,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public static final String PLAYER_SEX = "player_sex";
     private static int playerIndex = 1;
     private static boolean newPlayer = false;
-	private CustomListAdapter customListAdapter;
+	private CustomListAdapter mListAdapter;
     private Tracker mTracker;
     private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
@@ -77,8 +76,8 @@ public class NewPlayers extends Activity implements View.OnClickListener {
             if (mStored.isPlayersStored()) {
                 getPlayersForNewGame();
             } else {
-				mPlayersList.add(new Pair<>(1L, new Player(getString(R.string.player_1))));
-				mPlayersList.add(new Pair<>(2L, new Player(getString(R.string.player_2))));
+				mPlayersList.add(Pair.create(1L, new Player(getString(R.string.player_1))));
+				mPlayersList.add(Pair.create(2L, new Player(getString(R.string.player_2))));
             }
         } else {
 			ArrayList<Player> tList = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
@@ -86,22 +85,30 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         }
 
 
-        customListAdapter = new CustomListAdapter(mPlayersList, R.layout.list_players_for_new_game,
+        mListAdapter = new CustomListAdapter(mPlayersList, R.layout.list_players_for_new_game,
 				R.id.newPlayerName, true, this);
 		mDragList.setLayoutManager(new LinearLayoutManager(this));
-        mDragList.setAdapter(customListAdapter, true);
+        mDragList.setAdapter(mListAdapter, true);
 		mDragList.setCanDragHorizontally(false);
     }
 
     private void getPlayersForNewGame() {
         ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
         if (!tList.isEmpty()) {
-			mPlayersList = toPairList(tList);
+			mPlayersList = toPairList(clearStats(tList));
         }
     }
 
+	private ArrayList<Player> clearStats(ArrayList<Player> tList) {
+		ArrayList<Player> pList = new ArrayList<>(tList.size());
+		for (Player pl : tList) {
+			pList.add(pl.cloneWithoutStats());
+		}
+		return pList;
+	}
 
-    private void showPlayerNameDialog(String name) {
+
+	private void showPlayerNameDialog(String name) {
         showPlayerNameDialog(name, Sex.MAN);
     }
 
@@ -125,10 +132,14 @@ public class NewPlayers extends Activity implements View.OnClickListener {
             player.setSex(sex);
         }
 
-        customListAdapter.notifyDataSetChanged();
+        mListAdapter.notifyDataSetChanged();
+		playerDialog.dismiss();
+		playerDialog = null;
     }
 
     public void doNegativeClickPlayerNameDialog() {
+		playerDialog.dismiss();
+		playerDialog = null;
         // Do stuff here.
     }
 
@@ -154,7 +165,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 break;
             case R.id.imgBtnClear:
 				mPlayersList.clear();
-                customListAdapter.notifyDataSetChanged();
+                mListAdapter.notifyDataSetChanged();
                 mTracker.send(new HitBuilders.EventBuilder()
                         .setAction("ClearPlayers")
                         .setCategory("Action")
@@ -198,17 +209,16 @@ public class NewPlayers extends Activity implements View.OnClickListener {
      */
     public void playerDelete(int mPosition) {
         Player player = mPlayersList.get(mPosition).second;
-        StringBuilder message = new StringBuilder();
-        message.append(player.getName())
-                .append(EMPTY_STRING)
-                .append(getString(R.string.deleted));
+		String message = player.getName() +
+				EMPTY_STRING +
+				getString(R.string.deleted);
 
-        Toast.makeText(this, message.toString(),
+		Toast.makeText(this, message,
                 Toast.LENGTH_SHORT
         ).show();
 
 		mPlayersList.remove(mPosition);
-        customListAdapter.notifyDataSetChanged();
+        mListAdapter.notifyDataSetChanged();
     }
 
     public void playerEdit(int playerPosition) {
@@ -225,7 +235,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         } else {
             player.setSex(Sex.MAN);
         }
-        customListAdapter.notifyDataSetChanged();
+        mListAdapter.notifyDataSetChanged();
     }
 
 	private ArrayList<Player> toList() {
@@ -239,7 +249,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 	private ArrayList<Pair<Long, Player>> toPairList(List<Player> playersList) {
 		ArrayList<Pair<Long, Player>> pairList = new ArrayList<>();
 		for (int i=0; i < playersList.size(); i++) {
-			pairList.add(new Pair<>((long) i, playersList.get(0)));
+			pairList.add(Pair.create((long) i, playersList.get(i)));
 		}
 		return pairList;
 	}

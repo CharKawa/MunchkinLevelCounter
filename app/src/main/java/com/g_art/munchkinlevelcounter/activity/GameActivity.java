@@ -34,9 +34,7 @@ import java.util.ArrayList;
 public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
     public final static String CURR_LVL = "currentLVL";
     private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
-    final String PLAYER_KEY = "playersList";
-    final String BUNDLE_STATS_KEY = "bundleStats";
-    final int FIRST_PLAYER = 0;
+    private final String PLAYER_KEY = "playersList";
     private Tracker mTracker;
     private ArrayList<Player> playersList;
     private FragmentManager fm;
@@ -92,6 +90,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         /*
         Setting the first player chosen
          */
+        int FIRST_PLAYER = 0;
         onPlayerSelected(FIRST_PLAYER);
     }
 
@@ -200,7 +199,10 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
             result = true;
         } catch (Exception ex) {
             result = false;
-            throw ex;
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setAction("GameTerminated")
+                    .setLabel("GameActivity").set("ERROR", ex.toString())
+                    .build());
         }
         return result;
     }
@@ -282,11 +284,12 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
         Intent intent = new Intent(this, Stats.class);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(PLAYER_KEY, getPlayersList());
+        String BUNDLE_STATS_KEY = "bundleStats";
         intent.putExtra(BUNDLE_STATS_KEY, bundle);
         startActivity(intent);
     }
 
-    public ArrayList<Player> getPlayersList() {
+    private ArrayList<Player> getPlayersList() {
         return playersList;
     }
 
@@ -306,11 +309,7 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
 
     public void doPositiveClickLvLDialog(int newMaxLvl) {
-        if (maxLvl == newMaxLvl) {
-            // do nothing
-        } else {
-            maxLvl = updateMaxLVL(newMaxLvl);
-        }
+        maxLvl = updateMaxLVL(newMaxLvl);
     }
 
     private int updateMaxLVL(int newMaxLVL) {

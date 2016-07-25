@@ -13,9 +13,9 @@ import com.g_art.munchkinlevelcounter.billing.IabResult;
  * call {@link #getResult()}.
  */
 public class IabException extends Exception {
-    IabResult mResult;
+    private IabResult mResult;
 
-    public IabException(IabResult r) {
+    private IabException(IabResult r) {
         this(r, null);
     }
 
@@ -23,7 +23,7 @@ public class IabException extends Exception {
         this(new IabResult(response, message));
     }
 
-    public IabException(IabResult r, Exception cause) {
+    private IabException(IabResult r, Exception cause) {
         super(r.getMessage(), cause);
         mResult = r;
     }

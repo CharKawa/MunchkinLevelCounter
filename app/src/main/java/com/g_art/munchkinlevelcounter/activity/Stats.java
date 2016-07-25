@@ -24,9 +24,6 @@ import java.util.ArrayList;
 public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
     final String TAG = "GameActivity_Munchkin_Test";
-    private final String PLAYER_KEY = "playersList";
-    private final String BUNDLE_STATS_KEY = "bundleStats";
-    private String PREFS_NO_DATA;
 
     private ViewPager viewPager;
     private ActionBar actionBar;
@@ -50,11 +47,13 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         StoredPlayers mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
-        PREFS_NO_DATA = getString(R.string.no_data);
+        String PREFS_NO_DATA = getString(R.string.no_data);
 
         Intent intent = getIntent();
+        String BUNDLE_STATS_KEY = "bundleStats";
         Bundle bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
         ArrayList<Player> playersList;
+        String PLAYER_KEY = "playersList";
         if (bundle != null && !bundle.isEmpty()) {
             playersList = bundle.getParcelableArrayList(PLAYER_KEY);
             if (playersList != null) {

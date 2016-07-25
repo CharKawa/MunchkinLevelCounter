@@ -18,7 +18,6 @@ import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 public class Settings extends Activity implements View.OnClickListener {
 
     private EditText edTextMaxLvl;
-    private SharedPreferences mPrefs;
     private SettingsHandler setHandler;
 
 
@@ -27,7 +26,7 @@ public class Settings extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         setHandler = SettingsHandler.getInstance(mPrefs);
 
         edTextMaxLvl = (EditText) findViewById(R.id.edTextMaxLvl);

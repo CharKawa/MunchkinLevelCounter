@@ -26,18 +26,18 @@ import com.google.android.gms.analytics.Tracker;
 public class About extends Activity implements View.OnClickListener {
 
     // Debug tag, for logging
-    static final String TAG = "AboutActivity";
+    private static final String TAG = "AboutActivity";
     // SKUs for our products
-    static final String SKU_DONATE_099 = "donate_099";
-    static final String SKU_DONATE_199 = "donate_199";
-    static final String SKU_DONATE_399 = "donate_399";
-    static final String SKU_DONATE_999 = "donate_999";
+    private static final String SKU_DONATE_099 = "donate_099";
+    private static final String SKU_DONATE_199 = "donate_199";
+    private static final String SKU_DONATE_399 = "donate_399";
+    private static final String SKU_DONATE_999 = "donate_999";
     // (arbitrary) request code for the purchase flow
-    static final int RC_REQUEST = 10001;
+    private static final int RC_REQUEST = 10001;
     // The helper object
-    IabHelper mHelper;
+    private IabHelper mHelper;
     // Called when consumption is complete
-    IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+    private IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
         public void onConsumeFinished(Purchase purchase, IabResult result) {
             Log.d(TAG, "Consumption finished. Purchase: " + purchase + ", result: " + result);
 
@@ -54,7 +54,7 @@ public class About extends Activity implements View.OnClickListener {
         }
     };
     // Listener that's called when we finish querying the items and subscriptions we own
-    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+    private IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
         @Override
         public void onQueryInventoryFinished(IabResult result, Inventory inv) {
             Log.d(TAG, "Query inventory finished.");
@@ -108,7 +108,7 @@ public class About extends Activity implements View.OnClickListener {
         }
     };
     // Callback for when a purchase is finished
-    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+    private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
         @Override
         public void onIabPurchaseFinished(IabResult result, Purchase info) {
             Log.d(TAG, "Purchase finished: " + result + ", purchase: " + info);
@@ -127,31 +127,30 @@ public class About extends Activity implements View.OnClickListener {
 
             Log.d(TAG, "Purchase successful.");
 
-            if (info.getSku().equals(SKU_DONATE_099)) {
-                // bought SKU_DONATE_099. So consume it.
-                Log.d(TAG, "Purchase is SKU_DONATE_099. Starting SKU_DONATE_099 consumption.");
-                mHelper.consumeAsync(info, mConsumeFinishedListener);
-            } else if (info.getSku().equals(SKU_DONATE_199)) {
-                // bought SKU_DONATE_199. So consume it.
-                Log.d(TAG, "Purchase is SKU_DONATE_199. Starting SKU_DONATE_199 consumption.");
-                mHelper.consumeAsync(info, mConsumeFinishedListener);
-            } else if (info.getSku().equals(SKU_DONATE_399)) {
-                // bought SKU_DONATE_399. So consume it.
-                Log.d(TAG, "Purchase is SKU_DONATE_399. Starting SKU_DONATE_399 consumption.");
-                mHelper.consumeAsync(info, mConsumeFinishedListener);
-            } else if (info.getSku().equals(SKU_DONATE_999)) {
-                // bought SKU_DONATE_999. So consume it.
-                Log.d(TAG, "Purchase is SKU_DONATE_999. Starting SKU_DONATE_999 consumption.");
-                mHelper.consumeAsync(info, mConsumeFinishedListener);
+            switch (info.getSku()) {
+                case SKU_DONATE_099:
+                    // bought SKU_DONATE_099. So consume it.
+                    Log.d(TAG, "Purchase is SKU_DONATE_099. Starting SKU_DONATE_099 consumption.");
+                    mHelper.consumeAsync(info, mConsumeFinishedListener);
+                    break;
+                case SKU_DONATE_199:
+                    // bought SKU_DONATE_199. So consume it.
+                    Log.d(TAG, "Purchase is SKU_DONATE_199. Starting SKU_DONATE_199 consumption.");
+                    mHelper.consumeAsync(info, mConsumeFinishedListener);
+                    break;
+                case SKU_DONATE_399:
+                    // bought SKU_DONATE_399. So consume it.
+                    Log.d(TAG, "Purchase is SKU_DONATE_399. Starting SKU_DONATE_399 consumption.");
+                    mHelper.consumeAsync(info, mConsumeFinishedListener);
+                    break;
+                case SKU_DONATE_999:
+                    // bought SKU_DONATE_999. So consume it.
+                    Log.d(TAG, "Purchase is SKU_DONATE_999. Starting SKU_DONATE_999 consumption.");
+                    mHelper.consumeAsync(info, mConsumeFinishedListener);
+                    break;
             }
         }
     };
-    private ImageButton btnRate;
-    private ImageButton btnDonate099;
-    private ImageButton btnDonate199;
-    private ImageButton btnDonate399;
-    private ImageButton btnDonate999;
-    private ImageButton imgBtnContact;
     private boolean isDonate = false;
     private Tracker mTracker;
 
@@ -204,22 +203,22 @@ public class About extends Activity implements View.OnClickListener {
             isDonate = false;
         }
 
-        btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
+        ImageButton btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
         btnRate.setOnClickListener(this);
 
-        imgBtnContact = (ImageButton) findViewById(R.id.imgBtnContact);
+        ImageButton imgBtnContact = (ImageButton) findViewById(R.id.imgBtnContact);
         imgBtnContact.setOnClickListener(this);
 
-        btnDonate099 = (ImageButton) findViewById(R.id.btn_donate_099);
+        ImageButton btnDonate099 = (ImageButton) findViewById(R.id.btn_donate_099);
         btnDonate099.setOnClickListener(this);
 
-        btnDonate199 = (ImageButton) findViewById(R.id.btn_donate_199);
+        ImageButton btnDonate199 = (ImageButton) findViewById(R.id.btn_donate_199);
         btnDonate199.setOnClickListener(this);
 
-        btnDonate399 = (ImageButton) findViewById(R.id.btn_donate_399);
+        ImageButton btnDonate399 = (ImageButton) findViewById(R.id.btn_donate_399);
         btnDonate399.setOnClickListener(this);
 
-        btnDonate999 = (ImageButton) findViewById(R.id.btn_donate_999);
+        ImageButton btnDonate999 = (ImageButton) findViewById(R.id.btn_donate_999);
         btnDonate999.setOnClickListener(this);
     }
 
@@ -348,12 +347,12 @@ public class About extends Activity implements View.OnClickListener {
         }
     }
 
-    void complain(String message) {
+    private void complain(String message) {
         Log.e(TAG, "**** TrivialDrive Error: " + message);
         alert("Error: " + message);
     }
 
-    void alert(String message) {
+    private void alert(String message) {
         AlertDialog.Builder bld = new AlertDialog.Builder(this);
         bld.setMessage(message);
         bld.setNeutralButton("OK", null);
@@ -364,7 +363,7 @@ public class About extends Activity implements View.OnClickListener {
     /**
      * Verifies the developer payload of a purchase.
      */
-    boolean verifyDeveloperPayload(Purchase p) {
+    private boolean verifyDeveloperPayload(Purchase p) {
         String payload = p.getDeveloperPayload();
 
         /*

@@ -20,7 +20,7 @@ public class StoredPlayers {
     private static StoredPlayers instance;
     private final String PREFS_PLAYERS_KEY = "players";
     private SharedPreferences mPrefs;
-    private boolean result = false;
+    private boolean mResult = false;
     private String json;
 
     private Gson gson;
@@ -52,11 +52,11 @@ public class StoredPlayers {
         prefsEditor.putString(PREFS_PLAYERS_KEY, json);
         try {
             prefsEditor.apply();
-            result = true;
+            mResult = true;
         } catch (Exception ex) {
-            result = false;
+            mResult = false;
         }
-        return result;
+        return mResult;
     }
 
     /**
@@ -65,7 +65,7 @@ public class StoredPlayers {
      * @return ArrayList<Player>
      */
     public ArrayList<Player> loadPlayers(String noData) {
-        ArrayList<Player> playersList = new ArrayList<Player>();
+        ArrayList<Player> playersList = new ArrayList<>();
 
         if (isPlayersStored()) {
             json = mPrefs.getString(PREFS_PLAYERS_KEY, noData);
@@ -75,12 +75,12 @@ public class StoredPlayers {
                 }.getType();
                 try {
                     playersList = gson.fromJson(json, type);
-                    result = true;
+                    mResult = true;
                 } catch (JsonSyntaxException jsonSyntaxEx) {
-                    result = false;
+                    mResult = false;
                 }
             } else {
-                result = false;
+                mResult = false;
             }
         }
         return playersList;
@@ -97,12 +97,12 @@ public class StoredPlayers {
             prefsEditor.remove(PREFS_PLAYERS_KEY);
             try {
                 prefsEditor.apply();
-                result = true;
+                mResult = true;
             } catch (Exception ex) {
-                result = false;
+                mResult = false;
             }
         }
-        return result;
+        return mResult;
 
     }
 
@@ -110,7 +110,7 @@ public class StoredPlayers {
         return mPrefs.contains(PREFS_PLAYERS_KEY);
     }
 
-    public void setSharedPreferences(SharedPreferences sharedPreferences) {
+    private void setSharedPreferences(SharedPreferences sharedPreferences) {
         this.mPrefs = sharedPreferences;
     }
 }

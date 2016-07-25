@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class LvlStatsFragment extends Fragment {
 
-    final static String PLAYER_KEY = "playersList";
+    private final static String PLAYER_KEY = "playersList";
     private ArrayList<Player> playersList;
     private SparseArray playersColors;
     private boolean isDataPresent;
@@ -37,11 +37,7 @@ public class LvlStatsFragment extends Fragment {
 
         if (getArguments() != null) {
             playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            if (playersList != null && !playersList.isEmpty()) {
-                isDataPresent = true;
-            } else {
-                isDataPresent = false;
-            }
+            isDataPresent = playersList != null && !playersList.isEmpty();
         }
     }
 

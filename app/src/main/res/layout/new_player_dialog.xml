@@ -5,23 +5,27 @@
               android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/playerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:inputType="text"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/new_player_sex"/>
+            android:id="@+id/playerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/new_player_sex"
+            android:layout_toLeftOf="@+id/new_player_sex"
+            android:hint="@string/enter_player_name"
+            android:maxLines="1"
+            android:layout_alignParentLeft="true" />
 
     <ImageButton
-        android:id="@+id/new_player_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/playerName"
-        android:layout_alignTop="@+id/playerName"
-        android:background="@android:color/transparent"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        android:src="@drawable/man"
-        android:layout_alignParentEnd="true"/>
+            android:id="@+id/new_player_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/playerName"
+            android:layout_alignTop="@+id/playerName"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/man"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
 </RelativeLayout>

@@ -8,10 +8,10 @@ import java.util.Date;
  * Created by G_Art on 12/9/2014.
  */
 public class SettingsHandler {
-    public static final String MAX_LVL_SETTINGS = "max_lvl_settings";
-    public static final String POPUP_STATUS = "popup_status";
-    public static final String STATUS_UPDATE_DATE = "status_update_date";
-    public static final int DEFAULT_MAX_LVL = 10;
+    private static final String MAX_LVL_SETTINGS = "max_lvl_settings";
+    private static final String POPUP_STATUS = "popup_status";
+    private static final String STATUS_UPDATE_DATE = "status_update_date";
+    private static final int DEFAULT_MAX_LVL = 10;
     public static final int MIN_LVL = 1;
     public static final int ASK_LATER = 1;
     public static final int FIRST_SHOW = 0;
@@ -21,7 +21,6 @@ public class SettingsHandler {
     private SharedPreferences.Editor prefsEditor;
 
     private int maxLvl = DEFAULT_MAX_LVL;
-    private int popupStatus = FIRST_SHOW;
     private Date statusUpdate;
 
     private SettingsHandler(SharedPreferences mPrefs) {
@@ -50,7 +49,7 @@ public class SettingsHandler {
         if (!mPrefs.contains(POPUP_STATUS)) {
             updateStatus(FIRST_SHOW);
         }
-        popupStatus = mPrefs.getInt(POPUP_STATUS, FIRST_SHOW);
+        int popupStatus = mPrefs.getInt(POPUP_STATUS, FIRST_SHOW);
         return popupStatus;
     }
 
@@ -89,7 +88,7 @@ public class SettingsHandler {
         return result;
     }
 
-    public boolean saveDefaultSettings() {
+    private boolean saveDefaultSettings() {
         return saveSettings(DEFAULT_MAX_LVL);
     }
 
@@ -98,7 +97,7 @@ public class SettingsHandler {
         return maxLvl;
     }
 
-    public void setSharedPreferences(SharedPreferences sharedPreferences) {
+    private void setSharedPreferences(SharedPreferences sharedPreferences) {
         this.mPrefs = sharedPreferences;
     }
 }

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 /**
  * Created by G_Art on 7/9/2014.
  */
-public class SparseArrayAdapter<E> extends BaseAdapter {
+class SparseArrayAdapter<E> extends BaseAdapter {
 
 
     private SparseArray<E> mData;
