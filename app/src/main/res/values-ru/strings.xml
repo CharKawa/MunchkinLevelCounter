@@ -80,5 +80,6 @@
     <string name="btn_donate">Donate</string>
     <string name="action_battle">Бой</string>
     <string name="btnChangeSex">Change Sex</string>
+    <string name="enter_player_name">Имя</string>
 
 </resources>
