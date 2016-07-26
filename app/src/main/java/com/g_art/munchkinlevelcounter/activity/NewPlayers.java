@@ -10,13 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.model.Player;
-import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
+import com.g_art.munchkinlevelcounter.model.Player;
+import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -63,14 +62,12 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 		DragListView mDragList = (DragListView) findViewById(R.id.listVPlayers);
         ImageButton btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
-
         btnAddPlayers.setOnClickListener(this);
         ImageButton btnClear = (ImageButton) findViewById(R.id.imgBtnClear);
         btnClear.setOnClickListener(this);
         ImageButton btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
 		mPlayersList = new ArrayList<>();
-
 
         if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
             if (mStored.isPlayersStored()) {
@@ -83,7 +80,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 			ArrayList<Player> tList = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
 			mPlayersList = toPairList(tList);
         }
-
 
         mListAdapter = new CustomListAdapter(mPlayersList, R.layout.list_players_for_new_game,
 				R.id.newPlayerName, true, this);
@@ -106,7 +102,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 		}
 		return pList;
 	}
-
 
 	private void showPlayerNameDialog(String name) {
         showPlayerNameDialog(name, Sex.MAN);
@@ -142,7 +137,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 		playerDialog = null;
         // Do stuff here.
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -190,7 +184,6 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
                     startActivity(intent);
                 }
-
                 break;
         }
     }
