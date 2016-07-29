@@ -1,11 +1,11 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class NewPlayers extends Activity implements View.OnClickListener {
+public class NewPlayers extends AppCompatActivity implements View.OnClickListener {
     private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     private static final String EMPTY_STRING = " ";

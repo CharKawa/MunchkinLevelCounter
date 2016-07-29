@@ -1,13 +1,12 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
@@ -20,7 +19,7 @@ import com.google.android.gms.analytics.Tracker;
 import java.util.ArrayList;
 
 
-public class Stats extends FragmentActivity implements ActionBar.TabListener {
+public class Stats extends AppCompatActivity implements ActionBar.TabListener {
 
     public final static String PLAYER_KEY = "playersList";
 
@@ -71,7 +70,7 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         StatsPageAdapter statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), fragBundle);
         viewPager.setAdapter(statsAdapter);
         viewPager.setOffscreenPageLimit(2);
@@ -126,17 +125,17 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
     }
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
         viewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
 
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
 
     }
 }

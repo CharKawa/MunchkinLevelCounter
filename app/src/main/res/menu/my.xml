@@ -1,21 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MyActivity">
+      xmlns:tools="http://schemas.android.com/tools"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      tools:context=".MyActivity">
     <item
-        android:id="@+id/action_stats"
-        android:title="@string/main_screen_Stats"
-        android:icon="@drawable/stats"
-        android:background="@null"
-        android:showAsAction="ifRoom" />
+            android:id="@+id/action_stats"
+            android:title="@string/main_screen_Stats"
+            android:icon="@drawable/stats"
+            android:background="@null"
+            app:showAsAction="ifRoom|collapseActionView"/>
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never" />
+            android:id="@+id/action_settings"
+            android:title="@string/action_settings"
+            android:orderInCategory="100"
+            app:showAsAction="never|collapseActionView"/>
 
     <item
-        android:id="@+id/action_about"
-        android:title="@string/main_screen_About"
-        android:orderInCategory="101"
-        android:showAsAction="never" />
+            android:id="@+id/action_about"
+            android:title="@string/main_screen_About"
+            android:orderInCategory="101"
+            app:showAsAction="never|collapseActionView"/>
 </menu>
