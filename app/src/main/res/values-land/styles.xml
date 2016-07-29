@@ -3,6 +3,19 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+          which is used to tint widgets -->
+        <item name="colorAccent">@color/actionBarBackground</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/actionBarBackground</item>
+
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/actionBarBackground</item>
+
+        <item name="android:textColorPrimary">@color/text_color</item>
+
         <item name="android:textColor">@color/text_color</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
@@ -17,15 +30,13 @@
         <item name="android:actionMenuTextColor">@color/actionBarText_color</item>
 
 
-        <!-- Light.DarkActionBar specific -->
-        <item name="android:actionBarWidgetTheme">@style/AppTheme.Widget</item>
         <item name="android:colorForeground">@color/actionBarBackground</item>
         <item name="android:colorBackground">@color/background</item>
     </style>
 
 
     <!-- styles for the action bar -->
-    <style name="ActionBarMunchkin" parent="android:Widget.ActionBar">
+    <style name="ActionBarMunchkin" parent="style/Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:background">@color/actionBarBackground</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
     </style>
@@ -70,7 +81,7 @@
     </style>
 
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="AppTheme.Widget" parent="@android:style/Theme.Holo">
+    <style name="AppTheme.Widget" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
         <item name="android:textColor">@color/actionBarText_color</item>

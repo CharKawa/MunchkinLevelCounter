@@ -1,11 +1,11 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
@@ -25,7 +24,7 @@ import com.google.android.gms.analytics.Tracker;
 import java.util.Date;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends AppCompatActivity {
     private Tracker mTracker;
 
 

@@ -1,12 +1,11 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
+import android.support.v7.app.AppCompatActivity;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.fragments.info.ThanksPopup;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
@@ -15,7 +14,7 @@ import com.g_art.munchkinlevelcounter.util.SettingsHandler;
  * LevelCounter
  * Created by G_Art on 2/2/2016.
  */
-public class InfoActivity extends Activity implements ThanksPopup.PopupStatusUpdate {
+public class InfoActivity extends AppCompatActivity implements ThanksPopup.PopupStatusUpdate {
 
     private SettingsHandler settingsHandler;
 

@@ -1,21 +1,20 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
 /**
  * Created by G_Art on 1/8/2014.
  */
-public class Settings extends Activity implements View.OnClickListener {
+public class Settings extends AppCompatActivity implements View.OnClickListener {
 
     private EditText edTextMaxLvl;
     private SettingsHandler setHandler;

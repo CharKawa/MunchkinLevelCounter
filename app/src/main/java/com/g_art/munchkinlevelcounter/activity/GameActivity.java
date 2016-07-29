@@ -1,6 +1,5 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -8,19 +7,19 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.model.Player;
+import com.g_art.munchkinlevelcounter.fragments.dialog.BattleScreen;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
-import com.g_art.munchkinlevelcounter.fragments.dialog.DiceDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.MaxLvlDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
+import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 import com.google.android.gms.analytics.HitBuilders;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 /**
  * Created by G_Art on 28/7/2014.
  */
-public class GameActivity extends Activity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
+public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
     public final static String CURR_LVL = "currentLVL";
     private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
     private final String PLAYER_KEY = "playersList";
@@ -121,6 +120,8 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
     }
 
     private void showBattle() {
+        BattleScreen dialog = new BattleScreen();
+        dialog.show(fm, "battle");
     }
 
     @Override
@@ -256,12 +257,13 @@ public class GameActivity extends Activity implements FragmentPlayersList.OnPlay
                 resId = R.drawable.dice_6;
                 break;
         }
-
-        Bundle bundle = new Bundle();
-        bundle.putInt(DiceDialog.DICE_KEY, resId);
-        DiceDialog diceDialog = new DiceDialog();
-        diceDialog.setArguments(bundle);
-        diceDialog.show(fm, "dice");
+//
+//        Bundle bundle = new Bundle();
+//        bundle.putInt(DiceDialog.DICE_KEY, resId);
+//        DiceDialog diceDialog = new DiceDialog();
+//        diceDialog.setArguments(bundle);
+//        diceDialog.show(fm, "dice");
+        showBattle();
     }
 
     private void finishGame() {
