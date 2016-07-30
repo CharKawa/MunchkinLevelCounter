@@ -28,11 +28,6 @@ import com.google.android.gms.analytics.Tracker;
 public class ThanksPopup extends Fragment implements View.OnClickListener {
 
     private PopupStatusUpdate mCallback;
-    private ImageButton imgBtnRatePopup;
-    private ImageButton imgBtnSendScreen;
-    private Button btnMore;
-    private Button btnLater;
-    private Button btnNeverShow;
     private Tracker mTracker;
 
     /**
@@ -44,15 +39,15 @@ public class ThanksPopup extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout to use as dialog or embedded fragment
         View view = inflater.inflate(R.layout.fragment_tanks_popup, container, false);
-        imgBtnRatePopup = (ImageButton) view.findViewById(R.id.imgBtnRatePopup);
+        ImageButton imgBtnRatePopup = (ImageButton) view.findViewById(R.id.imgBtnRatePopup);
         imgBtnRatePopup.setOnClickListener(this);
-        imgBtnSendScreen = (ImageButton) view.findViewById(R.id.imgBtnSendScreen);
+        ImageButton imgBtnSendScreen = (ImageButton) view.findViewById(R.id.imgBtnSendScreen);
         imgBtnSendScreen.setOnClickListener(this);
-        btnMore = (Button) view.findViewById(R.id.btnMore);
+        Button btnMore = (Button) view.findViewById(R.id.btnMore);
         btnMore.setOnClickListener(this);
-        btnLater = (Button) view.findViewById(R.id.btnLater);
+        Button btnLater = (Button) view.findViewById(R.id.btnLater);
         btnLater.setOnClickListener(this);
-        btnNeverShow = (Button) view.findViewById(R.id.btnNeverShow);
+        Button btnNeverShow = (Button) view.findViewById(R.id.btnNeverShow);
         btnNeverShow.setOnClickListener(this);
         return view;
     }

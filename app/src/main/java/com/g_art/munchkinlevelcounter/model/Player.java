@@ -3,6 +3,7 @@ package com.g_art.munchkinlevelcounter.model;
 import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,6 +11,7 @@ import java.util.Random;
 /**
  * Created by G_Art on 16/7/2014.
  */
+@SuppressWarnings ("Convert2Diamond")
 public class Player implements Parcelable, Comparable {
 
     public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
@@ -35,9 +37,9 @@ public class Player implements Parcelable, Comparable {
     }
 
     public Player(String name) {
-        lvlStats = new ArrayList<String>();
-        gearStats = new ArrayList<String>();
-        powerStats = new ArrayList<String>();
+        lvlStats = new ArrayList<>();
+        gearStats = new ArrayList<>();
+        powerStats = new ArrayList<>();
         this.name = name;
         this.level = 1;
         this.gear = 0;
@@ -48,9 +50,9 @@ public class Player implements Parcelable, Comparable {
     }
 
     public Player(String name, int position) {
-        lvlStats = new ArrayList<String>();
-        gearStats = new ArrayList<String>();
-        powerStats = new ArrayList<String>();
+        lvlStats = new ArrayList<>();
+        gearStats = new ArrayList<>();
+        powerStats = new ArrayList<>();
         this.name = name;
         this.level = 1;
         this.gear = 0;
@@ -61,9 +63,9 @@ public class Player implements Parcelable, Comparable {
     }
 
     public Player(String name, int lvl, int gear) {
-        lvlStats = new ArrayList<String>();
-        gearStats = new ArrayList<String>();
-        powerStats = new ArrayList<String>();
+        lvlStats = new ArrayList<>();
+        gearStats = new ArrayList<>();
+        powerStats = new ArrayList<>();
         this.name = name;
         this.level = lvl;
         this.gear = gear;
@@ -75,9 +77,9 @@ public class Player implements Parcelable, Comparable {
     }
 
     public Player(Parcel in) {
-        lvlStats = new ArrayList<String>();
-        gearStats = new ArrayList<String>();
-        powerStats = new ArrayList<String>();
+        lvlStats = new ArrayList<>();
+        gearStats = new ArrayList<>();
+        powerStats = new ArrayList<>();
         this.name = in.readString();
         this.level = in.readInt();
         this.gear = in.readInt();
@@ -226,7 +228,7 @@ public class Player implements Parcelable, Comparable {
     }
 
     @Override
-    public int compareTo(Object another) {
+    public int compareTo(@NonNull Object another) {
         Player pl1 = this;
         Player pl2 = (Player) another;
         Boolean pl1W = pl1.isWinner();

@@ -61,7 +61,7 @@
     <string name="error_next_turn">Błąd w następnej turze!</string>
     <string name="error_save_players">To był błąd podczas próby zapisania graczy!</string>
     <string name="stats_off">Statystyka jest wyłączony, teraz to jest po prostu przełączyć graczy</string>
-    <string name="error_empty_name">Nazwa nie może być puste</string>
+    <string name="error_empty_name">Imię nie może być puste</string>
     <string name="no_data">Nie istnieją statystyki, należy zagrać, aby mieć.</string>
     <string name="prev_stas">To jest statystyka w poprzedniej grze.</string>
     <string name="contact">Masz pytania? Zawsze możesz skontaktować się ze mną:</string>
@@ -80,5 +80,6 @@
     <string name="btn_donate">Podarować</string>
     <string name="action_battle">Bitwa</string>
     <string name="btnChangeSex">Change Sex</string>
+    <string name="enter_player_name">Imię</string>
 
 </resources>

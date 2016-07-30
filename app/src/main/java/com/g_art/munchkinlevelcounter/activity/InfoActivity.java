@@ -18,7 +18,6 @@ import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 public class InfoActivity extends Activity implements ThanksPopup.PopupStatusUpdate {
 
     private SettingsHandler settingsHandler;
-    private int popupStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class InfoActivity extends Activity implements ThanksPopup.PopupStatusUpd
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         settingsHandler = SettingsHandler.getInstance(mPrefs);
-        popupStatus = settingsHandler.getPopupStatus();
+        int popupStatus = settingsHandler.getPopupStatus();
 
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getFragmentManager();

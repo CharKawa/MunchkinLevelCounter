@@ -21,17 +21,17 @@
         android:textSize="30dp" />
 
     <ImageButton
-        android:id="@+id/player_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/currentPlayer"
-        android:layout_alignTop="@+id/currentPlayer"
-        android:layout_toLeftOf="@+id/txtTotal"
-        android:layout_toStartOf="@+id/txtTotal"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="centerInside"
-        android:src="@drawable/man"/>
+            android:id="@+id/player_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/currentPlayer"
+            android:layout_alignTop="@+id/currentPlayer"
+            android:layout_toLeftOf="@+id/txtTotal"
+            android:layout_toStartOf="@+id/txtTotal"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/man"/>
 
     <TextView
         android:id="@+id/txtTotal"

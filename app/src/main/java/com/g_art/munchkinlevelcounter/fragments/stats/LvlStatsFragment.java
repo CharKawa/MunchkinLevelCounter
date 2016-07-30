@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.db.chart.view.LineChartView;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.model.Player;
+import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.SparseStringsAdapter;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.StatsHandler;
+import com.g_art.munchkinlevelcounter.model.Player;
 
 import java.util.ArrayList;
 
@@ -23,48 +22,27 @@ import java.util.ArrayList;
  */
 public class LvlStatsFragment extends Fragment {
 
-    final static String PLAYER_KEY = "playersList";
-    private ArrayList<Player> playersList;
-    private SparseArray playersColors;
-    private boolean isDataPresent;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        isDataPresent = false;
-        playersColors = new SparseArray();
-
-        if (getArguments() != null) {
-            playersList = getArguments().getParcelableArrayList(PLAYER_KEY);
-            if (playersList != null && !playersList.isEmpty()) {
-                isDataPresent = true;
-            } else {
-                isDataPresent = false;
-            }
-        }
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
 
-        try {
-            if (isDataPresent) {
-                LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
+        boolean isDataPresent = false;
+        ArrayList<Player> playersList = null;
+        SparseArray<String> playersColors = new SparseArray<>();
 
-                StatsHandler statsHandler = new StatsHandler(playersList, chartView);
-                chartView = statsHandler.getStats(getActivity(), StatsHandler.LVL_STATS);
-                if (chartView != null) {
-                    playersColors = statsHandler.getPlayersColorSparse();
-                    chartView.show();
-                }
+        if (getArguments() != null) {
+            playersList = getArguments().getParcelableArrayList(Stats.PLAYER_KEY);
+            isDataPresent = playersList != null && !playersList.isEmpty();
+        }
 
+        if (isDataPresent) {
+            LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
+
+            playersColors = StatsHandler.getStats(playersList, chartView, getActivity(), StatsHandler.LVL_STATS);
+            if (playersColors != null) {
+                chartView.show();
             }
-        } catch (IndexOutOfBoundsException e) {
-            Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
         }
 
         SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);

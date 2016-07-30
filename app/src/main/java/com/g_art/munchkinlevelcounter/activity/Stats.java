@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
@@ -23,10 +22,7 @@ import java.util.ArrayList;
 
 public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
-    final String TAG = "GameActivity_Munchkin_Test";
-    private final String PLAYER_KEY = "playersList";
-    private final String BUNDLE_STATS_KEY = "bundleStats";
-    private String PREFS_NO_DATA;
+    public final static String PLAYER_KEY = "playersList";
 
     private ViewPager viewPager;
     private ActionBar actionBar;
@@ -50,11 +46,13 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         StoredPlayers mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
-        PREFS_NO_DATA = getString(R.string.no_data);
+        String PREFS_NO_DATA = getString(R.string.no_data);
 
         Intent intent = getIntent();
+        String BUNDLE_STATS_KEY = "bundleStats";
         Bundle bundle = intent.getBundleExtra(BUNDLE_STATS_KEY);
         ArrayList<Player> playersList;
+        String PLAYER_KEY = "playersList";
         if (bundle != null && !bundle.isEmpty()) {
             playersList = bundle.getParcelableArrayList(PLAYER_KEY);
             if (playersList != null) {
@@ -73,10 +71,10 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
 
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setOffscreenPageLimit(3);
         actionBar = getActionBar();
         StatsPageAdapter statsAdapter = new StatsPageAdapter(getSupportFragmentManager(), fragBundle);
         viewPager.setAdapter(statsAdapter);
+        viewPager.setOffscreenPageLimit(2);
 
         /**
          * on swiping the viewpager make respective tab selected

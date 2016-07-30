@@ -3,14 +3,15 @@ package com.g_art.munchkinlevelcounter.fragments.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.NewPlayers;
 import com.g_art.munchkinlevelcounter.model.Sex;
@@ -49,6 +50,7 @@ public class PlayerNameDialog extends DialogFragment implements View.OnClickList
         btnPlayerSex.setOnClickListener(this);
 
         playerName.setText(getArguments().getString(NewPlayers.PLAYER_NAME));
+        playerName.requestFocus();
 
         builder.setTitle(R.string.title_dialog_new_Player)
                 .setCancelable(false)
@@ -76,6 +78,19 @@ public class PlayerNameDialog extends DialogFragment implements View.OnClickList
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        playerName.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(playerName, 0);
+            }
+        }, 300);
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
@@ -99,5 +114,10 @@ public class PlayerNameDialog extends DialogFragment implements View.OnClickList
         } else {
             btnPlayerSex.setImageResource(R.drawable.woman);
         }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
     }
 }

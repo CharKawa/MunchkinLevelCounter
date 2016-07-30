@@ -24,7 +24,6 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
     private static final String PLAYER_KEY = "playersList";
     private ArrayList<Player> playersList;
-    private View view;
     private View currentlySelected;
     private Boolean firstTimeStartup = true;
 
@@ -90,7 +89,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.fragment_players_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_players_list, container, false);
 
 
         inGamePlayersList = (ListView) view.findViewById(R.id.inGamePlayersList);
@@ -110,7 +109,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         }
     }
 
-    public void smoothScrollToPositionFromTop(final AbsListView view, final int position) {
+    private void smoothScrollToPositionFromTop(final AbsListView view, final int position) {
         if (view == null) {
             return;
         }
@@ -160,7 +159,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
     }
 
-    public View getChildAtPosition(final AdapterView view, final int position) {
+    private View getChildAtPosition(final AdapterView view, final int position) {
         if (null == view) {
             return null;
         }
@@ -200,7 +199,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
 
     }
 
-    public void highlightSelection(View rowView) {
+    private void highlightSelection(View rowView) {
         rowView.setBackgroundColor(getResources().getColor(R.color.list_selected));
 
         TextView name = (TextView) rowView.findViewById(R.id.InGameListPlayerName);
@@ -215,7 +214,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         totalValue.setTextColor(getResources().getColor(R.color.actionBarText_color));
     }
 
-    public void unhighlightSelection(View rowView) {
+    private void unhighlightSelection(View rowView) {
         rowView.setBackgroundColor(Color.TRANSPARENT);
 
         TextView name = (TextView) rowView.findViewById(R.id.InGameListPlayerName);
@@ -235,7 +234,7 @@ public class FragmentPlayersList extends Fragment implements AdapterView.OnItemC
         void onPlayerSelected(int position);
     }
 
-    public class InGameListAdapter extends BaseAdapter {
+    private class InGameListAdapter extends BaseAdapter {
 
         private LayoutInflater inflater = null;
         private ArrayList data;
