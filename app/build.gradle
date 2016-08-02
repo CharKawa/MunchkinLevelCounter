@@ -10,6 +10,7 @@ android {
 		targetSdkVersion 24
 		versionCode 13
 		versionName '0.9.9.6.3'
+		vectorDrawables.useSupportLibrary = true
 	}
 	buildTypes {
 		release {
@@ -32,6 +33,7 @@ dependencies {
 	compile 'com.android.support:support-v4:24.1.1'
 	compile 'com.android.support:design:24.1.1'
 	compile 'com.android.support:appcompat-v7:24.1.1'
+	compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
 	compile 'com.google.code.gson:gson:2.4'
 	compile 'com.google.android.gms:play-services-analytics:8.1.0'
 

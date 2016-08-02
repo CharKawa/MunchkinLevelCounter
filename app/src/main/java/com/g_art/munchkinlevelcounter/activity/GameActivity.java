@@ -120,8 +120,8 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
     }
 
     private void showBattle() {
-        BattleScreen dialog = new BattleScreen();
-        dialog.show(fm, "battle");
+        BattleScreen battleScreen = new BattleScreen();
+        fm.beginTransaction().add(battleScreen, "battle").commit();
     }
 
     @Override
