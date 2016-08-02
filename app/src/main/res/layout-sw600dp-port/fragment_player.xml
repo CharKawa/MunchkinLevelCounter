@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    android:paddingBottom="30dp">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:paddingBottom="30dp">
 
 
     <TextView
@@ -34,15 +35,15 @@
             android:src="@drawable/man"/>
 
     <TextView
-        android:id="@+id/txtTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignTop="@+id/total"
-        android:layout_toLeftOf="@+id/total"
-        android:text="@string/total_power"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25dp" />
+            android:id="@+id/txtTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="false"
+            android:layout_alignTop="@+id/total"
+            android:layout_toLeftOf="@+id/total"
+            android:text="@string/total_power"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="25dp" android:layout_alignParentRight="false"/>
 
     <TextView
         android:id="@+id/total"
@@ -99,7 +100,7 @@
         android:textSize="35dp" />
 
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnLvlUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,10 +108,10 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/txtPlayerLvl"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_up_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_up_24dp"/>
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnLvlDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,10 +119,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/txtPlayerLvl"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_dwn_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_down_24dp"/>
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnGearUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,10 +130,10 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/txtPlayerGear"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_up_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_up_24dp"/>
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnGearDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -140,8 +141,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/txtPlayerGear"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_dwn_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_down_24dp"/>
 
 
     <Button

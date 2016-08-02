@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.model.Sex;
-import com.g_art.munchkinlevelcounter.fragments.dialog.ContinueDialog;
 
 
 /**
@@ -62,13 +62,13 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         holder.txtCurrentPlayerLvl = (TextView) view.findViewById(R.id.txtPlayerLvl);
         holder.txtCurrentPlayerGear = (TextView) view.findViewById(R.id.txtPlayerGear);
         holder.txtCurrentPlayerPower = (TextView) view.findViewById(R.id.total);
-        holder.btnLvlUp = (ImageButton) view.findViewById(R.id.btnLvlUp);
+        holder.btnLvlUp = (FloatingActionButton) view.findViewById(R.id.btnLvlUp);
         holder.btnLvlUp.setOnClickListener(this);
-        holder.btnLvlDwn = (ImageButton) view.findViewById(R.id.btnLvlDwn);
+        holder.btnLvlDwn = (FloatingActionButton) view.findViewById(R.id.btnLvlDwn);
         holder.btnLvlDwn.setOnClickListener(this);
-        holder.btnGearUp = (ImageButton) view.findViewById(R.id.btnGearUp);
+        holder.btnGearUp = (FloatingActionButton) view.findViewById(R.id.btnGearUp);
         holder.btnGearUp.setOnClickListener(this);
-        holder.btnGearDwn = (ImageButton) view.findViewById(R.id.btnGearDwn);
+        holder.btnGearDwn = (FloatingActionButton) view.findViewById(R.id.btnGearDwn);
         holder.btnGearDwn.setOnClickListener(this);
         holder.btnSexType = (ImageButton) view.findViewById(R.id.player_sex);
         holder.btnSexType.setOnClickListener(this);
@@ -215,10 +215,10 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
         public TextView txtCurrentPlayerLvl;
         public TextView txtCurrentPlayerGear;
         public ImageButton btnSexType;
-        public ImageButton btnLvlUp;
-        public ImageButton btnLvlDwn;
-        public ImageButton btnGearUp;
-        public ImageButton btnGearDwn;
+        public FloatingActionButton btnLvlUp;
+        public FloatingActionButton btnLvlDwn;
+        public FloatingActionButton btnGearUp;
+        public FloatingActionButton btnGearDwn;
         public Button btnNextPlayer;
     }
 }

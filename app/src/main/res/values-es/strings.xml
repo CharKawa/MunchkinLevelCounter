@@ -81,5 +81,9 @@
     <string name="action_battle">Batalla</string>
     <string name="btnChangeSex">Change Sex</string>
     <string name="enter_player_name">Nombre</string>
+    <string name="mods">Mods</string>
+    <string name="warrior">Warrior</string>
+    <string name="btn_fight">Fight</string>
+    <string name="monster">Monster</string>
 
 </resources>

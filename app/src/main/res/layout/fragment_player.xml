@@ -1,7 +1,7 @@
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <TextView
@@ -108,7 +108,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnLvlUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,21 +116,21 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="25dp"
         android:layout_toRightOf="@+id/txtLevel"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_up_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_up_24dp"/>
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnLvlDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPlayerLvl"
         android:layout_marginLeft="2dp"
         android:layout_toRightOf="@+id/txtLevel"
-        android:background="@null"
         android:paddingBottom="5dp"
-        android:src="@drawable/munchkin_in_game_dwn_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_down_24dp"/>
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnGearUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -140,19 +140,19 @@
         android:layout_marginRight="2dp"
         android:layout_marginTop="25dp"
         android:layout_toLeftOf="@+id/txtGear"
-        android:background="@null"
-        android:src="@drawable/munchkin_in_game_up_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_up_24dp" />
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnGearDwn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPlayerGear"
         android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/txtGear"
-        android:background="@null"
         android:paddingBottom="5dp"
-        android:src="@drawable/munchkin_in_game_dwn_btn" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_arrow_down_24dp" />
 
 
     <Button
