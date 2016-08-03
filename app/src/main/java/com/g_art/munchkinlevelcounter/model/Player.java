@@ -62,6 +62,13 @@ public class Player implements Parcelable, Comparable {
 
     }
 
+    public Player(String name, int level, int gear, Sex sex) {
+        this.name = name;
+        this.level = level;
+        this.gear = gear;
+        this.sex = sex;
+    }
+
     public Player(Parcel in) {
         lvlStats = new ArrayList<>();
         gearStats = new ArrayList<>();
@@ -81,6 +88,10 @@ public class Player implements Parcelable, Comparable {
         Player newPlayer = new Player(this.name);
         newPlayer.setSex(this.getSex());
         return newPlayer;
+    }
+
+	public Player cloneForBattle() {
+        return new Player(this.name, this.level, this.gear, this.sex);
     }
 
     public String getName() {
@@ -106,6 +117,14 @@ public class Player implements Parcelable, Comparable {
     public void setGear(int gear) {
         this.gear = gear;
     }
+
+	public int getMods() {
+		return mods;
+	}
+
+	public void setMods(int mods) {
+		this.mods = mods;
+	}
 
     public boolean isWinner() {
         return winner;
