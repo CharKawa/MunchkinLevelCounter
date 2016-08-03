@@ -7,14 +7,15 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.fragments.dialog.BattleScreen;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.MaxLvlDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
@@ -32,16 +33,23 @@ import java.util.ArrayList;
  */
 public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
     public final static String CURR_LVL = "currentLVL";
-    private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
-    private final String PLAYER_KEY = "playersList";
+	public static final String PLAYER = "player";
+	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
+	public static final int BATTLE_RESULT_OK = 1;
+	public static final int BATTLE_RESULT_CANCEL = 0;
+	private static final String PLAYERS_KEY = "playersList";
+	private static final String SELECTED_KEY = "selectedPlayer";
+	private final int BATTLE_REQUEST = 10;
+
     private Tracker mTracker;
-    private ArrayList<Player> playersList;
     private FragmentManager fm;
     private ConfirmDialog confirmDialog;
     private DialogFragment lvlDialog;
     private SettingsHandler settingsHandler;
 
     private int maxLvl;
+	private ArrayList<Player> playersList;
+	private int mSelectedPlayerPosition;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,35 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
         }
 
         setContentView(R.layout.activity_game);
+
+		fm = getFragmentManager();
+
+		if (savedInstanceState != null) {
+			playersList = savedInstanceState.getParcelableArrayList(PLAYERS_KEY);
+			mSelectedPlayerPosition = savedInstanceState.getInt(SELECTED_KEY);
+		} else {
+			Intent intent = getIntent();
+			playersList = intent.getParcelableArrayListExtra(PLAYERS_KEY);
+			/*
+        	Saving first players stats
+         	*/
+			savePlayersStats();
+
+        	/*
+        	Setting the first player chosen
+         	*/
+			mSelectedPlayerPosition = 0;
+		}
+
+		FragmentPlayersList fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
+
+		if (fr == null) {
+			fr = new FragmentPlayersList();
+			Bundle bundle = new Bundle();
+			bundle.putParcelableArrayList(PLAYERS_KEY, playersList);
+			fr.setArguments(bundle);
+			fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
+		}
 
         // Obtain the shared Tracker instance.
         MyApplication application = (MyApplication) getApplication();
@@ -67,34 +104,18 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
         settingsHandler.loadSettings();
         maxLvl = settingsHandler.getMaxLvl();
 
-        Intent intent = getIntent();
-        playersList = intent.getParcelableArrayListExtra(PLAYER_KEY);
+		onPlayerSelected(mSelectedPlayerPosition);
 
-        fm = getFragmentManager();
-        FragmentPlayersList fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
-
-        if (fr == null) {
-            fr = new FragmentPlayersList();
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(PLAYER_KEY, playersList);
-            fr.setArguments(bundle);
-            fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
-        }
-
-        /*
-        Saving first players stats
-         */
-        savePlayersStats();
-
-        /*
-        Setting the first player chosen
-         */
-        int FIRST_PLAYER = 0;
-        onPlayerSelected(FIRST_PLAYER);
     }
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList(PLAYERS_KEY, playersList);
+		outState.putInt(SELECTED_KEY, mSelectedPlayerPosition);
+	}
 
-    @Override
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.in_game, menu);
@@ -117,11 +138,6 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void showBattle() {
-        BattleScreen battleScreen = new BattleScreen();
-        fm.beginTransaction().add(battleScreen, "battle").commit();
     }
 
     @Override
@@ -156,6 +172,7 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
 
         if (fragmentPlayer != null) {
             fragmentPlayer.changeSelectedPlayer(playersList.get(position));
+			mSelectedPlayerPosition = position;
             scrollToPlayer(position);
         }
     }
@@ -220,7 +237,6 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
         try {
             saveTask.execute(playersList);
             result = saveTask.get();
-
         } catch (Exception ex) {
             result = false;
         }
@@ -266,7 +282,33 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
         showBattle();
     }
 
-    private void finishGame() {
+	private void showBattle() {
+		//todo launch battle activity for result
+		Intent intent = new Intent(this, BattleActivity.class);
+		intent.putExtra(PLAYER, playersList.get(mSelectedPlayerPosition));
+		intent.putExtra(CURR_LVL, maxLvl());
+		View view = findViewById(R.id.action_dice);
+		int x = (int) view.getX();
+		int y = (int) view.getY();
+		ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
+		startActivityForResult(intent, BATTLE_REQUEST, optionsCompat.toBundle());
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (BATTLE_REQUEST == requestCode) {
+			if (BATTLE_RESULT_OK == resultCode) {
+
+			} else if (BATTLE_RESULT_CANCEL == resultCode) {
+
+			} else {
+
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	private void finishGame() {
         Bundle bundle = new Bundle();
         bundle.putString(ConfirmDialog.SOURCE_KEY, "FragmentPlayer");
         bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_finish);
@@ -285,7 +327,7 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
     private void openStatsActivity() {
         Intent intent = new Intent(this, Stats.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYER_KEY, getPlayersList());
+        bundle.putParcelableArrayList(PLAYERS_KEY, getPlayersList());
         String BUNDLE_STATS_KEY = "bundleStats";
         intent.putExtra(BUNDLE_STATS_KEY, bundle);
         startActivity(intent);
