@@ -9,7 +9,7 @@
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_munchkin</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_munchkin</item>
     </style>
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
 
         <!-- colorAccent is used as the default value for colorControlActivated,
