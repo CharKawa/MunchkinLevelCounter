@@ -157,8 +157,15 @@ public class BattleActivity extends AppCompatActivity {
 
 	@OnClick (R.id.btn_battle_fight)
 	public void fight() {
-		Toast.makeText(this, "btn_battle_fight", Toast.LENGTH_SHORT).show();
+		int pPowerValue = Integer.parseInt(pPower.getText().toString());
+		int mPowerValue = Integer.parseInt(mPower.getText().toString());
+		boolean willWin = pPowerValue > mPowerValue;
 
+		if (willWin) {
+			// TODO: 04-Aug-16 show winning dialog. ask about lvlUp
+		} else {
+			// TODO: 04-Aug-16 show loosing dialog. ask about lvlDwn
+		}
 	}
 
 	@OnClick (R.id.fab_battle_run_away)

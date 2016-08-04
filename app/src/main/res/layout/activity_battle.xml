@@ -103,8 +103,7 @@
             android:id="@+id/fab_battle_mods_dwn"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/fab_battle_gear_dwn"
-            android:layout_marginStart="13dp" tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toRightOf="@+id/txt_battle_mods" android:layout_marginLeft="13dp"/>
+            app:layout_constraintLeft_toLeftOf="@+id/fab_battle_gear_dwn"/>
 
     <CheckBox
             android:layout_width="wrap_content"
@@ -225,8 +224,10 @@
             app:srcCompat="@drawable/ic_arrow_down_24dp"
             android:id="@+id/fab_battle_m_mods_dwn"
             app:layout_constraintBottom_toTopOf="@+id/btn_battle_fight" android:layout_marginBottom="16dp"
-            android:layout_marginStart="13dp" tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toRightOf="@+id/txt_battle_m_mods" android:layout_marginLeft="13dp"/>
+            app:layout_constraintRight_toLeftOf="@+id/fab_battle_m_mods_up" tools:layout_constraintRight_creator="1"
+            android:layout_marginStart="72dp" android:layout_marginEnd="72dp" tools:layout_constraintLeft_creator="1"
+            app:layout_constraintLeft_toLeftOf="@+id/const_battle" android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"/>
     <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
