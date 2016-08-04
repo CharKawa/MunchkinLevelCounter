@@ -86,5 +86,7 @@
     <string name="btn_fight">Fight</string>
     <string name="monster">Monster</string>
     <string name="battle_screen">Battle</string>
+    <string name="run_away">Run Away</string>
+    <string name="treasures">Treasures</string>
 
 </resources>
