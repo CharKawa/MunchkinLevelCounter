@@ -292,7 +292,8 @@
             android:id="@+id/txt_battle_player_name"
             app:layout_constraintBottom_toTopOf="@+id/diagonal_divider" android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp" app:layout_constraintRight_toRightOf="@+id/const_battle"
-            android:layout_marginRight="16dp" android:textAlignment="textStart" android:paddingRight="8dp"/>
+            android:layout_marginRight="16dp" android:textAlignment="textStart"  android:gravity="start"
+            android:paddingRight="8dp"/>
     <TextView
             android:text="@string/monster"
             android:layout_width="wrap_content"
@@ -301,7 +302,7 @@
             android:layout_marginStart="16dp"
             app:layout_constraintLeft_toLeftOf="@+id/const_battle" android:layout_marginLeft="16dp"
             android:paddingLeft="8dp" app:layout_constraintTop_toBottomOf="@+id/diagonal_divider"
-            android:layout_marginTop="8dp" android:textAlignment="textEnd"/>
+            android:layout_marginTop="8dp" android:textAlignment="textEnd" android:gravity="end"/>
     <TextView
             android:text="20"
             android:layout_width="wrap_content"
