@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/const_battle">
+
+    <!--PLAYER-->
+    <TextView
+        android:id="@+id/txt_battle_lvl"
+        android:text="@string/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_battle_lvl_dwn"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_arrow_down_24dp"
+        app:layout_constraintRight_toLeftOf="@+id/fab_battle_lvl_up"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_gear_up"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/txt_battle_lvl"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="63dp" />
+
+    <TextView
+        android:id="@+id/txt_battle_gear"
+        android:text="@string/gear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_battle_mods"
+        android:layout_marginTop="57dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="57dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_battle_lvl"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/txt_battle_mods"
+        android:text="@string/mods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_battle_mods_value"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_battle_mods_value"
+        android:layout_marginLeft="16dp" />
+    <TextView
+        android:id="@+id/txt_battle_warrior"
+        android:text="@string/warrior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/txt_battle_mods"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_arrow_down_24dp"
+        android:id="@+id/fab_battle_gear_dwn"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_lvl_dwn"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_lvl_dwn"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_lvl_dwn" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_down_24dp"
+        android:id="@+id/fab_battle_mods_dwn"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_gear_dwn"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_gear_dwn"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_gear_dwn" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chb_battle_warrior"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_mods_dwn"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_mods_dwn"
+        android:layout_marginLeft="4dp" />
+
+    <TextView
+        android:text="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_battle_lvl_value"
+        app:layout_constraintRight_toLeftOf="@+id/fab_battle_lvl_up"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/fab_battle_lvl_dwn"
+        android:layout_marginLeft="8dp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="28dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:text="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_battle_gear_value"
+        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_lvl_value"
+        app:layout_constraintRight_toRightOf="@+id/txt_battle_lvl_value"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_gear_up"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:text="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_battle_mods_value"
+        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_gear_value"
+        app:layout_constraintRight_toRightOf="@+id/txt_battle_gear_value"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_mods_up"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="9dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_arrow_up_24dp"
+        android:id="@+id/fab_battle_lvl_up"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_gear_up"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_gear_up"
+        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_up_24dp"
+        android:id="@+id/fab_battle_gear_up"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_mods_up"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_lvl_up"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_mods_up" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_up_24dp"
+        android:id="@+id/fab_battle_mods_up"
+        app:layout_constraintRight_toLeftOf="@+id/txt_battle_player_name"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="45dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_gear_up"
+        android:layout_marginRight="45dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_person_add_24dp"
+        android:id="@+id/fab_battle_add_helper"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_mods_up"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintTop_toTopOf="@+id/fab_battle_lvl_up"
+        android:layout_marginRight="16dp" />
+
+    <TextView
+        android:text="@string/player_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_battle_player_name"
+        android:textAlignment="textStart"
+        android:paddingRight="8dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="38dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_mods_up"
+        android:layout_marginRight="16dp" />
+
+    <TextView
+        android:text="20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_battle_player_power"
+        android:textSize="24sp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toBottomOf="@+id/chb_battle_warrior"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/chb_battle_warrior"
+        android:layout_marginLeft="22dp" />
+
+</android.support.constraint.ConstraintLayout>
