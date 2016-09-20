@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/const_battle"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_marginBottom="5dp">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_battle_run_away"
@@ -14,7 +15,7 @@
         android:clickable="true"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_run_away_24dp"
-        tools:layout_editor_absoluteY="113dp"
+        tools:layout_editor_absoluteY="108dp"
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
@@ -23,8 +24,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_mods"
         android:paddingRight="8dp"
-        tools:layout_editor_absoluteY="173dp"
-        tools:layout_editor_absoluteX="325dp" />
+        tools:layout_editor_absoluteY="167dp"
+        tools:layout_editor_absoluteX="352dp" />
 
     <!--MONSTER-->
     <TextView
@@ -33,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="8dp"
-        tools:layout_editor_absoluteY="117dp"
-        tools:layout_editor_absoluteX="336dp" />
+        tools:layout_editor_absoluteY="111dp"
+        tools:layout_editor_absoluteX="363dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_arrow_down_24dp"
         android:id="@+id/fab_battle_m_lvl_dwn"
-        tools:layout_editor_absoluteY="105dp"
+        tools:layout_editor_absoluteY="100dp"
         tools:layout_editor_absoluteX="106dp" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -52,7 +53,7 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_arrow_down_24dp"
         android:id="@+id/fab_battle_m_mods_dwn"
-        tools:layout_editor_absoluteY="161dp"
+        tools:layout_editor_absoluteY="156dp"
         tools:layout_editor_absoluteX="106dp" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -60,8 +61,13 @@
         android:clickable="true"
         app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_up_24dp"
         android:id="@+id/fab_battle_m_lvl_up"
-        tools:layout_editor_absoluteY="105dp"
-        tools:layout_editor_absoluteX="232dp" />
+        tools:layout_editor_absoluteY="100dp"
+        app:layout_constraintRight_toLeftOf="@+id/txt_battle_m_lvl"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginStart="63dp"
+        app:layout_constraintLeft_toRightOf="@+id/fab_battle_m_lvl_dwn"
+        android:layout_marginLeft="63dp" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,22 +75,30 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_arrow_up_24dp"
         android:id="@+id/fab_battle_m_mods_up"
-        tools:layout_editor_absoluteY="161dp"
-        tools:layout_editor_absoluteX="232dp" />
+        tools:layout_editor_absoluteY="156dp"
+        tools:layout_editor_absoluteX="234dp" />
     <TextView
         android:text="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_lvl_value"
-        tools:layout_editor_absoluteY="113dp"
-        tools:layout_editor_absoluteX="181dp" />
+        app:layout_constraintRight_toLeftOf="@+id/fab_battle_m_lvl_up"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/fab_battle_m_lvl_dwn"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_m_lvl_up"
+        android:layout_marginBottom="10dp" />
     <TextView
         android:text="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_mods_value"
-        tools:layout_editor_absoluteY="172dp"
-        tools:layout_editor_absoluteX="181dp" />
+        app:layout_constraintRight_toRightOf="@+id/txt_battle_m_lvl_value"
+        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_m_lvl_value"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_m_mods_up"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:text="@string/monster"
@@ -93,7 +107,7 @@
         android:id="@+id/txt_battle_monster_name"
         android:paddingLeft="8dp"
         android:textAlignment="textEnd"
-        tools:layout_editor_absoluteY="51dp"
+        tools:layout_editor_absoluteY="45dp"
         tools:layout_editor_absoluteX="16dp" />
     <TextView
         android:text="20"
@@ -102,7 +116,7 @@
         android:id="@+id/txt_battle_m_power"
         android:textSize="24sp"
         tools:layout_editor_absoluteY="16dp"
-        tools:layout_editor_absoluteX="202dp" />
+        tools:layout_editor_absoluteX="216dp" />
 
     <TextView
         android:text="@string/treasures"
@@ -110,22 +124,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_tr"
         android:paddingRight="8dp"
-        tools:layout_editor_absoluteY="230dp"
-        tools:layout_editor_absoluteX="298dp" />
+        tools:layout_editor_absoluteY="224dp"
+        tools:layout_editor_absoluteX="324dp" />
     <TextView
         android:text="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_tr_value"
-        tools:layout_editor_absoluteY="229dp"
-        tools:layout_editor_absoluteX="181dp" />
+        app:layout_constraintRight_toRightOf="@+id/txt_battle_m_mods_value"
+        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_m_mods_value"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_down_24dp"
         android:id="@+id/fab_battle_m_tr_dwn"
-        tools:layout_editor_absoluteY="217dp"
+        tools:layout_editor_absoluteY="212dp"
         tools:layout_editor_absoluteX="106dp" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -133,14 +149,16 @@
         android:clickable="true"
         app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_up_24dp"
         android:id="@+id/fab_battle_m_tr_up"
-        tools:layout_editor_absoluteY="217dp"
-        tools:layout_editor_absoluteX="232dp" />
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_mods_up"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_m_mods_up"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_m_mods_up" />
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="normal" app:srcCompat="@drawable/sword"
         android:id="@+id/fab_battle_fight"
-        tools:layout_editor_absoluteY="193dp"
+        tools:layout_editor_absoluteY="188dp"
         tools:layout_editor_absoluteX="16dp" />
 </android.support.constraint.ConstraintLayout>
