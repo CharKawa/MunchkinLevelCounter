@@ -34,10 +34,10 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
     public final static String CURR_LVL = "currentLVL";
 	public static final String PLAYER = "player";
+	public static final String PLAYERS_KEY = "playersList";
 	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
 	public static final int BATTLE_RESULT_OK = 1;
 	public static final int BATTLE_RESULT_CANCEL = 0;
-	private static final String PLAYERS_KEY = "playersList";
 	private static final String SELECTED_KEY = "selectedPlayer";
 	private final int BATTLE_REQUEST = 10;
 
@@ -285,7 +285,8 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
 	private void showBattle() {
 		//todo launch battle activity for result
 		Intent intent = new Intent(this, BattleActivity.class);
-		intent.putExtra(PLAYER, playersList.get(mSelectedPlayerPosition));
+		intent.putExtra(PLAYER, mSelectedPlayerPosition);
+		intent.putParcelableArrayListExtra(PLAYERS_KEY, playersList);
 		intent.putExtra(CURR_LVL, maxLvl());
 		View view = findViewById(R.id.action_dice);
 		int x = (int) view.getX();
