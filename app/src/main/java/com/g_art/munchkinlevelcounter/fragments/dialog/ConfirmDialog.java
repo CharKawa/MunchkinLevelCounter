@@ -14,6 +14,8 @@ import com.g_art.munchkinlevelcounter.activity.GameActivity;
 public class ConfirmDialog extends DialogFragment {
 
     public static final String SOURCE_KEY = "source_key";
+    public static final String REQUEST_KEY = "request_key";
+    public static final String RESULT_KEY = "result_key";
     public static final String TITLE_KEY = "title_key";
     public static final String MSG_KEY = "msg_key";
     public static final String OK_KEY = "ok_key";
@@ -42,8 +44,8 @@ public class ConfirmDialog extends DialogFragment {
                             GameActivity gameActivity = (GameActivity) getActivity();
                             gameActivity.onNegativeClickConfirmDialog();
                         } else {
-                            GameActivity gameActivity = (GameActivity) getActivity();
-                            gameActivity.onPositiveClickContinueDialog();
+                            DialogClickEvents activity = (DialogClickEvents) getActivity();
+                            activity.positiveDialogClick(new Bundle());
                         }
 
                     }
@@ -55,10 +57,16 @@ public class ConfirmDialog extends DialogFragment {
                             GameActivity gameActivity = (GameActivity) getActivity();
                             gameActivity.onPositiveClickConfirmDialog();
                         } else {
-                            dismiss();
+                            DialogClickEvents activity = (DialogClickEvents) getActivity();
+                            activity.negativeDialogClick(new Bundle());
                         }
                     }
                 });
         return builder.create();
+    }
+
+    public interface DialogClickEvents {
+        void positiveDialogClick(final Bundle bundle);
+        void negativeDialogClick(final Bundle bundle);
     }
 }

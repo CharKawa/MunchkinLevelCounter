@@ -15,8 +15,13 @@
         android:clickable="true"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_run_away_24dp"
-        tools:layout_editor_absoluteY="108dp"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_fight"
+        android:layout_marginStart="16dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"/>
 
     <TextView
         android:text="@string/mods"
@@ -24,8 +29,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_mods"
         android:paddingRight="8dp"
-        tools:layout_editor_absoluteY="167dp"
-        tools:layout_editor_absoluteX="352dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_fight"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintTop_toTopOf="@+id/txt_battle_m_mods_value"
+        android:layout_marginRight="16dp"/>
 
     <!--MONSTER-->
     <TextView
@@ -34,8 +47,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="8dp"
-        tools:layout_editor_absoluteY="111dp"
-        tools:layout_editor_absoluteX="363dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/txt_battle_m_mods"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="16dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -44,8 +62,13 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_arrow_down_24dp"
         android:id="@+id/fab_battle_m_lvl_dwn"
-        tools:layout_editor_absoluteY="100dp"
-        tools:layout_editor_absoluteX="106dp" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_m_mods_dwn"
+        android:layout_marginStart="34dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/fab_battle_run_away"
+        android:layout_marginLeft="34dp"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,21 +76,26 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_arrow_down_24dp"
         android:id="@+id/fab_battle_m_mods_dwn"
-        tools:layout_editor_absoluteY="156dp"
-        tools:layout_editor_absoluteX="106dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_m_tr_dwn"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_lvl_dwn"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_m_lvl_dwn"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_up_24dp"
         android:id="@+id/fab_battle_m_lvl_up"
-        tools:layout_editor_absoluteY="100dp"
-        app:layout_constraintRight_toLeftOf="@+id/txt_battle_m_lvl"
-        android:layout_marginEnd="65dp"
-        android:layout_marginRight="65dp"
-        android:layout_marginStart="63dp"
-        app:layout_constraintLeft_toRightOf="@+id/fab_battle_m_lvl_dwn"
-        android:layout_marginLeft="63dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_m_mods_up"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_mods_up"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_m_mods_up"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,30 +103,33 @@
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_arrow_up_24dp"
         android:id="@+id/fab_battle_m_mods_up"
-        tools:layout_editor_absoluteY="156dp"
-        tools:layout_editor_absoluteX="234dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_m_tr_up"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_tr_up"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_m_tr_up"/>
     <TextView
         android:text="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_lvl_value"
-        app:layout_constraintRight_toLeftOf="@+id/fab_battle_m_lvl_up"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/fab_battle_m_lvl_dwn"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_m_lvl_up"
-        android:layout_marginBottom="10dp" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_m_lvl_dwn"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_m_mods_value"/>
     <TextView
         android:text="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_mods_value"
-        app:layout_constraintRight_toRightOf="@+id/txt_battle_m_lvl_value"
-        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_m_lvl_value"
-        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_m_mods_up"
-        android:layout_marginBottom="10dp" />
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_battle_m_mods_dwn"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_m_tr_value"/>
 
     <TextView
         android:text="@string/monster"
@@ -107,16 +138,29 @@
         android:id="@+id/txt_battle_monster_name"
         android:paddingLeft="8dp"
         android:textAlignment="textEnd"
-        tools:layout_editor_absoluteY="45dp"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/fab_battle_run_away"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="45dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="46dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp"/>
     <TextView
         android:text="20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_power"
         android:textSize="24sp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:layout_editor_absoluteX="216dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="31dp"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_lvl_up"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="31dp"/>
 
     <TextView
         android:text="@string/treasures"
@@ -124,41 +168,60 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_tr"
         android:paddingRight="8dp"
-        tools:layout_editor_absoluteY="224dp"
-        tools:layout_editor_absoluteX="324dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="11dp"
+        android:layout_marginRight="16dp"/>
     <TextView
         android:text="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_battle_m_tr_value"
-        app:layout_constraintRight_toRightOf="@+id/txt_battle_m_mods_value"
-        app:layout_constraintLeft_toLeftOf="@+id/txt_battle_m_mods_value"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="10dp" />
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/fab_battle_m_tr_dwn"
+        android:layout_marginLeft="36dp"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_down_24dp"
         android:id="@+id/fab_battle_m_tr_dwn"
-        tools:layout_editor_absoluteY="212dp"
-        tools:layout_editor_absoluteX="106dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_mods_dwn"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_m_mods_dwn"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="mini" app:srcCompat="@drawable/ic_arrow_up_24dp"
         android:id="@+id/fab_battle_m_tr_up"
-        app:layout_constraintRight_toRightOf="@+id/fab_battle_m_mods_up"
-        app:layout_constraintLeft_toLeftOf="@+id/fab_battle_m_mods_up"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/fab_battle_m_mods_up" />
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toRightOf="@+id/txt_battle_m_tr_value"
+        android:layout_marginLeft="36dp"/>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="normal" app:srcCompat="@drawable/sword"
         android:id="@+id/fab_battle_fight"
-        tools:layout_editor_absoluteY="188dp"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"/>
 </android.support.constraint.ConstraintLayout>

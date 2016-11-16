@@ -1,5 +1,7 @@
 package com.g_art.munchkinlevelcounter.activity;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -15,17 +17,20 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
+import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.model.Monster;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+
+import java.util.List;
 
 /**
  * MunchkinLevelCounter
  * Created by fftem on 03-Aug-16.
  */
 
-public class BattleActivity extends AppCompatActivity {
+public class BattleActivity extends AppCompatActivity implements ConfirmDialog.DialogClickEvents {
 
 	private Tracker mTracker;
 	private Unbinder unbinder;
@@ -35,6 +40,7 @@ public class BattleActivity extends AppCompatActivity {
 
 	private Player player;
 	private Player helper;
+	private List<Player> players;
 	private Monster monster;
 	private int mMaxLvl;
 
@@ -77,9 +83,15 @@ public class BattleActivity extends AppCompatActivity {
 				.setLabel("BattleActivity")
 				.build());
 
-		Intent intent = getIntent();
+		final Intent intent = getIntent();
 
-		player = intent.getParcelableExtra(GameActivity.PLAYER);
+		int selectedPlayerId = intent.getIntExtra(GameActivity.PLAYER, 0);
+
+		players = intent.getParcelableExtra(GameActivity.PLAYERS_KEY);
+
+		player = players.get(selectedPlayerId);
+		players.remove(selectedPlayerId);//remove so it won't be shown in help list
+
 		monster = new Monster();
 		mMaxLvl = intent.getIntExtra(GameActivity.CURR_LVL, 10);
 
@@ -163,14 +175,56 @@ public class BattleActivity extends AppCompatActivity {
 
 		if (willWin) {
 			// TODO: 04-Aug-16 show winning dialog. ask about lvlUp
+
+			Bundle bundle = new Bundle();
+			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
+			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
+			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
+			bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
+			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+			DialogFragment confirmDialog = new ConfirmDialog();
+			confirmDialog.setArguments(bundle);
+			confirmDialog.show(getFragmentManager(), "confirmDialog");
+
 		} else {
 			// TODO: 04-Aug-16 show loosing dialog. ask about lvlDwn
+
+			Bundle bundle = new Bundle();
+			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
+			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
+			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
+			bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
+			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+			DialogFragment confirmDialog = new ConfirmDialog();
+			confirmDialog.setArguments(bundle);
+			confirmDialog.show(getFragmentManager(), "confirmDialog");
 		}
 	}
 
 	@OnClick (R.id.fab_battle_run_away)
 	public void runAway() {
 		Toast.makeText(this, "fab_battle_run_away", Toast.LENGTH_SHORT).show();
+
+		Bundle bundle = new Bundle();
+		bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
+		bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
+		bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
+		bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
+		bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+		DialogFragment confirmDialog = new ConfirmDialog();
+		confirmDialog.setArguments(bundle);
+		confirmDialog.show(getFragmentManager(), "confirmDialog");
+	}
+
+
+	@Override
+	public void positiveDialogClick(Bundle bundle) {
+		if ("battle_fight".equalsIgnoreCase(bundle.getString(ConfirmDialog.REQUEST_KEY)));
+	}
+
+	@Override
+	public void negativeDialogClick(Bundle bundle) {
+		if ("battle_fight".equalsIgnoreCase(bundle.getString(ConfirmDialog.REQUEST_KEY)));
 	}
 
 	private void updateViewValues() {
