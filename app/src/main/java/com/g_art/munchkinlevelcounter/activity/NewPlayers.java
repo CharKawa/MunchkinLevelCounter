@@ -120,7 +120,7 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
         if (newPlayer) {
             Player newPlayer = new Player(name);
             newPlayer.setSex(sex);
-			mPlayersList.add(new Pair<>((long) mPlayersList.size(), newPlayer));
+			mPlayersList.add(new Pair<>((long) mPlayersList.size()+1, newPlayer));
 		} else {
             Player player = mPlayersList.get(playerIndex).second;
             player.setName(name);
