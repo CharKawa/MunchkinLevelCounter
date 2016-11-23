@@ -41,7 +41,7 @@ public class MaxLvlDialog extends DialogFragment {
         builder.setView(v);
 
         maxLvlEditText = (EditText) v.findViewById(R.id.maxLvL);
-        final int currMax = getArguments().getInt(GameActivity.CURR_LVL);
+        final int currMax = getArguments().getInt(GameActivity.MAX_LVL);
         maxLvlEditText.setText(Integer.toString(currMax), TextView.BufferType.EDITABLE);
 
         builder.setTitle(R.string.txt_max_lvl)
