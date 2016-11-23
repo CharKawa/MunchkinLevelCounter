@@ -1,6 +1,5 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -72,7 +71,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 
-		setContentView(R.layout.activity_battle);
+		setContentView(R.layout.activity_battle_container);
 
 		// Obtain the shared Tracker instance.
 		MyApplication application = (MyApplication) getApplication();
@@ -84,20 +83,27 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 				.build());
 
 		final Intent intent = getIntent();
+		final Bundle bundle = intent.getExtras();
 
-		int selectedPlayerId = intent.getIntExtra(GameActivity.PLAYER, 0);
+		int selectedPlayerId = bundle.getInt(GameActivity.PLAYER, 0);
 
-		players = intent.getParcelableExtra(GameActivity.PLAYERS_KEY);
+		players = bundle.getParcelableArrayList(GameActivity.PLAYERS_KEY);
+
+		if (players == null || players.isEmpty()) {
+			setResult(RESULT_CANCELED);
+			finish();
+		}
 
 		player = players.get(selectedPlayerId);
 		players.remove(selectedPlayerId);//remove so it won't be shown in help list
 
 		monster = new Monster();
-		mMaxLvl = intent.getIntExtra(GameActivity.CURR_LVL, 10);
+		mMaxLvl = intent.getIntExtra(GameActivity.MAX_LVL, 10);
 
 		//Binding views
 		unbinder = ButterKnife.bind(this);
 		fillViewValues();
+		getSupportActionBar().setTitle(player.getName()+ " VS " + "Monster");
 	}
 
 	@OnClick ({R.id.fab_battle_lvl_up, R.id.fab_battle_lvl_dwn,
@@ -167,15 +173,13 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 
 	}
 
-	@OnClick (R.id.btn_battle_fight)
+	@OnClick (R.id.fab_battle_fight)
 	public void fight() {
 		int pPowerValue = Integer.parseInt(pPower.getText().toString());
 		int mPowerValue = Integer.parseInt(mPower.getText().toString());
 		boolean willWin = pPowerValue > mPowerValue;
 
 		if (willWin) {
-			// TODO: 04-Aug-16 show winning dialog. ask about lvlUp
-
 			Bundle bundle = new Bundle();
 			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
 			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
@@ -185,10 +189,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 			DialogFragment confirmDialog = new ConfirmDialog();
 			confirmDialog.setArguments(bundle);
 			confirmDialog.show(getFragmentManager(), "confirmDialog");
-
 		} else {
-			// TODO: 04-Aug-16 show loosing dialog. ask about lvlDwn
-
 			Bundle bundle = new Bundle();
 			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
 			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);

@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:id="@+id/const_battle"
     android:layout_width="match_parent"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="5dp"
+    android:paddingBottom="5dp">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_battle_run_away"
@@ -138,6 +139,7 @@
         android:id="@+id/txt_battle_monster_name"
         android:paddingLeft="8dp"
         android:textAlignment="textEnd"
+        android:gravity="end"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/fab_battle_run_away"

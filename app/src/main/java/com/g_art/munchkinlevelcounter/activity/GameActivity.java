@@ -32,7 +32,7 @@ import java.util.ArrayList;
  * Created by G_Art on 28/7/2014.
  */
 public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
-    public final static String CURR_LVL = "currentLVL";
+    public final static String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
 	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
@@ -284,10 +284,12 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
 
 	private void showBattle() {
 		//todo launch battle activity for result
-		Intent intent = new Intent(this, BattleActivity.class);
-		intent.putExtra(PLAYER, mSelectedPlayerPosition);
-		intent.putParcelableArrayListExtra(PLAYERS_KEY, playersList);
-		intent.putExtra(CURR_LVL, maxLvl());
+		final Intent intent = new Intent(this, BattleActivity.class);
+		final Bundle bundle = new Bundle();
+		bundle.putInt(PLAYER, mSelectedPlayerPosition);
+		bundle.putParcelableArrayList(PLAYERS_KEY, playersList);
+		bundle.putInt(MAX_LVL, maxLvl());
+		intent.putExtras(bundle);
 		View view = findViewById(R.id.action_dice);
 		int x = (int) view.getX();
 		int y = (int) view.getY();
@@ -345,7 +347,7 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
 
     private void showMaxLvLDialog() {
         Bundle nBundle = new Bundle();
-        nBundle.putInt(CURR_LVL, maxLvl);
+        nBundle.putInt(MAX_LVL, maxLvl);
         if (lvlDialog == null) {
             lvlDialog = new MaxLvlDialog();
         }
