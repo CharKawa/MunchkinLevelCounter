@@ -63,6 +63,10 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	@BindView (R.id.txt_battle_m_power)
 	TextView mPower;
 
+	//Buttons
+	@BindView(R.id.fab_battle_add_helper)
+	FloatingActionButton helperBtn;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -182,20 +186,20 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		if (willWin) {
 			Bundle bundle = new Bundle();
 			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
-			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
-			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
-			bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
-			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.battle_dialog_title_win);
+			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.battle_dialog_msg);
+			bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_dialog_battle_continue);
+			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_battle);
 			DialogFragment confirmDialog = new ConfirmDialog();
 			confirmDialog.setArguments(bundle);
 			confirmDialog.show(getFragmentManager(), "confirmDialog");
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
-			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
-			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
-			bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
-			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.battle_dialog_title_lose);
+			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.battle_dialog_msg_lose);
+			bundle.putInt(ConfirmDialog.OK_KEY, R.string.battle_dialog_lose_run_away);
+			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.battle_dialog_lose_anyway);
 			DialogFragment confirmDialog = new ConfirmDialog();
 			confirmDialog.setArguments(bundle);
 			confirmDialog.show(getFragmentManager(), "confirmDialog");
@@ -208,10 +212,10 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 
 		Bundle bundle = new Bundle();
 		bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
-		bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
-		bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
-		bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
-		bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
+		bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.battle_dialog_title_run);
+		bundle.putInt(ConfirmDialog.MSG_KEY, R.string.battle_dialog_msg_run);
+		bundle.putInt(ConfirmDialog.OK_KEY, R.string.battle_dialog_run_confirm);
+		bundle.putInt(ConfirmDialog.NOT_KEY, R.string.battle_dialog_run_cancel);
 		DialogFragment confirmDialog = new ConfirmDialog();
 		confirmDialog.setArguments(bundle);
 		confirmDialog.show(getFragmentManager(), "confirmDialog");
@@ -246,6 +250,10 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		mMods.setText(String.valueOf(monster.getMods()));
 		int mPowerValue = monster.getLevel() + monster.getMods();
 		mPower.setText(String.valueOf(mPowerValue));
+
+		if (players.isEmpty()) { //after removing currentPlayer
+			helperBtn.setEnabled(false);
+		}
 	}
 
 	@Override
