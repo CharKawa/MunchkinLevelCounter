@@ -1,5 +1,6 @@
 package com.g_art.munchkinlevelcounter.listadapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,26 +11,31 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperAdapter;
+import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperViewHolder;
+import com.g_art.munchkinlevelcounter.listadapter.helper.OnStartDragListener;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.model.Sex;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by agulia on 11/27/16.
  */
 
-public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRecyclerAdapter.ViewHolder> {
+public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRecyclerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
+	private final OnStartDragListener mDragStartListener;
 	private ArrayList<Player> mPlayers;
 
-	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers) {
+	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers, OnStartDragListener dragStartListener) {
+		mDragStartListener = dragStartListener;
 		this.mPlayers = mPlayers;
 	}
 
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
 		View v = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.new_players_row, parent, false);
 
@@ -47,8 +53,6 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 			final Player player = mPlayers.get(holder.getAdapterPosition());
 
 			holder.text.setText(player.getName());
-//			holder.mTextWatcher.updatePosition(holder.getAdapterPosition());
-
 			holder.text.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -62,9 +66,12 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 
 				@Override
 				public void afterTextChanged(Editable s) {
-					mPlayers.get(holder.getAdapterPosition()).setName(s.toString());
+					if (!s.toString().isEmpty()) {
+						mPlayers.get(holder.getAdapterPosition()).setName(s.toString());
+					}
 				}
 			});
+
 			holder.imBtnPlayerSex.setVisibility(View.VISIBLE);
 			holder.imBtnPlayerSex.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -96,7 +103,21 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 		return mPlayers.size();
 	}
 
-	public static class ViewHolder extends RecyclerView.ViewHolder {
+	@Override
+	public boolean onItemMove(int fromPosition, int toPosition) {
+		Collections.swap(mPlayers, fromPosition, toPosition);
+		notifyItemMoved(fromPosition, toPosition);
+		return true;
+	}
+
+	@Override
+	public void onItemDismiss(int position) {
+		mPlayers.remove(position);
+		notifyItemRemoved(position);
+	}
+
+	public static class ViewHolder extends RecyclerView.ViewHolder  implements
+			ItemTouchHelperViewHolder {
 
 		private EditText text;
 		private ImageButton imBtnPlayerSex;
@@ -106,6 +127,16 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 
 			text = (EditText) itemView.findViewById(R.id.newPlayerName);
 			imBtnPlayerSex = (ImageButton) itemView.findViewById(R.id.imvPlayerSex);
+		}
+
+		@Override
+		public void onItemSelected() {
+			itemView.setBackgroundColor(Color.LTGRAY);
+		}
+
+		@Override
+		public void onItemClear() {
+			itemView.setBackgroundColor(0);
 		}
 	}
 }

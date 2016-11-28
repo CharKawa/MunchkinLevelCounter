@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -14,6 +15,8 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
 import com.g_art.munchkinlevelcounter.listadapter.NewPlayersRecyclerAdapter;
+import com.g_art.munchkinlevelcounter.listadapter.helper.OnStartDragListener;
+import com.g_art.munchkinlevelcounter.listadapter.helper.SimpleItemTouchHelperCallback;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class NewPlayers extends Activity implements View.OnClickListener {
+public class NewPlayers extends Activity implements View.OnClickListener, OnStartDragListener {
     private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     private static final String EMPTY_STRING = " ";
@@ -38,6 +41,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
 	private RecyclerView mRecyclerView;
 	private NewPlayersRecyclerAdapter mAdapter;
+	private ItemTouchHelper mItemTouchHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +73,14 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
 
 
-		mAdapter = new NewPlayersRecyclerAdapter(mPlayers);
+		mAdapter = new NewPlayersRecyclerAdapter(mPlayers, this);
 		mRecyclerView.setAdapter(mAdapter);
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+		ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+		mItemTouchHelper = new ItemTouchHelper(callback);
+		mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
 	private ArrayList<Player> initPlayers(Bundle savedInstanceState) {
@@ -230,4 +239,9 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         }
 		mAdapter.notifyItemChanged(playerPosition);
     }
+
+	@Override
+	public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+		mItemTouchHelper.startDrag(viewHolder);
+	}
 }
