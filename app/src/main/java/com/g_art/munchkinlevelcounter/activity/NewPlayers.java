@@ -31,7 +31,6 @@ import java.util.ArrayList;
 public class NewPlayers extends Activity implements View.OnClickListener, OnStartDragListener {
     private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
-    private static final String EMPTY_STRING = " ";
     public static final String PLAYER_SEX = "player_sex";
     private Tracker mTracker;
     private String PREFS_NO_DATA;
@@ -70,8 +69,6 @@ public class NewPlayers extends Activity implements View.OnClickListener, OnStar
         ImageButton btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
 		mPlayers = initPlayers(savedInstanceState);
-
-
 
 		mAdapter = new NewPlayersRecyclerAdapter(mPlayers, this);
 		mRecyclerView.setAdapter(mAdapter);
@@ -143,7 +140,6 @@ public class NewPlayers extends Activity implements View.OnClickListener, OnStar
     public void doNegativeClickPlayerNameDialog() {
 		playerDialog.dismiss();
 		playerDialog = null;
-        // Do stuff here.
     }
 
     @Override
@@ -205,39 +201,6 @@ public class NewPlayers extends Activity implements View.OnClickListener, OnStar
         }
 
         super.onDestroy();
-    }
-
-    /**
-     * **************  This function used by adapter ***************
-     */
-    public void playerDelete(int mPosition) {
-        Player player = mPlayers.get(mPosition);
-		String message = player.getName() +
-				EMPTY_STRING +
-				getString(R.string.deleted);
-
-		Toast.makeText(this, message,
-                Toast.LENGTH_SHORT
-        ).show();
-
-		mPlayers.remove(mPosition);
-		mAdapter.notifyItemRemoved(mPosition);
-    }
-
-    public void playerEdit(int playerPosition, String name) {
-		final Player player = mPlayers.get(playerPosition);
-		player.setName(name);
-		mAdapter.notifyItemChanged(playerPosition, player);
-	}
-
-    public void playerChangeSex(int playerPosition) {
-        Player player = mPlayers.get(playerPosition);
-        if (Sex.MAN == player.getSex()) {
-            player.setSex(Sex.WOMAN);
-        } else {
-            player.setSex(Sex.MAN);
-        }
-		mAdapter.notifyItemChanged(playerPosition);
     }
 
 	@Override
