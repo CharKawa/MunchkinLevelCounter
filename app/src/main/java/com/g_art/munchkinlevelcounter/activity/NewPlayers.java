@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +21,6 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by G_Art on 16/7/2014.
@@ -153,17 +151,10 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBtnAddPlayer:
-                String name = "";
-                showPlayerNameDialog(name);
+                showPlayerNameDialog("");
                 break;
             case R.id.imgBtnClear:
-				mPlayers.clear();
-				mAdapter.notifyItemRangeChanged(0, mPlayers.size());
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("ClearPlayers")
-                        .setCategory("Action")
-                        .setLabel("MyActivity")
-                        .build());
+				removePlayers();
                 break;
             case R.id.imgBtnStart:
 				int MIN_PLAYER_QUANTITY = 1;
@@ -186,7 +177,19 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         }
     }
 
-    @Override
+	private void removePlayers() {
+		int playersCount = mPlayers.size();
+		mPlayers.clear();
+
+		mAdapter.notifyItemRangeRemoved(0, playersCount);
+		mTracker.send(new HitBuilders.EventBuilder()
+				.setAction("ClearPlayers")
+				.setCategory("Action")
+				.setLabel("MyActivity")
+				.build());
+	}
+
+	@Override
     protected void onDestroy() {
         if (playerDialog != null) {
             playerDialog = null;
