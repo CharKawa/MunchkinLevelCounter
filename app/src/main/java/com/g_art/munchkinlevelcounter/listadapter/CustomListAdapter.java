@@ -1,10 +1,14 @@
 package com.g_art.munchkinlevelcounter.listadapter;
 
 import android.app.Activity;
+import android.preference.EditTextPreference;
 import android.support.v4.util.Pair;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -56,9 +60,28 @@ public class CustomListAdapter extends DragItemAdapter<Pair<Long, Player>, Custo
 		setPlayer(holder, player, position);
 	}
 
-	private void setPlayer(ViewHolder holder, Player player, final int playerPosition) {
+	private void setPlayer(final ViewHolder holder, final Player player, final int playerPosition) {
 		if (mList.isEmpty()) {
 			holder.text.setText(R.string.no_players);
+			holder.text.setFocusable(false);
+			holder.text.setFocusableInTouchMode(true);
+			holder.text.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					((NewPlayers) mActivity).playerEdit(playerPosition, s.toString());
+				}
+			});
+
 			holder.imBtnDel.setVisibility(View.GONE);
 			holder.imEdit.setVisibility(View.GONE);
 			holder.imBtnPlayerSex.setVisibility(View.GONE);
@@ -71,11 +94,10 @@ public class CustomListAdapter extends DragItemAdapter<Pair<Long, Player>, Custo
 			holder.text.setText(player.getName());
 
 			holder.imEdit.setVisibility(View.VISIBLE);
+
 			holder.imEdit.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					NewPlayers sct = (NewPlayers) mActivity;
-					sct.playerEdit(playerPosition);
 				}
 			});
 
@@ -141,7 +163,7 @@ public class CustomListAdapter extends DragItemAdapter<Pair<Long, Player>, Custo
 	 */
 	public class ViewHolder extends DragItemAdapter<Pair<Long, Player>, CustomListAdapter.ViewHolder>.ViewHolder {
 
-		public TextView text;
+		public EditText text;
 		public ImageButton imEdit;
 		public ImageButton imBtnDel;
 		public ImageButton imBtnPlayerSex;
@@ -149,9 +171,7 @@ public class CustomListAdapter extends DragItemAdapter<Pair<Long, Player>, Custo
 		public ViewHolder(View itemView) {
 			super(itemView, mGrabHandleId);
 
-			text = (TextView) itemView.findViewById(R.id.newPlayerName);
-			imEdit = (ImageButton) itemView.findViewById(R.id.imBtnEdit);
-			imBtnDel = (ImageButton) itemView.findViewById(R.id.imBtnDel);
+			text = (EditText) itemView.findViewById(R.id.newPlayerName);
 			imBtnPlayerSex = (ImageButton) itemView.findViewById(R.id.imvPlayerSex);
 		}
 	}

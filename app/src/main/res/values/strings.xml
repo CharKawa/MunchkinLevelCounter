@@ -58,10 +58,10 @@
     <string name="settings_saved">Settings are saved.</string>
     <string name="error_max_level_one">Max level cannot be equal 1.</string>
     <string name="dice">Dice</string>
-    <string name="more_players">Please, add more players.</string>
+    <string name="more_players">Please, add more mPlayers.</string>
     <string name="error_next_turn">Error in the next turn!</string>
-    <string name="error_save_players">It was error while trying to save players!</string>
-    <string name="stats_off">Statistic is off, now it\'s just switch players</string>
+    <string name="error_save_players">It was error while trying to save mPlayers!</string>
+    <string name="stats_off">Statistic is off, now it\'s just switch mPlayers</string>
     <string name="error_empty_name">Name cannot be empty</string>
     <string name="no_data">There are no statistic, please play a game to have one.</string>
     <string name="prev_stas">This is statistic for previous game.</string>

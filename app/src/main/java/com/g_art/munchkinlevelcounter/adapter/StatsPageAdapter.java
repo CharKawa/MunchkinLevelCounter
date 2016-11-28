@@ -1,4 +1,4 @@
-package com.g_art.munchkinlevelcounter.activity.adapter;
+package com.g_art.munchkinlevelcounter.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
