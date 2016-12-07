@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Created by G_Art on 28/7/2014.
  */
-public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate {
+public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate, ConfirmDialog.DialogClickEvents {
     public final static String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
@@ -318,13 +318,18 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
         bundle.putInt(ConfirmDialog.MSG_KEY, R.string.msg_finish_game);
         bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_finish);
         bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_finish);
-        ConfirmDialog confirmDialog = new ConfirmDialog();
+        final ConfirmDialog confirmDialog = new ConfirmDialog();
         confirmDialog.setArguments(bundle);
         confirmDialog.show(fm, "confirmDialog");
     }
 
-    public void onPositiveClickContinueDialog() {
+	@Override
+    public void positiveDialogClick(final Bundle bundle) {
         openStatsActivity();
+    }
+
+	@Override
+    public void negativeDialogClick(final Bundle bundle) {
     }
 
     private void openStatsActivity() {

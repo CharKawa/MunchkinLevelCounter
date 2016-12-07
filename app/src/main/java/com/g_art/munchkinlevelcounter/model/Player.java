@@ -25,6 +25,7 @@ public class Player implements Parcelable, Comparable {
     private String name;
     private int level;
     private int gear;
+    private int mods;
     private int color;
     private boolean winner;
     private Sex sex;
@@ -44,7 +45,7 @@ public class Player implements Parcelable, Comparable {
         this.gear = 0;
         this.sex = Sex.MAN;
         this.winner = false;
-        Random rnd = new Random();
+        final Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
@@ -57,7 +58,7 @@ public class Player implements Parcelable, Comparable {
         this.gear = gear;
         this.winner = false;
         this.sex = Sex.MAN;
-        Random rnd = new Random();
+        final Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 
     }

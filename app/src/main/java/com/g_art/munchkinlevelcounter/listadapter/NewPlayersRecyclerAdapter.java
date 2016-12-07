@@ -1,6 +1,8 @@
 package com.g_art.munchkinlevelcounter.listadapter;
 
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperAdapter;
@@ -28,9 +31,10 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 
 	private final OnStartDragListener mDragStartListener;
 	private ArrayList<Player> mPlayers;
+	public static int color;
 
 	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers, OnStartDragListener dragStartListener) {
-		mDragStartListener = dragStartListener;
+		this.mDragStartListener = dragStartListener;
 		this.mPlayers = mPlayers;
 	}
 
@@ -38,6 +42,7 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.new_players_row, parent, false);
+		color = parent.getContext().getResources().getColor(R.color.transparent_main_color);
 
 		return new ViewHolder(v);
 	}
@@ -71,6 +76,8 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 					}
 				}
 			});
+
+			holder.text.setFocusableInTouchMode(true);
 
 			holder.imBtnPlayerSex.setVisibility(View.VISIBLE);
 			holder.imBtnPlayerSex.setOnClickListener(new View.OnClickListener() {
@@ -121,17 +128,26 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 
 		private EditText text;
 		private ImageButton imBtnPlayerSex;
+		private ImageView imReorder;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
 
 			text = (EditText) itemView.findViewById(R.id.newPlayerName);
 			imBtnPlayerSex = (ImageButton) itemView.findViewById(R.id.imvPlayerSex);
+			imReorder = (ImageView) itemView.findViewById(R.id.reorder);
+			Drawable icon;
+			if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+				icon = VectorDrawableCompat.create(itemView.getContext().getResources(), R.drawable.ic_reorder_24dp, itemView.getContext().getTheme());
+			} else {
+				icon = itemView.getContext().getResources().getDrawable(R.drawable.ic_reorder_24dp, itemView.getContext().getTheme());
+			}
+			imReorder.setImageDrawable(icon);
 		}
 
 		@Override
 		public void onItemSelected() {
-			itemView.setBackgroundColor(Color.LTGRAY);
+			itemView.setBackgroundColor(color);
 		}
 
 		@Override

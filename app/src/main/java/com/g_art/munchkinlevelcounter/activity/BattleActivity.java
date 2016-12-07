@@ -3,10 +3,14 @@ package com.g_art.munchkinlevelcounter.activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindBool;
@@ -30,6 +34,8 @@ import java.util.List;
  */
 
 public class BattleActivity extends AppCompatActivity implements ConfirmDialog.DialogClickEvents {
+
+	public static String HELPER_LIST = "helpers";
 
 	private Tracker mTracker;
 	private Unbinder unbinder;
@@ -62,6 +68,8 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	TextView mMods;
 	@BindView (R.id.txt_battle_m_power)
 	TextView mPower;
+	@BindView (R.id.diagonal_divider)
+	View mDivider;
 
 	//Buttons
 	@BindView(R.id.fab_battle_add_helper)
@@ -106,8 +114,21 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 
 		//Binding views
 		unbinder = ButterKnife.bind(this);
+
+		initDivider();
+
 		fillViewValues();
 		getSupportActionBar().setTitle(player.getName()+ " VS " + "Monster");
+	}
+
+	private void initDivider() {
+		Drawable divider;
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+			divider = VectorDrawableCompat.create(getResources(), R.drawable.ic_test_divider_1, getTheme());
+		} else {
+			divider = getResources().getDrawable(R.drawable.ic_test_divider_1, getTheme());
+		}
+		mDivider.setBackgroundDrawable(divider);
 	}
 
 	@OnClick ({R.id.fab_battle_lvl_up, R.id.fab_battle_lvl_dwn,
