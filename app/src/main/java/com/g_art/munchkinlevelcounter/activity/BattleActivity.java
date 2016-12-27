@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +76,9 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	//Buttons
 	@BindView(R.id.fab_battle_add_helper)
 	FloatingActionButton helperBtn;
+	//CheckBox
+	@BindView(R.id.chb_battle_warrior)
+	AppCompatCheckBox checkBox;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,7 +88,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 
-		setContentView(R.layout.activity_battle_container);
+		setContentView(R.layout.rel_battle_screen);
 
 		// Obtain the shared Tracker instance.
 		MyApplication application = (MyApplication) getApplication();
@@ -118,7 +123,10 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		initDivider();
 
 		fillViewValues();
-		getSupportActionBar().setTitle(player.getName()+ " VS " + "Monster");
+		final ActionBar bar = getSupportActionBar();
+		if (bar != null) {
+			bar.setTitle(player.getName()+ " VS " + "Monster");
+		}
 	}
 
 	private void initDivider() {

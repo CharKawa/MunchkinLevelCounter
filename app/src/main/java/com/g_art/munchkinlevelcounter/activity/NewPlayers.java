@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class NewPlayers extends Activity implements View.OnClickListener, OnStartDragListener {
+public class NewPlayers extends AppCompatActivity implements View.OnClickListener, OnStartDragListener {
     private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     public static final String PLAYER_SEX = "player_sex";
