@@ -79,10 +79,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnLvlUp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_toRightOf="@+id/txtLevel"
-        android:layout_toEndOf="@+id/txtLevel"
+        android:layout_alignLeft="@id/btnLvlUp"
+        android:layout_alignRight="@id/btnLvlUp"
+        android:gravity="center"
+        android:text="10"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -100,11 +100,11 @@
         android:id="@+id/txtPlayerGear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
         android:layout_below="@+id/btnGearUp"
-        android:layout_marginRight="26dp"
-        android:layout_toLeftOf="@+id/txtGear"
+        android:layout_alignLeft="@+id/btnGearUp"
+        android:layout_alignRight="@+id/btnGearUp"
+        android:gravity="center"
+        android:text="10"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 

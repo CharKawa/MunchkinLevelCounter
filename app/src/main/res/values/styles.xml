@@ -73,7 +73,7 @@
 
     <style name="CustomButton" parent="@android:style/android:Widget.Holo.Light.Button">
         <item name="android:textColor">@drawable/custom_button_text</item>
-        <item name="android:background">@drawable/btn_shape</item>
+        <!--<item name="android:background">@drawable/btn_shape</item>-->
     </style>
 
     <style name="CustomSwitch" parent="@android:style/android:Widget.Holo.Light.Button.Toggle">
