@@ -17,12 +17,14 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
+
         <!--<item name="actionBarTheme">@style/AppTheme.Widget</item>-->
         <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTab.Munchkin</item>
         <item name="android:buttonStyleToggle">@style/CustomSwitch</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_munchkin</item>
+
         <!--<item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>-->
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
         <item name="android:actionDropDownStyle">@style/DropDownNav.Munchkin</item>
@@ -32,6 +34,29 @@
         <item name="android:textColorPrimary">@color/text_color</item>
 
         <item name="android:dialogTheme">@style/Dialog.FullScreen</item>
+
+    </style>
+
+    <style name="floating_action_button_default">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="floating_action_button_player_default">
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <style name="floating_action_button_monster_default">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
     </style>
 
     <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">

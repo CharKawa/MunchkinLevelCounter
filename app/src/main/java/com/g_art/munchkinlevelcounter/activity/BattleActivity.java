@@ -88,7 +88,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 
-		setContentView(R.layout.rel_battle_screen);
+		setContentView(R.layout.activity_battle_container);
 
 		// Obtain the shared Tracker instance.
 		MyApplication application = (MyApplication) getApplication();
