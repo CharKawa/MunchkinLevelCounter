@@ -54,7 +54,7 @@
     <string name="dice">Dados</string>
     <string name="more_players">Por favor, añade a los jugadores.</string>
     <string name="error_next_turn">Error in the next turn!</string>
-    <string name="error_save_players">It was error while trying to save players!</string>
+    <string name="error_save_players">It was error while trying to save mPlayers!</string>
     <string name="stats_off">Estadística no se calcula.</string>
     <string name="error_empty_name">Hay que escribir un nombre</string>
     <string name="no_data">No hay estadistica, por favor, juega un partida mas.</string>

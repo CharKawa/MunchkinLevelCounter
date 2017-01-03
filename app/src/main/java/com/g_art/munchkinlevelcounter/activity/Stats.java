@@ -10,7 +10,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.activity.adapter.StatsPageAdapter;
+import com.g_art.munchkinlevelcounter.adapter.StatsPageAdapter;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;

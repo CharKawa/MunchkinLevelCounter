@@ -5,41 +5,43 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.fragments.dialog.PlayerNameDialog;
-import com.g_art.munchkinlevelcounter.listadapter.CustomListAdapter;
+import com.g_art.munchkinlevelcounter.listadapter.NewPlayersRecyclerAdapter;
+import com.g_art.munchkinlevelcounter.listadapter.helper.OnStartDragListener;
+import com.g_art.munchkinlevelcounter.listadapter.helper.SimpleItemTouchHelperCallback;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.woxthebox.draglistview.DragListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class NewPlayers extends Activity implements View.OnClickListener {
+public class NewPlayers extends Activity implements View.OnClickListener, OnStartDragListener {
     private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     private static final String EMPTY_STRING = " ";
     public static final String PLAYER_SEX = "player_sex";
-    private static int playerIndex = 1;
-    private static boolean newPlayer = false;
-	private CustomListAdapter mListAdapter;
     private Tracker mTracker;
     private String PREFS_NO_DATA;
     private DialogFragment playerDialog;
     private StoredPlayers mStored;
-	private ArrayList<Pair<Long, Player>> mPlayersList;
+	private ArrayList<Player> mPlayers;
+
+	private RecyclerView mRecyclerView;
+	private NewPlayersRecyclerAdapter mAdapter;
+	private ItemTouchHelper mItemTouchHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
 
         mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
-		DragListView mDragList = (DragListView) findViewById(R.id.listVPlayers);
+		mRecyclerView = (RecyclerView)findViewById(R.id.listNewPlayers);
         ImageButton btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
         btnAddPlayers.setOnClickListener(this);
@@ -67,32 +69,43 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         btnClear.setOnClickListener(this);
         ImageButton btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
         btnStartGame.setOnClickListener(this);
-		mPlayersList = new ArrayList<>();
+		mPlayers = initPlayers(savedInstanceState);
 
-        if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
-            if (mStored.isPlayersStored()) {
-                getPlayersForNewGame();
-            } else {
-				mPlayersList.add(Pair.create(1L, new Player(getString(R.string.player_1))));
-				mPlayersList.add(Pair.create(2L, new Player(getString(R.string.player_2))));
-            }
-        } else {
-			ArrayList<Player> tList = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
-			mPlayersList = toPairList(tList);
-        }
 
-        mListAdapter = new CustomListAdapter(mPlayersList, R.layout.list_players_for_new_game,
-				R.id.newPlayerName, true, this);
-		mDragList.setLayoutManager(new LinearLayoutManager(this));
-        mDragList.setAdapter(mListAdapter, true);
-		mDragList.setCanDragHorizontally(false);
+
+		mAdapter = new NewPlayersRecyclerAdapter(mPlayers, this);
+		mRecyclerView.setAdapter(mAdapter);
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+		ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+		mItemTouchHelper = new ItemTouchHelper(callback);
+		mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
-    private void getPlayersForNewGame() {
-        ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
+	private ArrayList<Player> initPlayers(Bundle savedInstanceState) {
+		final ArrayList<Player> playerList;
+		if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
+			if (mStored.isPlayersStored()) {
+				playerList = getPlayersForNewGame();
+			} else {
+				playerList = new ArrayList<>();
+				playerList.add(new Player(getString(R.string.player_1)));
+				playerList.add(new Player(getString(R.string.player_2)));
+			}
+		} else {
+			playerList = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
+		}
+
+		return playerList;
+	}
+
+	private ArrayList<Player> getPlayersForNewGame() {
+        final ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
         if (!tList.isEmpty()) {
-			mPlayersList = toPairList(clearStats(tList));
+			return clearStats(tList);
         }
+		return new ArrayList<>();
     }
 
 	private ArrayList<Player> clearStats(ArrayList<Player> tList) {
@@ -116,21 +129,16 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         playerDialog.show(getFragmentManager(), "dialog");
     }
 
-    public void doPositiveClickPlayerNameDialog(String name, Sex sex) {
-        if (newPlayer) {
-            Player newPlayer = new Player(name);
-            newPlayer.setSex(sex);
-			mPlayersList.add(new Pair<>((long) mPlayersList.size()+1, newPlayer));
-		} else {
-            Player player = mPlayersList.get(playerIndex).second;
-            player.setName(name);
-            player.setSex(sex);
-        }
+	public void doPositiveClickPlayerNameDialog(String name, Sex sex) {
+		Player newPlayer = new Player(name);
+		newPlayer.setSex(sex);
 
-        mListAdapter.notifyDataSetChanged();
+		mPlayers.add(newPlayer);
+
+		mAdapter.notifyItemInserted(mPlayers.size());
 		playerDialog.dismiss();
 		playerDialog = null;
-    }
+	}
 
     public void doNegativeClickPlayerNameDialog() {
 		playerDialog.dismiss();
@@ -141,8 +149,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-		ArrayList<Player> listPlayers = toList();
-        outState.putParcelableArrayList(PLAYER_KEY, listPlayers);
+        outState.putParcelableArrayList(PLAYER_KEY, mPlayers);
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -153,33 +160,24 @@ public class NewPlayers extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgBtnAddPlayer:
-                String name = "";
-                showPlayerNameDialog(name);
-                newPlayer = true;
+                showPlayerNameDialog("");
                 break;
             case R.id.imgBtnClear:
-				mPlayersList.clear();
-                mListAdapter.notifyDataSetChanged();
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("ClearPlayers")
-                        .setCategory("Action")
-                        .setLabel("MyActivity")
-                        .build());
+				removePlayers();
                 break;
             case R.id.imgBtnStart:
 				int MIN_PLAYER_QUANTITY = 1;
-				if (mPlayersList.size() < MIN_PLAYER_QUANTITY) {
+				if (mPlayers.size() < MIN_PLAYER_QUANTITY) {
                     Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(this, GameActivity.class);
-					ArrayList<Player> listPlayers = toList();
-                    intent.putParcelableArrayListExtra(PLAYER_KEY, listPlayers);
+                    intent.putParcelableArrayListExtra(PLAYER_KEY, mPlayers);
 
                     mTracker.send(new HitBuilders.EventBuilder()
                             .setAction("Starting Game")
                             .setCategory("Action")
                             .setLabel("Number of players")
-                            .setValue(listPlayers.size())
+                            .setValue(mPlayers.size())
                             .build());
 
                     startActivity(intent);
@@ -188,7 +186,19 @@ public class NewPlayers extends Activity implements View.OnClickListener {
         }
     }
 
-    @Override
+	private void removePlayers() {
+		int playersCount = mPlayers.size();
+		mPlayers.clear();
+
+		mAdapter.notifyItemRangeRemoved(0, playersCount);
+		mTracker.send(new HitBuilders.EventBuilder()
+				.setAction("ClearPlayers")
+				.setCategory("Action")
+				.setLabel("MyActivity")
+				.build());
+	}
+
+	@Override
     protected void onDestroy() {
         if (playerDialog != null) {
             playerDialog = null;
@@ -201,7 +211,7 @@ public class NewPlayers extends Activity implements View.OnClickListener {
      * **************  This function used by adapter ***************
      */
     public void playerDelete(int mPosition) {
-        Player player = mPlayersList.get(mPosition).second;
+        Player player = mPlayers.get(mPosition);
 		String message = player.getName() +
 				EMPTY_STRING +
 				getString(R.string.deleted);
@@ -210,40 +220,28 @@ public class NewPlayers extends Activity implements View.OnClickListener {
                 Toast.LENGTH_SHORT
         ).show();
 
-		mPlayersList.remove(mPosition);
-        mListAdapter.notifyDataSetChanged();
+		mPlayers.remove(mPosition);
+		mAdapter.notifyItemRemoved(mPosition);
     }
 
-    public void playerEdit(int playerPosition) {
-        Player player = mPlayersList.get(playerPosition).second;
-        playerIndex = playerPosition;
-        newPlayer = false;
-        showPlayerNameDialog(player.getName(), player.getSex());
-    }
+    public void playerEdit(int playerPosition, String name) {
+		final Player player = mPlayers.get(playerPosition);
+		player.setName(name);
+		mAdapter.notifyItemChanged(playerPosition, player);
+	}
 
     public void playerChangeSex(int playerPosition) {
-        Player player = mPlayersList.get(playerPosition).second;
+        Player player = mPlayers.get(playerPosition);
         if (Sex.MAN == player.getSex()) {
             player.setSex(Sex.WOMAN);
         } else {
             player.setSex(Sex.MAN);
         }
-        mListAdapter.notifyDataSetChanged();
+		mAdapter.notifyItemChanged(playerPosition);
     }
 
-	private ArrayList<Player> toList() {
-		ArrayList<Player> listPlayers = new ArrayList<>(mPlayersList.size());
-		for (Pair<Long, Player> pair: mPlayersList) {
-			listPlayers.add(pair.second);
-		}
-		return listPlayers;
-	}
-
-	private ArrayList<Pair<Long, Player>> toPairList(List<Player> playersList) {
-		ArrayList<Pair<Long, Player>> pairList = new ArrayList<>();
-		for (int i=0; i < playersList.size(); i++) {
-			pairList.add(Pair.create((long) i, playersList.get(i)));
-		}
-		return pairList;
+	@Override
+	public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+		mItemTouchHelper.startDrag(viewHolder);
 	}
 }

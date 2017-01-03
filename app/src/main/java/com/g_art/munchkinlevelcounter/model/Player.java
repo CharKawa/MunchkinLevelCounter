@@ -11,7 +11,6 @@ import java.util.Random;
 /**
  * Created by G_Art on 16/7/2014.
  */
-@SuppressWarnings ("Convert2Diamond")
 public class Player implements Parcelable, Comparable {
 
     public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
@@ -45,19 +44,6 @@ public class Player implements Parcelable, Comparable {
         this.gear = 0;
         this.sex = Sex.MAN;
         this.winner = false;
-        Random rnd = new Random();
-        this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-    }
-
-    public Player(String name, int position) {
-        lvlStats = new ArrayList<>();
-        gearStats = new ArrayList<>();
-        powerStats = new ArrayList<>();
-        this.name = name;
-        this.level = 1;
-        this.gear = 0;
-        this.winner = false;
-        this.sex = Sex.MAN;
         Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
