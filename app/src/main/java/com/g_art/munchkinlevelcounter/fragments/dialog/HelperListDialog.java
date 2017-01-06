@@ -25,10 +25,7 @@ import butterknife.Unbinder;
  */
 
 public class HelperListDialog extends DialogFragment {
-	@BindView(R.id.helper_list_rec_view)
-	RecyclerView mRecyclerView;
-
-	private Unbinder unbinder;
+	private RecyclerView mRecyclerView;
 
 	@Nullable
 	@Override
@@ -36,7 +33,7 @@ public class HelperListDialog extends DialogFragment {
 		final View v = inflater.inflate(R.layout.helper_dialog, container, false);
 
 		//Binding views
-		unbinder = ButterKnife.bind(v);
+		mRecyclerView = (RecyclerView)v.findViewById(R.id.helper_list_rec_view);
 
 		final ArrayList<Player> helperList = getArguments().getParcelableArrayList(BattleActivity.HELPER_LIST);
 
@@ -51,6 +48,5 @@ public class HelperListDialog extends DialogFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		unbinder.unbind();
 	}
 }

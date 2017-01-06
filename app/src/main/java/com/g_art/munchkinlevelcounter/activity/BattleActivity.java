@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
@@ -23,11 +24,13 @@ import butterknife.Unbinder;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
+import com.g_art.munchkinlevelcounter.fragments.dialog.HelperListDialog;
 import com.g_art.munchkinlevelcounter.model.Monster;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -203,7 +206,13 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	@OnClick (R.id.fab_battle_add_helper)
 	public void selectHelper() {
 		Toast.makeText(this, "fab_battle_add_helper", Toast.LENGTH_SHORT).show();
-
+		if (!players.isEmpty()) {
+			final HelperListDialog helperListDialog = new HelperListDialog();
+			final Bundle bundle = new Bundle();
+			bundle.putParcelableArrayList(HELPER_LIST, new ArrayList<Parcelable>(players));
+			helperListDialog.setArguments(bundle);
+			helperListDialog.show(getFragmentManager(), "helpersDialog");
+		}
 	}
 
 	@OnClick (R.id.fab_battle_fight)
