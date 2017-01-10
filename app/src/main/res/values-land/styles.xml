@@ -14,7 +14,7 @@
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">@color/actionBarBackground</item>
 
-        <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="android:textColorPrimary">@color/actionBarText_color</item>
 
         <item name="android:textColor">@color/text_color</item>
         <item name="android:windowBackground">@color/background</item>

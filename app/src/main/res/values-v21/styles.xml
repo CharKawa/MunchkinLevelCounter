@@ -38,7 +38,7 @@
         <item name="android:actionMenuTextColor">@color/actionBarText_color</item>
         <item name="android:colorBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/status_bar</item>
-        <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="android:textColorPrimary">@color/actionBarText_color</item>
         <item name="android:dialogTheme">@style/Dialog.FullScreen</item>
     </style>
 
@@ -58,6 +58,21 @@
     <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">
         <item name="android:padding">0dp</item>
         <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <style name="MunchkinLevelCounterTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/actionBarBackground</item>
+        <item name="colorPrimaryDark">@color/text_color</item>
+        <item name="colorAccent">@color/actionBarBackground</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:colorForeground">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/status_bar</item>
+        <item name="android:textColorPrimaryInverse">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColorSecondaryInverse">@color/background</item>
+        <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="android:textColorSecondary">@color/text_color</item>
+        <item name="android:statusBarColor">@color/status_bar</item>
     </style>
 
 
