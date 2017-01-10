@@ -76,7 +76,7 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-		ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+		final ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
 		mItemTouchHelper = new ItemTouchHelper(callback);
 		mItemTouchHelper.attachToRecyclerView(mRecyclerView);
     }

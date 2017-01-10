@@ -136,7 +136,7 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 			text = (EditText) itemView.findViewById(R.id.newPlayerName);
 			imBtnPlayerSex = (ImageButton) itemView.findViewById(R.id.imvPlayerSex);
 			imReorder = (ImageView) itemView.findViewById(R.id.reorder);
-			Drawable icon;
+			final Drawable icon;
 			if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 				icon = VectorDrawableCompat.create(itemView.getContext().getResources(), R.drawable.ic_reorder_24dp, itemView.getContext().getTheme());
 			} else {

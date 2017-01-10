@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/helper_name"
+    <ImageView
+        android:id="@+id/helper_choose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PlayerName"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/helper_power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PlayerValue"/>
+        android:gravity="center"
+        android:text="PlayerValue"
+        android:layout_toRightOf="@id/helper_choose"
+        android:paddingRight="3dp"
+        android:textAlignment="center"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/helper_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/helper_power"
+        android:layout_alignTop="@id/helper_power"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/helper_power"
+        android:gravity="end"
+        android:textAlignment="viewEnd"
+        android:text="PlayerName"/>
+
+</RelativeLayout>
