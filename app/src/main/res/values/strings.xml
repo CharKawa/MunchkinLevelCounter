@@ -13,6 +13,7 @@
     <string name="title_activity_stats">Stats</string>
     <string name="title_activity_newPlayers">Players for the game</string>
     <string name="title_dialog_new_Player">Enter the name:</string>
+    <string name="title_dialog_choose_helper">Choose helper</string>
     <string name="title_dialog_continue">Congratulations!</string>
     <string name="title_dialog_confirm">Are you sure?</string>
     <string name="txt_max_lvl">Max LVL</string>

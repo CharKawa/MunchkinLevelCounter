@@ -1,5 +1,6 @@
 package com.g_art.munchkinlevelcounter.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by G_Art on 1/8/2014.
@@ -69,5 +72,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
     private void saveSettings(int maxLvl) {
         setHandler.saveSettings(maxLvl);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

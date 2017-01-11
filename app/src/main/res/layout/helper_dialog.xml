@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              style="@style/Base.Theme.AppCompat.Dialog">
+              android:layout_height="50dp">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/helper_list_rec_view"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

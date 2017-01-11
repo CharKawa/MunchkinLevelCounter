@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.GameActivity;
 
 /**
@@ -24,13 +25,12 @@ public class ConfirmDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setStyle(DialogFragment.STYLE_NORMAL, R.style.alertDialog);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Munchkin_Dialog);
 
         final Bundle bundle = getArguments();
 

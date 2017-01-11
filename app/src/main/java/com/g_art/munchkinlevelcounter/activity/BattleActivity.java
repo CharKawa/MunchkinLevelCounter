@@ -1,6 +1,7 @@
 package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
@@ -21,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
@@ -298,5 +301,10 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	protected void onDestroy() {
 		unbinder.unbind();
 		super.onDestroy();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 }

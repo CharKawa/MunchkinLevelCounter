@@ -33,7 +33,7 @@ public class PlayerNameDialog extends DialogFragment implements View.OnClickList
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Munchkin_Dialog);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 

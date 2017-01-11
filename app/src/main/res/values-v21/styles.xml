@@ -39,7 +39,7 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/status_bar</item>
         <item name="android:textColorPrimary">@color/actionBarText_color</item>
-        <item name="android:dialogTheme">@style/Dialog.FullScreen</item>
+        <item name="android:dialogTheme">@style/Munchkin.Dialog</item>
     </style>
 
     <style name="floating_action_button_default">
@@ -55,9 +55,17 @@
         <item name="android:layout_marginStart">@dimen/default_margin</item>
     </style>
 
-    <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">
-        <item name="android:padding">0dp</item>
+    <style name="Munchkin.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/text_color</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/text_color</item>
+        <!-- Used for the background -->
         <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <style name="Munchkin.TextView" parent="android:Widget.Holo.Light.TextView">
+        <item name="fontPath">fonts/Quasimodo.ttf</item>
     </style>
 
     <style name="MunchkinLevelCounterTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -73,6 +81,10 @@
         <item name="android:textColorPrimary">@color/text_color</item>
         <item name="android:textColorSecondary">@color/text_color</item>
         <item name="android:statusBarColor">@color/status_bar</item>
+
+        <item name="alertDialogTheme">@style/Munchkin.Dialog</item>
+        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
+
     </style>
 
 

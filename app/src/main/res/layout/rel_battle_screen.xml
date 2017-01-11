@@ -17,7 +17,8 @@
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginStart="@dimen/default_margin"
         android:gravity="center"
-        android:text="@string/level"/>
+        android:text="@string/level"
+        android:textColor="@color/text_color"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_battle_lvl_dwn"
@@ -122,7 +123,8 @@
         android:layout_alignEnd="@+id/fab_battle_add_helper"
         android:layout_alignRight="@+id/fab_battle_add_helper"
         android:layout_above="@id/diagonal_divider"
-        android:text="@string/player_1"/>
+        android:text="@string/player_1"
+        android:textSize="18sp"/>
 
     <!-- GEAR-->
 
@@ -238,7 +240,8 @@
         android:layout_alignLeft="@+id/fab_battle_fight"
         android:layout_alignStart="@+id/fab_battle_fight"
         android:layout_below="@+id/diagonal_divider"
-        android:text="@string/monster"/>
+        android:text="@string/monster"
+        android:textSize="18sp"/>
 
     <!--LVL-->
     <TextView

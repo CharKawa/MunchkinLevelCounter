@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.fragments.info.ThanksPopup;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * LevelCounter
@@ -48,5 +51,10 @@ public class InfoActivity extends AppCompatActivity implements ThanksPopup.Popup
             settingsHandler = SettingsHandler.getInstance(mPrefs);
         }
         return settingsHandler.updateStatus(updateStatus);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

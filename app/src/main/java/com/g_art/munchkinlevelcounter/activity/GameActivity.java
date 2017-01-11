@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -28,10 +29,17 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 /**
  * Created by G_Art on 28/7/2014.
  */
-public class GameActivity extends AppCompatActivity implements FragmentPlayersList.OnPlayerSelectedListener, FragmentPlayer.PlayersUpdate, ConfirmDialog.DialogClickEvents {
+public class GameActivity extends AppCompatActivity
+		implements
+		FragmentPlayersList.OnPlayerSelectedListener,
+		FragmentPlayer.PlayersUpdate,
+		ConfirmDialog.DialogClickEvents {
+
     public final static String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
@@ -373,4 +381,10 @@ public class GameActivity extends AppCompatActivity implements FragmentPlayersLi
         }
         return settingsHandler.getMaxLvl();
     }
+
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+	}
 }

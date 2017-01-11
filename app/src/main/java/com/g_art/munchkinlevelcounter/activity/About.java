@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.g_art.munchkinlevelcounter.billing.util.Inventory;
 import com.g_art.munchkinlevelcounter.billing.util.Purchase;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by G_Art on 12/9/2014.
@@ -403,5 +406,10 @@ public class About extends AppCompatActivity implements View.OnClickListener {
             }
             mHelper = null;
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

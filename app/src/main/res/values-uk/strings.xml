@@ -99,5 +99,7 @@
     <string name="battle_dialog_msg_run">You\'ve decided to run away. Run carefully. You can die.</string>
     <string name="battle_dialog_run_confirm">Run!</string>
     <string name="battle_dialog_run_cancel">Cancel</string>
+    <string name="battle_dialog_msg">You\'ve beat that monster! Don\'t forget to up your lvl!</string>
+    <string name="title_dialog_choose_helper">Choose helper</string>
 
 </resources>

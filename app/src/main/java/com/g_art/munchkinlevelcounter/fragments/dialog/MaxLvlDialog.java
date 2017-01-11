@@ -32,7 +32,7 @@ public class MaxLvlDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Munchkin_Dialog);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 

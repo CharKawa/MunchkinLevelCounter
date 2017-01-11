@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,6 +26,8 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by G_Art on 16/7/2014.
@@ -207,5 +210,10 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
 	@Override
 	public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 		mItemTouchHelper.startDrag(viewHolder);
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 }
