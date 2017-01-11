@@ -63,11 +63,13 @@
     <style name="ActionBarMunchkin" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:background">@color/actionBarBackground</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
     </style>
 
     <!-- styles for the action bar tab -->
     <style name="ActionBarTab.Munchkin" parent="@android:style/android:Widget.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator</item>
+        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
     </style>
 
     <!-- action bar title text -->
@@ -93,7 +95,7 @@
 
     <style name="CustomButton" parent="@android:style/android:Widget.Holo.Light.Button">
         <item name="android:textColor">@drawable/custom_button_text</item>
-        <!--<item name="android:background">@drawable/btn_shape</item>-->
+        <item name="android:background">@drawable/btn_shape</item>
     </style>
 
     <style name="CustomSwitch" parent="@android:style/android:Widget.Holo.Light.Button.Toggle">
@@ -146,10 +148,13 @@
         <item name="android:textColorSecondaryInverse">@color/background</item>
         <item name="android:textColorPrimary">@color/text_color</item>
         <item name="android:textColorSecondary">@color/text_color</item>
-
-        <item name="alertDialogTheme">@style/Munchkin.Dialog</item>
-
         <item name="android:textViewStyle">@style/Munchkin.TextView</item>
+
+        <!--<item name="dialogTheme">@style/Munchkin.Dialog</item>-->
+        <item name="android:buttonStyle">@style/CustomButton</item>
+        <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
+
+
     </style>
 
 </resources>
