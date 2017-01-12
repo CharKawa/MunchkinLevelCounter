@@ -14,6 +14,7 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by agulia on 12/1/16.
@@ -21,16 +22,19 @@ import java.util.ArrayList;
 
 public class HelperListAdapter extends RecyclerView.Adapter<HelperListAdapter.VieHolder> {
 
-	private ArrayList<Player> mPlayers;
+	private List<Player> mPlayers;
+	private View.OnClickListener onClickListener;
 
-	public HelperListAdapter(ArrayList<Player> mPlayers) {
+	public HelperListAdapter(List<Player> mPlayers, final View.OnClickListener onClickListener) {
 		this.mPlayers = mPlayers;
+		this.onClickListener = onClickListener;
 	}
 
 	@Override
 	public VieHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.helper_row, parent, false);
-		return new VieHolder(v);
+//		v.setOnClickListener(onClickListener);
+		return new VieHolder(v, onClickListener);
 	}
 
 	@Override
@@ -52,7 +56,7 @@ public class HelperListAdapter extends RecyclerView.Adapter<HelperListAdapter.Vi
 		TextView helperPower;
 		ImageView helper_choose;
 
-		public VieHolder(View itemView) {
+		public VieHolder(View itemView, View.OnClickListener onClickListener) {
 			super(itemView);
 			helperName = (TextView) itemView.findViewById(R.id.helper_name);
 			helperPower = (TextView) itemView.findViewById(R.id.helper_power);

@@ -42,7 +42,7 @@ public class ConfirmDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         if ("GameActivity".equals(bundle.getString(SOURCE_KEY))) {
                             GameActivity gameActivity = (GameActivity) getActivity();
-                            gameActivity.onNegativeClickConfirmDialog();
+                            gameActivity.stayInTheGame();
                         } else {
                             DialogClickEvents activity = (DialogClickEvents) getActivity();
                             activity.positiveDialogClick(new Bundle());
@@ -55,7 +55,7 @@ public class ConfirmDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         if ("GameActivity".equals(bundle.getString(SOURCE_KEY))) {
                             GameActivity gameActivity = (GameActivity) getActivity();
-                            gameActivity.onPositiveClickConfirmDialog();
+                            gameActivity.leaveGame();
                         } else {
                             DialogClickEvents activity = (DialogClickEvents) getActivity();
                             activity.negativeDialogClick(new Bundle());

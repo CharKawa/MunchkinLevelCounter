@@ -47,7 +47,7 @@ public class HelperListDialog extends DialogFragment {
 
 		mRecyclerView.setLayoutManager(layoutManager);
 
-		HelperListAdapter mAdapter = new HelperListAdapter(helperList);
+		HelperListAdapter mAdapter = new HelperListAdapter(helperList, null);
 		mRecyclerView.setAdapter(mAdapter);
 
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),

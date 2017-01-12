@@ -8,26 +8,37 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindBool;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.dialog.HelperListDialog;
+import com.g_art.munchkinlevelcounter.listadapter.HelperListAdapter;
 import com.g_art.munchkinlevelcounter.model.Monster;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.google.android.gms.analytics.HitBuilders;
@@ -68,6 +79,11 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	TextView pMods;
 	@BindView (R.id.txt_battle_player_power)
 	TextView pPower;
+	@BindView (R.id.chb_battle_warrior)
+	AppCompatCheckBox cb_warrior;
+
+	@BindView (R.id.txt_battle_helper_power_value)
+	TextView hPower;
 
 	//Monster's views
 	@BindView (R.id.txt_battle_m_lvl_value)
@@ -82,9 +98,8 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	//Buttons
 	@BindView(R.id.fab_battle_add_helper)
 	FloatingActionButton helperBtn;
-	//CheckBox
-	@BindView(R.id.chb_battle_warrior)
-	AppCompatCheckBox checkBox;
+
+	private int selectedIndex;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -208,14 +223,58 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 
 	@OnClick (R.id.fab_battle_add_helper)
 	public void selectHelper() {
-		Toast.makeText(this, "fab_battle_add_helper", Toast.LENGTH_SHORT).show();
 		if (!players.isEmpty()) {
-			final HelperListDialog helperListDialog = new HelperListDialog();
-			final Bundle bundle = new Bundle();
-			bundle.putParcelableArrayList(HELPER_LIST, new ArrayList<Parcelable>(players));
-			helperListDialog.setArguments(bundle);
-			helperListDialog.show(getFragmentManager(), "helpersDialog");
+			final List<String> playersList = new ArrayList<>(players.size());
+			for (Player player : players){
+				playersList.add(player.getHelperInfo());
+			}
+
+			MaterialDialog dialog = new MaterialDialog.Builder(this)
+//					.title(R.string.title_dialog_choose_helper)
+					.items(playersList)
+					.itemsCallbackSingleChoice(selectedIndex, new MaterialDialog.ListCallbackSingleChoice() {
+						@Override
+						public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+							return true;
+						}
+					})
+					.positiveText(R.string.title_dialog_choose_helper_ok)
+					.onPositive(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							helperSelected(dialog.getSelectedIndex());
+						}
+					})
+					.neutralText(R.string.title_dialog_choose_helper_cancel)
+					.onNeutral(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							dialog.dismiss();
+						}
+					})
+					.negativeText(R.string.title_dialog_choose_helper_remove)
+					.onNegative(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							helperSelected(-1);
+						}
+					})
+					.backgroundColor(getResources().getColor(R.color.background))
+					.dividerColor(getResources().getColor(R.color.text_color))
+					.autoDismiss(true)
+					.build();
+			dialog.show();
 		}
+	}
+
+	private void helperSelected(int position) {
+		if (position == -1) {
+			helper = null;
+		} else {
+			helper = players.get(position);
+		}
+		selectedIndex = position;
+		updateViewValues();
 	}
 
 	@OnClick (R.id.fab_battle_fight)
@@ -225,43 +284,39 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		boolean willWin = pPowerValue > mPowerValue;
 
 		if (willWin) {
-			Bundle bundle = new Bundle();
-			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
-			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.battle_dialog_title_win);
-			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.battle_dialog_msg);
-			bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_dialog_battle_continue);
-			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_battle);
-			DialogFragment confirmDialog = new ConfirmDialog();
-			confirmDialog.setArguments(bundle);
-			confirmDialog.show(getFragmentManager(), "confirmDialog");
+			new MaterialDialog.Builder(this)
+					.title(R.string.battle_dialog_title_win)
+					.content(R.string.battle_dialog_msg)
+					.positiveText(R.string.ok_btn_dialog_battle_continue)
+					.negativeText(R.string.cancel_btn_for_dialog_battle)
+					.backgroundColor(getResources().getColor(R.color.background))
+					.show();
 		} else {
-			Bundle bundle = new Bundle();
-			bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
-			bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.battle_dialog_title_lose);
-			bundle.putInt(ConfirmDialog.MSG_KEY, R.string.battle_dialog_msg_lose);
-			bundle.putInt(ConfirmDialog.OK_KEY, R.string.battle_dialog_lose_run_away);
-			bundle.putInt(ConfirmDialog.NOT_KEY, R.string.battle_dialog_lose_anyway);
-			DialogFragment confirmDialog = new ConfirmDialog();
-			confirmDialog.setArguments(bundle);
-			confirmDialog.show(getFragmentManager(), "confirmDialog");
+			new MaterialDialog.Builder(this)
+					.title(R.string.battle_dialog_title_lose)
+					.content(R.string.battle_dialog_msg_lose)
+					.positiveText(R.string.battle_dialog_lose_run_away)
+					.negativeText(R.string.battle_dialog_lose_anyway)
+					.backgroundColor(getResources().getColor(R.color.background))
+					.show();
 		}
 	}
 
 	@OnClick (R.id.fab_battle_run_away)
 	public void runAway() {
-		Toast.makeText(this, "fab_battle_run_away", Toast.LENGTH_SHORT).show();
-
-		Bundle bundle = new Bundle();
-		bundle.putString(ConfirmDialog.SOURCE_KEY, "BattleActivity");
-		bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.battle_dialog_title_run);
-		bundle.putInt(ConfirmDialog.MSG_KEY, R.string.battle_dialog_msg_run);
-		bundle.putInt(ConfirmDialog.OK_KEY, R.string.battle_dialog_run_confirm);
-		bundle.putInt(ConfirmDialog.NOT_KEY, R.string.battle_dialog_run_cancel);
-		DialogFragment confirmDialog = new ConfirmDialog();
-		confirmDialog.setArguments(bundle);
-		confirmDialog.show(getFragmentManager(), "confirmDialog");
+		new MaterialDialog.Builder(this)
+				.title(R.string.battle_dialog_title_run)
+				.content(R.string.battle_dialog_msg_run)
+				.positiveText(R.string.battle_dialog_run_confirm)
+				.negativeText(R.string.battle_dialog_run_cancel)
+				.backgroundColor(getResources().getColor(R.color.background))
+				.show();
 	}
 
+	@OnCheckedChanged(R.id.chb_battle_warrior)
+	public void enableWarrior() {
+		updateViewValues();
+	}
 
 	@Override
 	public void positiveDialogClick(Bundle bundle) {
@@ -283,7 +338,18 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		pLvl.setText(String.valueOf(player.getLevel()));
 		pGear.setText(String.valueOf(player.getGear()));
 		pMods.setText(String.valueOf(player.getMods()));
-		int pPowerValue = player.getLevel() + player.getGear() + player.getMods();
+		int pPowerValue = player.getPower() + player.getMods();
+
+		if (helper != null) {
+			hPower.setText("+"+helper.getPower());
+			pPowerValue = pPowerValue+helper.getPower();
+		} else {
+			hPower.setText("");
+		}
+		if (cb_warrior.isChecked()) {
+			pPowerValue++;
+		}
+
 		pPower.setText(String.valueOf(pPowerValue));
 
 		//Filling monster's values
@@ -294,8 +360,27 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 
 		if (players.isEmpty()) { //after removing currentPlayer
 			helperBtn.setEnabled(false);
+		} else {
+			helperBtn.setEnabled(true);
 		}
+		updateHelperBtn();
 	}
+
+	private void updateHelperBtn() {
+		final Drawable icon;
+		int resId = R.drawable.ic_person_add_24dp;
+		if (helper != null) {
+			resId = R.drawable.ic_autorenew_helper_24dp;
+		}
+
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+			icon = VectorDrawableCompat.create(this.getResources(), resId, this.getTheme());
+		} else {
+			icon = this.getResources().getDrawable(resId, this.getTheme());
+		}
+		helperBtn.setImageDrawable(icon);
+	}
+
 
 	@Override
 	protected void onDestroy() {

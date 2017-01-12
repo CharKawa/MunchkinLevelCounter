@@ -245,4 +245,12 @@ public class Player implements Parcelable, Comparable {
         }
         return colorCompare;
     }
+
+    public String getHelperInfo(){
+        return " Power: "+this.getPower() + " "+this.getName();
+    }
+
+    public int getPower() {
+        return this.level+this.gear;
+    }
 }

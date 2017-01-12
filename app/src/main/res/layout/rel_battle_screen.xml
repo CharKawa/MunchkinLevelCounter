@@ -80,6 +80,13 @@
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_person_add_24dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_battle_helper_power_value"
+        android:layout_alignRight="@id/fab_battle_add_helper"
+        android:layout_below="@id/fab_battle_add_helper"/>
+
     <!--WARRIOR-->
     <TextView
         android:id="@+id/txt_battle_warrior"

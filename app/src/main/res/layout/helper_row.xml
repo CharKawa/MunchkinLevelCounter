@@ -13,14 +13,27 @@
         android:layout_alignParentStart="true"/>
 
     <TextView
+        android:id="@+id/helper_power_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/total_power"
+        android:layout_toRightOf="@id/helper_choose"
+        android:layout_alignBottom="@id/helper_choose"
+        android:layout_alignTop="@id/helper_choose"
+        android:paddingRight="3dp"
+        android:textSize="24sp"
+        android:textAlignment="center"/>
+
+    <TextView
         android:id="@+id/helper_power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="PlayerValue"
-        android:layout_toRightOf="@id/helper_choose"
-        android:layout_alignBottom="@id/helper_choose"
-        android:layout_alignTop="@id/helper_choose"
+        android:layout_toRightOf="@id/helper_power_label"
+        android:layout_alignBottom="@id/helper_power_label"
+        android:layout_alignTop="@id/helper_power_label"
         android:paddingRight="3dp"
         android:textSize="24sp"
         android:textAlignment="center"/>

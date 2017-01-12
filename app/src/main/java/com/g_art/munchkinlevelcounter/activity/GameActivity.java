@@ -6,19 +6,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
-import com.g_art.munchkinlevelcounter.fragments.dialog.MaxLvlDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.model.Player;
@@ -37,8 +46,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class GameActivity extends AppCompatActivity
 		implements
 		FragmentPlayersList.OnPlayerSelectedListener,
-		FragmentPlayer.PlayersUpdate,
-		ConfirmDialog.DialogClickEvents {
+		FragmentPlayer.PlayersUpdate {
 
     public final static String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
@@ -150,18 +158,29 @@ public class GameActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        Bundle bundle = new Bundle();
-        bundle.putString(ConfirmDialog.SOURCE_KEY, "GameActivity");
-        bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_confirm);
-        bundle.putInt(ConfirmDialog.MSG_KEY, R.string.message_for_dialog_confirm);
-        bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_confirm);
-        bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_confirm);
-        confirmDialog = new ConfirmDialog();
-        confirmDialog.setArguments(bundle);
-        confirmDialog.show(fm, "confirmDialog");
+		new MaterialDialog.Builder(this)
+				.title(R.string.title_dialog_confirm)
+				.content(R.string.message_for_dialog_confirm)
+				.positiveText(R.string.ok_btn_for_dialog_confirm)
+				.negativeText(R.string.cancel_btn_for_dialog_confirm)
+				.backgroundColor(getResources().getColor(R.color.background))
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						stayInTheGame();
+					}
+				})
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						leaveGame();
+					}
+				})
+				.autoDismiss(true)
+				.show();
     }
 
-    public void onPositiveClickConfirmDialog() {
+    public void leaveGame() {
         mTracker.send(new HitBuilders.EventBuilder()
                 .setAction("GameTerminated")
                 .setLabel("GameActivity")
@@ -169,8 +188,7 @@ public class GameActivity extends AppCompatActivity
         super.onBackPressed();
     }
 
-    public void onNegativeClickConfirmDialog() {
-        confirmDialog.dismiss();
+    public void stayInTheGame() {
     }
 
     @Override
@@ -257,52 +275,58 @@ public class GameActivity extends AppCompatActivity
                 .setAction("DiceRolled")
                 .setLabel("GameActivity")
                 .build());
-        int resId = 1;
         int Min = 1;
         int Max = 6;
         int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
-        switch (dice) {
+		final View v = View.inflate(this, R.layout.dice_dialog, null);
+		final ImageView imageView = (ImageView) v.findViewById(R.id.imgDice);
+
+		switch (dice) {
             case 1:
-                resId = R.drawable.dice_1;
+				imageView.setImageResource(R.drawable.dice_1);
                 break;
             case 2:
-                resId = R.drawable.dice_2;
+				imageView.setImageResource(R.drawable.dice_2);
                 break;
             case 3:
-                resId = R.drawable.dice_3;
+				imageView.setImageResource(R.drawable.dice_3);
                 break;
             case 4:
-                resId = R.drawable.dice_4;
+				imageView.setImageResource(R.drawable.dice_4);
                 break;
             case 5:
-                resId = R.drawable.dice_5;
+				imageView.setImageResource(R.drawable.dice_5);
                 break;
             case 6:
-                resId = R.drawable.dice_6;
+				imageView.setImageResource(R.drawable.dice_6);
                 break;
         }
-//
-//        Bundle bundle = new Bundle();
-//        bundle.putInt(DiceDialog.DICE_KEY, resId);
-//        DiceDialog diceDialog = new DiceDialog();
-//        diceDialog.setArguments(bundle);
-//        diceDialog.show(fm, "dice");
+
+//		new MaterialDialog.Builder(this)
+//				.title(R.string.dice)
+//				.customView(imageView, false)
+//				.backgroundColor(getResources().getColor(R.color.background))
+//				.autoDismiss(true)
+//				.show();
         showBattle();
     }
 
 	private void showBattle() {
-		//todo launch battle activity for result
 		final Intent intent = new Intent(this, BattleActivity.class);
 		final Bundle bundle = new Bundle();
 		bundle.putInt(PLAYER, mSelectedPlayerPosition);
 		bundle.putParcelableArrayList(PLAYERS_KEY, playersList);
 		bundle.putInt(MAX_LVL, maxLvl());
 		intent.putExtras(bundle);
-		View view = findViewById(R.id.action_dice);
-		int x = (int) view.getX();
-		int y = (int) view.getY();
-		ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
-		startActivityForResult(intent, BATTLE_REQUEST, optionsCompat.toBundle());
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			View view = findViewById(R.id.action_dice);
+			int x = (int) view.getX();
+			int y = (int) view.getY();ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
+			startActivityForResult(intent, BATTLE_REQUEST, optionsCompat.toBundle());
+		} else {
+			startActivityForResult(intent, BATTLE_REQUEST);
+		}
 	}
 
 	@Override
@@ -320,24 +344,33 @@ public class GameActivity extends AppCompatActivity
 	}
 
 	private void finishGame() {
-        Bundle bundle = new Bundle();
-        bundle.putString(ConfirmDialog.SOURCE_KEY, "FragmentPlayer");
-        bundle.putInt(ConfirmDialog.TITLE_KEY, R.string.title_dialog_finish);
-        bundle.putInt(ConfirmDialog.MSG_KEY, R.string.msg_finish_game);
-        bundle.putInt(ConfirmDialog.OK_KEY, R.string.ok_btn_for_dialog_finish);
-        bundle.putInt(ConfirmDialog.NOT_KEY, R.string.cancel_btn_for_dialog_finish);
-        final ConfirmDialog confirmDialog = new ConfirmDialog();
-        confirmDialog.setArguments(bundle);
-        confirmDialog.show(fm, "confirmDialog");
+		new MaterialDialog.Builder(this)
+				.title(R.string.title_dialog_finish)
+				.content(R.string.msg_finish_game)
+				.positiveText(R.string.ok_btn_for_dialog_finish)
+				.negativeText(R.string.cancel_btn_for_dialog_finish)
+				.backgroundColor(getResources().getColor(R.color.background))
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						finishCurrentGame();
+					}
+				})
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						contCurrentGame();
+					}
+				})
+				.autoDismiss(true)
+				.show();
     }
 
-	@Override
-    public void positiveDialogClick(final Bundle bundle) {
+    public void finishCurrentGame() {
         openStatsActivity();
     }
 
-	@Override
-    public void negativeDialogClick(final Bundle bundle) {
+    public void contCurrentGame() {
     }
 
     private void openStatsActivity() {
@@ -359,13 +392,71 @@ public class GameActivity extends AppCompatActivity
     }
 
     private void showMaxLvLDialog() {
-        Bundle nBundle = new Bundle();
-        nBundle.putInt(MAX_LVL, maxLvl);
-        if (lvlDialog == null) {
-            lvlDialog = new MaxLvlDialog();
-        }
-        lvlDialog.setArguments(nBundle);
-        lvlDialog.show(getFragmentManager(), "LvLDialog");
+		View v = View.inflate(this, R.layout.maxlvl_dialog, null);
+		final EditText maxLvlEditText = (EditText) v.findViewById(R.id.maxLvL);
+		maxLvlEditText.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
+
+		final MaterialDialog maxLvlDialog = new MaterialDialog.Builder(this)
+				.title(R.string.txt_max_lvl)
+				.customView(maxLvlEditText, false)
+				.positiveText(R.string.dialog_ok_btn)
+				.negativeText(R.string.dialog_cancel_btn)
+				.backgroundColor(getResources().getColor(R.color.background))
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						EditText editLvl = (EditText)dialog.getCustomView();
+						String lvl = editLvl.getText().toString();
+						if (!lvl.equals("") && !lvl.equals(" ")) {
+							try {
+								int mLvl = Integer.parseInt(lvl);
+								if (mLvl <= SettingsHandler.MIN_LVL) {
+									Toast.makeText(dialog.getContext(),
+											getString(R.string.error_max_level_one),
+											Toast.LENGTH_SHORT
+									).show();
+									editLvl.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
+								} else {
+									doPositiveClickLvLDialog(mLvl);
+								}
+							} catch (NumberFormatException ex) {
+								Toast.makeText(dialog.getContext(),
+										getString(R.string.error_max_lvl_settings),
+										Toast.LENGTH_SHORT
+								).show();
+							}
+						}
+					}
+				})
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						contCurrentGame();
+					}
+				})
+		.build();
+
+		maxLvlEditText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if (s.length() > 0) {
+					maxLvlDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+				} else {
+					maxLvlDialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+		maxLvlDialog.show();
     }
 
     public void doPositiveClickLvLDialog(int newMaxLvl) {

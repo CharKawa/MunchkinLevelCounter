@@ -18,7 +18,7 @@
     <string name="dialog_ok_btn">Ок</string>
     <string name="dialog_cancel_btn">Відміна</string>
     <string name="list_players_Delete">Видалити</string>
-    <string name="total_power">Сила:</string>
+    <string name="total_power">Сила</string>
     <string name="level">Рівень</string>
     <string name="gear">Манатки</string>
     <string name="game_screen">Level Counter</string>
@@ -91,7 +91,7 @@
     <string name="ok_btn_dialog_battle_continue">Continue</string>
     <string name="cancel_btn_for_dialog_battle">Cancel</string>
     <string name="battle_dialog_title_win">Victory!</string>
-    <string name="battle_dialog_title_lose">Defeate</string>
+    <string name="battle_dialog_title_lose">Defeat</string>
     <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to run Away?</string>
     <string name="battle_dialog_lose_run_away">Run Away</string>
     <string name="battle_dialog_lose_anyway">Continue</string>
