@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/thanks_popup"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/thanks_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -28,7 +29,7 @@
         android:layout_margin="10dp"
         android:background="@null"
         android:contentDescription="@string/btn_rate"
-        android:src="@drawable/rate"/>
+        app:srcCompat="@drawable/ic_stars_24dp"/>
 
     <TextView
         android:id="@+id/txtDonatePopup"

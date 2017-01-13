@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:id="@+id/scrollView"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/scrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             tools:context=".activity.About">
@@ -62,7 +63,7 @@
             android:layout_margin="5dp"
             android:background="@null"
             android:contentDescription="@string/btn_rate"
-            android:src="@drawable/rate" />
+            app:srcCompat="@drawable/ic_stars_24dp"/>
 
         <TextView
             android:id="@+id/txtDonate"
