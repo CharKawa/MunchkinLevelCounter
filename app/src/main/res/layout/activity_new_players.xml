@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="fill_parent"
               android:layout_height="match_parent"
+              android:focusableInTouchMode="true"
               android:orientation="vertical">
 
     <LinearLayout
@@ -24,45 +24,58 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
-
-        <ImageButton
-            android:id="@+id/imgBtnAddPlayer"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_new_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/players_screen_Add_Player"
-            android:src="@drawable/add_player"/>
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:elevation="0dp"
+            app:pressedTranslationZ="0dp"
+            app:srcCompat="@drawable/ic_person_add_24dp"
+            app:fabSize="normal"
+            />
 
-        <ImageButton
-            android:id="@+id/imgBtnClear"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_clear_players"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="left"
-            android:layout_margin="15dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/players_screen_Clear_All"
-            android:src="@drawable/clear"/>
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:elevation="0dp"
+            app:pressedTranslationZ="0dp"
+            app:srcCompat="@drawable/ic_delete_24dp"
+            app:fabSize="normal"
+            />
 
-        <ImageButton
-            android:id="@+id/imgBtnStart"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_start_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:layout_margin="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/players_screen_Start_Game"
-            android:src="@drawable/start"/>
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:elevation="0dp"
+            app:pressedTranslationZ="0dp"
+            app:srcCompat="@drawable/ic_check_24dp"
+            app:fabSize="normal"
+            />
 
     </RelativeLayout>
 </LinearLayout>

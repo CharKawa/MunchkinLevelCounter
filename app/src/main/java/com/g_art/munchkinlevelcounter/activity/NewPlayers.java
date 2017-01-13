@@ -26,20 +26,23 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class NewPlayers extends AppCompatActivity implements View.OnClickListener, OnStartDragListener {
+public class NewPlayers extends AppCompatActivity implements OnStartDragListener {
     private final static String PLAYER_KEY = "playersList";
     public final static String PLAYER_NAME = "playerName";
     public static final String PLAYER_SEX = "player_sex";
     private Tracker mTracker;
     private String PREFS_NO_DATA;
-    private DialogFragment playerDialog;
     private StoredPlayers mStored;
 	private ArrayList<Player> mPlayers;
+	private Unbinder unbinder;
 
 	private RecyclerView mRecyclerView;
 	private NewPlayersRecyclerAdapter mAdapter;
@@ -49,6 +52,7 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_players);
+		unbinder = ButterKnife.bind(this);
 
         // Obtain the shared Tracker instance.
         MyApplication application = (MyApplication) getApplication();
@@ -64,13 +68,7 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
         mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
 		mRecyclerView = (RecyclerView)findViewById(R.id.listNewPlayers);
-        ImageButton btnAddPlayers = (ImageButton) findViewById(R.id.imgBtnAddPlayer);
 
-        btnAddPlayers.setOnClickListener(this);
-        ImageButton btnClear = (ImageButton) findViewById(R.id.imgBtnClear);
-        btnClear.setOnClickListener(this);
-        ImageButton btnStartGame = (ImageButton) findViewById(R.id.imgBtnStart);
-        btnStartGame.setOnClickListener(this);
 		mPlayers = initPlayers(savedInstanceState);
 
 		mAdapter = new NewPlayersRecyclerAdapter(mPlayers, this);
@@ -116,33 +114,11 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
 		return pList;
 	}
 
-	private void showPlayerNameDialog(String name) {
-        showPlayerNameDialog(name, Sex.MAN);
-    }
-
-	private void showPlayerNameDialog(String name, Sex sex) {
-        playerDialog = new PlayerNameDialog();
-        Bundle nBundle = new Bundle();
-        nBundle.putString(PLAYER_NAME, name);
-        nBundle.putSerializable(PLAYER_SEX, sex);
-        playerDialog.setArguments(nBundle);
-        playerDialog.show(getFragmentManager(), "dialog");
-    }
-
-	public void doPositiveClickPlayerNameDialog(String name, Sex sex) {
-		Player newPlayer = new Player(name);
-		newPlayer.setSex(sex);
-
+	private void addNewPlayer(String name) {
+		final Player newPlayer = new Player(name);
 		mPlayers.add(newPlayer);
-
 		mAdapter.notifyItemInserted(mPlayers.size());
-		playerDialog.dismiss();
-		playerDialog = null;
-	}
-
-    public void doNegativeClickPlayerNameDialog() {
-		playerDialog.dismiss();
-		playerDialog = null;
+		mRecyclerView.scrollToPosition(mPlayers.size()-1);
     }
 
     @Override
@@ -155,16 +131,21 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-    @Override
+	@OnClick({
+			R.id.fab_clear_players,
+			R.id.fab_new_player,
+			R.id.fab_start_game
+	})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imgBtnAddPlayer:
-                showPlayerNameDialog("");
+            case R.id.fab_new_player:
+				final int number = mPlayers.size()+1;
+                addNewPlayer("Player #"+number);
                 break;
-            case R.id.imgBtnClear:
+            case R.id.fab_clear_players:
 				removePlayers();
                 break;
-            case R.id.imgBtnStart:
+            case R.id.fab_start_game:
 				int MIN_PLAYER_QUANTITY = 1;
 				if (mPlayers.size() < MIN_PLAYER_QUANTITY) {
                     Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
@@ -199,10 +180,7 @@ public class NewPlayers extends AppCompatActivity implements View.OnClickListene
 
 	@Override
     protected void onDestroy() {
-        if (playerDialog != null) {
-            playerDialog = null;
-        }
-
+		unbinder.unbind();
         super.onDestroy();
     }
 

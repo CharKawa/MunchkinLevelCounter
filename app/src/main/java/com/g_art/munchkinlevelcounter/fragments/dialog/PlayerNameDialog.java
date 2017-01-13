@@ -61,7 +61,7 @@ public class PlayerNameDialog extends DialogFragment implements View.OnClickList
                         if (name.isEmpty()) {
                             Toast.makeText(getActivity(), getString(R.string.error_empty_name), Toast.LENGTH_SHORT).show();
                         } else {
-                            ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name, playerSex);
+//                            ((NewPlayers) getActivity()).doPositiveClickPlayerNameDialog(name, playerSex);
                         }
 
                     }
@@ -69,7 +69,7 @@ public class PlayerNameDialog extends DialogFragment implements View.OnClickList
                 .setNegativeButton(R.string.dialog_cancel_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((NewPlayers) getActivity()).doNegativeClickPlayerNameDialog();
+//                        ((NewPlayers) getActivity()).doNegativeClickPlayerNameDialog();
                     }
                 });
 

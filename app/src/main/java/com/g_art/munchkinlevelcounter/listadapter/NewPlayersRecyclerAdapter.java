@@ -50,15 +50,15 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, final int position) {
 		if (mPlayers.isEmpty()) {
-			holder.text.setText(R.string.no_players);
+			holder.pName.setText(R.string.no_players);
 
-			holder.imBtnPlayerSex.setVisibility(View.GONE);
+			holder.pSex.setVisibility(View.GONE);
 		} else {
 
 			final Player player = mPlayers.get(holder.getAdapterPosition());
 
-			holder.text.setText(player.getName());
-			holder.text.addTextChangedListener(new TextWatcher() {
+			holder.pName.setText(player.getName());
+			holder.pName.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -77,10 +77,10 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 				}
 			});
 
-			holder.text.setFocusableInTouchMode(true);
+			holder.pName.setFocusableInTouchMode(true);
 
-			holder.imBtnPlayerSex.setVisibility(View.VISIBLE);
-			holder.imBtnPlayerSex.setOnClickListener(new View.OnClickListener() {
+			holder.pSex.setVisibility(View.VISIBLE);
+			holder.pSex.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					playerChangeSex(holder.getAdapterPosition());
@@ -88,9 +88,9 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 			});
 
 			if (player.getSex() == Sex.MAN) {
-				holder.imBtnPlayerSex.setImageResource(R.drawable.man);
+				holder.pSex.setImageResource(R.drawable.man);
 			} else {
-				holder.imBtnPlayerSex.setImageResource(R.drawable.woman);
+				holder.pSex.setImageResource(R.drawable.woman);
 			}
 		}
 	}
@@ -126,15 +126,16 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 	public static class ViewHolder extends RecyclerView.ViewHolder  implements
 			ItemTouchHelperViewHolder {
 
-		private EditText text;
-		private ImageButton imBtnPlayerSex;
+		private EditText pName;
+		private ImageButton pSex;
 		private ImageView imReorder;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
 
-			text = (EditText) itemView.findViewById(R.id.newPlayerName);
-			imBtnPlayerSex = (ImageButton) itemView.findViewById(R.id.imvPlayerSex);
+			pName = (EditText) itemView.findViewById(R.id.newPlayerName);
+
+			pSex = (ImageButton) itemView.findViewById(R.id.imvPlayerSex);
 			imReorder = (ImageView) itemView.findViewById(R.id.reorder);
 			final Drawable icon;
 			if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
