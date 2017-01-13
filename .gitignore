@@ -66,3 +66,22 @@ captures/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 # Created by .ignore support plugin (hsz.mobi)
+/.idea/
+.idea/
+Screenshots/.picasa.ini
+Screenshots/1080x1920_gameScreen.png
+Screenshots/1080x1920_statsScreen.png
+Screenshots/1080x192_playersScreen.png
+app/class_files.txt
+app/fabric.properties
+app/libs/
+app/manifest-merger-debug-report.txt
+app/manifest-merger-release-report.txt
+app/mapping.txt
+app/seeds.txt
+app/src/androidTest/
+app/unused.txt
+gradlew
+gradlew.bat
+import-summary.txt
+projectFilesBackup/
