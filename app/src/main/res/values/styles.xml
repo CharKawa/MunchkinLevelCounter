@@ -1,39 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-
-        <!-- colorAccent is used as the default value for colorControlActivated,
-          which is used to tint widgets -->
-        <item name="colorAccent">@color/actionBarBackground</item>
-
-        <!-- colorPrimaryDark is used for the status bar -->
-        <item name="colorPrimaryDark">@color/status_bar</item>
-
-        <!-- colorPrimary is used for the default action bar background -->
+    <style name="MunchkinLevelCounterTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/actionBarBackground</item>
-
-        <item name="android:textColor">@color/text_color</item>
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
-
-        <!--<item name="actionBarTheme">@style/AppTheme.Widget</item>-->
-        <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
-        <item name="android:buttonStyle">@style/CustomButton</item>
-        <item name="android:actionBarTabStyle">@style/ActionBarTab.Munchkin</item>
-        <item name="android:buttonStyleToggle">@style/CustomSwitch</item>
-        <item name="android:actionBarItemBackground">@drawable/selectable_background_munchkin</item>
-
-        <!--<item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>-->
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
-        <item name="android:actionDropDownStyle">@style/DropDownNav.Munchkin</item>
-
-        <item name="android:actionMenuTextColor">@color/actionBarText_color</item>
+        <item name="colorPrimaryDark">@color/text_color</item>
+        <item name="colorAccent">@color/actionBarBackground</item>
         <item name="android:colorBackground">@color/background</item>
-        <item name="android:textColorPrimary">@color/actionBarText_color</item>
+        <item name="android:colorForeground">@color/status_bar</item>
+        <item name="android:textColorPrimaryInverse">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColorSecondaryInverse">@color/background</item>
+        <item name="android:textColorPrimary">@color/text_color</item>
+        <item name="android:textColorSecondary">@color/text_color</item>
+        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
 
-        <item name="android:dialogTheme">@style/Munchkin.Dialog</item>
+        <item name="actionBarStyle">@style/Munchkin.ActionBar</item>
+        <item name="actionBarTheme">@style/Munchkin.ThemeOverlay.AppTheme.ActionBar</item>
+        <item name="actionBarPopupTheme">@style/Munchkin.ThemeOverlay.AppTheme.PopupMenu</item>
 
     </style>
 
@@ -59,71 +42,6 @@
         <item name="android:layout_marginBottom">0dp</item>
     </style>
 
-    <!-- styles for the action bar -->
-    <style name="ActionBarMunchkin" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:background">@color/actionBarBackground</item>
-        <item name="android:titleTextStyle">@style/TitleTextStyle</item>
-        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
-    </style>
-
-    <!-- styles for the action bar tab -->
-    <style name="ActionBarTab.Munchkin" parent="@android:style/android:Widget.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator</item>
-        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
-    </style>
-
-    <!-- action bar title text -->
-    <style name="TitleTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
-        <item name="android:textColor">@color/actionBarText_color</item>
-    </style>
-
-    <!-- alert dialog style-->
-    <style name="alertDialog" parent="@android:style/Theme.Holo.Light.Dialog">
-        <!--<item name="android:background">@android:color/transparent</item>-->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-
-        <!--<item name="android:buttonStyle">@style/CustomButton</item>-->
-        <!--<item name="buttonBarStyle">@style/CustomButton</item>-->
-        <!--<item name="borderlessButtonStyle">@style/CustomButton</item>-->
-    </style>
-
-    <!-- action bar tab text -->
-    <style name="TabTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
-        <item name="android:textColor">@color/text_color</item>
-    </style>
-
-    <style name="CustomButton" parent="@android:style/android:Widget.Holo.Light.Button">
-        <item name="android:textColor">@drawable/custom_button_text</item>
-        <item name="android:background">@drawable/btn_shape</item>
-    </style>
-
-    <style name="CustomSwitch" parent="@android:style/android:Widget.Holo.Light.Button.Toggle">
-        <item name="android:thumb">@drawable/munchkin_switch_inner_holo_light</item>
-        <item name="android:track">@drawable/munchkin_switch_track_holo_light</item>
-    </style>
-
-    <style name="PopupMenu.Munchkin" parent="@android:style/android:Widget.Holo.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_munchkin</item>
-    </style>
-
-    <style name="DropDownListView.Munchkin" parent="@android:style/android:Widget.Holo.ListView.DropDown">
-        <item name="android:listSelector">@drawable/selectable_background_munchkin</item>
-    </style>
-
-    <style name="DropDownNav.Munchkin" parent="@android:style/Widget.Holo.Spinner">
-        <item name="android:background">@drawable/spinner_background_ab_munchkin</item>
-        <item name="android:popupBackground">@drawable/menu_dropdown_munchkin</item>
-        <item name="android:dropDownSelector">@drawable/selectable_background_munchkin</item>
-    </style>
-
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="AppTheme.Widget" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:popupMenuStyle">@style/PopupMenu.Munchkin</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Munchkin</item>
-        <item name="android:textColor">@color/actionBarText_color</item>
-    </style>
-
     <style name="Munchkin.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the buttons -->
         <item name="colorAccent">@color/text_color</item>
@@ -137,24 +55,48 @@
         <item name="fontPath">fonts/Quasimodo.ttf</item>
     </style>
 
-    <style name="MunchkinLevelCounterTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/actionBarBackground</item>
-        <item name="colorPrimaryDark">@color/text_color</item>
-        <item name="colorAccent">@color/actionBarBackground</item>
-        <item name="android:colorBackground">@color/background</item>
-        <item name="android:colorForeground">@color/status_bar</item>
-        <item name="android:textColorPrimaryInverse">@color/background</item>
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:textColorSecondaryInverse">@color/background</item>
-        <item name="android:textColorPrimary">@color/text_color</item>
-        <item name="android:textColorSecondary">@color/text_color</item>
-        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
-
-        <!--<item name="dialogTheme">@style/Munchkin.Dialog</item>-->
-        <item name="android:buttonStyle">@style/CustomButton</item>
-        <item name="android:actionBarStyle">@style/ActionBarMunchkin</item>
-
-
+    <style name="Munchkin.Button" parent="android:style/Widget.Button">
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:background">@drawable/btn_shape</item>
     </style>
+
+    <!-- styles for the action bar -->
+    <style name="ActionBarMunchkin" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:background">@color/actionBarBackground</item>
+        <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+        <item name="android:textViewStyle">@style/Munchkin.TextView</item>
+    </style>
+
+    <!-- action bar title text -->
+    <style name="TitleTextStyle" parent="@android:style/android:Widget.ActionBar.TabText">
+        <item name="android:textColor">@color/actionBarText_color</item>
+    </style>
+
+
+    <style name="Munchkin.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <!-- action bar background - without android prefix -->
+        <item name="background">@color/actionBarBackground</item>
+        <!-- action bar elevation - without android prefix -->
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Munchkin.ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- title text color -->
+        <item name="android:textColorPrimary">@color/actionBarText_color</item>
+        <!-- subtitle text color -->
+        <item name="android:textColorSecondary">?android:textColorPrimary</item>
+        <!-- action menu item text color -->
+        <item name="actionMenuTextColor">?android:textColorPrimary</item>
+        <!-- action menu item icon color -->
+        <item name="colorControlNormal">?android:textColorPrimary</item>
+    </style>
+
+    <style name="Munchkin.ThemeOverlay.AppTheme.PopupMenu" parent="ThemeOverlay.AppCompat.Dark">
+        <!-- popup menu background - NEVER "android:background" !!! in themes -->
+        <item name="android:colorBackground">@color/background</item>
+        <!-- popup menu item text color -->
+        <item name="android:textColorPrimary">@color/text_color</item>
+    </style>
+
 
 </resources>

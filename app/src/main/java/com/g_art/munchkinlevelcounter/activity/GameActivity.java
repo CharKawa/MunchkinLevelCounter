@@ -1,6 +1,5 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +26,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
 import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
 import com.g_art.munchkinlevelcounter.model.Player;
@@ -62,8 +60,6 @@ public class GameActivity extends AppCompatActivity
 
     private Tracker mTracker;
     private FragmentManager fm;
-    private ConfirmDialog confirmDialog;
-    private DialogFragment lvlDialog;
     private SettingsHandler settingsHandler;
 
     private int maxLvl;
@@ -147,6 +143,9 @@ public class GameActivity extends AppCompatActivity
             case R.id.action_dice:
                 rollADice();
                 return true;
+			case R.id.action_start_battle:
+				showBattle();
+				return true;
             case R.id.action_finish:
                 savePlayersStats();
                 finishGame();
@@ -164,6 +163,8 @@ public class GameActivity extends AppCompatActivity
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_confirm)
 				.content(R.string.message_for_dialog_confirm)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.ok_btn_for_dialog_confirm)
 				.negativeText(R.string.cancel_btn_for_dialog_confirm)
 				.backgroundColor(getResources().getColor(R.color.background))
@@ -171,6 +172,7 @@ public class GameActivity extends AppCompatActivity
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 						stayInTheGame();
+						dialog.dismiss();
 					}
 				})
 				.onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -305,13 +307,11 @@ public class GameActivity extends AppCompatActivity
                 break;
         }
 
-//		new MaterialDialog.Builder(this)
-//				.title(R.string.dice)
-//				.customView(imageView, false)
-//				.backgroundColor(getResources().getColor(R.color.background))
-//				.autoDismiss(true)
-//				.show();
-        showBattle();
+		new MaterialDialog.Builder(this)
+				.customView(imageView, false)
+				.backgroundColor(getResources().getColor(R.color.background))
+				.autoDismiss(true)
+				.show();
     }
 
 	private void showBattle() {
@@ -353,6 +353,8 @@ public class GameActivity extends AppCompatActivity
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_finish)
 				.content(R.string.msg_finish_game)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.ok_btn_for_dialog_finish)
 				.negativeText(R.string.cancel_btn_for_dialog_finish)
 				.backgroundColor(getResources().getColor(R.color.background))
@@ -398,20 +400,17 @@ public class GameActivity extends AppCompatActivity
     }
 
     private void showMaxLvLDialog() {
-		View v = View.inflate(this, R.layout.maxlvl_dialog, null);
-		final EditText maxLvlEditText = (EditText) v.findViewById(R.id.maxLvL);
-		maxLvlEditText.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
-
 		final MaterialDialog maxLvlDialog = new MaterialDialog.Builder(this)
 				.title(R.string.txt_max_lvl)
-				.customView(maxLvlEditText, false)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.customView(R.layout.maxlvl_dialog, false)
 				.positiveText(R.string.dialog_ok_btn)
 				.negativeText(R.string.dialog_cancel_btn)
 				.backgroundColor(getResources().getColor(R.color.background))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						EditText editLvl = (EditText)dialog.getCustomView();
+						final EditText editLvl = (EditText)dialog.getCustomView().findViewById(R.id.maxLvL);
 						String lvl = editLvl.getText().toString();
 						if (!lvl.equals("") && !lvl.equals(" ")) {
 							try {
@@ -442,10 +441,13 @@ public class GameActivity extends AppCompatActivity
 				})
 		.build();
 
+		final EditText maxLvlEditText = (EditText) maxLvlDialog.getCustomView().findViewById(R.id.maxLvL);
+		maxLvlEditText.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
+		final int position = maxLvlEditText.length();
+		maxLvlEditText.setSelection(position);
 		maxLvlEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 			}
 
 			@Override

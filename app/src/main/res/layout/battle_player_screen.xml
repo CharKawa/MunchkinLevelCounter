@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/const_battle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,6 +18,7 @@
         android:layout_marginStart="16dp"
         android:paddingLeft="8dp"
         android:text="@string/level"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/fab_battle_lvl_dwn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -54,6 +54,7 @@
         android:layout_marginStart="16dp"
         android:paddingLeft="8dp"
         android:text="@string/gear"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/fab_battle_gear_dwn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -70,6 +71,7 @@
         android:layout_marginStart="16dp"
         android:paddingLeft="8dp"
         android:text="@string/mods"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/fab_battle_mods_dwn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -86,6 +88,7 @@
         android:layout_marginStart="16dp"
         android:paddingLeft="8dp"
         android:text="@string/warrior"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/chb_battle_warrior"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -138,6 +141,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="10"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/fab_battle_lvl_up"
         app:layout_constraintLeft_toRightOf="@+id/fab_battle_lvl_dwn"
         app:layout_constraintRight_toLeftOf="@+id/fab_battle_lvl_up"
@@ -152,6 +156,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="10"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/fab_battle_gear_up"
         app:layout_constraintLeft_toRightOf="@+id/fab_battle_gear_dwn"
         app:layout_constraintRight_toLeftOf="@+id/fab_battle_gear_up"
@@ -166,6 +171,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="10"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toBottomOf="@+id/fab_battle_mods_up"
         app:layout_constraintLeft_toRightOf="@+id/fab_battle_mods_dwn"
         app:layout_constraintRight_toLeftOf="@+id/fab_battle_mods_up"
@@ -240,17 +246,17 @@
         app:srcCompat="@drawable/ic_person_add_24dp"/>
 
     <TextView
+        android:id="@+id/txt_battle_helper_power_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_battle_helper_power_value"
         android:layout_alignRight="@id/fab_battle_add_helper"
         android:layout_below="@id/fab_battle_add_helper"
+        android:layout_marginTop="8dp"
         android:text="+25"
-        app:layout_constraintRight_toRightOf="@+id/fab_battle_add_helper"
-        app:layout_constraintTop_toBottomOf="@+id/fab_battle_add_helper"
+        android:textColor="@color/text_color"
         app:layout_constraintLeft_toLeftOf="@+id/fab_battle_add_helper"
-        android:layout_marginTop="8dp"/>
-
+        app:layout_constraintRight_toRightOf="@+id/fab_battle_add_helper"
+        app:layout_constraintTop_toBottomOf="@+id/fab_battle_add_helper"/>
 
     <TextView
         android:id="@+id/txt_battle_player_name"
@@ -264,6 +270,7 @@
         android:paddingRight="8dp"
         android:text="@string/player_1"
         android:textAlignment="textStart"
+        android:textColor="@color/text_color"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/txt_battle_player_power"
         app:layout_constraintRight_toRightOf="parent"
@@ -279,6 +286,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="20"
+        android:textColor="@color/text_color"
         android:textSize="24sp"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintLeft_toLeftOf="parent"

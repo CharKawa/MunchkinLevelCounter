@@ -8,10 +8,13 @@ package com.g_art.munchkinlevelcounter.model;
 public class Monster extends BaseModel {
 	private final static String MONSTER_NAME = "Monster";
 
+	private int treasures;
+
 	public Monster() {
 		this.name = MONSTER_NAME;
 		this.level = 1;
 		this.mods = 0;
+		treasures = 1;
 	}
 
 	public String getName() {
@@ -36,5 +39,18 @@ public class Monster extends BaseModel {
 
 	public void setMods(int mods) {
 		this.mods = mods;
+	}
+
+	public int getTreasures() {
+		return treasures;
+	}
+
+	public Monster setTreasures(int treasures) {
+		this.treasures = treasures;
+		return this;
+	}
+
+	public int getPower() {
+		return this.level + this.mods;
 	}
 }

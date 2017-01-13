@@ -22,7 +22,6 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
     private EditText edTextMaxLvl;
     private SettingsHandler setHandler;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -169,6 +169,7 @@
         android:height="45dp"
         android:gravity="center"
         android:text="@string/btnNextPlayer"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        style="@style/Munchkin.Button"/>
 
 </RelativeLayout>

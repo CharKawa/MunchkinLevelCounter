@@ -53,7 +53,6 @@ import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESU
 public class BattleActivity extends AppCompatActivity {
 
 	private static final int SUCCESS_RUN_AWAY = 4;
-	public static String HELPER_LIST = "helpers";
 
 	private Tracker mTracker;
 	private Unbinder unbinder;
@@ -91,6 +90,8 @@ public class BattleActivity extends AppCompatActivity {
 	TextView mMods;
 	@BindView(R.id.txt_battle_m_power)
 	TextView mPower;
+	@BindView(R.id.txt_battle_m_tr_value)
+	TextView mTreasures;
 	@BindView(R.id.diagonal_divider)
 	View mDivider;
 
@@ -131,7 +132,7 @@ public class BattleActivity extends AppCompatActivity {
 			finish();
 		}
 
-		player = players.remove(selectedPlayerId);	//remove so it won't be shown in help list
+		player = players.remove(selectedPlayerId);    //remove so it won't be shown in help list
 
 		monster = new Monster();
 		mMaxLvl = intent.getIntExtra(GameActivity.MAX_LVL, 10);
@@ -185,7 +186,8 @@ public class BattleActivity extends AppCompatActivity {
 	}
 
 	@OnClick({R.id.fab_battle_m_lvl_up, R.id.fab_battle_m_lvl_dwn,
-			R.id.fab_battle_m_mods_up, R.id.fab_battle_m_mods_dwn})
+			R.id.fab_battle_m_mods_up, R.id.fab_battle_m_mods_dwn,
+			R.id.fab_battle_m_tr_up, R.id.fab_battle_m_tr_dwn})
 	public void monsterClicks(FloatingActionButton fab) {
 		int id = fab.getId();
 		switch (id) {
@@ -202,6 +204,14 @@ public class BattleActivity extends AppCompatActivity {
 				break;
 			case R.id.fab_battle_m_mods_dwn:
 				monster.setMods(monster.getMods() - 1);
+				break;
+			case R.id.fab_battle_m_tr_up:
+				monster.setTreasures(monster.getTreasures() + 1);
+				break;
+			case R.id.fab_battle_m_tr_dwn:
+				if (monster.getTreasures() != 0) {
+					monster.setTreasures(monster.getTreasures() - 1);
+				}
 				break;
 			default:
 				break;
@@ -274,6 +284,8 @@ public class BattleActivity extends AppCompatActivity {
 			new MaterialDialog.Builder(this)
 					.title(R.string.battle_dialog_title_win)
 					.content(R.string.battle_dialog_msg)
+					.titleColor(getResources().getColor(R.color.text_color))
+					.contentColor(getResources().getColor(R.color.text_color))
 					.positiveText(R.string.ok_btn_dialog_battle_continue)
 					.onPositive(new MaterialDialog.SingleButtonCallback() {
 						@Override
@@ -295,6 +307,8 @@ public class BattleActivity extends AppCompatActivity {
 			new MaterialDialog.Builder(this)
 					.title(R.string.battle_dialog_title_lose)
 					.content(R.string.battle_dialog_msg_lose)
+					.titleColor(getResources().getColor(R.color.text_color))
+					.contentColor(getResources().getColor(R.color.text_color))
 					.positiveText(R.string.battle_dialog_lose_run_away)
 					.onPositive(new MaterialDialog.SingleButtonCallback() {
 						@Override
@@ -326,6 +340,8 @@ public class BattleActivity extends AppCompatActivity {
 		new MaterialDialog.Builder(this)
 				.title(R.string.battle_dialog_title_run)
 				.content(R.string.battle_dialog_msg_run)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.battle_dialog_run_confirm)
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
@@ -363,6 +379,7 @@ public class BattleActivity extends AppCompatActivity {
 
 		MaterialDialog diceDialog = new MaterialDialog.Builder(this)
 				.title(R.string.dice)
+				.titleColor(getResources().getColor(R.color.text_color))
 				.customView(R.layout.dice_dialog, false)
 				.backgroundColor(getResources().getColor(R.color.background))
 				.autoDismiss(true)
@@ -400,6 +417,7 @@ public class BattleActivity extends AppCompatActivity {
 		}
 		final TextView textView = (TextView) diceDialog.getCustomView().findViewById(R.id.run_away_result);
 		textView.setText(SUCCESS_RUN_AWAY <= dice ? R.string.run_away_success : R.string.run_away_fail);
+		textView.setTextColor(getResources().getColor(R.color.text_color));
 
 		diceDialog.show();
 	}
@@ -444,8 +462,8 @@ public class BattleActivity extends AppCompatActivity {
 		//Filling monster's values
 		mLvl.setText(String.valueOf(monster.getLevel()));
 		mMods.setText(String.valueOf(monster.getMods()));
-		int mPowerValue = monster.getLevel() + monster.getMods();
-		mPower.setText(String.valueOf(mPowerValue));
+		mPower.setText(String.valueOf(monster.getPower()));
+		mTreasures.setText(String.valueOf(monster.getTreasures()));
 
 		if (players.isEmpty()) { //after removing currentPlayer
 			helperBtn.setEnabled(false);
@@ -484,6 +502,8 @@ public class BattleActivity extends AppCompatActivity {
 	private void showCancelDialog() {
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_confirm)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.contentColor(getResources().getColor(R.color.text_color))
 				.content(R.string.message_for_dialog_battle_leave)
 				.positiveText(R.string.ok_btn_dialog_battle_leave)
 				.onPositive(new MaterialDialog.SingleButtonCallback() {

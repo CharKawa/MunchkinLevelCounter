@@ -29,7 +29,6 @@ public class Stats extends AppCompatActivity implements ActionBar.TabListener {
     private ViewPager viewPager;
     private ActionBar actionBar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
