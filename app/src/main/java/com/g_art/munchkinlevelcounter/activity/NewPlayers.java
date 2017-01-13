@@ -1,6 +1,5 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;

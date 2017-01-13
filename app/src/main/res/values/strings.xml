@@ -32,6 +32,9 @@
     <string name="statsOnOff">Collect game statistic?</string>
     <string name="message_for_dialog_cont">You Won the Game! Continue further or quit?</string>
     <string name="message_for_dialog_confirm">You will lose your progress!</string>
+    <string name="message_for_dialog_battle_leave">You want to cancel battle?</string>
+    <string name="ok_btn_dialog_battle_leave">Yes</string>
+    <string name="cancel_btn_dialog_battle_leave">No, Stay</string>
     <string name="ok_btn_for_dialog_confirm">Stay</string>
     <string name="cancel_btn_for_dialog_confirm">Exit</string>
     <string name="ok_btn_for_dialog_cont">Continue</string>
@@ -62,6 +65,8 @@
     <string name="settings_saved">Settings are saved.</string>
     <string name="error_max_level_one">Max level cannot be equal 1.</string>
     <string name="dice">Dice</string>
+    <string name="run_away_success">Success! But check Modifiers!</string>
+    <string name="run_away_fail">Fail! But check Modifiers!</string>
     <string name="more_players">Please, add more mPlayers.</string>
     <string name="error_next_turn">Error in the next turn!</string>
     <string name="error_save_players">It was error while trying to save mPlayers!</string>
@@ -98,12 +103,12 @@
     <string name="battle_dialog_msg">You\'ve beat that monster! Don\'t forget to up your lvl!</string>
     <string name="battle_dialog_title_win">Victory!</string>
     <string name="battle_dialog_title_lose">Defeat</string>
-    <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to run Away?</string>
-    <string name="battle_dialog_lose_run_away">Run Away</string>
-    <string name="battle_dialog_lose_anyway">Continue</string>
+    <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to Run Away?</string>
+    <string name="battle_dialog_lose_run_away">Save Me!</string>
+    <string name="battle_dialog_lose_anyway">Warriors Are Not RUN!!</string>
     <string name="battle_dialog_title_run">Run Away</string>
-    <string name="battle_dialog_msg_run">You\'ve decided to run away. Run carefully. You can die.</string>
+    <string name="battle_dialog_msg_run">Run carefully. You can die.</string>
     <string name="battle_dialog_run_confirm">Run!</string>
-    <string name="battle_dialog_run_cancel">Cancel</string>
+    <string name="battle_dialog_run_cancel">NO! I\'ll Stay!</string>
 
 </resources>

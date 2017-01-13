@@ -52,10 +52,13 @@ public class GameActivity extends AppCompatActivity
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
 	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
+	public static final int BATTLE_REQUEST = 10;
 	public static final int BATTLE_RESULT_OK = 1;
 	public static final int BATTLE_RESULT_CANCEL = 0;
+	public static final int BATTLE_RESULT_FAIL = 4;
+	public static final int RUN_AWAY_RESULT_OK = 2;
+	public static final int RUN_AWAY_RESULT_FAIL = 3;
 	private static final String SELECTED_KEY = "selectedPlayer";
-	private final int BATTLE_REQUEST = 10;
 
     private Tracker mTracker;
     private FragmentManager fm;
@@ -331,14 +334,17 @@ public class GameActivity extends AppCompatActivity
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (BATTLE_REQUEST == requestCode) {
-			if (BATTLE_RESULT_OK == resultCode) {
-
-			} else if (BATTLE_RESULT_CANCEL == resultCode) {
-
-			} else {
-
-			}
+		switch (resultCode) {
+			case BATTLE_RESULT_CANCEL:
+				break;
+			case BATTLE_RESULT_FAIL:
+				break;
+			case BATTLE_RESULT_OK:
+				break;
+			case RUN_AWAY_RESULT_FAIL:
+				break;
+			case RUN_AWAY_RESULT_OK:
+				break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -472,7 +478,6 @@ public class GameActivity extends AppCompatActivity
         }
         return settingsHandler.getMaxLvl();
     }
-
 
 	@Override
 	protected void attachBaseContext(Context newBase) {

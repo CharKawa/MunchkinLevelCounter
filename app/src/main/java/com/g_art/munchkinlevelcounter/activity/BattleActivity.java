@@ -1,13 +1,11 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,14 +13,11 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import butterknife.BindBool;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,12 +28,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.fragments.dialog.ConfirmDialog;
-import com.g_art.munchkinlevelcounter.fragments.dialog.HelperListDialog;
-import com.g_art.munchkinlevelcounter.listadapter.HelperListAdapter;
 import com.g_art.munchkinlevelcounter.model.Monster;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.google.android.gms.analytics.HitBuilders;
@@ -47,19 +38,27 @@ import com.google.android.gms.analytics.Tracker;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_REQUEST;
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_CANCEL;
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_FAIL;
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_OK;
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESULT_FAIL;
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESULT_OK;
+
 /**
  * MunchkinLevelCounter
  * Created by fftem on 03-Aug-16.
  */
 
-public class BattleActivity extends AppCompatActivity implements ConfirmDialog.DialogClickEvents {
+public class BattleActivity extends AppCompatActivity {
 
+	private static final int SUCCESS_RUN_AWAY = 4;
 	public static String HELPER_LIST = "helpers";
 
 	private Tracker mTracker;
 	private Unbinder unbinder;
 
-	@BindBool (R.bool.portrait_only)
+	@BindBool(R.bool.portrait_only)
 	boolean mPortrait;
 
 	private Player player;
@@ -69,30 +68,30 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	private int mMaxLvl;
 
 	//Player's views
-	@BindView (R.id.txt_battle_player_name)
+	@BindView(R.id.txt_battle_player_name)
 	TextView pName;
-	@BindView (R.id.txt_battle_lvl_value)
+	@BindView(R.id.txt_battle_lvl_value)
 	TextView pLvl;
-	@BindView (R.id.txt_battle_gear_value)
+	@BindView(R.id.txt_battle_gear_value)
 	TextView pGear;
-	@BindView (R.id.txt_battle_mods_value)
+	@BindView(R.id.txt_battle_mods_value)
 	TextView pMods;
-	@BindView (R.id.txt_battle_player_power)
+	@BindView(R.id.txt_battle_player_power)
 	TextView pPower;
-	@BindView (R.id.chb_battle_warrior)
+	@BindView(R.id.chb_battle_warrior)
 	AppCompatCheckBox cb_warrior;
 
-	@BindView (R.id.txt_battle_helper_power_value)
+	@BindView(R.id.txt_battle_helper_power_value)
 	TextView hPower;
 
 	//Monster's views
-	@BindView (R.id.txt_battle_m_lvl_value)
+	@BindView(R.id.txt_battle_m_lvl_value)
 	TextView mLvl;
-	@BindView (R.id.txt_battle_m_mods_value)
+	@BindView(R.id.txt_battle_m_mods_value)
 	TextView mMods;
-	@BindView (R.id.txt_battle_m_power)
+	@BindView(R.id.txt_battle_m_power)
 	TextView mPower;
-	@BindView (R.id.diagonal_divider)
+	@BindView(R.id.diagonal_divider)
 	View mDivider;
 
 	//Buttons
@@ -132,8 +131,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 			finish();
 		}
 
-		player = players.get(selectedPlayerId);
-		players.remove(selectedPlayerId);//remove so it won't be shown in help list
+		player = players.remove(selectedPlayerId);	//remove so it won't be shown in help list
 
 		monster = new Monster();
 		mMaxLvl = intent.getIntExtra(GameActivity.MAX_LVL, 10);
@@ -146,21 +144,11 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		fillViewValues();
 		final ActionBar bar = getSupportActionBar();
 		if (bar != null) {
-			bar.setTitle(player.getName()+ " VS " + "Monster");
+			bar.setTitle(player.getName() + " VS " + "Monster");
 		}
 	}
 
-	private void initDivider() {
-		Drawable divider;
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-			divider = VectorDrawableCompat.create(getResources(), R.drawable.ic_test_divider_1, getTheme());
-		} else {
-			divider = getResources().getDrawable(R.drawable.ic_test_divider_1, getTheme());
-		}
-		mDivider.setBackgroundDrawable(divider);
-	}
-
-	@OnClick ({R.id.fab_battle_lvl_up, R.id.fab_battle_lvl_dwn,
+	@OnClick({R.id.fab_battle_lvl_up, R.id.fab_battle_lvl_dwn,
 			R.id.fab_battle_gear_up, R.id.fab_battle_gear_dwn,
 			R.id.fab_battle_mods_up, R.id.fab_battle_mods_dwn})
 	public void playerClicks(FloatingActionButton fab) {
@@ -196,7 +184,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		updateViewValues();
 	}
 
-	@OnClick ({R.id.fab_battle_m_lvl_up, R.id.fab_battle_m_lvl_dwn,
+	@OnClick({R.id.fab_battle_m_lvl_up, R.id.fab_battle_m_lvl_dwn,
 			R.id.fab_battle_m_mods_up, R.id.fab_battle_m_mods_dwn})
 	public void monsterClicks(FloatingActionButton fab) {
 		int id = fab.getId();
@@ -221,16 +209,15 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		updateViewValues();
 	}
 
-	@OnClick (R.id.fab_battle_add_helper)
+	@OnClick(R.id.fab_battle_add_helper)
 	public void selectHelper() {
 		if (!players.isEmpty()) {
 			final List<String> playersList = new ArrayList<>(players.size());
-			for (Player player : players){
+			for (Player player : players) {
 				playersList.add(player.getHelperInfo());
 			}
 
 			MaterialDialog dialog = new MaterialDialog.Builder(this)
-//					.title(R.string.title_dialog_choose_helper)
 					.items(playersList)
 					.itemsCallbackSingleChoice(selectedIndex, new MaterialDialog.ListCallbackSingleChoice() {
 						@Override
@@ -277,7 +264,7 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		updateViewValues();
 	}
 
-	@OnClick (R.id.fab_battle_fight)
+	@OnClick(R.id.fab_battle_fight)
 	public void fight() {
 		int pPowerValue = Integer.parseInt(pPower.getText().toString());
 		int mPowerValue = Integer.parseInt(mPower.getText().toString());
@@ -288,7 +275,20 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 					.title(R.string.battle_dialog_title_win)
 					.content(R.string.battle_dialog_msg)
 					.positiveText(R.string.ok_btn_dialog_battle_continue)
+					.onPositive(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							battleFightResult(BATTLE_RESULT_OK);
+							dialog.dismiss();
+						}
+					})
 					.negativeText(R.string.cancel_btn_for_dialog_battle)
+					.onNegative(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							dialog.dismiss();
+						}
+					})
 					.backgroundColor(getResources().getColor(R.color.background))
 					.show();
 		} else {
@@ -296,36 +296,125 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 					.title(R.string.battle_dialog_title_lose)
 					.content(R.string.battle_dialog_msg_lose)
 					.positiveText(R.string.battle_dialog_lose_run_away)
+					.onPositive(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							dialog.dismiss();
+							runAway();
+						}
+					})
 					.negativeText(R.string.battle_dialog_lose_anyway)
+					.onNegative(new MaterialDialog.SingleButtonCallback() {
+						@Override
+						public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+							battleFightResult(BATTLE_RESULT_FAIL);
+							dialog.dismiss();
+						}
+					})
 					.backgroundColor(getResources().getColor(R.color.background))
 					.show();
 		}
 	}
 
-	@OnClick (R.id.fab_battle_run_away)
+	private void battleFightResult(int battleResult) {
+		setResult(battleResult);
+		finishBattle();
+	}
+
+	@OnClick(R.id.fab_battle_run_away)
 	public void runAway() {
 		new MaterialDialog.Builder(this)
 				.title(R.string.battle_dialog_title_run)
 				.content(R.string.battle_dialog_msg_run)
 				.positiveText(R.string.battle_dialog_run_confirm)
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						dialog.dismiss();
+						showRunDice();
+					}
+				})
 				.negativeText(R.string.battle_dialog_run_cancel)
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						dialog.dismiss();
+					}
+				})
 				.backgroundColor(getResources().getColor(R.color.background))
+				.autoDismiss(true)
 				.show();
 	}
 
 	@OnCheckedChanged(R.id.chb_battle_warrior)
-	public void enableWarrior() {
+	public void isWarrior() {
 		updateViewValues();
 	}
 
-	@Override
-	public void positiveDialogClick(Bundle bundle) {
-		if ("battle_fight".equalsIgnoreCase(bundle.getString(ConfirmDialog.REQUEST_KEY)));
+	private void showRunDice() {
+
+		mTracker.send(new HitBuilders.EventBuilder()
+				.setAction("DiceRolled")
+				.setLabel("BattleActivity")
+				.build());
+		int Min = 1;
+		int Max = 6;
+		final int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
+
+		MaterialDialog diceDialog = new MaterialDialog.Builder(this)
+				.title(R.string.dice)
+				.customView(R.layout.dice_dialog, false)
+				.backgroundColor(getResources().getColor(R.color.background))
+				.autoDismiss(true)
+				.positiveText(R.string.dialog_ok_btn)
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						runAwayResult(dice);
+					}
+				})
+				.build();
+
+
+		final ImageView imageView = (ImageView) diceDialog.getCustomView().findViewById(R.id.imgDice);
+
+		switch (dice) {
+			case 1:
+				imageView.setImageResource(R.drawable.dice_1);
+				break;
+			case 2:
+				imageView.setImageResource(R.drawable.dice_2);
+				break;
+			case 3:
+				imageView.setImageResource(R.drawable.dice_3);
+				break;
+			case 4:
+				imageView.setImageResource(R.drawable.dice_4);
+				break;
+			case 5:
+				imageView.setImageResource(R.drawable.dice_5);
+				break;
+			case 6:
+				imageView.setImageResource(R.drawable.dice_6);
+				break;
+		}
+		final TextView textView = (TextView) diceDialog.getCustomView().findViewById(R.id.run_away_result);
+		textView.setText(SUCCESS_RUN_AWAY <= dice ? R.string.run_away_success : R.string.run_away_fail);
+
+		diceDialog.show();
 	}
 
-	@Override
-	public void negativeDialogClick(Bundle bundle) {
-		if ("battle_fight".equalsIgnoreCase(bundle.getString(ConfirmDialog.REQUEST_KEY)));
+	private void runAwayResult(int dice) {
+		if (SUCCESS_RUN_AWAY <= dice) {
+			setResult(RUN_AWAY_RESULT_OK);
+		} else {
+			setResult(RUN_AWAY_RESULT_FAIL);
+		}
+		finishBattle();
+	}
+
+	public void finishBattle() {
+		finish();
 	}
 
 	private void updateViewValues() {
@@ -341,8 +430,8 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		int pPowerValue = player.getPower() + player.getMods();
 
 		if (helper != null) {
-			hPower.setText("+"+helper.getPower());
-			pPowerValue = pPowerValue+helper.getPower();
+			hPower.setText("+" + helper.getPower());
+			pPowerValue = pPowerValue + helper.getPower();
 		} else {
 			hPower.setText("");
 		}
@@ -381,6 +470,44 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 		helperBtn.setImageDrawable(icon);
 	}
 
+	@Override
+	public boolean onNavigateUp() {
+		showCancelDialog();
+		return false;
+	}
+
+	@Override
+	public void onBackPressed() {
+		showCancelDialog();
+	}
+
+	private void showCancelDialog() {
+		new MaterialDialog.Builder(this)
+				.title(R.string.title_dialog_confirm)
+				.content(R.string.message_for_dialog_battle_leave)
+				.positiveText(R.string.ok_btn_dialog_battle_leave)
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						leaveBattle();
+					}
+				})
+				.negativeText(R.string.cancel_btn_dialog_battle_leave)
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						dialog.dismiss();
+					}
+				})
+				.backgroundColor(getResources().getColor(R.color.background))
+				.autoDismiss(true)
+				.show();
+	}
+
+	private void leaveBattle() {
+		setResult(BATTLE_RESULT_CANCEL);
+		finishBattle();
+	}
 
 	@Override
 	protected void onDestroy() {
@@ -391,5 +518,15 @@ public class BattleActivity extends AppCompatActivity implements ConfirmDialog.D
 	@Override
 	protected void attachBaseContext(Context newBase) {
 		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+	}
+
+	private void initDivider() {
+		Drawable divider;
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+			divider = VectorDrawableCompat.create(getResources(), R.drawable.ic_test_divider_1, getTheme());
+		} else {
+			divider = getResources().getDrawable(R.drawable.ic_test_divider_1, getTheme());
+		}
+		mDivider.setBackgroundDrawable(divider);
 	}
 }

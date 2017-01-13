@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imgDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imgDice"
-        android:contentDescription="@string/dice"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/dice_1"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/dice"/>
+
+    <TextView
+        android:id="@+id/run_away_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:layout_below="@id/imgDice"/>
 </RelativeLayout>
