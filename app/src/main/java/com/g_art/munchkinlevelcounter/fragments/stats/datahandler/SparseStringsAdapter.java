@@ -14,45 +14,45 @@ import com.g_art.munchkinlevelcounter.R;
  */
 public class SparseStringsAdapter extends SparseArrayAdapter<String> {
 
-    private final LayoutInflater mInflater;
+	private final LayoutInflater mInflater;
 
-    public SparseStringsAdapter(Context context, SparseArray<String> data) {
-        mInflater = LayoutInflater.from(context);
-        setData(data);
+	public SparseStringsAdapter(Context context, SparseArray<String> data) {
+		mInflater = LayoutInflater.from(context);
+		setData(data);
 
-    }
+	}
 
-    public static class ViewHolder {
-        public View viewPlayerColor;
-        public TextView txtPlayerName;
-    }
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View view = convertView;
+		ViewHolder holder;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        ViewHolder holder;
+		if (view == null) {
+			view = mInflater.inflate(R.layout.in_stat_player_list, null);
 
-        if (view == null) {
-            view = mInflater.inflate(R.layout.in_stat_player_list, null);
+			holder = new ViewHolder();
+			holder.txtPlayerName = (TextView) view.findViewById(R.id.txtPlayerNameInStats);
+			holder.viewPlayerColor = view.findViewById(R.id.playerColor);
 
-            holder = new ViewHolder();
-            holder.txtPlayerName = (TextView) view.findViewById(R.id.txtPlayerNameInStats);
-            holder.viewPlayerColor = view.findViewById(R.id.playerColor);
+			/************  Set holder with LayoutInflater ************/
+			view.setTag(holder);
+		} else {
+			holder = (ViewHolder) view.getTag();
+		}
 
-            /************  Set holder with LayoutInflater ************/
-            view.setTag(holder);
-        } else {
-            holder = (ViewHolder) view.getTag();
-        }
+		if (getCount() == 0) {
+			holder.txtPlayerName.setText(view.getContext().getString(R.string.no_data));
+			holder.viewPlayerColor.setVisibility(View.INVISIBLE);
+		} else {
+			holder.viewPlayerColor.setBackgroundColor((int) getItemId(position));
+			holder.txtPlayerName.setText(getItem(position));
+		}
 
-        if (getCount() == 0) {
-            holder.txtPlayerName.setText(view.getContext().getString(R.string.no_data));
-            holder.viewPlayerColor.setVisibility(View.INVISIBLE);
-        } else {
-            holder.viewPlayerColor.setBackgroundColor((int) getItemId(position));
-            holder.txtPlayerName.setText(getItem(position));
-        }
+		return view;
+	}
 
-        return view;
-    }
+	public static class ViewHolder {
+		public View viewPlayerColor;
+		public TextView txtPlayerName;
+	}
 }

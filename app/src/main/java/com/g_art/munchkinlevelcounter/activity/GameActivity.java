@@ -46,34 +46,34 @@ public class GameActivity extends AppCompatActivity
 		FragmentPlayersList.OnPlayerSelectedListener,
 		FragmentPlayer.PlayersUpdate {
 
-    public final static String MAX_LVL = "max_lvl";
+	public final static String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
-	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
 	public static final int BATTLE_REQUEST = 10;
 	public static final int BATTLE_RESULT_OK = 1;
 	public static final int BATTLE_RESULT_CANCEL = 0;
 	public static final int BATTLE_RESULT_FAIL = 4;
 	public static final int RUN_AWAY_RESULT_OK = 2;
 	public static final int RUN_AWAY_RESULT_FAIL = 3;
+	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
 	private static final String SELECTED_KEY = "selectedPlayer";
 
-    private Tracker mTracker;
-    private FragmentManager fm;
-    private SettingsHandler settingsHandler;
+	private Tracker mTracker;
+	private FragmentManager fm;
+	private SettingsHandler settingsHandler;
 
-    private int maxLvl;
+	private int maxLvl;
 	private ArrayList<Player> playersList;
 	private int mSelectedPlayerPosition;
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        if (getResources().getBoolean(R.bool.portrait_only)) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+		if (getResources().getBoolean(R.bool.portrait_only)) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 
-        setContentView(R.layout.activity_game);
+		setContentView(R.layout.activity_game);
 
 		fm = getFragmentManager();
 
@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity
 			Intent intent = getIntent();
 			playersList = intent.getParcelableArrayListExtra(PLAYERS_KEY);
 			/*
-        	Saving first players stats
+			Saving first players stats
          	*/
 			savePlayersStats();
 
@@ -104,24 +104,24 @@ public class GameActivity extends AppCompatActivity
 			fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
 		}
 
-        // Obtain the shared Tracker instance.
-        MyApplication application = (MyApplication) getApplication();
-        mTracker = application.getDefaultTracker();
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setAction("GameStarted")
-                .setCategory("Screen")
-                .setLabel("GameActivity")
-                .build());
+		// Obtain the shared Tracker instance.
+		MyApplication application = (MyApplication) getApplication();
+		mTracker = application.getDefaultTracker();
+		mTracker.send(new HitBuilders.EventBuilder()
+				.setAction("GameStarted")
+				.setCategory("Screen")
+				.setLabel("GameActivity")
+				.build());
 
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        settingsHandler = SettingsHandler.getInstance(mPrefs);
+		SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		settingsHandler = SettingsHandler.getInstance(mPrefs);
 
-        settingsHandler.loadSettings();
-        maxLvl = settingsHandler.getMaxLvl();
+		settingsHandler.loadSettings();
+		maxLvl = settingsHandler.getMaxLvl();
 
 		onPlayerSelected(mSelectedPlayerPosition);
 
-    }
+	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -131,35 +131,35 @@ public class GameActivity extends AppCompatActivity
 	}
 
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.in_game, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.in_game, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_dice:
-                rollADice();
-                return true;
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_dice:
+				rollADice();
+				return true;
 			case R.id.action_start_battle:
 				showBattle();
 				return true;
-            case R.id.action_finish:
-                savePlayersStats();
-                finishGame();
-                return true;
-            case R.id.action_settings:
-                showMaxLvLDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+			case R.id.action_finish:
+				savePlayersStats();
+				finishGame();
+				return true;
+			case R.id.action_settings:
+				showMaxLvLDialog();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 
-    @Override
-    public void onBackPressed() {
+	@Override
+	public void onBackPressed() {
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_confirm)
 				.content(R.string.message_for_dialog_confirm)
@@ -183,136 +183,136 @@ public class GameActivity extends AppCompatActivity
 				})
 				.autoDismiss(true)
 				.show();
-    }
+	}
 
-    public void leaveGame() {
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setAction("GameTerminated")
-                .setLabel("GameActivity")
-                .build());
-        super.onBackPressed();
-    }
+	public void leaveGame() {
+		mTracker.send(new HitBuilders.EventBuilder()
+				.setAction("GameTerminated")
+				.setLabel("GameActivity")
+				.build());
+		super.onBackPressed();
+	}
 
-    public void stayInTheGame() {
-    }
+	public void stayInTheGame() {
+	}
 
-    @Override
-    public void onPlayerSelected(int position) {
+	@Override
+	public void onPlayerSelected(int position) {
 
-        FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
+		FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
 
-        if (fragmentPlayer != null) {
-            fragmentPlayer.changeSelectedPlayer(playersList.get(position));
+		if (fragmentPlayer != null) {
+			fragmentPlayer.changeSelectedPlayer(playersList.get(position));
 			mSelectedPlayerPosition = position;
-            scrollToPlayer(position);
-        }
-    }
+			scrollToPlayer(position);
+		}
+	}
 
-    @Override
-    public void finishClick() {
-        savePlayersStats();
-        openStatsActivity();
-    }
+	@Override
+	public void finishClick() {
+		savePlayersStats();
+		openStatsActivity();
+	}
 
-    @Override
-    public void onPlayersUpdate() {
-        FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
-        if (fragment != null) {
-            fragment.listUpdate();
-        }
-    }
+	@Override
+	public void onPlayersUpdate() {
+		FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+		if (fragment != null) {
+			fragment.listUpdate();
+		}
+	}
 
-    private void scrollToPlayer(int position) {
+	private void scrollToPlayer(int position) {
 
-        FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
-        if (fragment != null) {
-            fragment.scrollToPlayer(position);
-        }
-    }
+		FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+		if (fragment != null) {
+			fragment.scrollToPlayer(position);
+		}
+	}
 
-    @Override
-    public boolean onNextTurnClick(Player player) {
-        boolean result = false;
-        try {
-            int i = 0;
-            for (Player selectedPlayer : playersList) {
-                i++;
-                if (selectedPlayer.equals(player)) {
-                    if (i == playersList.size()) {
-                        i = 0;
-                    }
-                    onPlayerSelected(i);
-                }
-            }
+	@Override
+	public boolean onNextTurnClick(Player player) {
+		boolean result = false;
+		try {
+			int i = 0;
+			for (Player selectedPlayer : playersList) {
+				i++;
+				if (selectedPlayer.equals(player)) {
+					if (i == playersList.size()) {
+						i = 0;
+					}
+					onPlayerSelected(i);
+				}
+			}
 
-            result = true;
-        } catch (Exception ex) {
-            result = false;
-            mTracker.send(new HitBuilders.EventBuilder()
-                    .setAction("GameTerminated")
-                    .setLabel("GameActivity").set("ERROR", ex.toString())
-                    .build());
-        }
-        return result;
-    }
+			result = true;
+		} catch (Exception ex) {
+			result = false;
+			mTracker.send(new HitBuilders.EventBuilder()
+					.setAction("GameTerminated")
+					.setLabel("GameActivity").set("ERROR", ex.toString())
+					.build());
+		}
+		return result;
+	}
 
-    @Override
-    public int maxLvl() {
-        return settingsHandler.getMaxLvl();
-    }
+	@Override
+	public int maxLvl() {
+		return settingsHandler.getMaxLvl();
+	}
 
-    public boolean savePlayersStats() {
-        boolean result;
-        SavePlayersStatsTask saveTask = new SavePlayersStatsTask();
+	public boolean savePlayersStats() {
+		boolean result;
+		SavePlayersStatsTask saveTask = new SavePlayersStatsTask();
 
-        try {
-            saveTask.execute(playersList);
-            result = saveTask.get();
-        } catch (Exception ex) {
-            result = false;
-        }
+		try {
+			saveTask.execute(playersList);
+			result = saveTask.get();
+		} catch (Exception ex) {
+			result = false;
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private void rollADice() {
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setAction("DiceRolled")
-                .setLabel("GameActivity")
-                .build());
-        int Min = 1;
-        int Max = 6;
-        int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
+	private void rollADice() {
+		mTracker.send(new HitBuilders.EventBuilder()
+				.setAction("DiceRolled")
+				.setLabel("GameActivity")
+				.build());
+		int Min = 1;
+		int Max = 6;
+		int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
 		final View v = View.inflate(this, R.layout.dice_dialog, null);
 		final ImageView imageView = (ImageView) v.findViewById(R.id.imgDice);
 
 		switch (dice) {
-            case 1:
+			case 1:
 				imageView.setImageResource(R.drawable.dice_1);
-                break;
-            case 2:
+				break;
+			case 2:
 				imageView.setImageResource(R.drawable.dice_2);
-                break;
-            case 3:
+				break;
+			case 3:
 				imageView.setImageResource(R.drawable.dice_3);
-                break;
-            case 4:
+				break;
+			case 4:
 				imageView.setImageResource(R.drawable.dice_4);
-                break;
-            case 5:
+				break;
+			case 5:
 				imageView.setImageResource(R.drawable.dice_5);
-                break;
-            case 6:
+				break;
+			case 6:
 				imageView.setImageResource(R.drawable.dice_6);
-                break;
-        }
+				break;
+		}
 
 		new MaterialDialog.Builder(this)
 				.customView(imageView, false)
 				.backgroundColor(getResources().getColor(R.color.background))
 				.autoDismiss(true)
 				.show();
-    }
+	}
 
 	private void showBattle() {
 		final Intent intent = new Intent(this, BattleActivity.class);
@@ -325,7 +325,8 @@ public class GameActivity extends AppCompatActivity
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			View view = findViewById(R.id.action_dice);
 			int x = (int) view.getX();
-			int y = (int) view.getY();ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
+			int y = (int) view.getY();
+			ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
 			startActivityForResult(intent, BATTLE_REQUEST, optionsCompat.toBundle());
 		} else {
 			startActivityForResult(intent, BATTLE_REQUEST);
@@ -372,34 +373,34 @@ public class GameActivity extends AppCompatActivity
 				})
 				.autoDismiss(true)
 				.show();
-    }
+	}
 
-    public void finishCurrentGame() {
-        openStatsActivity();
-    }
+	public void finishCurrentGame() {
+		openStatsActivity();
+	}
 
-    public void contCurrentGame() {
-    }
+	public void contCurrentGame() {
+	}
 
-    private void openStatsActivity() {
-        Intent intent = new Intent(this, Stats.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(PLAYERS_KEY, getPlayersList());
-        String BUNDLE_STATS_KEY = "bundleStats";
-        intent.putExtra(BUNDLE_STATS_KEY, bundle);
-        startActivity(intent);
-    }
+	private void openStatsActivity() {
+		Intent intent = new Intent(this, Stats.class);
+		Bundle bundle = new Bundle();
+		bundle.putParcelableArrayList(PLAYERS_KEY, getPlayersList());
+		String BUNDLE_STATS_KEY = "bundleStats";
+		intent.putExtra(BUNDLE_STATS_KEY, bundle);
+		startActivity(intent);
+	}
 
-    private ArrayList<Player> getPlayersList() {
-        return playersList;
-    }
+	private ArrayList<Player> getPlayersList() {
+		return playersList;
+	}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
 
-    private void showMaxLvLDialog() {
+	private void showMaxLvLDialog() {
 		final MaterialDialog maxLvlDialog = new MaterialDialog.Builder(this)
 				.title(R.string.txt_max_lvl)
 				.titleColor(getResources().getColor(R.color.text_color))
@@ -410,7 +411,7 @@ public class GameActivity extends AppCompatActivity
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						final EditText editLvl = (EditText)dialog.getCustomView().findViewById(R.id.maxLvL);
+						final EditText editLvl = (EditText) dialog.getCustomView().findViewById(R.id.maxLvL);
 						String lvl = editLvl.getText().toString();
 						if (!lvl.equals("") && !lvl.equals(" ")) {
 							try {
@@ -439,7 +440,7 @@ public class GameActivity extends AppCompatActivity
 						contCurrentGame();
 					}
 				})
-		.build();
+				.build();
 
 		final EditText maxLvlEditText = (EditText) maxLvlDialog.getCustomView().findViewById(R.id.maxLvL);
 		maxLvlEditText.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
@@ -465,21 +466,21 @@ public class GameActivity extends AppCompatActivity
 			}
 		});
 		maxLvlDialog.show();
-    }
+	}
 
-    public void doPositiveClickLvLDialog(int newMaxLvl) {
-        maxLvl = updateMaxLVL(newMaxLvl);
-    }
+	public void doPositiveClickLvLDialog(int newMaxLvl) {
+		maxLvl = updateMaxLVL(newMaxLvl);
+	}
 
-    private int updateMaxLVL(int newMaxLVL) {
-        if (settingsHandler.saveSettings(newMaxLVL)) {
-            Toast.makeText(this,
-                    getString(R.string.settings_saved),
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
-        return settingsHandler.getMaxLvl();
-    }
+	private int updateMaxLVL(int newMaxLVL) {
+		if (settingsHandler.saveSettings(newMaxLVL)) {
+			Toast.makeText(this,
+					getString(R.string.settings_saved),
+					Toast.LENGTH_SHORT
+			).show();
+		}
+		return settingsHandler.getMaxLvl();
+	}
 
 	@Override
 	protected void attachBaseContext(Context newBase) {

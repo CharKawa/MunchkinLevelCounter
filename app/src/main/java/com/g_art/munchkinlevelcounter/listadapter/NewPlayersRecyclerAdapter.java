@@ -29,9 +29,9 @@ import java.util.Collections;
 
 public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRecyclerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
+	public static int color;
 	private final OnStartDragListener mDragStartListener;
 	private ArrayList<Player> mPlayers;
-	public static int color;
 
 	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers, OnStartDragListener dragStartListener) {
 		this.mDragStartListener = dragStartListener;
@@ -123,7 +123,7 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 		notifyItemRemoved(position);
 	}
 
-	public static class ViewHolder extends RecyclerView.ViewHolder  implements
+	public static class ViewHolder extends RecyclerView.ViewHolder implements
 			ItemTouchHelperViewHolder {
 
 		private EditText pName;

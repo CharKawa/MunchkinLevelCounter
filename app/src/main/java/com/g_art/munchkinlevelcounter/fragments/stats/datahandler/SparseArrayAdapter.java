@@ -11,34 +11,34 @@ import android.widget.BaseAdapter;
 class SparseArrayAdapter<E> extends BaseAdapter {
 
 
-    private SparseArray<E> mData;
+	private SparseArray<E> mData;
 
-    public void setData(SparseArray<E> data) {
-        mData = data;
-    }
+	public void setData(SparseArray<E> data) {
+		mData = data;
+	}
 
-    @Override
-    public int getCount() {
-        if (mData != null && mData.size() >= 1) {
-            return mData.size();
-        } else {
-            return 1;
-        }
+	@Override
+	public int getCount() {
+		if (mData != null && mData.size() >= 1) {
+			return mData.size();
+		} else {
+			return 1;
+		}
 
-    }
+	}
 
-    @Override
-    public E getItem(int position) {
-        return mData.valueAt(position);
-    }
+	@Override
+	public E getItem(int position) {
+		return mData.valueAt(position);
+	}
 
-    @Override
-    public long getItemId(int position) {
-        return mData.keyAt(position);
-    }
+	@Override
+	public long getItemId(int position) {
+		return mData.keyAt(position);
+	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
-    }
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		return null;
+	}
 }

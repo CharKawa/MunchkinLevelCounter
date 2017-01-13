@@ -11,13 +11,13 @@ package com.g_art.munchkinlevelcounter.billing.util;
  * @author nelson
  */
 public class Base64DecoderException extends Exception {
-    public Base64DecoderException() {
-        super();
-    }
+	private static final long serialVersionUID = 1L;
 
-    public Base64DecoderException(String s) {
-        super(s);
-    }
+	public Base64DecoderException() {
+		super();
+	}
 
-    private static final long serialVersionUID = 1L;
+	public Base64DecoderException(String s) {
+		super(s);
+	}
 }

@@ -11,35 +11,35 @@ import java.util.ArrayList;
  */
 public class SavePlayersStatsTask extends AsyncTask<ArrayList<Player>, Void, Boolean> {
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+	}
 
-    @SafeVarargs
-    @Override
-    protected final Boolean doInBackground(ArrayList<Player>... params) {
+	@SafeVarargs
+	@Override
+	protected final Boolean doInBackground(ArrayList<Player>... params) {
 
-        boolean result = false;
+		boolean result = false;
 
-        try {
-            for (Player selectedPlayer : params[0]) {
-                selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
-                selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
-                selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
-            }
-            result = true;
-        } catch (Exception ex) {
-            result = false;
-        }
+		try {
+			for (Player selectedPlayer : params[0]) {
+				selectedPlayer.getLvlStats().add(String.valueOf(selectedPlayer.getLevel()));
+				selectedPlayer.getGearStats().add(String.valueOf(selectedPlayer.getGear()));
+				selectedPlayer.getPowerStats().add(String.valueOf(selectedPlayer.getLevel() + selectedPlayer.getGear()));
+			}
+			result = true;
+		} catch (Exception ex) {
+			result = false;
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 
-    @Override
-    protected void onPostExecute(Boolean aBoolean) {
-        super.onPostExecute(aBoolean);
-    }
+	@Override
+	protected void onPostExecute(Boolean aBoolean) {
+		super.onPostExecute(aBoolean);
+	}
 
 }

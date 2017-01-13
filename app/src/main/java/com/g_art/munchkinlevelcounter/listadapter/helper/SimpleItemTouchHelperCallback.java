@@ -8,7 +8,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
  * Created by agulia on 11/28/16.
  */
 
-public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback  {
+public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	public static final float ALPHA_FULL = 1.0f;
 
 	private final ItemTouchHelperAdapter mAdapter;

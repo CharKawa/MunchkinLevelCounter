@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.billing.IabHelper;
@@ -27,346 +28,346 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class About extends AppCompatActivity implements View.OnClickListener {
 
-    // Debug tag, for logging
-    private static final String TAG = "AboutActivity";
-    // SKUs for our products
-    private static final String SKU_DONATE_099 = "donate_099";
-    private static final String SKU_DONATE_199 = "donate_199";
-    private static final String SKU_DONATE_399 = "donate_399";
-    private static final String SKU_DONATE_999 = "donate_999";
-    // (arbitrary) request code for the purchase flow
-    private static final int RC_REQUEST = 10001;
-    // The helper object
-    private IabHelper mHelper;
-    // Called when consumption is complete
-    private IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
-        public void onConsumeFinished(Purchase purchase, IabResult result) {
-            Log.d(TAG, "Consumption finished. Purchase: " + purchase + ", result: " + result);
+	// Debug tag, for logging
+	private static final String TAG = "AboutActivity";
+	// SKUs for our products
+	private static final String SKU_DONATE_099 = "donate_099";
+	private static final String SKU_DONATE_199 = "donate_199";
+	private static final String SKU_DONATE_399 = "donate_399";
+	private static final String SKU_DONATE_999 = "donate_999";
+	// (arbitrary) request code for the purchase flow
+	private static final int RC_REQUEST = 10001;
+	// The helper object
+	private IabHelper mHelper;
+	// Called when consumption is complete
+	private IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+		public void onConsumeFinished(Purchase purchase, IabResult result) {
+			Log.d(TAG, "Consumption finished. Purchase: " + purchase + ", result: " + result);
 
-            // if we were disposed of in the meantime, quit.
-            if (mHelper == null) return;
+			// if we were disposed of in the meantime, quit.
+			if (mHelper == null) return;
 
-            if (result.isSuccess()) {
-                Log.d(TAG, "Consumption successful. Provisioning.");
-                alert("Thanks for your donating!!");
-            } else {
-                complain("Error while consuming: " + result);
-            }
-            Log.d(TAG, "End consumption flow.");
-        }
-    };
-    // Listener that's called when we finish querying the items and subscriptions we own
-    private IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-        @Override
-        public void onQueryInventoryFinished(IabResult result, Inventory inv) {
-            Log.d(TAG, "Query inventory finished.");
+			if (result.isSuccess()) {
+				Log.d(TAG, "Consumption successful. Provisioning.");
+				alert("Thanks for your donating!!");
+			} else {
+				complain("Error while consuming: " + result);
+			}
+			Log.d(TAG, "End consumption flow.");
+		}
+	};
+	// Listener that's called when we finish querying the items and subscriptions we own
+	private IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+		@Override
+		public void onQueryInventoryFinished(IabResult result, Inventory inv) {
+			Log.d(TAG, "Query inventory finished.");
 
-            //Have we been disposed of in the meantime? if so, quit.
-            if (mHelper == null) return;
+			//Have we been disposed of in the meantime? if so, quit.
+			if (mHelper == null) return;
 
-            //Is it a failure?
-            if (result.isFailure()) {
-                complain("Failed to query inventory: " + result);
-                return;
-            }
+			//Is it a failure?
+			if (result.isFailure()) {
+				complain("Failed to query inventory: " + result);
+				return;
+			}
 
-            Log.d(TAG, "Query inventory was successful.");
+			Log.d(TAG, "Query inventory was successful.");
 
             /*
-             * Check for items we own. Notice that for each purchase, we check
+			 * Check for items we own. Notice that for each purchase, we check
              * the developer payload to see if it's correct! See
              * verifyDeveloperPayload().
              */
 
-            Purchase purchase099 = inv.getPurchase(SKU_DONATE_099);
-            if (purchase099 != null && verifyDeveloperPayload(purchase099)) {
-                Log.d(TAG, "We have purchase099. Consuming it.");
-                mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_099), mConsumeFinishedListener);
-                return;
-            }
+			Purchase purchase099 = inv.getPurchase(SKU_DONATE_099);
+			if (purchase099 != null && verifyDeveloperPayload(purchase099)) {
+				Log.d(TAG, "We have purchase099. Consuming it.");
+				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_099), mConsumeFinishedListener);
+				return;
+			}
 
-            Purchase purchase199 = inv.getPurchase(SKU_DONATE_199);
-            if (purchase199 != null && verifyDeveloperPayload(purchase199)) {
-                Log.d(TAG, "We have purchase099. Consuming it.");
-                mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_199), mConsumeFinishedListener);
-                return;
-            }
+			Purchase purchase199 = inv.getPurchase(SKU_DONATE_199);
+			if (purchase199 != null && verifyDeveloperPayload(purchase199)) {
+				Log.d(TAG, "We have purchase099. Consuming it.");
+				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_199), mConsumeFinishedListener);
+				return;
+			}
 
-            Purchase purchase399 = inv.getPurchase(SKU_DONATE_399);
-            if (purchase399 != null && verifyDeveloperPayload(purchase399)) {
-                Log.d(TAG, "We have purchase099. Consuming it.");
-                mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_399), mConsumeFinishedListener);
-                return;
-            }
+			Purchase purchase399 = inv.getPurchase(SKU_DONATE_399);
+			if (purchase399 != null && verifyDeveloperPayload(purchase399)) {
+				Log.d(TAG, "We have purchase099. Consuming it.");
+				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_399), mConsumeFinishedListener);
+				return;
+			}
 
-            Purchase purchase999 = inv.getPurchase(SKU_DONATE_999);
-            if (purchase999 != null && verifyDeveloperPayload(purchase999)) {
-                Log.d(TAG, "We have purchase099. Consuming it.");
-                mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_999), mConsumeFinishedListener);
-                return;
-            }
+			Purchase purchase999 = inv.getPurchase(SKU_DONATE_999);
+			if (purchase999 != null && verifyDeveloperPayload(purchase999)) {
+				Log.d(TAG, "We have purchase099. Consuming it.");
+				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_999), mConsumeFinishedListener);
+				return;
+			}
 
-            Log.d(TAG, "Initial inventory query finished; enabling main UI.");
-        }
-    };
-    // Callback for when a purchase is finished
-    private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-        @Override
-        public void onIabPurchaseFinished(IabResult result, Purchase info) {
-            Log.d(TAG, "Purchase finished: " + result + ", purchase: " + info);
+			Log.d(TAG, "Initial inventory query finished; enabling main UI.");
+		}
+	};
+	// Callback for when a purchase is finished
+	private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+		@Override
+		public void onIabPurchaseFinished(IabResult result, Purchase info) {
+			Log.d(TAG, "Purchase finished: " + result + ", purchase: " + info);
 
-            // if we were disposed of in the meantime, quit.
-            if (mHelper == null) return;
+			// if we were disposed of in the meantime, quit.
+			if (mHelper == null) return;
 
-            if (result.isFailure()) {
-                complain("Error purchasing: " + result);
-                return;
-            }
-            if (!verifyDeveloperPayload(info)) {
-                complain("Error purchasing. Authenticity verification failed.");
-                return;
-            }
+			if (result.isFailure()) {
+				complain("Error purchasing: " + result);
+				return;
+			}
+			if (!verifyDeveloperPayload(info)) {
+				complain("Error purchasing. Authenticity verification failed.");
+				return;
+			}
 
-            Log.d(TAG, "Purchase successful.");
+			Log.d(TAG, "Purchase successful.");
 
-            switch (info.getSku()) {
-                case SKU_DONATE_099:
-                    // bought SKU_DONATE_099. So consume it.
-                    Log.d(TAG, "Purchase is SKU_DONATE_099. Starting SKU_DONATE_099 consumption.");
-                    mHelper.consumeAsync(info, mConsumeFinishedListener);
-                    break;
-                case SKU_DONATE_199:
-                    // bought SKU_DONATE_199. So consume it.
-                    Log.d(TAG, "Purchase is SKU_DONATE_199. Starting SKU_DONATE_199 consumption.");
-                    mHelper.consumeAsync(info, mConsumeFinishedListener);
-                    break;
-                case SKU_DONATE_399:
-                    // bought SKU_DONATE_399. So consume it.
-                    Log.d(TAG, "Purchase is SKU_DONATE_399. Starting SKU_DONATE_399 consumption.");
-                    mHelper.consumeAsync(info, mConsumeFinishedListener);
-                    break;
-                case SKU_DONATE_999:
-                    // bought SKU_DONATE_999. So consume it.
-                    Log.d(TAG, "Purchase is SKU_DONATE_999. Starting SKU_DONATE_999 consumption.");
-                    mHelper.consumeAsync(info, mConsumeFinishedListener);
-                    break;
-            }
-        }
-    };
-    private boolean isDonate = false;
-    private Tracker mTracker;
+			switch (info.getSku()) {
+				case SKU_DONATE_099:
+					// bought SKU_DONATE_099. So consume it.
+					Log.d(TAG, "Purchase is SKU_DONATE_099. Starting SKU_DONATE_099 consumption.");
+					mHelper.consumeAsync(info, mConsumeFinishedListener);
+					break;
+				case SKU_DONATE_199:
+					// bought SKU_DONATE_199. So consume it.
+					Log.d(TAG, "Purchase is SKU_DONATE_199. Starting SKU_DONATE_199 consumption.");
+					mHelper.consumeAsync(info, mConsumeFinishedListener);
+					break;
+				case SKU_DONATE_399:
+					// bought SKU_DONATE_399. So consume it.
+					Log.d(TAG, "Purchase is SKU_DONATE_399. Starting SKU_DONATE_399 consumption.");
+					mHelper.consumeAsync(info, mConsumeFinishedListener);
+					break;
+				case SKU_DONATE_999:
+					// bought SKU_DONATE_999. So consume it.
+					Log.d(TAG, "Purchase is SKU_DONATE_999. Starting SKU_DONATE_999 consumption.");
+					mHelper.consumeAsync(info, mConsumeFinishedListener);
+					break;
+			}
+		}
+	};
+	private boolean isDonate = false;
+	private Tracker mTracker;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_about);
 
-        // Obtain the shared Tracker instance.
-        MyApplication application = (MyApplication) getApplication();
-        mTracker = application.getDefaultTracker();
+		// Obtain the shared Tracker instance.
+		MyApplication application = (MyApplication) getApplication();
+		mTracker = application.getDefaultTracker();
 
-        String base64EncodedPublicKey = getString(R.string.base64);
+		String base64EncodedPublicKey = getString(R.string.base64);
 
-        Log.d(TAG, "Creating IAB helper.");
-        mHelper = new IabHelper(this, base64EncodedPublicKey);
+		Log.d(TAG, "Creating IAB helper.");
+		mHelper = new IabHelper(this, base64EncodedPublicKey);
 
-        // enable debug logging (for a production application, you should set this to false).
-        mHelper.enableDebugLogging(true);
+		// enable debug logging (for a production application, you should set this to false).
+		mHelper.enableDebugLogging(true);
 
-        // Start setup. This is asynchronous and the specified listener
-        // will be called once setup completes.
-        Log.d(TAG, "Starting setup.");
+		// Start setup. This is asynchronous and the specified listener
+		// will be called once setup completes.
+		Log.d(TAG, "Starting setup.");
 
-        // Start setup. This is asynchronous and the specified listener
-        // will be called once setup completes.
-        Log.d(TAG, "Starting setup.");
-        try {
-            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-                public void onIabSetupFinished(IabResult result) {
-                    Log.d(TAG, "Setup finished.");
+		// Start setup. This is asynchronous and the specified listener
+		// will be called once setup completes.
+		Log.d(TAG, "Starting setup.");
+		try {
+			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+				public void onIabSetupFinished(IabResult result) {
+					Log.d(TAG, "Setup finished.");
 
-                    if (!result.isSuccess()) {
-                        // Oh noes, there was a problem.
-                        complain("Problem setting up in-app billing: " + result);
-                        return;
-                    }
+					if (!result.isSuccess()) {
+						// Oh noes, there was a problem.
+						complain("Problem setting up in-app billing: " + result);
+						return;
+					}
 
-                    // Have we been disposed of in the meantime? If so, quit.
-                    if (mHelper == null) return;
+					// Have we been disposed of in the meantime? If so, quit.
+					if (mHelper == null) return;
 
-                    // IAB is fully set up. Now, let's get an inventory of stuff we own.
-                    Log.d(TAG, "Setup successful. Querying inventory.");
-                    mHelper.queryInventoryAsync(mGotInventoryListener);
-                    isDonate = true;
-                }
-            });
-        } catch (Exception e) {
-            Log.d(TAG, "Exception in Billing");
-            isDonate = false;
-        }
+					// IAB is fully set up. Now, let's get an inventory of stuff we own.
+					Log.d(TAG, "Setup successful. Querying inventory.");
+					mHelper.queryInventoryAsync(mGotInventoryListener);
+					isDonate = true;
+				}
+			});
+		} catch (Exception e) {
+			Log.d(TAG, "Exception in Billing");
+			isDonate = false;
+		}
 
-        ImageButton btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
-        btnRate.setOnClickListener(this);
+		ImageButton btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
+		btnRate.setOnClickListener(this);
 
-        ImageButton imgBtnContact = (ImageButton) findViewById(R.id.imgBtnContact);
-        imgBtnContact.setOnClickListener(this);
+		ImageButton imgBtnContact = (ImageButton) findViewById(R.id.imgBtnContact);
+		imgBtnContact.setOnClickListener(this);
 
-        ImageButton btnDonate099 = (ImageButton) findViewById(R.id.btn_donate_099);
-        btnDonate099.setOnClickListener(this);
+		ImageButton btnDonate099 = (ImageButton) findViewById(R.id.btn_donate_099);
+		btnDonate099.setOnClickListener(this);
 
-        ImageButton btnDonate199 = (ImageButton) findViewById(R.id.btn_donate_199);
-        btnDonate199.setOnClickListener(this);
+		ImageButton btnDonate199 = (ImageButton) findViewById(R.id.btn_donate_199);
+		btnDonate199.setOnClickListener(this);
 
-        ImageButton btnDonate399 = (ImageButton) findViewById(R.id.btn_donate_399);
-        btnDonate399.setOnClickListener(this);
+		ImageButton btnDonate399 = (ImageButton) findViewById(R.id.btn_donate_399);
+		btnDonate399.setOnClickListener(this);
 
-        ImageButton btnDonate999 = (ImageButton) findViewById(R.id.btn_donate_999);
-        btnDonate999.setOnClickListener(this);
-    }
+		ImageButton btnDonate999 = (ImageButton) findViewById(R.id.btn_donate_999);
+		btnDonate999.setOnClickListener(this);
+	}
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.imgBtnRate:
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnRateClicked")
-                        .setCategory("Button")
-                        .setLabel("About.Rate")
-                        .build());
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                //Try Google Play
-                intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
-                if (!MyStartActivity(intent)) {
-                    //Market (Google play) app seems not installed, let's try to open a webbrowser
-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.g_art.munchkinlevelcounter"));
-                    if (!MyStartActivity(intent)) {
-                        //Well if this also fails, we have run out of options, inform the user.
-                        Toast.makeText(this, "Could not open Android market, please install the market app.", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                break;
-            case R.id.imgBtnContact:
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnContact")
-                        .setCategory("Button")
-                        .setLabel("About.Contact")
-                        .build());
-                Intent Email = new Intent(Intent.ACTION_SEND);
-                Email.setType("message/rfc822");
-                Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
-                Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
-                Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
-                startActivity(Intent.createChooser(Email, "Choose your Email App:"));
-                break;
-            case R.id.btn_donate_099:
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnDonate_099")
-                        .setCategory("Button")
-                        .setLabel("About.Donate")
-                        .build());
-                if (isDonate) {
-                    onDonateBtnClicked(SKU_DONATE_099);
-                } else {
-                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.btn_donate_199:
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnDonate_199")
-                        .setCategory("Button")
-                        .setLabel("About.Donate")
-                        .build());
-                if (isDonate) {
-                    onDonateBtnClicked(SKU_DONATE_199);
-                } else {
-                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.btn_donate_399:
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnDonate_399")
-                        .setCategory("Button")
-                        .setLabel("About.Donate")
-                        .build());
-                if (isDonate) {
-                    onDonateBtnClicked(SKU_DONATE_399);
-                } else {
-                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.btn_donate_999:
-                mTracker.send(new HitBuilders.EventBuilder()
-                        .setAction("BtnDonate_999")
-                        .setCategory("Button")
-                        .setLabel("About.Donate")
-                        .build());
-                if (isDonate) {
-                    onDonateBtnClicked(SKU_DONATE_999);
-                } else {
-                    Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.imgBtnRate:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction("BtnRateClicked")
+						.setCategory("Button")
+						.setLabel("About.Rate")
+						.build());
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				//Try Google Play
+				intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
+				if (!MyStartActivity(intent)) {
+					//Market (Google play) app seems not installed, let's try to open a webbrowser
+					intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.g_art.munchkinlevelcounter"));
+					if (!MyStartActivity(intent)) {
+						//Well if this also fails, we have run out of options, inform the user.
+						Toast.makeText(this, "Could not open Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+					}
+				}
+				break;
+			case R.id.imgBtnContact:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction("BtnContact")
+						.setCategory("Button")
+						.setLabel("About.Contact")
+						.build());
+				Intent Email = new Intent(Intent.ACTION_SEND);
+				Email.setType("message/rfc822");
+				Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
+				Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+				Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
+				startActivity(Intent.createChooser(Email, "Choose your Email App:"));
+				break;
+			case R.id.btn_donate_099:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction("BtnDonate_099")
+						.setCategory("Button")
+						.setLabel("About.Donate")
+						.build());
+				if (isDonate) {
+					onDonateBtnClicked(SKU_DONATE_099);
+				} else {
+					Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case R.id.btn_donate_199:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction("BtnDonate_199")
+						.setCategory("Button")
+						.setLabel("About.Donate")
+						.build());
+				if (isDonate) {
+					onDonateBtnClicked(SKU_DONATE_199);
+				} else {
+					Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case R.id.btn_donate_399:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction("BtnDonate_399")
+						.setCategory("Button")
+						.setLabel("About.Donate")
+						.build());
+				if (isDonate) {
+					onDonateBtnClicked(SKU_DONATE_399);
+				} else {
+					Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case R.id.btn_donate_999:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction("BtnDonate_999")
+						.setCategory("Button")
+						.setLabel("About.Donate")
+						.build());
+				if (isDonate) {
+					onDonateBtnClicked(SKU_DONATE_999);
+				} else {
+					Toast.makeText(this, "Could not connect to Android market, please install the market app.", Toast.LENGTH_SHORT).show();
+				}
+				break;
+		}
+	}
 
-    private boolean MyStartActivity(Intent intent) {
-        try {
-            startActivity(intent);
-            return true;
-        } catch (ActivityNotFoundException e) {
-            return false;
-        }
-    }
+	private boolean MyStartActivity(Intent intent) {
+		try {
+			startActivity(intent);
+			return true;
+		} catch (ActivityNotFoundException e) {
+			return false;
+		}
+	}
 
-    private void onDonateBtnClicked(String SKU) {
-        // launch the sku purchase
-        // We will be notified of completion via mPurchaseFinishedListener
+	private void onDonateBtnClicked(String SKU) {
+		// launch the sku purchase
+		// We will be notified of completion via mPurchaseFinishedListener
 
-        Log.d(TAG, "Launching purchase flow for: " + SKU);
+		Log.d(TAG, "Launching purchase flow for: " + SKU);
 
          /* TODO: for security, generate your payload here for verification. See the comments on
          *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
          *        an empty string, but on a production app you should carefully generate this. */
-        String payload = "";
+		String payload = "";
 
-        mHelper.launchPurchaseFlow(this, SKU, RC_REQUEST,
-                mPurchaseFinishedListener, payload);
-    }
+		mHelper.launchPurchaseFlow(this, SKU, RC_REQUEST,
+				mPurchaseFinishedListener, payload);
+	}
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
-        if (mHelper == null) return;
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+		if (mHelper == null) return;
 
-        // Pass on the activity result to the helper for handling
-        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-            // not handled, so handle it ourselves (here's where you'd
-            // perform any handling of activity results not related to in-app
-            // billing...
-            super.onActivityResult(requestCode, resultCode, data);
-        } else {
-            Log.d(TAG, "onActivityResult handled by IABUtil.");
-        }
-    }
+		// Pass on the activity result to the helper for handling
+		if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+			// not handled, so handle it ourselves (here's where you'd
+			// perform any handling of activity results not related to in-app
+			// billing...
+			super.onActivityResult(requestCode, resultCode, data);
+		} else {
+			Log.d(TAG, "onActivityResult handled by IABUtil.");
+		}
+	}
 
-    private void complain(String message) {
-        Log.e(TAG, "**** TrivialDrive Error: " + message);
-        alert("Error: " + message);
-    }
+	private void complain(String message) {
+		Log.e(TAG, "**** TrivialDrive Error: " + message);
+		alert("Error: " + message);
+	}
 
-    private void alert(String message) {
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setMessage(message);
-        bld.setNeutralButton("OK", null);
-        Log.d(TAG, "Showing alert dialog: " + message);
-        bld.create().show();
-    }
+	private void alert(String message) {
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
+		bld.setMessage(message);
+		bld.setNeutralButton("OK", null);
+		Log.d(TAG, "Showing alert dialog: " + message);
+		bld.create().show();
+	}
 
-    /**
-     * Verifies the developer payload of a purchase.
-     */
-    private boolean verifyDeveloperPayload(Purchase p) {
-        String payload = p.getDeveloperPayload();
+	/**
+	 * Verifies the developer payload of a purchase.
+	 */
+	private boolean verifyDeveloperPayload(Purchase p) {
+		String payload = p.getDeveloperPayload();
 
         /*
          * TODO: verify that the developer payload of the purchase is correct. It will be
@@ -391,25 +392,25 @@ public class About extends AppCompatActivity implements View.OnClickListener {
          * installations is recommended.
          */
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 
-        // very important:
-        Log.d(TAG, "Destroying helper.");
-        if (mHelper != null) {
-            if (isDonate) {
-                mHelper.dispose();
-            }
-            mHelper = null;
-        }
-    }
+		// very important:
+		Log.d(TAG, "Destroying helper.");
+		if (mHelper != null) {
+			if (isDonate) {
+				mHelper.dispose();
+			}
+			mHelper = null;
+		}
+	}
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+	}
 }

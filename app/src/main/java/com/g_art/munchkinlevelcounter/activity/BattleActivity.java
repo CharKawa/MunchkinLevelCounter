@@ -18,14 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindBool;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
@@ -38,7 +30,14 @@ import com.google.android.gms.analytics.Tracker;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_REQUEST;
+import butterknife.BindBool;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_CANCEL;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_FAIL;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_OK;
@@ -53,19 +52,8 @@ import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESU
 public class BattleActivity extends AppCompatActivity {
 
 	private static final int SUCCESS_RUN_AWAY = 4;
-
-	private Tracker mTracker;
-	private Unbinder unbinder;
-
 	@BindBool(R.bool.portrait_only)
 	boolean mPortrait;
-
-	private Player player;
-	private Player helper;
-	private List<Player> players;
-	private Monster monster;
-	private int mMaxLvl;
-
 	//Player's views
 	@BindView(R.id.txt_battle_player_name)
 	TextView pName;
@@ -79,10 +67,8 @@ public class BattleActivity extends AppCompatActivity {
 	TextView pPower;
 	@BindView(R.id.chb_battle_warrior)
 	AppCompatCheckBox cb_warrior;
-
 	@BindView(R.id.txt_battle_helper_power_value)
 	TextView hPower;
-
 	//Monster's views
 	@BindView(R.id.txt_battle_m_lvl_value)
 	TextView mLvl;
@@ -94,11 +80,16 @@ public class BattleActivity extends AppCompatActivity {
 	TextView mTreasures;
 	@BindView(R.id.diagonal_divider)
 	View mDivider;
-
 	//Buttons
 	@BindView(R.id.fab_battle_add_helper)
 	FloatingActionButton helperBtn;
-
+	private Tracker mTracker;
+	private Unbinder unbinder;
+	private Player player;
+	private Player helper;
+	private List<Player> players;
+	private Monster monster;
+	private int mMaxLvl;
 	private int selectedIndex;
 
 	@Override

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
 import com.db.chart.view.LineChartView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.Stats;
@@ -22,33 +23,33 @@ import java.util.ArrayList;
  */
 public class GearStatsFragment extends Fragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
+		final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
 
-        boolean isDataPresent = false;
-        ArrayList<Player> playersList = null;
-        SparseArray<String> playersColors = new SparseArray<>();
+		boolean isDataPresent = false;
+		ArrayList<Player> playersList = null;
+		SparseArray<String> playersColors = new SparseArray<>();
 
-        if (getArguments() != null) {
-            playersList = getArguments().getParcelableArrayList(Stats.PLAYER_KEY);
-            isDataPresent = playersList != null && !playersList.isEmpty();
-        }
+		if (getArguments() != null) {
+			playersList = getArguments().getParcelableArrayList(Stats.PLAYER_KEY);
+			isDataPresent = playersList != null && !playersList.isEmpty();
+		}
 
-        if (isDataPresent) {
-            LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
+		if (isDataPresent) {
+			LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
-            playersColors = StatsHandler.getStats(playersList, chartView, getActivity(), StatsHandler.GEAR_STATS);
-            if (playersColors != null) {
-                chartView.show();
-            }
-        }
+			playersColors = StatsHandler.getStats(playersList, chartView, getActivity(), StatsHandler.GEAR_STATS);
+			if (playersColors != null) {
+				chartView.show();
+			}
+		}
 
-        SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
-        ListView inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
-        inStatsPlayersList.setAdapter(sparseStringsAdapter);
+		SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
+		ListView inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
+		inStatsPlayersList.setAdapter(sparseStringsAdapter);
 
-        return v;
-    }
+		return v;
+	}
 }

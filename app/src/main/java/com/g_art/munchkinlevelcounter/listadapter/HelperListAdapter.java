@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.model.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

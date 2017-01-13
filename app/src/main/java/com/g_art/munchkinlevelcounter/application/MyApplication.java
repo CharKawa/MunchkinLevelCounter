@@ -1,14 +1,12 @@
 package com.g_art.munchkinlevelcounter.application;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * MunchkinLevelCounter
