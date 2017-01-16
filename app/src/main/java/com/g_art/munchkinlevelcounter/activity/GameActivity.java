@@ -199,12 +199,12 @@ public class GameActivity extends AppCompatActivity
 	@Override
 	public void onPlayerSelected(int position) {
 
-		FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
+		final FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
 
 		if (fragmentPlayer != null) {
-			fragmentPlayer.changeSelectedPlayer(playersList.get(position));
 			mSelectedPlayerPosition = position;
-			scrollToPlayer(position);
+			fragmentPlayer.changeSelectedPlayer(playersList.get(position));
+			selectPlayer(position);
 		}
 	}
 
@@ -215,18 +215,10 @@ public class GameActivity extends AppCompatActivity
 	}
 
 	@Override
-	public void onPlayersUpdate() {
-		FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+	public void selectPlayer(int position) {
+		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
 		if (fragment != null) {
-			fragment.listUpdate();
-		}
-	}
-
-	private void scrollToPlayer(int position) {
-
-		FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
-		if (fragment != null) {
-			fragment.scrollToPlayer(position);
+			fragment.selectPlayer(position);
 		}
 	}
 
@@ -309,7 +301,7 @@ public class GameActivity extends AppCompatActivity
 
 		new MaterialDialog.Builder(this)
 				.customView(imageView, false)
-				.backgroundColor(getResources().getColor(R.color.background))
+//				.backgroundColor(getResources().getColor(R.color.transparent_main_color))
 				.autoDismiss(true)
 				.show();
 	}

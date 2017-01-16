@@ -22,28 +22,29 @@
         android:textSize="25dp" />
 
     <ImageButton
-            android:id="@+id/player_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/currentPlayer"
-            android:layout_alignTop="@+id/currentPlayer"
-            android:layout_toLeftOf="@+id/txtTotal"
-            android:layout_toStartOf="@+id/txtTotal"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:src="@drawable/man"/>
+        android:id="@+id/player_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/currentPlayer"
+        android:layout_alignTop="@+id/currentPlayer"
+        android:layout_toLeftOf="@+id/txtTotal"
+        android:layout_toStartOf="@+id/txtTotal"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/man"/>
 
     <TextView
-            android:id="@+id/txtTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_alignTop="@+id/total"
-            android:layout_toLeftOf="@+id/total"
-            android:text="@string/total_power"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="25dp" android:layout_alignParentRight="false"/>
+        android:id="@+id/txtTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignTop="@+id/total"
+        android:layout_toLeftOf="@+id/total"
+        android:text="@string/total_power"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25dp"/>
 
     <TextView
         android:id="@+id/total"
@@ -66,7 +67,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/level"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="50dp" />
+        android:textSize="50sp"/>
 
     <TextView
         android:id="@+id/txtPlayerLvl"
@@ -76,7 +77,7 @@
         android:layout_centerHorizontal="true"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="35dp" />
+        android:textSize="35sp"/>
 
     <TextView
         android:id="@+id/txtGear"
@@ -87,7 +88,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/gear"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="50dp" />
+        android:textSize="50sp"/>
 
     <TextView
         android:id="@+id/txtPlayerGear"
@@ -97,7 +98,7 @@
         android:layout_centerHorizontal="true"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="35dp" />
+        android:textSize="35sp"/>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -147,6 +148,7 @@
 
     <Button
         android:id="@+id/btnNextPlayer"
+        style="@style/Munchkin.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -159,7 +161,6 @@
         android:height="45dp"
         android:gravity="center"
         android:text="@string/btnNextPlayer"
-        android:textStyle="bold"
-        style="@style/Munchkin.Button"/>
+        android:textStyle="bold"/>
 
 </RelativeLayout>

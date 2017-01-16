@@ -32,8 +32,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by G_Art on 16/7/2014.
  */
 public class NewPlayers extends AppCompatActivity implements OnStartDragListener {
-	public final static String PLAYER_NAME = "playerName";
-	public static final String PLAYER_SEX = "player_sex";
 	private final static String PLAYER_KEY = "playersList";
 	private Tracker mTracker;
 	private String PREFS_NO_DATA;
@@ -71,7 +69,6 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 		mAdapter = new NewPlayersRecyclerAdapter(mPlayers, this);
 		mRecyclerView.setAdapter(mAdapter);
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
 		final ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
 		mItemTouchHelper = new ItemTouchHelper(callback);

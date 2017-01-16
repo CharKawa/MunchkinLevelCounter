@@ -132,7 +132,6 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 				break;
 		}
 		setSelectedPlayer();
-		mCallback.onPlayersUpdate();
 	}
 
 	private void showContinueDialog() {
@@ -224,9 +223,9 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
 		void finishClick();
 
-		void onPlayersUpdate();
-
 		boolean savePlayersStats();
+
+		void selectPlayer(int position);
 
 		boolean onNextTurnClick(Player player);
 

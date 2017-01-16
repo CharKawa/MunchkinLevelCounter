@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:src="http://schemas.android.com/tools"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                xmlns:src="http://schemas.android.com/tools"
                 android:padding="10dp">
 
 
@@ -29,6 +29,7 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/reorder"
         android:layout_toRightOf="@+id/imvPlayerSex"
+        android:hint="@string/enter_player_name"
         android:textSize="25sp"/>
 
     <ImageView

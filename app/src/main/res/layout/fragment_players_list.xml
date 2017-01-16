@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     tools:context="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList">
 
-    <ListView
-        android:id="@+id/inGamePlayersList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_in_game_players"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/text_color"
-        android:dividerHeight="2dp" />
+        />
 
 
 </FrameLayout>
