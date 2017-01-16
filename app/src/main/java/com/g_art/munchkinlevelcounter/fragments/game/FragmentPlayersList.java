@@ -103,6 +103,10 @@ public class FragmentPlayersList extends Fragment {
 		inGameAdapter.toggleSelection(position);
 	}
 
+	public void updatePlayer(int position) {
+		inGameAdapter.notifyItemChanged(position);
+	}
+
 	private void scrollToPlayer(int position) {
 		mRecyclerView.scrollToPosition(position);
 	}

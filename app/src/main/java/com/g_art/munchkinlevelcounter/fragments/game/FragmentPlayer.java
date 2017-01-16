@@ -131,7 +131,7 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 				updatePlayerSex();
 				break;
 		}
-		setSelectedPlayer();
+		updateSelectedPlayer();
 	}
 
 	private void showContinueDialog() {
@@ -186,18 +186,18 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 
 	public void changeSelectedPlayer(Player player) {
 		selectedPlayer = player;
-		setSelectedPlayer();
-
+		updateSelectedPlayer();
 		mCallback.savePlayersStats();
 	}
 
-	private void setSelectedPlayer() {
+	private void updateSelectedPlayer() {
 		if (selectedPlayer != null) {
 			holder.txtCurrentPlayerName.setText(selectedPlayer.getName());
 			holder.txtCurrentPlayerLvl.setText(Integer.toString(selectedPlayer.getLevel()));
 			holder.txtCurrentPlayerGear.setText(Integer.toString(selectedPlayer.getGear()));
-			holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getGear() + selectedPlayer.getLevel()));
+			holder.txtCurrentPlayerPower.setText(Integer.toString(selectedPlayer.getPower()));
 			updatePlayerSex();
+			mCallback.updatePlayer(-1);
 		}
 	}
 
@@ -228,6 +228,8 @@ public class FragmentPlayer extends Fragment implements View.OnClickListener {
 		void selectPlayer(int position);
 
 		boolean onNextTurnClick(Player player);
+
+		void updatePlayer(int position);
 
 		int maxLvl();
 	}

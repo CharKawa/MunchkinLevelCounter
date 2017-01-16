@@ -106,7 +106,7 @@
     <string name="battle_dialog_title_lose">Defeat</string>
     <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to Run Away?</string>
     <string name="battle_dialog_lose_run_away">Save Me!</string>
-    <string name="battle_dialog_lose_anyway">Warriors Are Not RUN!!</string>
+    <string name="battle_dialog_lose_anyway">Warriors Do not RUN!</string>
     <string name="battle_dialog_title_run">Run Away</string>
     <string name="battle_dialog_msg_run">Run carefully. You can die.</string>
     <string name="battle_dialog_run_confirm">Run!</string>

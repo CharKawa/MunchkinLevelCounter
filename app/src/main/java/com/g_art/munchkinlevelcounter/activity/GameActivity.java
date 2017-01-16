@@ -223,6 +223,18 @@ public class GameActivity extends AppCompatActivity
 	}
 
 	@Override
+	public void updatePlayer(int position) {
+		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+		if (fragment != null) {
+			if (position == -1) {
+				fragment.updatePlayer(mSelectedPlayerPosition);
+			} else {
+				fragment.updatePlayer(position);
+			}
+		}
+	}
+
+	@Override
 	public boolean onNextTurnClick(Player player) {
 		boolean result = false;
 		try {
