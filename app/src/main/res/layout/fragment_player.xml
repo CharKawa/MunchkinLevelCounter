@@ -1,7 +1,8 @@
 <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -22,7 +23,7 @@
         android:layout_toStartOf="@+id/player_sex"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <ImageButton
         android:id="@+id/player_sex"
@@ -32,9 +33,9 @@
         android:layout_alignTop="@+id/currentPlayer"
         android:layout_toLeftOf="@+id/txtTotal"
         android:layout_toStartOf="@+id/txtTotal"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
-        android:adjustViewBounds="true"
         android:src="@drawable/man"/>
 
     <TextView
@@ -42,10 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/total"
-        android:layout_toStartOf="@+id/total"
         android:layout_toLeftOf="@+id/total"
+        android:layout_toStartOf="@+id/total"
         android:text="@string/total_power"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
         android:id="@+id/total"
@@ -54,12 +55,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/btnNextPlayer"
+        android:layout_marginEnd="12dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="12dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginTop="15dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
         android:id="@+id/txtLevel"
@@ -70,20 +71,20 @@
         android:layout_alignTop="@+id/txtPlayerLvl"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
-        android:text="@string/level"
         android:gravity="end"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/level"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
         android:id="@+id/txtPlayerLvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnLvlUp"
+        android:layout_alignRight="@+id/btnLvlUp"
         android:layout_below="@+id/btnLvlUp"
-        android:layout_alignLeft="@id/btnLvlUp"
-        android:layout_alignRight="@id/btnLvlUp"
         android:gravity="center"
         android:text="10"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
         android:id="@+id/txtGear"
@@ -94,18 +95,18 @@
         android:layout_alignTop="@+id/txtPlayerGear"
         android:layout_marginRight="30dp"
         android:text="@string/gear"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <TextView
         android:id="@+id/txtPlayerGear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnGearUp"
         android:layout_alignLeft="@+id/btnGearUp"
         android:layout_alignRight="@+id/btnGearUp"
+        android:layout_below="@+id/btnGearUp"
         android:gravity="center"
         android:text="10"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -141,7 +142,7 @@
         android:layout_marginTop="25dp"
         android:layout_toLeftOf="@+id/txtGear"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_arrow_up_24dp" />
+        app:srcCompat="@drawable/ic_arrow_up_24dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnGearDwn"
@@ -152,11 +153,12 @@
         android:layout_toLeftOf="@+id/txtGear"
         android:paddingBottom="5dp"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_arrow_down_24dp" />
+        app:srcCompat="@drawable/ic_arrow_down_24dp"/>
 
 
     <Button
         android:id="@+id/btnNextPlayer"
+        style="@style/Munchkin.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -169,7 +171,6 @@
         android:height="45dp"
         android:gravity="center"
         android:text="@string/btnNextPlayer"
-        android:textStyle="bold"
-        style="@style/Munchkin.Button"/>
+        android:textStyle="bold"/>
 
 </RelativeLayout>

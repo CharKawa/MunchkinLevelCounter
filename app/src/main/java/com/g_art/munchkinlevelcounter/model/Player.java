@@ -85,6 +85,34 @@ public class Player implements Parcelable, Comparable {
 		in.readStringList(powerStats);
 	}
 
+	public int incrementLvl() {
+		this.level++;
+		return this.level;
+	}
+
+	public int decrementLvl() {
+		this.level--;
+		return this.level;
+	}
+
+	public int incrementGear() {
+		this.gear++;
+		return this.gear;
+	}
+
+	public int decrementGear() {
+		this.gear--;
+		return this.gear;
+	}
+
+	public void toggleGender() {
+		if (this.getSex() == Sex.MAN) {
+			this.setSex(Sex.WOMAN);
+		} else {
+			this.setSex(Sex.MAN);
+		}
+	}
+
 	public Player cloneWithoutStats() {
 		Player newPlayer = new Player(this.name);
 		newPlayer.setSex(this.getSex());

@@ -2,7 +2,6 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
@@ -10,14 +9,18 @@
 
     <LinearLayout
         android:id="@+id/fragmentList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@id/currentPlayer_container"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true">
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_in_game_players"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/currentPlayer_container"
@@ -27,12 +30,7 @@
         android:layout_alignParentRight="true"
         android:orientation="vertical">
 
-        <fragment
-            android:id="@+id/currentPlayer_Fragment"
-            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_player" />
+        <include layout="@layout/fragment_player"/>
 
     </LinearLayout>
 

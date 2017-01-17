@@ -1,6 +1,5 @@
 package com.g_art.munchkinlevelcounter.activity;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +28,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
-import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer;
-import com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayersList;
+import com.g_art.munchkinlevelcounter.listadapter.InGamePlayersAdapter;
+import com.g_art.munchkinlevelcounter.listadapter.helper.ItemClickSupport;
 import com.g_art.munchkinlevelcounter.model.Player;
+import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 import com.google.android.gms.analytics.HitBuilders;
@@ -36,35 +39,48 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by G_Art on 28/7/2014.
  */
-public class GameActivity extends AppCompatActivity
-		implements
-		FragmentPlayersList.OnPlayerSelectedListener,
-		FragmentPlayer.PlayersUpdate {
+public class GameActivity extends AppCompatActivity {
 
-	public final static String MAX_LVL = "max_lvl";
+	public static final String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
+	public static final String BUNDLE_STATS_KEY = "bundleStats";
 	public static final int BATTLE_REQUEST = 10;
 	public static final int BATTLE_RESULT_OK = 1;
 	public static final int BATTLE_RESULT_CANCEL = 0;
 	public static final int BATTLE_RESULT_FAIL = 4;
 	public static final int RUN_AWAY_RESULT_OK = 2;
 	public static final int RUN_AWAY_RESULT_FAIL = 3;
-	private static final String TAG_FPL_FRAGMENT = "Fragment_Players_List";
 	private static final String SELECTED_KEY = "selectedPlayer";
-
+	@BindView(R.id.rv_in_game_players)
+	RecyclerView mRecyclerView;
+	@BindView(R.id.currentPlayer)
+	TextView txtCurrentPlayerName;
+	@BindView(R.id.txtPlayerLvl)
+	TextView txtCurrentPlayerLvl;
+	@BindView(R.id.txtPlayerGear)
+	TextView txtCurrentPlayerGear;
+	@BindView(R.id.total)
+	TextView txtCurrentPlayerPower;
+	@BindView(R.id.player_sex)
+	ImageButton btnSexType;
 	private Tracker mTracker;
-	private FragmentManager fm;
+	private Unbinder unbinder;
 	private SettingsHandler settingsHandler;
-
-	private int maxLvl;
+	private InGamePlayersAdapter inGameAdapter;
 	private ArrayList<Player> playersList;
 	private int mSelectedPlayerPosition;
+	private Player mSelectedPlayer;
+	private boolean contAfterMaxLVL;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,14 +90,13 @@ public class GameActivity extends AppCompatActivity
 		}
 
 		setContentView(R.layout.activity_game);
-
-		fm = getFragmentManager();
+		unbinder = ButterKnife.bind(this);
 
 		if (savedInstanceState != null) {
 			playersList = savedInstanceState.getParcelableArrayList(PLAYERS_KEY);
 			mSelectedPlayerPosition = savedInstanceState.getInt(SELECTED_KEY);
 		} else {
-			Intent intent = getIntent();
+			final Intent intent = getIntent();
 			playersList = intent.getParcelableArrayListExtra(PLAYERS_KEY);
 			/*
 			Saving first players stats
@@ -89,20 +104,13 @@ public class GameActivity extends AppCompatActivity
 			savePlayersStats();
 
         	/*
-        	Setting the first player chosen
+			Setting the first player chosen
          	*/
 			mSelectedPlayerPosition = 0;
 		}
 
-		FragmentPlayersList fr = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
-
-		if (fr == null) {
-			fr = new FragmentPlayersList();
-			Bundle bundle = new Bundle();
-			bundle.putParcelableArrayList(PLAYERS_KEY, playersList);
-			fr.setArguments(bundle);
-			fm.beginTransaction().add(R.id.fragmentList, fr, TAG_FPL_FRAGMENT).commit();
-		}
+		intiGameAdapter();
+		initRecyclerView();
 
 		// Obtain the shared Tracker instance.
 		MyApplication application = (MyApplication) getApplication();
@@ -113,14 +121,31 @@ public class GameActivity extends AppCompatActivity
 				.setLabel("GameActivity")
 				.build());
 
-		SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		settingsHandler = SettingsHandler.getInstance(mPrefs);
 
 		settingsHandler.loadSettings();
-		maxLvl = settingsHandler.getMaxLvl();
 
 		onPlayerSelected(mSelectedPlayerPosition);
+	}
 
+	private void intiGameAdapter() {
+		inGameAdapter = new InGamePlayersAdapter(playersList);
+	}
+
+	private void initRecyclerView() {
+		mRecyclerView.setHasFixedSize(true);
+		mRecyclerView.setAdapter(inGameAdapter);
+
+		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+		final ItemClickSupport itemClick = ItemClickSupport.addTo(mRecyclerView);
+		itemClick.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+			@Override
+			public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+				onPlayerSelected(position);
+				selectPlayer(position);
+			}
+		});
 	}
 
 	@Override
@@ -135,6 +160,55 @@ public class GameActivity extends AppCompatActivity
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.in_game, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@OnClick({
+			R.id.btnLvlUp,
+			R.id.btnLvlDwn,
+			R.id.btnGearUp,
+			R.id.btnGearDwn,
+			R.id.btnNextPlayer,
+			R.id.player_sex
+	})
+	public void clickPerformed(View v) {
+		switch (v.getId()) {
+			case R.id.btnLvlUp:
+				if (isMaxLvlReached(mSelectedPlayer.getLevel()) == false) {
+					mSelectedPlayer.incrementLvl();
+				} else {
+					if (contAfterMaxLVL) {
+						mSelectedPlayer.incrementLvl();
+					} else {
+						showContinueDialog();
+					}
+				}
+				break;
+
+			case R.id.btnLvlDwn:
+				if (mSelectedPlayer.getLevel() != 1) {
+					mSelectedPlayer.decrementLvl();
+				}
+				break;
+
+			case R.id.btnGearUp:
+				mSelectedPlayer.incrementGear();
+				break;
+
+			case R.id.btnGearDwn:
+				mSelectedPlayer.decrementGear();
+				break;
+
+			case R.id.btnNextPlayer:
+				if (onNextTurnClick(mSelectedPlayer) == false) {
+					Toast.makeText(this, getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
+				}
+				break;
+			case R.id.player_sex:
+				mSelectedPlayer.toggleGender();
+				updatePlayerSex();
+				break;
+		}
+		updateSelectedPlayer();
 	}
 
 	@Override
@@ -196,45 +270,42 @@ public class GameActivity extends AppCompatActivity
 	public void stayInTheGame() {
 	}
 
-	@Override
 	public void onPlayerSelected(int position) {
+		mSelectedPlayer = playersList.get(position);
+		mSelectedPlayerPosition = position;
+		selectPlayer(position);
+		updateSelectedPlayer();
+	}
 
-		final FragmentPlayer fragmentPlayer = (FragmentPlayer) fm.findFragmentById(R.id.currentPlayer_Fragment);
-
-		if (fragmentPlayer != null) {
-			mSelectedPlayerPosition = position;
-			fragmentPlayer.changeSelectedPlayer(playersList.get(position));
-			selectPlayer(position);
+	private void updateSelectedPlayer() {
+		if (mSelectedPlayer != null) {
+			txtCurrentPlayerName.setText(mSelectedPlayer.getName());
+			txtCurrentPlayerLvl.setText(Integer.toString(mSelectedPlayer.getLevel()));
+			txtCurrentPlayerGear.setText(Integer.toString(mSelectedPlayer.getGear()));
+			txtCurrentPlayerPower.setText(Integer.toString(mSelectedPlayer.getPower()));
+			updatePlayerSex();
+			updatePlayer(mSelectedPlayerPosition);
 		}
 	}
 
-	@Override
+	private void updatePlayerSex() {
+		if (Sex.MAN == mSelectedPlayer.getSex()) {
+			btnSexType.setImageResource(R.drawable.man);
+		} else {
+			btnSexType.setImageResource(R.drawable.woman);
+		}
+	}
+
+
 	public void finishClick() {
 		savePlayersStats();
 		openStatsActivity();
 	}
 
-	@Override
-	public void selectPlayer(int position) {
-		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
-		if (fragment != null) {
-			fragment.selectPlayer(position);
-		}
-	}
-
-	@Override
 	public void updatePlayer(int position) {
-		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
-		if (fragment != null) {
-			if (position == -1) {
-				fragment.updatePlayer(mSelectedPlayerPosition);
-			} else {
-				fragment.updatePlayer(position);
-			}
-		}
+		inGameAdapter.notifyItemChanged(position);
 	}
 
-	@Override
 	public boolean onNextTurnClick(Player player) {
 		boolean result = false;
 		try {
@@ -260,14 +331,13 @@ public class GameActivity extends AppCompatActivity
 		return result;
 	}
 
-	@Override
 	public int maxLvl() {
 		return settingsHandler.getMaxLvl();
 	}
 
 	public boolean savePlayersStats() {
 		boolean result;
-		SavePlayersStatsTask saveTask = new SavePlayersStatsTask();
+		final SavePlayersStatsTask saveTask = new SavePlayersStatsTask();
 
 		try {
 			saveTask.execute(playersList);
@@ -330,7 +400,7 @@ public class GameActivity extends AppCompatActivity
 			View view = findViewById(R.id.action_dice);
 			int x = (int) view.getX();
 			int y = (int) view.getY();
-			ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
+			final ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
 			startActivityForResult(intent, BATTLE_REQUEST, optionsCompat.toBundle());
 		} else {
 			startActivityForResult(intent, BATTLE_REQUEST);
@@ -352,6 +422,43 @@ public class GameActivity extends AppCompatActivity
 				break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	private void showContinueDialog() {
+		new MaterialDialog.Builder(this)
+				.title(R.string.title_dialog_continue)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.content(R.string.message_for_dialog_cont)
+				.contentColor(getResources().getColor(R.color.text_color))
+				.positiveText(R.string.ok_btn_for_dialog_cont)
+				.positiveColor(getResources().getColor(R.color.text_color))
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						doPositiveClickContinueDialog();
+					}
+				})
+				.negativeText(R.string.cancel_btn_for_dialog_cont)
+				.negativeColor(getResources().getColor(R.color.text_color))
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						doNegativeClickContinueDialog();
+					}
+				})
+				.show();
+	}
+
+	public void doPositiveClickContinueDialog() {
+		contAfterMaxLVL = true;
+		mSelectedPlayer.setWinner(true);
+		clickPerformed(findViewById(R.id.btnLvlUp));
+	}
+
+	public void doNegativeClickContinueDialog() {
+		mSelectedPlayer.setWinner(true);
+		mSelectedPlayer.incrementLvl();
+		finishClick();
 	}
 
 	private void finishGame() {
@@ -386,22 +493,24 @@ public class GameActivity extends AppCompatActivity
 	public void contCurrentGame() {
 	}
 
+	private boolean isMaxLvlReached(int currentLvl) {
+		boolean maxLvlReached = false;
+		if (currentLvl + 1 == maxLvl()) {
+			maxLvlReached = true;
+		}
+		return maxLvlReached;
+	}
+
 	private void openStatsActivity() {
-		Intent intent = new Intent(this, Stats.class);
-		Bundle bundle = new Bundle();
+		final Intent intent = new Intent(this, Stats.class);
+		final Bundle bundle = new Bundle();
 		bundle.putParcelableArrayList(PLAYERS_KEY, getPlayersList());
-		String BUNDLE_STATS_KEY = "bundleStats";
 		intent.putExtra(BUNDLE_STATS_KEY, bundle);
 		startActivity(intent);
 	}
 
 	private ArrayList<Player> getPlayersList() {
 		return playersList;
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
 	}
 
 	private void showMaxLvLDialog() {
@@ -473,7 +582,7 @@ public class GameActivity extends AppCompatActivity
 	}
 
 	public void doPositiveClickLvLDialog(int newMaxLvl) {
-		maxLvl = updateMaxLVL(newMaxLvl);
+		updateMaxLVL(newMaxLvl);
 	}
 
 	private int updateMaxLVL(int newMaxLVL) {
@@ -484,6 +593,22 @@ public class GameActivity extends AppCompatActivity
 			).show();
 		}
 		return settingsHandler.getMaxLvl();
+	}
+
+	public void selectPlayer(int position) {
+		inGameAdapter.clearSelection();
+		inGameAdapter.toggleSelection(position);
+		scrollToPlayer(position);
+	}
+
+	private void scrollToPlayer(int position) {
+		mRecyclerView.scrollToPosition(position);
+	}
+
+	@Override
+	protected void onDestroy() {
+		unbinder.unbind();
+		super.onDestroy();
 	}
 
 	@Override

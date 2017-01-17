@@ -15,20 +15,23 @@
         android:layout_weight="0.1"
         android:orientation="horizontal">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_in_game_players"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/currentPlayer_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
 
-        <fragment
-            android:id="@+id/currentPlayer_Fragment"
-            android:name="com.g_art.munchkinlevelcounter.fragments.game.FragmentPlayer"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            tools:layout="@layout/fragment_player" />
+        <include layout="@layout/fragment_player"/>
 
     </LinearLayout>
 

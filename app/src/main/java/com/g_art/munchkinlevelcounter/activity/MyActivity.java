@@ -22,8 +22,6 @@ import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-import java.util.Date;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -50,45 +48,11 @@ public class MyActivity extends AppCompatActivity {
 
 		unbinder = ButterKnife.bind(this);
 
-//		if (savedInstanceState == null) {
-//			getFragmentManager().beginTransaction()
-//					.add(R.id.container, new PlaceholderFragment())
-//					.commit();
-//		}
-
-//		doNeedToOpenThanks();
 		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		settingsHandler = SettingsHandler.getInstance(mPrefs);
 		int popupStatus = settingsHandler.getPopupStatus();
 
 		showTranslationPopup(popupStatus);
-	}
-
-	private void doNeedToOpenThanks() {
-		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		final SettingsHandler settingsHandler = SettingsHandler.getInstance(mPrefs);
-		final int popupStatus = settingsHandler.getPopupStatus();
-		if (popupStatus == SettingsHandler.FIRST_SHOW) {
-			mTracker.send(new HitBuilders.EventBuilder()
-					.setAction("OpenThanksScreen")
-					.setCategory("Screen")
-					.setLabel("FIRST_SHOW")
-					.build());
-			showThanksPopup();
-		} else if (popupStatus == SettingsHandler.ASK_LATER) {
-			mTracker.send(new HitBuilders.EventBuilder()
-					.setAction("OpenThanksScreen")
-					.setCategory("Screen")
-					.setLabel("ASK_LATER")
-					.build());
-			Date dateOfShow = settingsHandler.getStatusDate();
-			long DAY_IN_MS = 1000 * 60 * 60 * 24;
-			Date currentDate = new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
-			if (dateOfShow.before(currentDate)) {
-				showThanksPopup();
-			}
-		}
-
 	}
 
 	private void showTranslationPopup(int popupStatus) {
@@ -154,11 +118,6 @@ public class MyActivity extends AppCompatActivity {
 				})
 				.backgroundColor(getResources().getColor(R.color.background))
 				.show();
-	}
-
-	private void showThanksPopup() {
-		Intent intent = new Intent(this, InfoActivity.class);
-		startActivity(intent);
 	}
 
 	@Override

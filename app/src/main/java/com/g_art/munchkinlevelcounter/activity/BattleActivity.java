@@ -30,7 +30,6 @@ import com.google.android.gms.analytics.Tracker;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindBool;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
@@ -41,6 +40,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_CANCEL;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_FAIL;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.BATTLE_RESULT_OK;
+import static com.g_art.munchkinlevelcounter.activity.GameActivity.PLAYER;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESULT_FAIL;
 import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESULT_OK;
 
@@ -52,8 +52,8 @@ import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESU
 public class BattleActivity extends AppCompatActivity {
 
 	private static final int SUCCESS_RUN_AWAY = 4;
-	@BindBool(R.bool.portrait_only)
-	boolean mPortrait;
+
+	private static final String PLAYERS_KEY = "helpers";
 	//Player's views
 	@BindView(R.id.txt_battle_player_name)
 	TextView pName;
@@ -88,7 +88,7 @@ public class BattleActivity extends AppCompatActivity {
 	private Unbinder unbinder;
 	private Player player;
 	private Player helper;
-	private List<Player> players;
+	private ArrayList<Player> players;
 	private Monster monster;
 	private int mMaxLvl;
 	private int selectedIndex;
@@ -97,9 +97,7 @@ public class BattleActivity extends AppCompatActivity {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (mPortrait) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		setContentView(R.layout.activity_battle_container);
 
@@ -112,22 +110,26 @@ public class BattleActivity extends AppCompatActivity {
 				.setLabel("BattleActivity")
 				.build());
 
-		final Intent intent = getIntent();
-		final Bundle bundle = intent.getExtras();
+		if (savedInstanceState == null) {
 
-		int selectedPlayerId = bundle.getInt(GameActivity.PLAYER, 0);
+			final Intent intent = getIntent();
+			final Bundle bundle = intent.getExtras();
+			int selectedPlayerId = bundle.getInt(GameActivity.PLAYER, 0);
+			players = bundle.getParcelableArrayList(GameActivity.PLAYERS_KEY);
+			if (players == null || players.isEmpty()) {
+				setResult(RESULT_CANCELED);
+				finish();
+			}
 
-		players = bundle.getParcelableArrayList(GameActivity.PLAYERS_KEY);
+			player = players.remove(selectedPlayerId);    //remove so it won't be shown in help list
+			mMaxLvl = intent.getIntExtra(GameActivity.MAX_LVL, 10);
 
-		if (players == null || players.isEmpty()) {
-			setResult(RESULT_CANCELED);
-			finish();
+		} else {
+			players = savedInstanceState.getParcelableArrayList(PLAYERS_KEY);
+			player = savedInstanceState.getParcelable(PLAYER);
 		}
 
-		player = players.remove(selectedPlayerId);    //remove so it won't be shown in help list
-
 		monster = new Monster();
-		mMaxLvl = intent.getIntExtra(GameActivity.MAX_LVL, 10);
 
 		//Binding views
 		unbinder = ButterKnife.bind(this);
@@ -139,6 +141,13 @@ public class BattleActivity extends AppCompatActivity {
 		if (bar != null) {
 			bar.setTitle(player.getName() + " VS " + "Monster");
 		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList(PLAYERS_KEY, players);
+		outState.putParcelable(PLAYER, player);
 	}
 
 	@OnClick({R.id.fab_battle_lvl_up, R.id.fab_battle_lvl_dwn,
