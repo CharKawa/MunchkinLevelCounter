@@ -12,6 +12,7 @@
     <color name="grid">#b0bec5</color>
     <color name="actionBarBackground">#4a1914</color>
     <color name="background">#fbce97</color>
+    <color name="trans_background">#80000000</color>
     <color name="darkBackground">#c8a478</color>
     <color name="text_color">#4a1914</color>
     <color name="button_text_color">#fbce97</color>

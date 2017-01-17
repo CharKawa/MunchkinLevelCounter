@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"> Level Counter</string>
+    <string name="app_name">Level Counter</string>
     <string name="action_settings">Settings</string>
     <string name="main_screen_Players">Players</string>
-    <string name="main_screen_Stats"> Statistic</string>
+    <string name="main_screen_Stats">Statistic</string>
     <string name="main_screen_Settings">Settings</string>
     <string name="main_screen_About">About</string>
     <string name="players_screen_Add_Player">Add Player</string>
@@ -65,7 +65,7 @@
     <string name="settings_saved">Settings are saved.</string>
     <string name="error_max_level_one">Max level cannot be equal 1.</string>
     <string name="dice">Dice</string>
-    <string name="action_start_batter">Fight</string>
+    <string name="action_start_battle">Fight</string>
     <string name="run_away_success">Success! But check Modifiers!</string>
     <string name="run_away_fail">Fail! But check Modifiers!</string>
     <string name="more_players">Please, add more mPlayers.</string>
@@ -96,7 +96,6 @@
     <string name="btn_fight">Fight</string>
     <string name="monster">Monster</string>
     <string name="battle_screen">Battle</string>
-    <string name="run_away">Run Away</string>
     <string name="treasures">Treasures</string>
 
     <string name="ok_btn_dialog_battle_continue">Continue</string>
@@ -104,12 +103,17 @@
     <string name="battle_dialog_msg">You\'ve beat that monster! Don\'t forget to up your lvl!</string>
     <string name="battle_dialog_title_win">Victory!</string>
     <string name="battle_dialog_title_lose">Defeat</string>
-    <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to Run Away?</string>
+    <string name="battle_dialog_msg_lose">You will lose! Maybe it is better to run Away?</string>
     <string name="battle_dialog_lose_run_away">Save Me!</string>
     <string name="battle_dialog_lose_anyway">Warriors Do not RUN!</string>
     <string name="battle_dialog_title_run">Run Away</string>
     <string name="battle_dialog_msg_run">Run carefully. You can die.</string>
     <string name="battle_dialog_run_confirm">Run!</string>
-    <string name="battle_dialog_run_cancel">NO! I\'ll Stay!</string>
+    <string name="battle_dialog_run_cancel">No! I\'ll Stay!</string>
+    <string name="tr_dialog_title">Help Us.</string>
+    <string name="tr_dialog_msg">You can help us with translation into your language! Please, mail us: android.dev.g.art@gmail.com</string>
+    <string name="tr_dialog_pos">Sure</string>
+    <string name="tr_dialog_neg">No</string>
+    <string name="tr_dialog_neu">Not Now</string>
 
 </resources>

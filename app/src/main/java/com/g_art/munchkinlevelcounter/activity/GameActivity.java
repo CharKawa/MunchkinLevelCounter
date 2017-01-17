@@ -216,7 +216,7 @@ public class GameActivity extends AppCompatActivity
 
 	@Override
 	public void selectPlayer(int position) {
-		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
 		if (fragment != null) {
 			fragment.selectPlayer(position);
 		}
@@ -224,7 +224,7 @@ public class GameActivity extends AppCompatActivity
 
 	@Override
 	public void updatePlayer(int position) {
-		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentById(R.id.fragmentList);
+		final FragmentPlayersList fragment = (FragmentPlayersList) fm.findFragmentByTag(TAG_FPL_FRAGMENT);
 		if (fragment != null) {
 			if (position == -1) {
 				fragment.updatePlayer(mSelectedPlayerPosition);
@@ -313,7 +313,7 @@ public class GameActivity extends AppCompatActivity
 
 		new MaterialDialog.Builder(this)
 				.customView(imageView, false)
-//				.backgroundColor(getResources().getColor(R.color.transparent_main_color))
+				.backgroundColor(getResources().getColor(R.color.background))
 				.autoDismiss(true)
 				.show();
 	}

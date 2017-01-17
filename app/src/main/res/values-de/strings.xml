@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"> Level Counter</string>
+    <string name="app_name">Level Counter</string>
     <string name="action_settings">Einstellungen</string>
     <string name="main_screen_Players">Spieler</string>
     <string name="main_screen_Stats">Statistisch</string>
@@ -82,24 +82,37 @@
     <string name="btnChangeSex">Change Sex</string>
     <string name="enter_player_name">Name</string>
     <string name="mods">Mods</string>
-    <string name="warrior">Warrior</string>
-    <string name="btn_fight">Fight</string>
+    <string name="warrior">Krieger</string>
+    <string name="btn_fight">Kampf</string>
     <string name="monster">Monster</string>
-    <string name="battle_screen">Battle</string>
-    <string name="run_away">Run Away</string>
-    <string name="treasures">Treasures</string>
-    <string name="ok_btn_dialog_battle_continue">Continue</string>
-    <string name="cancel_btn_for_dialog_battle">Cancel</string>
-    <string name="battle_dialog_title_win">Victory!</string>
-    <string name="battle_dialog_title_lose">Defeat</string>
-    <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to run Away?</string>
-    <string name="battle_dialog_lose_run_away">Run Away</string>
-    <string name="battle_dialog_lose_anyway">Continue</string>
-    <string name="battle_dialog_title_run">Run Away</string>
-    <string name="battle_dialog_msg_run">You\'ve decided to run away. Run carefully. You can die.</string>
-    <string name="battle_dialog_run_confirm">Run!</string>
-    <string name="battle_dialog_run_cancel">Cancel</string>
-    <string name="battle_dialog_msg">You\'ve beat that monster! Don\'t forget to up your lvl!</string>
-    <string name="title_dialog_choose_helper">Choose helper</string>
+    <string name="battle_screen">Kampf</string>
+    <string name="treasures">Schätze</string>
+    <string name="ok_btn_dialog_battle_continue">Fortsetzen</string>
+    <string name="cancel_btn_for_dialog_battle">Stornieren</string>
+    <string name="battle_dialog_title_win">Sieg!</string>
+    <string name="battle_dialog_title_lose">Niederlage</string>
+    <string name="battle_dialog_msg_lose">Du wirst verlieren! Vielleicht ist es besser, weg zu laufen?</string>
+    <string name="battle_dialog_lose_run_away">Rette mich!</string>
+    <string name="battle_dialog_lose_anyway">Krieger laufen nicht!</string>
+    <string name="battle_dialog_title_run">Lauf!</string>
+    <string name="battle_dialog_msg_run">Vorsichtig laufen lassen. Du kannst sterben.</string>
+    <string name="battle_dialog_run_confirm">Lauf!</string>
+    <string name="battle_dialog_run_cancel">Nein! Ich werde bleiben!</string>
+    <string name="battle_dialog_msg">Sie haben dieses Monster geschlagen! Vergessen Sie nicht, Ihre lvl!</string>
+    <string name="title_dialog_choose_helper">Wählen Sie Helfer</string>
+    <string name="action_start_battle">Kampf</string>
+    <string name="cancel_btn_dialog_battle_leave">Nein, bleib</string>
+    <string name="message_for_dialog_battle_leave">Sie wollen den Kampf abbrechen?</string>
+    <string name="ok_btn_dialog_battle_leave">Ja</string>
+    <string name="run_away_fail">Fehlschlagen! Aber überprüfen Modifiers!</string>
+    <string name="run_away_success">Erfolg! Aber überprüfen Modifiers!</string>
+    <string name="title_dialog_choose_helper_cancel">Stornieren</string>
+    <string name="title_dialog_choose_helper_ok">Wählen</string>
+    <string name="title_dialog_choose_helper_remove">Entfernen</string>
+    <string name="tr_dialog_title">Help Us.</string>
+    <string name="tr_dialog_msg">You can help us with translation into your language! Please, mail us: android.dev.g.art@gmail.com</string>
+    <string name="tr_dialog_pos">Sure</string>
+    <string name="tr_dialog_neg">No</string>
+    <string name="tr_dialog_neu">Not Now</string>
 
 </resources>

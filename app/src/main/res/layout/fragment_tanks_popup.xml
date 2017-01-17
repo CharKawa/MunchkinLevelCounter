@@ -24,7 +24,7 @@
         android:id="@+id/imgBtnRatePopup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/txtDonatePopup"
+        android:layout_above="@+id/txt_message_thanks_popup"
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
         android:background="@null"
@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/ic_stars_24dp"/>
 
     <TextView
-        android:id="@+id/txtDonatePopup"
+        android:id="@+id/txt_message_thanks_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -45,26 +45,28 @@
         android:id="@+id/imgBtnSendScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtDonatePopup"
+        android:layout_below="@+id/txt_message_thanks_popup"
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
         android:background="@null"
         android:contentDescription="@string/contact"
-        android:src="@drawable/contact" />
+        android:src="@drawable/contact"/>
 
     <Button
         android:id="@+id/btnLater"
+        style="@style/Munchkin.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false"
         android:layout_below="@+id/imgBtnSendScreen"
         android:layout_toLeftOf="@+id/btnMore"
         android:gravity="center"
-        android:text="@string/btn_showLater"
-        />
+        android:text="@string/btn_showLater"/>
 
     <Button
         android:id="@+id/btnMore"
+        style="@style/Munchkin.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgBtnSendScreen"
@@ -74,13 +76,14 @@
 
     <Button
         android:id="@+id/btnNeverShow"
+        style="@style/Munchkin.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
         android:layout_below="@+id/imgBtnSendScreen"
         android:layout_toRightOf="@+id/btnMore"
         android:gravity="center"
-        android:text="@string/btn_neverAsk"
-        />
+        android:text="@string/btn_neverAsk"/>
 
 </RelativeLayout>

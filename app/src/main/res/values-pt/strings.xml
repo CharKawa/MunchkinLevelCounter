@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"> Level Counter</string>
+    <string name="app_name">Level Counter</string>
     <string name="action_settings">Definições</string>
     <string name="main_screen_Players">Jogadores</string>
     <string name="main_screen_Stats">Estatística</string>
@@ -16,7 +16,7 @@
     <string name="title_dialog_confirm">Você tem certeza?</string>
     <string name="txt_max_lvl">Max LVL</string>
     <string name="dialog_ok_btn">OK</string>
-    <string name="dialog_cancel_btn">cancelar</string>
+    <string name="dialog_cancel_btn">Cancelar</string>
     <string name="list_players_Delete">Delete</string>
     <string name="total_power">Poder</string>
     <string name="level">LVL</string>
@@ -82,24 +82,37 @@
     <string name="btnChangeSex">Change Sex</string>
     <string name="enter_player_name">Nome</string>
     <string name="mods">Mods</string>
-    <string name="warrior">Warrior</string>
-    <string name="btn_fight">Fight</string>
+    <string name="warrior">Guerreiro</string>
+    <string name="btn_fight">Combate</string>
     <string name="monster">Monster</string>
-    <string name="battle_screen">Battle</string>
-    <string name="run_away">Run Away</string>
-    <string name="treasures">Treasures</string>
-    <string name="ok_btn_dialog_battle_continue">Continue</string>
-    <string name="cancel_btn_for_dialog_battle">Cancel</string>
-    <string name="battle_dialog_title_win">Victory!</string>
-    <string name="battle_dialog_title_lose">Defeat</string>
-    <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to run Away?</string>
-    <string name="battle_dialog_lose_run_away">Run Away</string>
-    <string name="battle_dialog_lose_anyway">Continue</string>
-    <string name="battle_dialog_title_run">Run Away</string>
-    <string name="battle_dialog_msg_run">You\'ve decided to run away. Run carefully. You can die.</string>
-    <string name="battle_dialog_run_confirm">Run!</string>
-    <string name="battle_dialog_run_cancel">Cancel</string>
-    <string name="battle_dialog_msg">You\'ve beat that monster! Don\'t forget to up your lvl!</string>
-    <string name="title_dialog_choose_helper">Choose helper</string>
+    <string name="battle_screen">Combate</string>
+    <string name="treasures">Tesouros</string>
+    <string name="ok_btn_dialog_battle_continue">Continuar</string>
+    <string name="cancel_btn_for_dialog_battle">Cancelar</string>
+    <string name="battle_dialog_title_win">Vitória!</string>
+    <string name="battle_dialog_title_lose">Derrota</string>
+    <string name="battle_dialog_msg_lose">Você vai perder! Talvez seja melhor fugir?</string>
+    <string name="battle_dialog_lose_run_away">Me salve!</string>
+    <string name="battle_dialog_lose_anyway">Os guerreiros não funcionam!</string>
+    <string name="battle_dialog_title_run">Fugir!</string>
+    <string name="battle_dialog_msg_run">Corra com cuidado. Você pode morrer.</string>
+    <string name="battle_dialog_run_confirm">Fugir!</string>
+    <string name="battle_dialog_run_cancel">Não! Eu vou ficar!</string>
+    <string name="battle_dialog_msg">Você bateu aquele monstro! Não se esqueça de seu lvl!</string>
+    <string name="title_dialog_choose_helper">Escolha o auxiliar</string>
+    <string name="action_start_battle">Combate</string>
+    <string name="cancel_btn_dialog_battle_leave">Sem estadia</string>
+    <string name="message_for_dialog_battle_leave">Você quer cancelar a batalha?</string>
+    <string name="ok_btn_dialog_battle_leave">Sim</string>
+    <string name="run_away_fail">Falhou! Mas verifique os Modificadores!</string>
+    <string name="run_away_success">Sucesso! Mas verifique os Modificadores!</string>
+    <string name="title_dialog_choose_helper_cancel">Cancelar</string>
+    <string name="title_dialog_choose_helper_ok">Escolher</string>
+    <string name="title_dialog_choose_helper_remove">Remover</string>
+    <string name="tr_dialog_title">Help Us.</string>
+    <string name="tr_dialog_msg">You can help us with translation into your language! Please, mail us: android.dev.g.art@gmail.com</string>
+    <string name="tr_dialog_pos">Sure</string>
+    <string name="tr_dialog_neg">No</string>
+    <string name="tr_dialog_neu">Not Now</string>
 
 </resources>

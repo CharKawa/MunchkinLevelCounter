@@ -108,7 +108,9 @@ public class FragmentPlayersList extends Fragment {
 	}
 
 	private void scrollToPlayer(int position) {
-		mRecyclerView.scrollToPosition(position);
+		if (mRecyclerView != null) {
+			mRecyclerView.scrollToPosition(position);
+		}
 	}
 
 	// interface for communication between fragments

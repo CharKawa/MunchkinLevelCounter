@@ -10,7 +10,7 @@
         android:id="@+id/action_start_battle"
         android:background="@null"
         android:icon="@drawable/ic_sword_action"
-        android:title="@string/action_start_batter"
+        android:title="@string/action_start_battle"
         app:showAsAction="ifRoom|collapseActionView"/>
     <item
         android:id="@+id/action_finish"

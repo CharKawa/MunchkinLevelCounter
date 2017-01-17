@@ -2,23 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="@null">
 
     <ImageView
         android:id="@+id/imgDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/dice_1"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/dice"/>
+        android:contentDescription="@string/dice"
+        android:src="@drawable/dice_1"/>
 
     <TextView
         android:id="@+id/run_away_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Result"
+        android:layout_below="@id/imgDice"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:layout_below="@id/imgDice"/>
+        android:text="Result"
+        android:visibility="gone"/>
 </RelativeLayout>

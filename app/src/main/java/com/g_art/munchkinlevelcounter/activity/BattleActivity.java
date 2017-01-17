@@ -83,6 +83,7 @@ public class BattleActivity extends AppCompatActivity {
 	//Buttons
 	@BindView(R.id.fab_battle_add_helper)
 	FloatingActionButton helperBtn;
+
 	private Tracker mTracker;
 	private Unbinder unbinder;
 	private Player player;
@@ -407,6 +408,7 @@ public class BattleActivity extends AppCompatActivity {
 				break;
 		}
 		final TextView textView = (TextView) diceDialog.getCustomView().findViewById(R.id.run_away_result);
+		textView.setVisibility(View.VISIBLE);
 		textView.setText(SUCCESS_RUN_AWAY <= dice ? R.string.run_away_success : R.string.run_away_fail);
 		textView.setTextColor(getResources().getColor(R.color.text_color));
 

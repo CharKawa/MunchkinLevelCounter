@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"> Level Counter</string>
+    <string name="app_name">Level Counter</string>
     <string name="action_settings">Налаштування</string>
     <string name="main_screen_Players">Гравці</string>
     <string name="main_screen_Stats"> Статистика</string>
@@ -16,7 +16,7 @@
     <string name="title_dialog_continue">Вітання!</string>
     <string name="title_dialog_confirm">Ви впевненні?</string>
     <string name="dialog_ok_btn">Ок</string>
-    <string name="dialog_cancel_btn">Відміна</string>
+    <string name="dialog_cancel_btn">Скасувати</string>
     <string name="list_players_Delete">Видалити</string>
     <string name="total_power">Сила</string>
     <string name="level">Рівень</string>
@@ -82,24 +82,37 @@
     <string name="btnChangeSex">Change Sex</string>
     <string name="enter_player_name">Ім\'я</string>
     <string name="mods">Mods</string>
-    <string name="warrior">Warrior</string>
-    <string name="btn_fight">Fight</string>
+    <string name="warrior">Воїн</string>
+    <string name="btn_fight">Битва</string>
     <string name="monster">Monster</string>
-    <string name="battle_screen">Battle</string>
-    <string name="run_away">Run Away</string>
-    <string name="treasures">Treasures</string>
-    <string name="ok_btn_dialog_battle_continue">Continue</string>
-    <string name="cancel_btn_for_dialog_battle">Cancel</string>
-    <string name="battle_dialog_title_win">Victory!</string>
-    <string name="battle_dialog_title_lose">Defeat</string>
-    <string name="battle_dialog_msg_lose">You will lose! Maybe it is batter to run Away?</string>
-    <string name="battle_dialog_lose_run_away">Run Away</string>
-    <string name="battle_dialog_lose_anyway">Continue</string>
-    <string name="battle_dialog_title_run">Run Away</string>
-    <string name="battle_dialog_msg_run">You\'ve decided to run away. Run carefully. You can die.</string>
-    <string name="battle_dialog_run_confirm">Run!</string>
-    <string name="battle_dialog_run_cancel">Cancel</string>
-    <string name="battle_dialog_msg">You\'ve beat that monster! Don\'t forget to up your lvl!</string>
-    <string name="title_dialog_choose_helper">Choose helper</string>
+    <string name="battle_screen">Битва</string>
+    <string name="treasures">Скарби</string>
+    <string name="ok_btn_dialog_battle_continue">Продовжити</string>
+    <string name="cancel_btn_for_dialog_battle">Скасувати</string>
+    <string name="battle_dialog_title_win">Перемога!</string>
+    <string name="battle_dialog_title_lose">Поразка</string>
+    <string name="battle_dialog_msg_lose">Ви програєте! Може краще втекти?</string>
+    <string name="battle_dialog_lose_run_away">Рятуйте!</string>
+    <string name="battle_dialog_lose_anyway">Воїни не здаються!</string>
+    <string name="battle_dialog_title_run">Втекти!</string>
+    <string name="battle_dialog_msg_run">Тікайте обережно. Можна Вмерти.</string>
+    <string name="battle_dialog_run_confirm">Втекти!</string>
+    <string name="battle_dialog_run_cancel">Ні! Залишаюсь!</string>
+    <string name="battle_dialog_msg">Ви вбили монстра. Підніміть свій рівень!</string>
+    <string name="title_dialog_choose_helper">Оберіть помічника</string>
+    <string name="action_start_battle">Битва</string>
+    <string name="cancel_btn_dialog_battle_leave">Залишитись</string>
+    <string name="message_for_dialog_battle_leave">Ви хочете скасувати бій?</string>
+    <string name="ok_btn_dialog_battle_leave">Так</string>
+    <string name="run_away_fail">Невдача! Але перевірте модифікатори!</string>
+    <string name="run_away_success">Успіх! Але перевірте модифікатори.</string>
+    <string name="title_dialog_choose_helper_cancel">Скасувати</string>
+    <string name="title_dialog_choose_helper_ok">Обрати</string>
+    <string name="title_dialog_choose_helper_remove">Видалити</string>
+    <string name="tr_dialog_title">Help Us.</string>
+    <string name="tr_dialog_msg">You can help us with translation into your language! Please, mail us: android.dev.g.art@gmail.com</string>
+    <string name="tr_dialog_pos">Sure</string>
+    <string name="tr_dialog_neg">No</string>
+    <string name="tr_dialog_neu">Not Now</string>
 
 </resources>
