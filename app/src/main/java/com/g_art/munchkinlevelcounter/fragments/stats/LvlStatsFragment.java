@@ -6,14 +6,12 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.db.chart.view.LineChartView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.Stats;
-import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.SparseStringsAdapter;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.StatsHandler;
 import com.g_art.munchkinlevelcounter.model.Player;
+import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.ArrayList;
 
@@ -23,14 +21,16 @@ import java.util.ArrayList;
  */
 public class LvlStatsFragment extends Fragment {
 
+	private LineChart mChart;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final View v = inflater.inflate(R.layout.fragment_linegraph, container, false);
+		final View v = inflater.inflate(R.layout.fragment_game_stats, container, false);
 
 		boolean isDataPresent = false;
 		ArrayList<Player> playersList = null;
-		SparseArray<String> playersColors = new SparseArray<>();
+		final SparseArray<String> playersColors;
 
 		if (getArguments() != null) {
 			playersList = getArguments().getParcelableArrayList(Stats.PLAYER_KEY);
@@ -38,17 +38,28 @@ public class LvlStatsFragment extends Fragment {
 		}
 
 		if (isDataPresent) {
-			LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
+//			LineChartView chartView = (LineChartView) v.findViewById(R.id.LineChart);
 
-			playersColors = StatsHandler.getStats(playersList, chartView, getActivity(), StatsHandler.LVL_STATS);
+			mChart = (LineChart) v.findViewById(R.id.game_stats);
+			mChart.setDrawGridBackground(false);
+			// enable touch gestures
+			mChart.setTouchEnabled(true);
+			mChart.setScaleEnabled(true);
+			// if disabled, scaling can be done on x- and y-axis separately
+			mChart.setPinchZoom(true);
+
+			// no description text
+			mChart.getDescription().setEnabled(false);
+
+//			mChart.saveToGallery("munchkin_game_stat", 100);
+
+			playersColors = StatsHandler.getStats(playersList, mChart, getActivity(), StatsHandler.LVL_STATS);
 			if (playersColors != null) {
-				chartView.show();
+//				final SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
+//				final ListView inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
+//				inStatsPlayersList.setAdapter(sparseStringsAdapter);
 			}
 		}
-
-		SparseStringsAdapter sparseStringsAdapter = new SparseStringsAdapter(getActivity(), playersColors);
-		ListView inStatsPlayersList = (ListView) v.findViewById(R.id.isStatsPlayersList);
-		inStatsPlayersList.setAdapter(sparseStringsAdapter);
 
 		return v;
 	}
