@@ -49,11 +49,13 @@
             android:layout_alignStart="@+id/txtAbout_text"
             android:layout_below="@+id/txtAbout_text"
             android:paddingBottom="10dp"
+            android:paddingEnd="10dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
+            android:paddingStart="5dp"
             android:paddingTop="5dp"
             android:text="@string/rate"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <ImageButton
             android:id="@+id/imgBtnRate"
@@ -64,17 +66,6 @@
             android:background="@null"
             android:contentDescription="@string/btn_rate"
             app:srcCompat="@drawable/ic_stars_24dp"/>
-
-        <TextView
-            android:id="@+id/txtDonate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txtRate"
-            android:layout_alignStart="@+id/txtRate"
-            android:layout_below="@+id/imgBtnRate"
-            android:padding="5dp"
-            android:text="@string/thanks"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ImageButton
             android:id="@+id/btn_donate_099"
@@ -130,8 +121,14 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/btn_donate_999"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
             android:text="@string/contact"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <ImageButton
             android:id="@+id/imgBtnContact"
@@ -141,6 +138,22 @@
             android:layout_margin="5dp"
             android:background="@null"
             android:src="@drawable/contact" />
+
+        <TextView
+            android:id="@+id/txtDonate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imgBtnRate"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/thanks"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
     </RelativeLayout>
 
 </ScrollView>
