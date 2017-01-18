@@ -53,13 +53,13 @@ public class GameActivity extends AppCompatActivity {
 	public static final String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
 	public static final String PLAYERS_KEY = "playersList";
-	public static final String BUNDLE_STATS_KEY = "bundleStats";
-	public static final int BATTLE_REQUEST = 10;
 	public static final int BATTLE_RESULT_OK = 1;
 	public static final int BATTLE_RESULT_CANCEL = 0;
 	public static final int BATTLE_RESULT_FAIL = 4;
 	public static final int RUN_AWAY_RESULT_OK = 2;
 	public static final int RUN_AWAY_RESULT_FAIL = 3;
+	private static final String BUNDLE_STATS_KEY = "bundleStats";
+	private static final int BATTLE_REQUEST = 10;
 	private static final String SELECTED_KEY = "selectedPlayer";
 	@BindView(R.id.rv_in_game_players)
 	RecyclerView mRecyclerView;
@@ -173,6 +173,7 @@ public class GameActivity extends AppCompatActivity {
 	public void clickPerformed(View v) {
 		switch (v.getId()) {
 			case R.id.btnLvlUp:
+				//noinspection PointlessBooleanExpression
 				if (isMaxLvlReached(mSelectedPlayer.getLevel()) == false) {
 					mSelectedPlayer.incrementLvl();
 				} else {
@@ -199,6 +200,7 @@ public class GameActivity extends AppCompatActivity {
 				break;
 
 			case R.id.btnNextPlayer:
+				//noinspection PointlessBooleanExpression
 				if (onNextTurnClick(mSelectedPlayer) == false) {
 					Toast.makeText(this, getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
 				}
@@ -259,7 +261,7 @@ public class GameActivity extends AppCompatActivity {
 				.show();
 	}
 
-	public void leaveGame() {
+	private void leaveGame() {
 		mTracker.send(new HitBuilders.EventBuilder()
 				.setAction("GameTerminated")
 				.setLabel("GameActivity")
@@ -267,10 +269,11 @@ public class GameActivity extends AppCompatActivity {
 		super.onBackPressed();
 	}
 
-	public void stayInTheGame() {
+	@SuppressWarnings("EmptyMethod")
+	private void stayInTheGame() {
 	}
 
-	public void onPlayerSelected(int position) {
+	private void onPlayerSelected(int position) {
 		mSelectedPlayer = playersList.get(position);
 		mSelectedPlayerPosition = position;
 		selectPlayer(position);
@@ -280,9 +283,9 @@ public class GameActivity extends AppCompatActivity {
 	private void updateSelectedPlayer() {
 		if (mSelectedPlayer != null) {
 			txtCurrentPlayerName.setText(mSelectedPlayer.getName());
-			txtCurrentPlayerLvl.setText(Integer.toString(mSelectedPlayer.getLevel()));
-			txtCurrentPlayerGear.setText(Integer.toString(mSelectedPlayer.getGear()));
-			txtCurrentPlayerPower.setText(Integer.toString(mSelectedPlayer.getPower()));
+			txtCurrentPlayerLvl.setText(String.valueOf(mSelectedPlayer.getLevel()));
+			txtCurrentPlayerGear.setText(String.valueOf(mSelectedPlayer.getGear()));
+			txtCurrentPlayerPower.setText(String.valueOf(mSelectedPlayer.getPower()));
 			updatePlayerSex();
 			updatePlayer(mSelectedPlayerPosition);
 		}
@@ -297,17 +300,17 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 
-	public void finishClick() {
+	private void finishClick() {
 		savePlayersStats();
 		openStatsActivity();
 	}
 
-	public void updatePlayer(int position) {
+	private void updatePlayer(int position) {
 		inGameAdapter.notifyItemChanged(position);
 	}
 
-	public boolean onNextTurnClick(Player player) {
-		boolean result = false;
+	private boolean onNextTurnClick(Player player) {
+		boolean result;
 		try {
 			int i = 0;
 			for (Player selectedPlayer : playersList) {
@@ -331,11 +334,12 @@ public class GameActivity extends AppCompatActivity {
 		return result;
 	}
 
-	public int maxLvl() {
+	private int maxLvl() {
 		return settingsHandler.getMaxLvl();
 	}
 
-	public boolean savePlayersStats() {
+	@SuppressWarnings("unchecked")
+	private void savePlayersStats() {
 		boolean result;
 		final SavePlayersStatsTask saveTask = new SavePlayersStatsTask();
 
@@ -345,8 +349,6 @@ public class GameActivity extends AppCompatActivity {
 		} catch (Exception ex) {
 			result = false;
 		}
-
-		return result;
 	}
 
 	private void rollADice() {
@@ -449,13 +451,13 @@ public class GameActivity extends AppCompatActivity {
 				.show();
 	}
 
-	public void doPositiveClickContinueDialog() {
+	private void doPositiveClickContinueDialog() {
 		contAfterMaxLVL = true;
 		mSelectedPlayer.setWinner(true);
 		clickPerformed(findViewById(R.id.btnLvlUp));
 	}
 
-	public void doNegativeClickContinueDialog() {
+	private void doNegativeClickContinueDialog() {
 		mSelectedPlayer.setWinner(true);
 		mSelectedPlayer.incrementLvl();
 		finishClick();
@@ -486,11 +488,12 @@ public class GameActivity extends AppCompatActivity {
 				.show();
 	}
 
-	public void finishCurrentGame() {
+	private void finishCurrentGame() {
 		openStatsActivity();
 	}
 
-	public void contCurrentGame() {
+	@SuppressWarnings("EmptyMethod")
+	private void contCurrentGame() {
 	}
 
 	private boolean isMaxLvlReached(int currentLvl) {
@@ -524,6 +527,9 @@ public class GameActivity extends AppCompatActivity {
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						if (dialog.getCustomView() == null) {
+							return;
+						}
 						final EditText editLvl = (EditText) dialog.getCustomView().findViewById(R.id.maxLvL);
 						String lvl = editLvl.getText().toString();
 						if (!lvl.equals("") && !lvl.equals(" ")) {
@@ -534,7 +540,7 @@ public class GameActivity extends AppCompatActivity {
 											getString(R.string.error_max_level_one),
 											Toast.LENGTH_SHORT
 									).show();
-									editLvl.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
+									editLvl.setText(String.valueOf(maxLvl()), TextView.BufferType.EDITABLE);
 								} else {
 									doPositiveClickLvLDialog(mLvl);
 								}
@@ -555,8 +561,11 @@ public class GameActivity extends AppCompatActivity {
 				})
 				.build();
 
+		if (maxLvlDialog.getCustomView() == null) {
+			return;
+		}
 		final EditText maxLvlEditText = (EditText) maxLvlDialog.getCustomView().findViewById(R.id.maxLvL);
-		maxLvlEditText.setText(Integer.toString(maxLvl()), TextView.BufferType.EDITABLE);
+		maxLvlEditText.setText(String.valueOf(maxLvl()), TextView.BufferType.EDITABLE);
 		final int position = maxLvlEditText.length();
 		maxLvlEditText.setSelection(position);
 		maxLvlEditText.addTextChangedListener(new TextWatcher() {
@@ -581,21 +590,21 @@ public class GameActivity extends AppCompatActivity {
 		maxLvlDialog.show();
 	}
 
-	public void doPositiveClickLvLDialog(int newMaxLvl) {
+	private void doPositiveClickLvLDialog(int newMaxLvl) {
 		updateMaxLVL(newMaxLvl);
 	}
 
-	private int updateMaxLVL(int newMaxLVL) {
+	private void updateMaxLVL(int newMaxLVL) {
 		if (settingsHandler.saveSettings(newMaxLVL)) {
 			Toast.makeText(this,
 					getString(R.string.settings_saved),
 					Toast.LENGTH_SHORT
 			).show();
 		}
-		return settingsHandler.getMaxLvl();
+		settingsHandler.getMaxLvl();
 	}
 
-	public void selectPlayer(int position) {
+	private void selectPlayer(int position) {
 		inGameAdapter.clearSelection();
 		inGameAdapter.toggleSelection(position);
 		scrollToPlayer(position);

@@ -7,13 +7,8 @@
     <string name="main_screen_Stats">Statistic</string>
     <string name="main_screen_Settings">Settings</string>
     <string name="main_screen_About">About</string>
-    <string name="players_screen_Add_Player">Add Player</string>
-    <string name="players_screen_Start_Game">Play!</string>
-    <string name="players_screen_Clear_All">Clear All</string>
     <string name="title_activity_stats">Stats</string>
     <string name="title_activity_newPlayers">Players for the game</string>
-    <string name="title_dialog_new_Player">Enter the name:</string>
-    <string name="title_dialog_choose_helper">Choose helper</string>
     <string name="title_dialog_choose_helper_ok">Choose</string>
     <string name="title_dialog_choose_helper_cancel">Cancel</string>
     <string name="title_dialog_choose_helper_remove">Remove</string>
@@ -22,14 +17,12 @@
     <string name="txt_max_lvl">Max LVL</string>
     <string name="dialog_ok_btn">OK</string>
     <string name="dialog_cancel_btn">Cancel</string>
-    <string name="list_players_Delete">Delete</string>
     <string name="total_power">Power</string>
     <string name="level">LVL</string>
     <string name="gear">GEAR</string>
     <string name="game_screen">Level Counter</string>
     <string name="total">TOTAL</string>
     <string name="no_players">Please, Add Players.</string>
-    <string name="statsOnOff">Collect game statistic?</string>
     <string name="message_for_dialog_cont">You Won the Game! Continue further or quit?</string>
     <string name="message_for_dialog_confirm">You will lose your progress!</string>
     <string name="message_for_dialog_battle_leave">You want to cancel battle?</string>
@@ -46,7 +39,6 @@
     <string name="loser">Loser.</string>
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
-    <string name="about">About: </string>
     <string name="about_the_app">Level counter for popular card game. With statistic of the game.</string>
     <string name="rate">If you like it, please, rate this app: </string>
     <string name="btn_rate">Rate</string>
@@ -56,9 +48,6 @@
     <string name="donate_3.99">Excellent beer 3.99$</string>
     <string name="donate_9.99">A case of beer 9.99$</string>
     <string name="list_players_Edit">Edit</string>
-    <string name="msg_error_during_purchase">Something wrong, please try later</string>
-    <string name="msg_thank_you_for_purchase">Thanks for donating!</string>
-    <string name="base64">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkRwCg3RouBZQwBKzlAuvzby1Dwy5DgujGtsv0tBLTQB91lxSeBF7pW5c6KN2wKxwclQFJN7NgnoicY+lckrfpnsMWPPwYQdgMNqqyIxR8I7gbCGCb7jvVyafRWuwUQJt/+znOIyLOrbuqQTGsm0Z9Yv1tkne9wi0d358BT7r/2hGZ5N+jAjK5D2xXWVL1BRu7sB0mFpNVICOv/8RrqxcvaSL4FtyLh8SpkQHcq/zK2jQus2hGpQWaFTCSWgiv0Y9X5hFYN9P9GGuCPp4dhs6w61LlnaKVmKTuulvoPvtt1BzYq3lOMtPUBhYPkM35DyO/YTv0N14PXH+mTh00AUPtQIDAQAB</string>
     <string name="player_1">Player #1</string>
     <string name="player_2">Player #2</string>
     <string name="error_max_lvl_settings">Error setting max level</string>
@@ -70,12 +59,8 @@
     <string name="run_away_fail">Fail! But check Modifiers!</string>
     <string name="more_players">Please, add more mPlayers.</string>
     <string name="error_next_turn">Error in the next turn!</string>
-    <string name="error_save_players">It was error while trying to save mPlayers!</string>
-    <string name="stats_off">Statistic is off, now it\'s just switch mPlayers</string>
-    <string name="error_empty_name">Name cannot be empty</string>
     <string name="no_data">There are no statistic, please play a game to have one.</string>
     <string name="prev_stas">This is statistic for previous game.</string>
-    <string name="deleted">deleted</string>
     <string name="contact">Have questions? You can always contact me:</string>
     <string name="btnNextPlayer">Next Player</string>
     <string name="msg_finish_game">You will finish current game</string>
@@ -83,17 +68,9 @@
     <string name="ok_btn_for_dialog_finish">Yes</string>
     <string name="cancel_btn_for_dialog_finish">Stay</string>
     <string name="action_finish">Finish</string>
-    <string name="txtThanks">Hello! Thank You for using my app. I hope You enjoyed it. If You like it, please rate.</string>
-    <string name="btn_showLater">Ask later</string>
-    <string name="btn_donate">Donate</string>
-    <string name="btn_neverAsk">Never ask</string>
-    <string name="info_activity">Thank You!</string>
-    <string name="action_battle">Battle</string>
-    <string name="btnChangeSex">Change Sex</string>
     <string name="enter_player_name">Enter Player\'s Name</string>
     <string name="mods">Mods</string>
     <string name="warrior">Warrior</string>
-    <string name="btn_fight">Fight</string>
     <string name="monster">Monster</string>
     <string name="battle_screen">Battle</string>
     <string name="treasures">Treasures</string>
@@ -115,5 +92,6 @@
     <string name="tr_dialog_pos">Sure</string>
     <string name="tr_dialog_neg">No</string>
     <string name="tr_dialog_neu">Not Now</string>
+    <string name="helper_power_value" translatable="false">+%1$d</string>
 
 </resources>

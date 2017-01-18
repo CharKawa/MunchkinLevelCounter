@@ -2,14 +2,12 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/const_battle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <!--PLAYER-->
     <TextView
-        android:id="@+id/txt_battle_lvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -45,7 +43,6 @@
         app:srcCompat="@drawable/ic_arrow_down_24dp"/>
 
     <TextView
-        android:id="@+id/txt_battle_gear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -62,7 +59,6 @@
         app:layout_constraintTop_toTopOf="@+id/fab_battle_gear_dwn"/>
 
     <TextView
-        android:id="@+id/txt_battle_mods"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -79,7 +75,6 @@
         app:layout_constraintTop_toTopOf="@+id/fab_battle_mods_dwn"/>
 
     <TextView
-        android:id="@+id/txt_battle_warrior"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

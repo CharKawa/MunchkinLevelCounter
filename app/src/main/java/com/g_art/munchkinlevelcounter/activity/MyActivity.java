@@ -78,12 +78,10 @@ public class MyActivity extends AppCompatActivity {
 						updateStatus(SettingsHandler.NEVER_ASK);
 
 						final Intent email = new Intent(Intent.ACTION_SENDTO);
-//						email.setType("message/rfc822");
 						email.setData(Uri.parse("mailto:"));
 						email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
 						email.putExtra(Intent.EXTRA_SUBJECT, "Translation");
 						email.putExtra(Intent.EXTRA_TEXT, "Yes, I want to help you with translation into: ");
-//						startActivity(Intent.createChooser(email, "Choose your Email App:"));
 						if (email.resolveActivity(getPackageManager()) != null) {
 							startActivity(email);
 						}
@@ -99,7 +97,7 @@ public class MyActivity extends AppCompatActivity {
 								.setCategory("Button")
 								.setLabel("Translation.Help")
 								.build());
-
+						updateStatus(SettingsHandler.ASK_LATER);
 						dialog.dismiss();
 					}
 				})
@@ -160,12 +158,12 @@ public class MyActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 
-	public boolean updateStatus(int updateStatus) {
+	private void updateStatus(int updateStatus) {
 		if (settingsHandler == null) {
-			SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+			final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 			settingsHandler = SettingsHandler.getInstance(mPrefs);
 		}
-		return settingsHandler.updateStatus(updateStatus);
+		settingsHandler.updateStatus(updateStatus);
 	}
 
 	@Override

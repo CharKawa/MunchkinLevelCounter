@@ -66,7 +66,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 
 		mPlayers = initPlayers(savedInstanceState);
 
-		mAdapter = new NewPlayersRecyclerAdapter(mPlayers, this);
+		mAdapter = new NewPlayersRecyclerAdapter(mPlayers);
 		mRecyclerView.setAdapter(mAdapter);
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -119,10 +119,6 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelableArrayList(PLAYER_KEY, mPlayers);
-	}
-
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
 	}
 
 	@OnClick({

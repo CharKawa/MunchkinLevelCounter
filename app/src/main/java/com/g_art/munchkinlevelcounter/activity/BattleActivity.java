@@ -48,6 +48,7 @@ import static com.g_art.munchkinlevelcounter.activity.GameActivity.RUN_AWAY_RESU
  * Created by fftem on 03-Aug-16.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class BattleActivity extends AppCompatActivity {
 
 	private static final int SUCCESS_RUN_AWAY = 4;
@@ -391,6 +392,10 @@ public class BattleActivity extends AppCompatActivity {
 				.build();
 
 
+		if (diceDialog.getCustomView() == null) {
+			return;
+		}
+
 		final ImageView imageView = (ImageView) diceDialog.getCustomView().findViewById(R.id.imgDice);
 
 		switch (dice) {
@@ -430,7 +435,7 @@ public class BattleActivity extends AppCompatActivity {
 		finishBattle();
 	}
 
-	public void finishBattle() {
+	private void finishBattle() {
 		finish();
 	}
 
@@ -447,7 +452,7 @@ public class BattleActivity extends AppCompatActivity {
 		int pPowerValue = player.getPower() + player.getMods();
 
 		if (helper != null) {
-			hPower.setText("+" + helper.getPower());
+			hPower.setText(String.format(getResources().getResourceName(R.string.helper_power_value), helper.getPower()));
 			pPowerValue = pPowerValue + helper.getPower();
 		} else {
 			hPower.setText("");

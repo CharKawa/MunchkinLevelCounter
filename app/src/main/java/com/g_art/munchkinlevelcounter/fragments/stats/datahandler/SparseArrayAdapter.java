@@ -13,7 +13,7 @@ class SparseArrayAdapter<E> extends BaseAdapter {
 
 	private SparseArray<E> mData;
 
-	public void setData(SparseArray<E> data) {
+	void setData(SparseArray<E> data) {
 		mData = data;
 	}
 

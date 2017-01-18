@@ -10,8 +10,8 @@ import java.util.Date;
 public class SettingsHandler {
 	public static final int MIN_LVL = 1;
 	public static final int ASK_LATER = 1;
-	public static final int FIRST_SHOW = 0;
 	public static final int NEVER_ASK = 2;
+	private static final int FIRST_SHOW = 0;
 	private static final String MAX_LVL_SETTINGS = "max_lvl_settings";
 	private static final String POPUP_STATUS = "popup_status";
 	private static final String STATUS_UPDATE_DATE = "status_update_date";
@@ -49,8 +49,7 @@ public class SettingsHandler {
 		if (!mPrefs.contains(POPUP_STATUS)) {
 			updateStatus(FIRST_SHOW);
 		}
-		int popupStatus = mPrefs.getInt(POPUP_STATUS, FIRST_SHOW);
-		return popupStatus;
+		return mPrefs.getInt(POPUP_STATUS, FIRST_SHOW);
 	}
 
 	public Date getStatusDate() {
@@ -88,8 +87,8 @@ public class SettingsHandler {
 		return result;
 	}
 
-	private boolean saveDefaultSettings() {
-		return saveSettings(DEFAULT_MAX_LVL);
+	private void saveDefaultSettings() {
+		saveSettings(DEFAULT_MAX_LVL);
 	}
 
 	public int getMaxLvl() {

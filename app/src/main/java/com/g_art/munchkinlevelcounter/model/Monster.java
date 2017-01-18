@@ -45,9 +45,8 @@ public class Monster extends BaseModel {
 		return treasures;
 	}
 
-	public Monster setTreasures(int treasures) {
+	public void setTreasures(int treasures) {
 		this.treasures = treasures;
-		return this;
 	}
 
 	public int getPower() {

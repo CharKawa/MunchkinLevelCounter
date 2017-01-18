@@ -12,7 +12,7 @@ public enum Sex {
 	@SerializedName("1")
 	WOMAN(1);
 
-	private int sex;
+	private final int sex;
 
 	Sex(int sex) {
 		this.sex = sex;

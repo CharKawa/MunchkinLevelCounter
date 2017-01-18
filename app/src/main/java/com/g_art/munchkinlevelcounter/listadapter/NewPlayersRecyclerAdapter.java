@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperViewHolder;
-import com.g_art.munchkinlevelcounter.listadapter.helper.OnStartDragListener;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.model.Sex;
 
@@ -30,11 +29,9 @@ import java.util.Collections;
 public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRecyclerAdapter.ViewHolder> implements ItemTouchHelperAdapter {
 
 	public static int color;
-	private final OnStartDragListener mDragStartListener;
-	private ArrayList<Player> mPlayers;
+	private final ArrayList<Player> mPlayers;
 
-	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers, OnStartDragListener dragStartListener) {
-		this.mDragStartListener = dragStartListener;
+	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers) {
 		this.mPlayers = mPlayers;
 	}
 
@@ -126,9 +123,9 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 	public static class ViewHolder extends RecyclerView.ViewHolder implements
 			ItemTouchHelperViewHolder {
 
-		private EditText pName;
-		private ImageButton pSex;
-		private ImageView imReorder;
+		private final EditText pName;
+		private final ImageButton pSex;
+		private final ImageView imReorder;
 
 		public ViewHolder(View itemView) {
 			super(itemView);

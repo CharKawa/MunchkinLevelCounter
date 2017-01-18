@@ -40,7 +40,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 	// The helper object
 	private IabHelper mHelper;
 	// Called when consumption is complete
-	private IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
+	private final IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
 		public void onConsumeFinished(Purchase purchase, IabResult result) {
 			Log.d(TAG, "Consumption finished. Purchase: " + purchase + ", result: " + result);
 
@@ -57,7 +57,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 		}
 	};
 	// Listener that's called when we finish querying the items and subscriptions we own
-	private IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+	private final IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
 		@Override
 		public void onQueryInventoryFinished(IabResult result, Inventory inv) {
 			Log.d(TAG, "Query inventory finished.");
@@ -79,28 +79,28 @@ public class About extends AppCompatActivity implements View.OnClickListener {
              * verifyDeveloperPayload().
              */
 
-			Purchase purchase099 = inv.getPurchase(SKU_DONATE_099);
+			final Purchase purchase099 = inv.getPurchase(SKU_DONATE_099);
 			if (purchase099 != null && verifyDeveloperPayload(purchase099)) {
 				Log.d(TAG, "We have purchase099. Consuming it.");
 				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_099), mConsumeFinishedListener);
 				return;
 			}
 
-			Purchase purchase199 = inv.getPurchase(SKU_DONATE_199);
+			final Purchase purchase199 = inv.getPurchase(SKU_DONATE_199);
 			if (purchase199 != null && verifyDeveloperPayload(purchase199)) {
 				Log.d(TAG, "We have purchase099. Consuming it.");
 				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_199), mConsumeFinishedListener);
 				return;
 			}
 
-			Purchase purchase399 = inv.getPurchase(SKU_DONATE_399);
+			final Purchase purchase399 = inv.getPurchase(SKU_DONATE_399);
 			if (purchase399 != null && verifyDeveloperPayload(purchase399)) {
 				Log.d(TAG, "We have purchase099. Consuming it.");
 				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_399), mConsumeFinishedListener);
 				return;
 			}
 
-			Purchase purchase999 = inv.getPurchase(SKU_DONATE_999);
+			final Purchase purchase999 = inv.getPurchase(SKU_DONATE_999);
 			if (purchase999 != null && verifyDeveloperPayload(purchase999)) {
 				Log.d(TAG, "We have purchase099. Consuming it.");
 				mHelper.consumeAsync(inv.getPurchase(SKU_DONATE_999), mConsumeFinishedListener);
@@ -110,8 +110,9 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 			Log.d(TAG, "Initial inventory query finished; enabling main UI.");
 		}
 	};
+
 	// Callback for when a purchase is finished
-	private IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+	private final IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
 		@Override
 		public void onIabPurchaseFinished(IabResult result, Purchase info) {
 			Log.d(TAG, "Purchase finished: " + result + ", purchase: " + info);
@@ -154,6 +155,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 			}
 		}
 	};
+
 	private boolean isDonate = false;
 	private Tracker mTracker;
 
@@ -166,10 +168,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 		MyApplication application = (MyApplication) getApplication();
 		mTracker = application.getDefaultTracker();
 
-		String base64EncodedPublicKey = getString(R.string.base64);
-
 		Log.d(TAG, "Creating IAB helper.");
-		mHelper = new IabHelper(this, base64EncodedPublicKey);
+		mHelper = new IabHelper(this);
 
 		// enable debug logging (for a production application, you should set this to false).
 		mHelper.enableDebugLogging(true);
@@ -234,13 +234,13 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 						.setCategory("Button")
 						.setLabel("About.Rate")
 						.build());
-				Intent intent = new Intent(Intent.ACTION_VIEW);
+				final Intent intent = new Intent(Intent.ACTION_VIEW);
 				//Try Google Play
 				intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
-				if (!MyStartActivity(intent)) {
+				if (!mayStartActivity(intent)) {
 					//Market (Google play) app seems not installed, let's try to open a webbrowser
 					intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.g_art.munchkinlevelcounter"));
-					if (!MyStartActivity(intent)) {
+					if (!mayStartActivity(intent)) {
 						//Well if this also fails, we have run out of options, inform the user.
 						Toast.makeText(this, "Could not open Android market, please install the market app.", Toast.LENGTH_SHORT).show();
 					}
@@ -252,12 +252,14 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 						.setCategory("Button")
 						.setLabel("About.Contact")
 						.build());
-				Intent Email = new Intent(Intent.ACTION_SEND);
-				Email.setType("message/rfc822");
-				Email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
-				Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
-				Email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
-				startActivity(Intent.createChooser(Email, "Choose your Email App:"));
+				final Intent email = new Intent(Intent.ACTION_SENDTO);
+				email.setData(Uri.parse("mailto:"));
+				email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
+				email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+				email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
+				if (email.resolveActivity(getPackageManager()) != null) {
+					startActivity(email);
+				}
 				break;
 			case R.id.btn_donate_099:
 				mTracker.send(new HitBuilders.EventBuilder()
@@ -310,7 +312,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 		}
 	}
 
-	private boolean MyStartActivity(Intent intent) {
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
+	private boolean mayStartActivity(Intent intent) {
 		try {
 			startActivity(intent);
 			return true;
@@ -326,7 +329,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 		Log.d(TAG, "Launching purchase flow for: " + SKU);
 
          /* TODO: for security, generate your payload here for verification. See the comments on
-         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+		 *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
          *        an empty string, but on a production app you should carefully generate this. */
 		String payload = "";
 

@@ -33,7 +33,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
 		edTextMaxLvl = (EditText) findViewById(R.id.edTextMaxLvl);
 		if (setHandler.loadSettings()) {
-			edTextMaxLvl.setText(Integer.toString(setHandler.getMaxLvl()), TextView.BufferType.EDITABLE);
+			edTextMaxLvl.setText(String.valueOf(setHandler.getMaxLvl()), TextView.BufferType.EDITABLE);
 		}
 
 		edTextMaxLvl.setOnClickListener(this);
@@ -51,7 +51,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 							getString(R.string.error_max_lvl_settings),
 							Toast.LENGTH_SHORT
 					).show();
-					edTextMaxLvl.setText(Integer.toString(setHandler.getMaxLvl()), TextView.BufferType.EDITABLE);
+					edTextMaxLvl.setText(String.valueOf(setHandler.getMaxLvl()), TextView.BufferType.EDITABLE);
 				}
 
 		}

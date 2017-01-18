@@ -19,7 +19,7 @@
         android:layout_marginTop="15dp"
         android:layout_toLeftOf="@+id/txtTotal"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25dp" />
+        android:textSize="25sp"/>
 
     <ImageButton
         android:id="@+id/player_sex"
@@ -44,7 +44,7 @@
         android:layout_toLeftOf="@+id/total"
         android:text="@string/total_power"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25dp"/>
+        android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/total"
@@ -57,7 +57,7 @@
         android:layout_marginRight="12dp"
         android:layout_marginTop="15dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25dp" />
+        android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/txtLevel"

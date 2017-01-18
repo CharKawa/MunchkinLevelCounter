@@ -85,24 +85,20 @@ public class Player implements Parcelable, Comparable {
 		in.readStringList(powerStats);
 	}
 
-	public int incrementLvl() {
+	public void incrementLvl() {
 		this.level++;
-		return this.level;
 	}
 
-	public int decrementLvl() {
+	public void decrementLvl() {
 		this.level--;
-		return this.level;
 	}
 
-	public int incrementGear() {
+	public void incrementGear() {
 		this.gear++;
-		return this.gear;
 	}
 
-	public int decrementGear() {
+	public void decrementGear() {
 		this.gear--;
-		return this.gear;
 	}
 
 	public void toggleGender() {

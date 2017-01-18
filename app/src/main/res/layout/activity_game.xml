@@ -9,7 +9,6 @@
     tools:context=".activity.GameActivity">
 
     <LinearLayout
-        android:id="@+id/fragmentList"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
@@ -24,7 +23,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/currentPlayer_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

@@ -13,7 +13,7 @@ import com.g_art.munchkinlevelcounter.fragments.stats.PowerStatsFragment;
  * Created by G_Art on 4/9/2014.
  */
 public class StatsPageAdapter extends FragmentPagerAdapter {
-	private Bundle bundle;
+	private final Bundle bundle;
 
 	public StatsPageAdapter(FragmentManager fm, Bundle bundle) {
 		super(fm);

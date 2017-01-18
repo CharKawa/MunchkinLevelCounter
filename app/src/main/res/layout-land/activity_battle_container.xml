@@ -9,7 +9,6 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/battle_player_view"
             layout="@layout/battle_player_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -22,7 +21,6 @@
             android:layout_marginTop="-30dp"/>
 
         <include
-            android:id="@+id/battle_monster_view"
             layout="@layout/battle_monster_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

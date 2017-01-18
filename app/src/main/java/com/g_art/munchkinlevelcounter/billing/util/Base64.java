@@ -278,6 +278,7 @@ class Base64 {
 
 		// If doPadding is false, set length to truncate '='
 		// padding characters
+		//noinspection PointlessBooleanExpression
 		while (doPadding == false && outLen > 0) {
 			if (outBuff[outLen - 1] != '=') {
 				break;
@@ -343,7 +344,6 @@ class Base64 {
 			e += 4;
 		}
 
-		assert (e == outBuff.length);
 		return outBuff;
 	}
 

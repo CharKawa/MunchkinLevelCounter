@@ -28,7 +28,7 @@ public class SparseStringsAdapter extends SparseArrayAdapter<String> {
 		ViewHolder holder;
 
 		if (view == null) {
-			view = mInflater.inflate(R.layout.in_stat_player_list, null);
+			view = mInflater.inflate(R.layout.in_stat_player_list, parent);
 
 			holder = new ViewHolder();
 			holder.txtPlayerName = (TextView) view.findViewById(R.id.txtPlayerNameInStats);

@@ -19,11 +19,10 @@ import java.util.List;
 public class StoredPlayers {
 	private static StoredPlayers instance;
 	private final String PREFS_PLAYERS_KEY = "players";
+	private final Gson gson;
 	private SharedPreferences mPrefs;
 	private boolean mResult = false;
 	private String json;
-
-	private Gson gson;
 
 
 	private StoredPlayers(SharedPreferences sharedPreferences) {

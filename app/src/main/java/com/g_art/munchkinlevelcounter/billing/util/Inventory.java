@@ -14,8 +14,8 @@ import java.util.Map;
  * An Inventory is returned by such methods as {@link com.g_art.munchkinlevelcounter.billing.IabHelper#queryInventory}.
  */
 public class Inventory {
-	private Map<String, SkuDetails> mSkuMap = new HashMap<>();
-	private Map<String, Purchase> mPurchaseMap = new HashMap<>();
+	private final Map<String, SkuDetails> mSkuMap = new HashMap<>();
+	private final Map<String, Purchase> mPurchaseMap = new HashMap<>();
 
 	public Inventory() {
 	}

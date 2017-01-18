@@ -20,8 +20,8 @@ import java.util.List;
 
 public class InGamePlayersAdapter extends RecyclerView.Adapter<InGamePlayersAdapter.ViewHolder> {
 
-	private List<Player> mPlayers;
-	private SparseBooleanArray selectedItems;
+	private final List<Player> mPlayers;
+	private final SparseBooleanArray selectedItems;
 
 	public InGamePlayersAdapter(List<Player> mPlayers) {
 		this.mPlayers = mPlayers;
@@ -60,7 +60,7 @@ public class InGamePlayersAdapter extends RecyclerView.Adapter<InGamePlayersAdap
 	 * @param position Position of the item to check
 	 * @return true if the item is selected, false otherwise
 	 */
-	public boolean isSelected(int position) {
+	private boolean isSelected(int position) {
 		return getSelectedItems().contains(position);
 	}
 
@@ -103,7 +103,7 @@ public class InGamePlayersAdapter extends RecyclerView.Adapter<InGamePlayersAdap
 	 *
 	 * @return List of selected items ids
 	 */
-	public List<Integer> getSelectedItems() {
+	private List<Integer> getSelectedItems() {
 		final List<Integer> items = new ArrayList<>(selectedItems.size());
 		for (int i = 0; i < selectedItems.size(); ++i) {
 			items.add(selectedItems.keyAt(i));
@@ -142,9 +142,9 @@ public class InGamePlayersAdapter extends RecyclerView.Adapter<InGamePlayersAdap
 	}
 
 	public static class ViewHolder extends RecyclerView.ViewHolder {
-		TextView pName;
-		TextView pLvl;
-		TextView pTotal;
+		final TextView pName;
+		final TextView pLvl;
+		final TextView pTotal;
 
 		public ViewHolder(View itemView) {
 			super(itemView);

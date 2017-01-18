@@ -14,20 +14,18 @@ import org.json.JSONObject;
  * Represents an in-app product's listing details.
  */
 public class SkuDetails {
-	private String mItemType;
+	private final String mJson;
 	private String mSku;
 	private String mType;
 	private String mPrice;
 	private String mTitle;
 	private String mDescription;
-	private String mJson;
 
 	public SkuDetails(String jsonSkuDetails) throws JSONException {
 		this(IabHelper.ITEM_TYPE_INAPP, jsonSkuDetails);
 	}
 
 	public SkuDetails(String itemType, String jsonSkuDetails) throws JSONException {
-		mItemType = itemType;
 		mJson = jsonSkuDetails;
 		JSONObject o = new JSONObject(mJson);
 		mSku = o.optString("productId");

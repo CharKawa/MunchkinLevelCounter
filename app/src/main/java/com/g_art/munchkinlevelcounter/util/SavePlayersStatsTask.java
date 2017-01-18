@@ -11,16 +11,11 @@ import java.util.ArrayList;
  */
 public class SavePlayersStatsTask extends AsyncTask<ArrayList<Player>, Void, Boolean> {
 
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-	}
-
 	@SafeVarargs
 	@Override
 	protected final Boolean doInBackground(ArrayList<Player>... params) {
 
-		boolean result = false;
+		boolean result;
 
 		try {
 			for (Player selectedPlayer : params[0]) {

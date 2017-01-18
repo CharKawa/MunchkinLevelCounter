@@ -26,6 +26,7 @@ public class StatsHandler {
 	public final static int POWER_STATS = 2;
 	private final static int CLEAR_STRING_BUILDER = 0;
 
+	@SuppressWarnings("unchecked")
 	public static SparseArray<String> getStats(ArrayList<Player> playersList, LineChartView chartView, final Context context, int stats) {
 		int MAX_VALUE = 0;
 		int MIN_VALUE = 0;
