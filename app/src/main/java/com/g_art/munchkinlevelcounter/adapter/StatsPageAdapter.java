@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.g_art.munchkinlevelcounter.fragments.stats.GearStatsFragment;
 import com.g_art.munchkinlevelcounter.fragments.stats.LvlStatsFragment;
+import com.g_art.munchkinlevelcounter.fragments.stats.PowerStatsFragment;
 
 /**
  * Created by G_Art on 4/9/2014.
@@ -28,12 +30,12 @@ public class StatsPageAdapter extends FragmentPagerAdapter {
 				return lvlFr;
 			case 1:
 				// GearStatsFragment activity
-				LvlStatsFragment gearFr = new LvlStatsFragment();
+				GearStatsFragment gearFr = new GearStatsFragment();
 				gearFr.setArguments(bundle);
 				return gearFr;
 			case 2:
 				// PowerStatsFragment activity
-				LvlStatsFragment powerFr = new LvlStatsFragment();
+				PowerStatsFragment powerFr = new PowerStatsFragment();
 				powerFr.setArguments(bundle);
 				return powerFr;
 		}

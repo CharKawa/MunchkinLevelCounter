@@ -45,8 +45,7 @@ public class Player implements Parcelable, Comparable {
 		this.gear = 0;
 		this.sex = Sex.MAN;
 		this.winner = false;
-		final Random rnd = new Random();
-		this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+		generateColor();
 	}
 
 	public Player(String name, int lvl, int gear) {
@@ -58,9 +57,7 @@ public class Player implements Parcelable, Comparable {
 		this.gear = gear;
 		this.winner = false;
 		this.sex = Sex.MAN;
-		final Random rnd = new Random();
-		this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-
+		generateColor();
 	}
 
 	public Player(String name, int level, int gear, Sex sex) {
@@ -276,5 +273,10 @@ public class Player implements Parcelable, Comparable {
 
 	public int getPower() {
 		return this.level + this.gear;
+	}
+
+	public void generateColor() {
+		final Random rnd = new Random();
+		setColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
 	}
 }

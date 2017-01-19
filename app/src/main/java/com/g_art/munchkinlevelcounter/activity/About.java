@@ -373,7 +373,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 		String payload = p.getDeveloperPayload();
 
         /*
-         * TODO: verify that the developer payload of the purchase is correct. It will be
+		 * TODO: verify that the developer payload of the purchase is correct. It will be
          * the same one that you sent when initiating the purchase.
          *
          * WARNING: Locally generating a random string when starting a purchase and

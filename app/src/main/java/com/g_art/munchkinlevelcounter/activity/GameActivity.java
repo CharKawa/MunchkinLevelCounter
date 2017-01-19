@@ -204,6 +204,7 @@ public class GameActivity extends AppCompatActivity {
 				if (onNextTurnClick(mSelectedPlayer) == false) {
 					Toast.makeText(this, getString(R.string.error_next_turn), Toast.LENGTH_LONG).show();
 				}
+				savePlayersStats();
 				break;
 			case R.id.player_sex:
 				mSelectedPlayer.toggleGender();
@@ -278,6 +279,7 @@ public class GameActivity extends AppCompatActivity {
 		mSelectedPlayerPosition = position;
 		selectPlayer(position);
 		updateSelectedPlayer();
+		savePlayersStats();
 	}
 
 	private void updateSelectedPlayer() {

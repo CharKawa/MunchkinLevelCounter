@@ -45,7 +45,6 @@ dependencies {
 
 	//Utils
 	//Line Charts
-	compile 'com.diogobernardino:williamchart:2.2'
 	compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 	
 	//View injection
