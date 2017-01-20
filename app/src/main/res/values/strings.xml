@@ -93,5 +93,9 @@
     <string name="tr_dialog_neg">No</string>
     <string name="tr_dialog_neu">Not Now</string>
     <string name="helper_power_value" translatable="false">+%1$d</string>
+    <string name="stats_screen_save">Save Stats to file</string>
+    <string name="save_stats_file_name">Level_Count_%1d</string>
+    <string name="save_stats_result">Stats have been saved</string>
+    <string name="save_stats_fail">Saving failed</string>
 
 </resources>

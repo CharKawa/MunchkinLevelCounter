@@ -452,7 +452,7 @@ public class BattleActivity extends AppCompatActivity {
 		int pPowerValue = player.getPower() + player.getMods();
 
 		if (helper != null) {
-			hPower.setText(String.format(getResources().getResourceName(R.string.helper_power_value), helper.getPower()));
+			hPower.setText(String.format(getResources().getString(R.string.helper_power_value), helper.getPower()));
 			pPowerValue = pPowerValue + helper.getPower();
 		} else {
 			hPower.setText("");

@@ -124,7 +124,12 @@ public class Stats extends AppCompatActivity implements ActionBar.TabListener {
 	 */
 	@Override
 	public void onBackPressed() {
-		NavUtils.navigateUpFromSameTask(this);
+		try {
+			NavUtils.navigateUpFromSameTask(this);
+		} catch (IllegalArgumentException ex) {
+			final Intent intent = new Intent(this, MyActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	@Override

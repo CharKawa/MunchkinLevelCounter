@@ -1,14 +1,23 @@
 package com.g_art.munchkinlevelcounter.fragments.stats;
 
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.Stats;
 import com.g_art.munchkinlevelcounter.fragments.stats.datahandler.StatsHandler;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 
 import java.util.ArrayList;
 
@@ -17,6 +26,29 @@ import java.util.ArrayList;
  */
 
 public abstract class StatsFragment extends Fragment {
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.stats, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.stats_save:
+				saveStatsToFile();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 
 	protected void initView(View v, int statsType) {
 		boolean isDataPresent = false;
@@ -30,6 +62,7 @@ public abstract class StatsFragment extends Fragment {
 		if (isDataPresent) {
 			final LineChart mChart = (LineChart) v.findViewById(R.id.game_stats);
 			mChart.setDrawGridBackground(false);
+			mChart.setBackgroundColor(getResources().getColor(R.color.background));
 			// enable touch gestures
 			mChart.setTouchEnabled(true);
 			mChart.setScaleEnabled(true);
@@ -44,9 +77,45 @@ public abstract class StatsFragment extends Fragment {
 			mChart.getLegend().setXEntrySpace(15f);
 			mChart.setBorderColor(getResources().getColor(R.color.text_color));
 
+			Description desc = new Description();
+			desc.setText(getResources().getString(R.string.lvl_tab));
+			desc.setTextColor(getResources().getColor(R.color.text_color));
+			desc.setTextSize(15f);
+			switch (statsType) {
+				case StatsHandler.GEAR_STATS:
+					desc.setText(getResources().getString(R.string.gear_tab));
+					break;
+				case StatsHandler.POWER_STATS:
+					desc.setText(getResources().getString(R.string.power_tab));
+					break;
+				default:
+					break;
+			}
+
+			mChart.setDescription(desc);
+
 			final SparseArray<String> playersColors = StatsHandler.getStats(playersList, mChart, getActivity(), statsType);
 			if (playersColors != null) {
 				mChart.invalidate();
+			}
+		}
+	}
+
+	private void saveStatsToFile() {
+		final View v = getView();
+		if (v != null) {
+			final LineChart mChart = (LineChart) v.findViewById(R.id.game_stats);
+			final String fileName = String.format(getResources().getString(R.string.save_stats_file_name), SystemClock.currentThreadTimeMillis());
+			final boolean result = mChart.saveToGallery(fileName, 100);
+
+			if (result) {
+				new MaterialDialog.Builder(getActivity())
+						.content(R.string.save_stats_result)
+						.contentColor(getResources().getColor(R.color.text_color))
+						.backgroundColor(getResources().getColor(R.color.background))
+						.show();
+			} else {
+				Toast.makeText(getContext(), R.string.save_stats_fail, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
