@@ -450,6 +450,7 @@ public class GameActivity extends AppCompatActivity {
 						doNegativeClickContinueDialog();
 					}
 				})
+				.backgroundColor(getResources().getColor(R.color.background))
 				.show();
 	}
 
