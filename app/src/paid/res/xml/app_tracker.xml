@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- End current session if app sleeps for a period of time -->
+    <integer name="ga_sessionTimeout">300</integer>
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <screenName name="com.g_art.munchkinlevelcounter.activity.MyActivity">
+        LevelCounterPaid StartScreen
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.About">
+        LevelCounterPaid About
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.InfoActivity">
+        LevelCounterPaid InfoActivity
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.NewPlayers">
+        LevelCounterPaid NewPlayers
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.Settings">
+        LevelCounterPaid Settings
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.Stats">
+        LevelCounterPaid Stats
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.GameActivity">
+        LevelCounterPaid GameActivity
+    </screenName>
+
+    <!--  The property id associated with this analytics tracker -->
+    <string name="ga_trackingId">UA-72556928-4</string>
+
+    <!--
+      See Project Structure -> Analytics -> Google Analytics -> Learn More
+      to learn more about configuring this file.
+    -->
+</resources>

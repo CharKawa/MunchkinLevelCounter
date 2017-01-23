@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionBarBackground">#4a1914</color>
+    <color name="background">#fbce97</color>
+    <color name="text_color">#4a1914</color>
+    <color name="button_text_color">#fbce97</color>
+    <color name="transparent_main_color">#A58D8A</color>
+    <color name="actionBarText_color">#fbce97</color>
+    <color name="list_focused">#4a1914</color>
+    <color name="list_selected">#4a1914</color>
+    <color name="list_default">#FBCE97</color>
+    <color name="status_bar">#220b09</color>
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="default_margin">16dp</dimen>
+
+
+    <!-- btn_outlay_shape. -->
+    <dimen name="btn_outlay_horizontal_material">4dp</dimen>
+    <dimen name="btn_outlay_vertical_material">6dp</dimen>
+    <dimen name="btn_outlay_control_corner_material">2dp</dimen>
+    <dimen name="btn_outlay_padding_horizontal_material">8dp</dimen>
+    <dimen name="btn_outlay_padding_vertical_material">4dp</dimen>
+
+</resources>
