@@ -2,6 +2,7 @@ package com.g_art.munchkinlevelcounter.application;
 
 import android.app.Application;
 
+import com.g_art.munchkinlevelcounter.BuildConfig;
 import com.g_art.munchkinlevelcounter.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
@@ -33,6 +34,8 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		if ( BuildConfig.USE_FABRIC ) {
+		}
 		CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
 				.setDefaultFontPath("fonts/Quasimodo.ttf")
 				.setFontAttrId(R.attr.fontPath)

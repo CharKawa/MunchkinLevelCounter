@@ -1,6 +1,16 @@
+buildscript {
+	repositories {
+		maven { url 'https://maven.fabric.io/public' }
+	}
+	dependencies {
+		classpath 'io.fabric.tools:gradle:1.22.1'
+	}
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'android-apt'
+apply plugin: 'io.fabric'
 
 android {
 	signingConfigs {
@@ -28,13 +38,22 @@ android {
 		main {
 		}
 		free {
+			buildConfigField "boolean", "USE_FABRIC", "false"
+			ext.enableCrashlytics = false
 		}
 		paid {
 			applicationId 'com.g_art.munchkinlevelcounter.paid'
-			versionCode 13
-			versionName '1.0'
+
+			buildConfigField "boolean", "USE_FABRIC", "false"
+			ext.enableCrashlytics = false
+		}
+		amazon {
+			applicationId 'com.g_art.munchkinlevelcounter.paid.underground'
+
+			buildConfigField "boolean", "USE_FABRIC", "true"
 		}
 	}
+
 	lintOptions {
 		disable 'MissingTranslation'
 	}
@@ -42,17 +61,18 @@ android {
 repositories {
 	jcenter()
 	maven { url "https://jitpack.io" }
+	maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
-	compile fileTree(include: ['*.jar'], dir: 'libs')
+//	compile fileTree(include: ['*.jar'], dir: 'libs')
 	compile 'com.android.support:support-v4:25.1.0'
 	compile 'com.android.support:recyclerview-v7:25.1.0'
 	compile 'com.android.support:design:25.1.0'
 	compile 'com.android.support:appcompat-v7:25.1.0'
 	compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 	compile 'com.google.code.gson:gson:2.4'
-	compile 'com.google.android.gms:play-services-analytics:8.1.0'
+
 	//Utils
 	//Line Charts
 	compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
@@ -63,4 +83,15 @@ dependencies {
 	compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 	//Material Dialog
 	compile 'com.afollestad.material-dialogs:core:0.9.2.3'
+
+	//Analytics
+	//Fabric
+	amazonCompile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+		transitive = true;
+	}
+	//For Paid version
+	paidCompile 'com.google.android.gms:play-services-analytics:8.1.0'
+	//For Free version
+	freeCompile 'com.google.android.gms:play-services-analytics:8.1.0'
+
 }

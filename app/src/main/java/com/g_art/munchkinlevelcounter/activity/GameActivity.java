@@ -27,7 +27,6 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.listadapter.InGamePlayersAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemClickSupport;
 import com.g_art.munchkinlevelcounter.model.Player;

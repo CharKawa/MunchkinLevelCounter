@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.listadapter.NewPlayersRecyclerAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.OnStartDragListener;
 import com.g_art.munchkinlevelcounter.listadapter.helper.SimpleItemTouchHelperCallback;

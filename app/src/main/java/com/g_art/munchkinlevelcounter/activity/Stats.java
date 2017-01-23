@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.adapter.StatsPageAdapter;
-import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 import com.google.android.gms.analytics.HitBuilders;
