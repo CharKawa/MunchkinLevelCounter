@@ -16,10 +16,10 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,7 +28,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MyActivity extends AppCompatActivity {
-	private Tracker mTracker;
 	private Unbinder unbinder;
 	private SettingsHandler settingsHandler;
 
@@ -36,14 +35,8 @@ public class MyActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.frag_main_screen);
-		// Obtain the shared Tracker instance.
-		MyApplication application = (MyApplication) getApplication();
-		mTracker = application.getDefaultTracker();
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("AppStarted")
-				.setCategory("Screen")
-				.setLabel("MyActivity")
-				.build());
+
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "MyActivity");
 
 		unbinder = ButterKnife.bind(this);
 
@@ -68,11 +61,7 @@ public class MyActivity extends AppCompatActivity {
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						mTracker.send(new HitBuilders.EventBuilder()
-								.setAction("btn_translation_help")
-								.setCategory("Button")
-								.setLabel("Translation.Help")
-								.build());
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Help, "MyActivity");
 
 						updateStatus(SettingsHandler.NEVER_ASK);
 
@@ -91,11 +80,7 @@ public class MyActivity extends AppCompatActivity {
 				.onNeutral(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						mTracker.send(new HitBuilders.EventBuilder()
-								.setAction("btn_translation_not_now")
-								.setCategory("Button")
-								.setLabel("Translation.Help")
-								.build());
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Not_Now, "MyActivity");
 						updateStatus(SettingsHandler.ASK_LATER);
 						dialog.dismiss();
 					}
@@ -105,11 +90,7 @@ public class MyActivity extends AppCompatActivity {
 				.onNegative(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						mTracker.send(new HitBuilders.EventBuilder()
-								.setAction("btn_translation_no")
-								.setCategory("Button")
-								.setLabel("Translation.Help")
-								.build());
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_No, "MyActivity");
 						updateStatus(SettingsHandler.NEVER_ASK);
 					}
 				})
@@ -129,7 +110,7 @@ public class MyActivity extends AppCompatActivity {
 		Intent intent;
 		switch (item.getItemId()) {
 			case R.id.action_stats:
-				StoredPlayers mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
+				final StoredPlayers mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 				if (mStored.isPlayersStored()) {
 					intent = new Intent(this, Stats.class);
 					startActivity(intent);

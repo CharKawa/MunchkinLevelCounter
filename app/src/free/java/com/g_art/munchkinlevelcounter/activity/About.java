@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.application.MyApplication;
 import com.g_art.munchkinlevelcounter.billing.IabHelper;
 import com.g_art.munchkinlevelcounter.billing.IabResult;
@@ -157,7 +159,6 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 	};
 
 	private boolean isDonate = false;
-	private Tracker mTracker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +167,6 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 
 		// Obtain the shared Tracker instance.
 		MyApplication application = (MyApplication) getApplication();
-		mTracker = application.getDefaultTracker();
 
 		Log.d(TAG, "Creating IAB helper.");
 		mHelper = new IabHelper(this);
@@ -229,11 +229,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.imgBtnRate:
-				mTracker.send(new HitBuilders.EventBuilder()
-						.setAction("BtnRateClicked")
-						.setCategory("Button")
-						.setLabel("About.Rate")
-						.build());
+				Analytics.getInstance().logEvent(AnalyticsActions.Rate, "AboutActivity");
+
 				final Intent intent = new Intent(Intent.ACTION_VIEW);
 				//Try Google Play
 				intent.setData(Uri.parse("market://details?id=com.g_art.munchkinlevelcounter"));
@@ -247,11 +244,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 				}
 				break;
 			case R.id.imgBtnContact:
-				mTracker.send(new HitBuilders.EventBuilder()
-						.setAction("BtnContact")
-						.setCategory("Button")
-						.setLabel("About.Contact")
-						.build());
+				Analytics.getInstance().logEvent(AnalyticsActions.Contact, "AboutActivity");
+
 				final Intent email = new Intent(Intent.ACTION_SENDTO);
 				email.setData(Uri.parse("mailto:"));
 				email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
@@ -262,11 +256,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 				}
 				break;
 			case R.id.btn_donate_099:
-				mTracker.send(new HitBuilders.EventBuilder()
-						.setAction("BtnDonate_099")
-						.setCategory("Button")
-						.setLabel("About.Donate")
-						.build());
+				Analytics.getInstance().logEvent(AnalyticsActions.Donate, "BtnDonate_099", "AboutActivity");
+
 				if (isDonate) {
 					onDonateBtnClicked(SKU_DONATE_099);
 				} else {
@@ -274,11 +265,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 				}
 				break;
 			case R.id.btn_donate_199:
-				mTracker.send(new HitBuilders.EventBuilder()
-						.setAction("BtnDonate_199")
-						.setCategory("Button")
-						.setLabel("About.Donate")
-						.build());
+				Analytics.getInstance().logEvent(AnalyticsActions.Donate, "BtnDonate_199", "AboutActivity");
+
 				if (isDonate) {
 					onDonateBtnClicked(SKU_DONATE_199);
 				} else {
@@ -286,11 +274,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 				}
 				break;
 			case R.id.btn_donate_399:
-				mTracker.send(new HitBuilders.EventBuilder()
-						.setAction("BtnDonate_399")
-						.setCategory("Button")
-						.setLabel("About.Donate")
-						.build());
+				Analytics.getInstance().logEvent(AnalyticsActions.Donate, "BtnDonate_399", "AboutActivity");
+
 				if (isDonate) {
 					onDonateBtnClicked(SKU_DONATE_399);
 				} else {
@@ -298,11 +283,8 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 				}
 				break;
 			case R.id.btn_donate_999:
-				mTracker.send(new HitBuilders.EventBuilder()
-						.setAction("BtnDonate_999")
-						.setCategory("Button")
-						.setLabel("About.Donate")
-						.build());
+				Analytics.getInstance().logEvent(AnalyticsActions.Donate, "BtnDonate_999", "AboutActivity");
+
 				if (isDonate) {
 					onDonateBtnClicked(SKU_DONATE_999);
 				} else {
@@ -356,6 +338,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 	private void complain(String message) {
 		Log.e(TAG, "**** TrivialDrive Error: " + message);
 		alert("Error: " + message);
+		Analytics.getInstance().logEvent(AnalyticsActions.Donate, "Error", "AboutActivity");
 	}
 
 	private void alert(String message) {

@@ -20,11 +20,10 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.application.MyApplication;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.model.Monster;
 import com.g_art.munchkinlevelcounter.model.Player;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +83,6 @@ public class BattleActivity extends AppCompatActivity {
 	@BindView(R.id.fab_battle_add_helper)
 	FloatingActionButton helperBtn;
 
-	private Tracker mTracker;
 	private Unbinder unbinder;
 	private Player player;
 	private Player helper;
@@ -99,14 +97,7 @@ public class BattleActivity extends AppCompatActivity {
 
 		setContentView(R.layout.activity_battle_container);
 
-		// Obtain the shared Tracker instance.
-		MyApplication application = (MyApplication) getApplication();
-		mTracker = application.getDefaultTracker();
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("BattleScreen")
-				.setCategory("Screen")
-				.setLabel("BattleActivity")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "BattleActivity");
 
 		if (savedInstanceState == null) {
 
@@ -153,6 +144,7 @@ public class BattleActivity extends AppCompatActivity {
 			R.id.fab_battle_mods_up, R.id.fab_battle_mods_dwn})
 	public void playerClicks(FloatingActionButton fab) {
 		int id = fab.getId();
+		AnalyticsActions action = null;
 		switch (id) {
 			case R.id.fab_battle_lvl_up:
 				if (player.getLevel() + 1 == mMaxLvl) {
@@ -160,27 +152,35 @@ public class BattleActivity extends AppCompatActivity {
 				} else {
 					player.setLevel(player.getLevel() + 1);
 				}
+				action = AnalyticsActions.Player_LVL_UP;
 				break;
 			case R.id.fab_battle_lvl_dwn:
 				if (player.getLevel() != 1) {
 					player.setLevel(player.getLevel() - 1);
 				}
+				action = AnalyticsActions.Player_LVL_DWN;
 				break;
 			case R.id.fab_battle_gear_up:
 				player.setGear(player.getGear() + 1);
+				action = AnalyticsActions.Player_GEARS_UP;
 				break;
 			case R.id.fab_battle_gear_dwn:
 				player.setGear(player.getGear() - 1);
+				action = AnalyticsActions.Player_GEARS_DWN;
 				break;
 			case R.id.fab_battle_mods_up:
 				player.setMods(player.getMods() + 1);
+				action = AnalyticsActions.Player_MODS_UP;
 				break;
 			case R.id.fab_battle_mods_dwn:
 				player.setMods(player.getMods() - 1);
+				action = AnalyticsActions.Player_MODS_DWN;
 				break;
 			default:
+				action = AnalyticsActions.ILLEGAL_ACTION;
 				break;
 		}
+		Analytics.getInstance().logEvent(action, "BattleActivity");
 		updateViewValues();
 	}
 
@@ -189,32 +189,41 @@ public class BattleActivity extends AppCompatActivity {
 			R.id.fab_battle_m_tr_up, R.id.fab_battle_m_tr_dwn})
 	public void monsterClicks(FloatingActionButton fab) {
 		int id = fab.getId();
+		AnalyticsActions action = null;
 		switch (id) {
 			case R.id.fab_battle_m_lvl_up:
 				monster.setLevel(monster.getLevel() + 1);
+				action = AnalyticsActions.Monster_LVL_UP;
 				break;
 			case R.id.fab_battle_m_lvl_dwn:
 				if (monster.getLevel() != 1) {
 					monster.setLevel(monster.getLevel() - 1);
 				}
+				action = AnalyticsActions.Monster_LVL_DWN;
 				break;
 			case R.id.fab_battle_m_mods_up:
 				monster.setMods(monster.getMods() + 1);
+				action = AnalyticsActions.Monster_MODS_UP;
 				break;
 			case R.id.fab_battle_m_mods_dwn:
 				monster.setMods(monster.getMods() - 1);
+				action = AnalyticsActions.Monster_MODS_DWN;
 				break;
 			case R.id.fab_battle_m_tr_up:
 				monster.setTreasures(monster.getTreasures() + 1);
+				action = AnalyticsActions.Monster_TR_UP;
 				break;
 			case R.id.fab_battle_m_tr_dwn:
 				if (monster.getTreasures() != 0) {
 					monster.setTreasures(monster.getTreasures() - 1);
 				}
+				action = AnalyticsActions.Monster_TR_DWN;
 				break;
 			default:
+				action = AnalyticsActions.ILLEGAL_ACTION;
 				break;
 		}
+		Analytics.getInstance().logEvent(action, "BattleActivity");
 		updateViewValues();
 	}
 
@@ -260,6 +269,8 @@ public class BattleActivity extends AppCompatActivity {
 					.autoDismiss(true)
 					.build();
 			dialog.show();
+
+			Analytics.getInstance().logEvent(AnalyticsActions.Help_Request, "BattleActivity");
 		}
 	}
 
@@ -336,6 +347,7 @@ public class BattleActivity extends AppCompatActivity {
 
 	@OnClick(R.id.fab_battle_run_away)
 	public void runAway() {
+		Analytics.getInstance().logEvent(AnalyticsActions.Run_Away, "BattleActivity");
 		new MaterialDialog.Builder(this)
 				.title(R.string.battle_dialog_title_run)
 				.content(R.string.battle_dialog_msg_run)
@@ -367,11 +379,7 @@ public class BattleActivity extends AppCompatActivity {
 	}
 
 	private void showRunDice() {
-
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("DiceRolled")
-				.setLabel("BattleActivity")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Dice_Rolled, "BattleActivity");
 		int Min = 1;
 		int Max = 6;
 		final int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
@@ -436,6 +444,7 @@ public class BattleActivity extends AppCompatActivity {
 	}
 
 	private void finishBattle() {
+		Analytics.getInstance().logEvent(AnalyticsActions.Battle_Finished, "BattleActivity");
 		finish();
 	}
 
@@ -504,6 +513,8 @@ public class BattleActivity extends AppCompatActivity {
 	}
 
 	private void showCancelDialog() {
+		Analytics.getInstance().logEvent(AnalyticsActions.Battle_Cancel, "BattleActivity");
+
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_confirm)
 				.titleColor(getResources().getColor(R.color.text_color))
@@ -513,6 +524,7 @@ public class BattleActivity extends AppCompatActivity {
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						dialog.dismiss();
 						leaveBattle();
 					}
 				})

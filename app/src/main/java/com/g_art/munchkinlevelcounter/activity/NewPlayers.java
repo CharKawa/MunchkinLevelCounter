@@ -12,13 +12,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.listadapter.NewPlayersRecyclerAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.OnStartDragListener;
 import com.g_art.munchkinlevelcounter.listadapter.helper.SimpleItemTouchHelperCallback;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class NewPlayers extends AppCompatActivity implements OnStartDragListener {
 	private final static String PLAYER_KEY = "playersList";
-	private Tracker mTracker;
 	private String PREFS_NO_DATA;
 	private StoredPlayers mStored;
 	private ArrayList<Player> mPlayers;
@@ -48,14 +47,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 		setContentView(R.layout.activity_new_players);
 		unbinder = ButterKnife.bind(this);
 
-		// Obtain the shared Tracker instance.
-		MyApplication application = (MyApplication) getApplication();
-		mTracker = application.getDefaultTracker();
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("Setting Players")
-				.setCategory("Screen")
-				.setLabel("NewPlayers")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "NewPlayers");
 
 		PREFS_NO_DATA = getString(R.string.no_data);
 
@@ -108,6 +100,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	}
 
 	private void addNewPlayer(String name) {
+		Analytics.getInstance().logEvent(AnalyticsActions.Add_Player, "NewPlayers");
 		final Player newPlayer = new Player(name);
 		mPlayers.add(newPlayer);
 		mAdapter.notifyItemInserted(mPlayers.size());
@@ -142,13 +135,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 					Intent intent = new Intent(this, GameActivity.class);
 					intent.putParcelableArrayListExtra(PLAYER_KEY, mPlayers);
 
-					mTracker.send(new HitBuilders.EventBuilder()
-							.setAction("Starting Game")
-							.setCategory("Action")
-							.setLabel("Number of players")
-							.setValue(mPlayers.size())
-							.build());
-
+					Analytics.getInstance().logEvent(AnalyticsActions.Game_Starting, "NewPlayers");
 					startActivity(intent);
 				}
 				break;
@@ -160,11 +147,8 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 		mPlayers.clear();
 
 		mAdapter.notifyItemRangeRemoved(0, playersCount);
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("ClearPlayers")
-				.setCategory("Action")
-				.setLabel("MyActivity")
-				.build());
+
+		Analytics.getInstance().logEvent(AnalyticsActions.Remove_Players, "NewPlayers");
 	}
 
 	@Override
@@ -175,6 +159,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 
 	@Override
 	public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+		Analytics.getInstance().logEvent(AnalyticsActions.Drag_Player, "NewPlayers");
 		mItemTouchHelper.startDrag(viewHolder);
 	}
 

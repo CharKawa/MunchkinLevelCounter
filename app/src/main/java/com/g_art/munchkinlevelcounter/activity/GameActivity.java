@@ -27,14 +27,14 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.listadapter.InGamePlayersAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemClickSupport;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -60,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
 	private static final String BUNDLE_STATS_KEY = "bundleStats";
 	private static final int BATTLE_REQUEST = 10;
 	private static final String SELECTED_KEY = "selectedPlayer";
+
 	@BindView(R.id.rv_in_game_players)
 	RecyclerView mRecyclerView;
 	@BindView(R.id.currentPlayer)
@@ -72,7 +73,7 @@ public class GameActivity extends AppCompatActivity {
 	TextView txtCurrentPlayerPower;
 	@BindView(R.id.player_sex)
 	ImageButton btnSexType;
-	private Tracker mTracker;
+
 	private Unbinder unbinder;
 	private SettingsHandler settingsHandler;
 	private InGamePlayersAdapter inGameAdapter;
@@ -112,13 +113,7 @@ public class GameActivity extends AppCompatActivity {
 		initRecyclerView();
 
 		// Obtain the shared Tracker instance.
-		MyApplication application = (MyApplication) getApplication();
-		mTracker = application.getDefaultTracker();
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("GameStarted")
-				.setCategory("Screen")
-				.setLabel("GameActivity")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "GameActivity");
 
 		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		settingsHandler = SettingsHandler.getInstance(mPrefs);
@@ -262,10 +257,8 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void leaveGame() {
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("GameTerminated")
-				.setLabel("GameActivity")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Cancel_Game, "GameActivity");
+
 		super.onBackPressed();
 	}
 
@@ -327,10 +320,7 @@ public class GameActivity extends AppCompatActivity {
 			result = true;
 		} catch (Exception ex) {
 			result = false;
-			mTracker.send(new HitBuilders.EventBuilder()
-					.setAction("GameTerminated")
-					.setLabel("GameActivity").set("ERROR", ex.toString())
-					.build());
+			Analytics.getInstance().logEvent(AnalyticsActions.Error, "Game_Activity", ex.toString());
 		}
 		return result;
 	}
@@ -353,10 +343,7 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void rollADice() {
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("DiceRolled")
-				.setLabel("GameActivity")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Dice_Rolled, "GameActivity");
 		int Min = 1;
 		int Max = 6;
 		int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
@@ -399,6 +386,8 @@ public class GameActivity extends AppCompatActivity {
 		bundle.putInt(MAX_LVL, maxLvl());
 		intent.putExtras(bundle);
 
+		Analytics.getInstance().logEvent(AnalyticsActions.Battle_Started, "GameActivity");
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			View view = findViewById(R.id.action_dice);
 			int x = (int) view.getX();
@@ -428,6 +417,7 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void showContinueDialog() {
+		Analytics.getInstance().logEvent(AnalyticsActions.Win_Game, "Game_Activity");
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_continue)
 				.titleColor(getResources().getColor(R.color.text_color))
@@ -466,6 +456,7 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void finishGame() {
+		Analytics.getInstance().logEvent(AnalyticsActions.Finish_Game, "Game_Activity");
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_finish)
 				.content(R.string.msg_finish_game)

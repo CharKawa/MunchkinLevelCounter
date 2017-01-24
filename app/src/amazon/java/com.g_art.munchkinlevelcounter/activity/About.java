@@ -10,10 +10,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.CustomEvent;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.application.MyApplication;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -28,9 +27,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
 
-		// Obtain the shared Tracker instance.
-		MyApplication application = (MyApplication) getApplication();
-		Answers.getInstance().logCustom(new CustomEvent("About opened"));
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "AboutActivity");
 
 		ImageButton btnRate = (ImageButton) findViewById(R.id.imgBtnRate);
 		btnRate.setOnClickListener(this);
@@ -43,7 +40,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.imgBtnRate:
-				Answers.getInstance().logCustom(new CustomEvent("Rate clicked"));
+				Analytics.getInstance().logEvent(AnalyticsActions.Rate, "AboutActivity");
 				final Intent intent = new Intent(Intent.ACTION_VIEW);
 				//Try Google Play
 				intent.setData(Uri.parse("http://www.amazon.com/gp/mas/dl/android?asin=B0196EYN12"));
@@ -53,11 +50,12 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 				}
 				break;
 			case R.id.imgBtnContact:
+				Analytics.getInstance().logEvent(AnalyticsActions.Contact, "AboutActivity");
 				final Intent email = new Intent(Intent.ACTION_SENDTO);
 				email.setData(Uri.parse("mailto:"));
 				email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
 				email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
-				email.putExtra(Intent.EXTRA_TEXT, "Dear Developer," + "");
+				email.putExtra(Intent.EXTRA_TEXT, "Dear Developer, ");
 				if (email.resolveActivity(getPackageManager()) != null) {
 					startActivity(email);
 				}

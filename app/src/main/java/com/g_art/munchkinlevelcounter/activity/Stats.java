@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.adapter.StatsPageAdapter;
+import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.model.Player;
 import com.g_art.munchkinlevelcounter.util.StoredPlayers;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -34,14 +34,7 @@ public class Stats extends AppCompatActivity implements ActionBar.TabListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stats);
 
-		// Obtain the shared Tracker instance.
-		MyApplication application = (MyApplication) getApplication();
-		Tracker mTracker = application.getDefaultTracker();
-		mTracker.send(new HitBuilders.EventBuilder()
-				.setAction("Stats opened")
-				.setCategory("Screen")
-				.setLabel("Stats")
-				.build());
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "Stats");
 
 		ActionBar.Tab lvlTab, gearTab, powerTab;
 

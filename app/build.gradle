@@ -93,5 +93,4 @@ dependencies {
 	paidCompile 'com.google.android.gms:play-services-analytics:8.1.0'
 	//For Free version
 	freeCompile 'com.google.android.gms:play-services-analytics:8.1.0'
-
 }
