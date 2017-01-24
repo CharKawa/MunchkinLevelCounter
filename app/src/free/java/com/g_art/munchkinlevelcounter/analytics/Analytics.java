@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 
@@ -40,6 +41,9 @@ public class Analytics {
 			case Fabric:
 				break;
 			case Google:
+				mTracker.send(new HitBuilders.EventBuilder()
+					.setAction(eventName)
+					.build());
 				break;
 			default:
 				break;
@@ -51,6 +55,11 @@ public class Analytics {
 			case Fabric:
 				break;
 			case Google:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction(action.name())
+						.setCategory(activityName)
+						.set(action.name(), actionValue)
+						.build());
 				break;
 			default:
 				break;
@@ -62,6 +71,10 @@ public class Analytics {
 			case Fabric:
 				break;
 			case Google:
+				mTracker.send(new HitBuilders.EventBuilder()
+						.setAction(action.name())
+						.setCategory(activityName)
+						.build());
 				break;
 			default:
 				break;

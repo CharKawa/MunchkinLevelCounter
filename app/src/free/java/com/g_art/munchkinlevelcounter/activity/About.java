@@ -20,8 +20,6 @@ import com.g_art.munchkinlevelcounter.billing.IabHelper;
 import com.g_art.munchkinlevelcounter.billing.IabResult;
 import com.g_art.munchkinlevelcounter.billing.util.Inventory;
 import com.g_art.munchkinlevelcounter.billing.util.Purchase;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
