@@ -10,7 +10,7 @@
     <string name="title_activity_stats">Статистика</string>
     <string name="title_activity_newPlayers">Гравці для партії</string>
     <string name="title_dialog_continue">Вітання!</string>
-    <string name="title_dialog_confirm">Ви впевненні?</string>
+    <string name="title_dialog_confirm">Ви впевнені?</string>
     <string name="dialog_ok_btn">Ок</string>
     <string name="dialog_cancel_btn">Скасувати</string>
     <string name="total_power">Сила</string>
@@ -86,14 +86,14 @@
     <string name="title_dialog_choose_helper_cancel">Скасувати</string>
     <string name="title_dialog_choose_helper_ok">Обрати</string>
     <string name="title_dialog_choose_helper_remove">Видалити</string>
-    <string name="tr_dialog_title">Help Us.</string>
-    <string name="tr_dialog_msg">You can help us with translation into your language! Please, mail us: android.dev.g.art@gmail.com</string>
-    <string name="tr_dialog_pos">Sure</string>
-    <string name="tr_dialog_neg">No</string>
-    <string name="tr_dialog_neu">Not Now</string>
-    <string name="stats_screen_save">Save Stats to file</string>
+    <string name="tr_dialog_title">Допоможіть нам.</string>
+    <string name="tr_dialog_msg">Ви можете допомогти нам з перекладом: android.dev.g.art@gmail.com</string>
+    <string name="tr_dialog_pos">Так</string>
+    <string name="tr_dialog_neg">Ні</string>
+    <string name="tr_dialog_neu">Потім</string>
+    <string name="stats_screen_save">Зберегти статистику у файл</string>
     <string name="save_stats_file_name">Level_Counter_%1d</string>
     <string name="save_stats_result">Статистика була збережена в галереї</string>
-    <string name="save_stats_fail">Saving failed</string>
+    <string name="save_stats_fail">Виникла помилка!</string>
 
 </resources>
