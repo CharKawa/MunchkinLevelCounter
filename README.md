@@ -11,7 +11,7 @@ MunchkinLevelCounter
        src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonMobileApps/amazon-apps-store-us-white.png" />
 </a>
 
-Level counter for card game for Android
+Level counter for card game for Android. 
 Have charts based on stats collected during the game.
 
 
