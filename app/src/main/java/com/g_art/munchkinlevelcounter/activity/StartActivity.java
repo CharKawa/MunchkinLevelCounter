@@ -27,16 +27,16 @@ import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MyActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity {
 	private Unbinder unbinder;
 	private SettingsHandler settingsHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.frag_main_screen);
+		setContentView(R.layout.activity_start);
 
-		Analytics.getInstance().logEvent(AnalyticsActions.Open, "MyActivity");
+		Analytics.getInstance().logEvent(AnalyticsActions.Open, "StartActivity");
 
 		unbinder = ButterKnife.bind(this);
 
@@ -61,7 +61,7 @@ public class MyActivity extends AppCompatActivity {
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Help, "MyActivity");
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Help, "StartActivity");
 
 						updateStatus(SettingsHandler.NEVER_ASK);
 
@@ -80,7 +80,7 @@ public class MyActivity extends AppCompatActivity {
 				.onNeutral(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Not_Now, "MyActivity");
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Not_Now, "StartActivity");
 						updateStatus(SettingsHandler.ASK_LATER);
 						dialog.dismiss();
 					}
@@ -90,7 +90,7 @@ public class MyActivity extends AppCompatActivity {
 				.onNegative(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						Analytics.getInstance().logEvent(AnalyticsActions.Translation_No, "MyActivity");
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_No, "StartActivity");
 						updateStatus(SettingsHandler.NEVER_ASK);
 					}
 				})

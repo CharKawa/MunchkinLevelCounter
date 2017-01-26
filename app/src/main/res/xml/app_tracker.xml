@@ -6,7 +6,7 @@
     <!-- Enable automatic Activity measurement -->
     <bool name="ga_autoActivityTracking">true</bool>
 
-    <screenName name="com.g_art.munchkinlevelcounter.activity.MyActivity">
+    <screenName name="com.g_art.munchkinlevelcounter.activity.StartActivity">
         LevelCounter StartScreen
     </screenName>
     <screenName name="com.g_art.munchkinlevelcounter.activity.About">

@@ -119,7 +119,7 @@ public class Stats extends AppCompatActivity implements ActionBar.TabListener {
 		try {
 			NavUtils.navigateUpFromSameTask(this);
 		} catch (IllegalArgumentException ex) {
-			final Intent intent = new Intent(this, MyActivity.class);
+			final Intent intent = new Intent(this, StartActivity.class);
 			startActivity(intent);
 		}
 	}
