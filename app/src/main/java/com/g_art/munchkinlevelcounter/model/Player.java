@@ -267,8 +267,8 @@ public class Player implements Parcelable, Comparable {
 		return colorCompare;
 	}
 
-	public String getHelperInfo() {
-		return " Power: " + this.getPower() + " " + this.getName();
+	public String getHelperInfo(String template) {
+		return String.format(template, this.getPower(), this.getName(), this.getLevel());
 	}
 
 	public int getPower() {

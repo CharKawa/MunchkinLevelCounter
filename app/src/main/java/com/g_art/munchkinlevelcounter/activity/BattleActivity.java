@@ -232,7 +232,7 @@ public class BattleActivity extends AppCompatActivity {
 		if (!players.isEmpty()) {
 			final List<String> playersList = new ArrayList<>(players.size());
 			for (Player player : players) {
-				playersList.add(player.getHelperInfo());
+				playersList.add(player.getHelperInfo(getString(R.string.helper_info_template)));
 			}
 
 			MaterialDialog dialog = new MaterialDialog.Builder(this)

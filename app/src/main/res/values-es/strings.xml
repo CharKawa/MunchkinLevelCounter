@@ -95,5 +95,6 @@
     <string name="save_stats_file_name">Level_Counter_%1d</string>
     <string name="save_stats_result">Las estadísticas se han guardado en la galería</string>
     <string name="save_stats_fail">Saving failed</string>
+    <string name="helper_info_template">Poder:%1$d %2$s LVL:%3$d</string>
 
 </resources>
