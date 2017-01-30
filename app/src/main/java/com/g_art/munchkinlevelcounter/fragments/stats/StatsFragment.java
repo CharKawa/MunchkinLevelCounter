@@ -1,7 +1,10 @@
 package com.g_art.munchkinlevelcounter.fragments.stats;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.activity.Stats;
@@ -106,13 +110,32 @@ public abstract class StatsFragment extends Fragment {
 		if (v != null) {
 			final LineChart mChart = (LineChart) v.findViewById(R.id.game_stats);
 			final String fileName = String.format(getResources().getString(R.string.save_stats_file_name), SystemClock.currentThreadTimeMillis());
-			final boolean result = mChart.saveToGallery(fileName, 100);
+			final boolean result = mChart.saveToGallery(fileName, getResources().getString(R.string.app_name),
+					"MPAndroidChart-Library Save", Bitmap.CompressFormat.JPEG, 100);
 
 			if (result) {
 				new MaterialDialog.Builder(getActivity())
 						.content(R.string.save_stats_result)
 						.contentColor(getResources().getColor(R.color.text_color))
 						.backgroundColor(getResources().getColor(R.color.background))
+						.positiveText(R.string.open_gallery)
+						.positiveColor(getResources().getColor(R.color.text_color))
+						.onPositive(new MaterialDialog.SingleButtonCallback() {
+							@Override
+							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+								Intent intent = new Intent(Intent.ACTION_VIEW);
+								intent.setType("image/*");
+								startActivity(Intent.createChooser(intent, "Choose Gallery"));
+							}
+						})
+						.neutralText(R.string.dialog_cancel_btn)
+						.neutralColor(getResources().getColor(R.color.text_color))
+						.onNeutral(new MaterialDialog.SingleButtonCallback() {
+							@Override
+							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+								dialog.dismiss();
+							}
+						})
 						.show();
 			} else {
 				Toast.makeText(getContext(), R.string.save_stats_fail, Toast.LENGTH_SHORT).show();

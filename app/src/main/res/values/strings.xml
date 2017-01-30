@@ -98,5 +98,7 @@
     <string name="save_stats_result">Stats have been saved to gallery</string>
     <string name="save_stats_fail">Saving failed</string>
     <string name="helper_info_template">Power:%1$d %2$s LVL:%3$d</string>
+    <string name="open_gallery">Show</string>
+    <string name="app_save_folder">Level Counter Stats</string>
 
 </resources>
