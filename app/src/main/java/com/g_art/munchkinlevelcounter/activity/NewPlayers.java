@@ -32,7 +32,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class NewPlayers extends AppCompatActivity implements OnStartDragListener {
 	private final static String PLAYER_KEY = "playersList";
-	private String PREFS_NO_DATA;
 	private StoredPlayers mStored;
 	private ArrayList<Player> mPlayers;
 	private Unbinder unbinder;
@@ -48,8 +47,6 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 		unbinder = ButterKnife.bind(this);
 
 		Analytics.getInstance().logEvent(AnalyticsActions.Open, "NewPlayers");
-
-		PREFS_NO_DATA = getString(R.string.no_data);
 
 		mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
 
@@ -84,7 +81,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	}
 
 	private ArrayList<Player> getPlayersForNewGame() {
-		final ArrayList<Player> tList = mStored.loadPlayers(PREFS_NO_DATA);
+		final ArrayList<Player> tList = mStored.loadPlayers(getString(R.string.no_data));
 		if (!tList.isEmpty()) {
 			return clearStats(tList);
 		}
