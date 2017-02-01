@@ -31,8 +31,8 @@ import com.g_art.munchkinlevelcounter.analytics.Analytics;
 import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
 import com.g_art.munchkinlevelcounter.listadapter.InGamePlayersAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemClickSupport;
+import com.g_art.munchkinlevelcounter.model.Gender;
 import com.g_art.munchkinlevelcounter.model.Player;
-import com.g_art.munchkinlevelcounter.model.Sex;
 import com.g_art.munchkinlevelcounter.util.SavePlayersStatsTask;
 import com.g_art.munchkinlevelcounter.util.SettingsHandler;
 
@@ -286,7 +286,7 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void updatePlayerSex() {
-		if (Sex.MAN == mSelectedPlayer.getSex()) {
+		if (Gender.MAN == mSelectedPlayer.getGender()) {
 			btnSexType.setImageResource(R.drawable.man);
 		} else {
 			btnSexType.setImageResource(R.drawable.woman);

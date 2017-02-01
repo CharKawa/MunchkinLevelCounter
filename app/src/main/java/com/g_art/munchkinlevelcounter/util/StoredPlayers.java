@@ -18,15 +18,13 @@ import java.util.List;
  */
 public class StoredPlayers {
 	private static StoredPlayers instance;
+	private static Gson gson;
 	private final String PREFS_PLAYERS_KEY = "players";
-	private final Gson gson;
 	private SharedPreferences mPrefs;
 	private boolean mResult = false;
-	private String json;
 
 
 	private StoredPlayers(SharedPreferences sharedPreferences) {
-		this.gson = new Gson();
 		this.mPrefs = sharedPreferences;
 	}
 
@@ -36,7 +34,20 @@ public class StoredPlayers {
 		} else {
 			instance.setSharedPreferences(sharedPreferences);
 		}
+		if (gson == null) {
+			gson = new Gson();
+		}
 		return instance;
+	}
+
+	public static String serialiseStats(ArrayList<String> stats) {
+		return gson.toJson(stats);
+	}
+
+	public static ArrayList<String> deSerialiseStats(String stats) {
+		Type type = new TypeToken<ArrayList<String>>() {
+		}.getType();
+		return gson.fromJson(stats, type);
 	}
 
 	/**
@@ -45,7 +56,7 @@ public class StoredPlayers {
 	 * @return boolean. True for success, false for failure.
 	 */
 	public boolean savePlayers(List<Player> playersList) {
-		json = gson.toJson(playersList);
+		final String json = gson.toJson(playersList);
 		Log.i("JSON", "savePlayers: " + json);
 		SharedPreferences.Editor prefsEditor = mPrefs.edit();
 		prefsEditor.putString(PREFS_PLAYERS_KEY, json);
@@ -67,7 +78,7 @@ public class StoredPlayers {
 		ArrayList<Player> playersList = new ArrayList<>();
 
 		if (isPlayersStored()) {
-			json = mPrefs.getString(PREFS_PLAYERS_KEY, noData);
+			final String json = mPrefs.getString(PREFS_PLAYERS_KEY, noData);
 			Log.i("JSON", "loadPlayers: " + json);
 			if (!json.equals(noData)) {
 				Type type = new TypeToken<ArrayList<Player>>() {

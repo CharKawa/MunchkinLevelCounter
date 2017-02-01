@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperViewHolder;
+import com.g_art.munchkinlevelcounter.model.Gender;
 import com.g_art.munchkinlevelcounter.model.Player;
-import com.g_art.munchkinlevelcounter.model.Sex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,7 +84,7 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 				}
 			});
 
-			if (player.getSex() == Sex.MAN) {
+			if (player.getGender() == Gender.MAN) {
 				holder.pSex.setImageResource(R.drawable.man);
 			} else {
 				holder.pSex.setImageResource(R.drawable.woman);
@@ -94,10 +94,10 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 
 	private void playerChangeSex(int playerPosition) {
 		final Player player = mPlayers.get(playerPosition);
-		if (Sex.MAN == player.getSex()) {
-			player.setSex(Sex.WOMAN);
+		if (Gender.MAN == player.getGender()) {
+			player.setGender(Gender.WOMAN);
 		} else {
-			player.setSex(Sex.MAN);
+			player.setGender(Gender.MAN);
 		}
 		notifyItemChanged(playerPosition);
 	}

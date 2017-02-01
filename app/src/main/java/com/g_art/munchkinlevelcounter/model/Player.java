@@ -5,13 +5,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.g_art.munchkinlevelcounter.util.db.converters.GenderConverter;
+import com.g_art.munchkinlevelcounter.util.db.converters.StatsConverter;
+
+import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Convert;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
+import org.greenrobot.greendao.annotation.JoinEntity;
+import org.greenrobot.greendao.annotation.ToMany;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class Player implements Parcelable, Comparable {
+@Entity
+public class Player implements Parcelable, Comparable<Player> {
 
 	public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
 		public Player createFromParcel(Parcel in) {
@@ -22,16 +36,45 @@ public class Player implements Parcelable, Comparable {
 			return new Player[size];
 		}
 	};
+
+	@Id(autoincrement = true)
+	private long id;
+
+	@Index
 	private String name;
 	private int level;
 	private int gear;
 	private int mods;
 	private int color;
 	private boolean winner;
-	private Sex sex;
+	@Convert(converter = GenderConverter.class, columnType = Integer.class)
+	private Gender gender;
+	@Convert(converter = StatsConverter.class, columnType = String.class)
 	private ArrayList<String> lvlStats;
+	@Convert(converter = StatsConverter.class, columnType = String.class)
 	private ArrayList<String> gearStats;
+	@Convert(converter = StatsConverter.class, columnType = String.class)
 	private ArrayList<String> powerStats;
+
+	@ToMany
+	@JoinEntity(
+			entity = PlayerInGameEntity.class,
+			sourceProperty = "playerId",
+			targetProperty = "gameId"
+	)
+	private List<Game> games;
+
+	/**
+	 * Used to resolve relations
+	 */
+	@Generated(hash = 2040040024)
+	private transient DaoSession daoSession;
+
+	/**
+	 * Used for active entity operations.
+	 */
+	@Generated(hash = 2108114900)
+	private transient PlayerDao myDao;
 
 	public Player() {
 	}
@@ -43,7 +86,7 @@ public class Player implements Parcelable, Comparable {
 		this.name = name;
 		this.level = 1;
 		this.gear = 0;
-		this.sex = Sex.MAN;
+		this.gender = Gender.MAN;
 		this.winner = false;
 		generateColor();
 	}
@@ -56,15 +99,15 @@ public class Player implements Parcelable, Comparable {
 		this.level = lvl;
 		this.gear = gear;
 		this.winner = false;
-		this.sex = Sex.MAN;
+		this.gender = Gender.MAN;
 		generateColor();
 	}
 
-	public Player(String name, int level, int gear, Sex sex) {
+	public Player(String name, int level, int gear, Gender gender) {
 		this.name = name;
 		this.level = level;
 		this.gear = gear;
-		this.sex = sex;
+		this.gender = gender;
 	}
 
 	public Player(Parcel in) {
@@ -75,11 +118,28 @@ public class Player implements Parcelable, Comparable {
 		this.level = in.readInt();
 		this.gear = in.readInt();
 		this.color = in.readInt();
-		this.sex = (Sex) in.readSerializable();
+		this.gender = (Gender) in.readSerializable();
 		this.winner = in.readByte() != 0;
 		in.readStringList(lvlStats);
 		in.readStringList(gearStats);
 		in.readStringList(powerStats);
+	}
+
+	@Generated(hash = 1649594086)
+	public Player(long id, String name, int level, int gear, int mods, int color,
+				  boolean winner, Gender gender, ArrayList<String> lvlStats,
+				  ArrayList<String> gearStats, ArrayList<String> powerStats) {
+		this.id = id;
+		this.name = name;
+		this.level = level;
+		this.gear = gear;
+		this.mods = mods;
+		this.color = color;
+		this.winner = winner;
+		this.gender = gender;
+		this.lvlStats = lvlStats;
+		this.gearStats = gearStats;
+		this.powerStats = powerStats;
 	}
 
 	public void incrementLvl() {
@@ -99,21 +159,21 @@ public class Player implements Parcelable, Comparable {
 	}
 
 	public void toggleGender() {
-		if (this.getSex() == Sex.MAN) {
-			this.setSex(Sex.WOMAN);
+		if (this.getGender() == Gender.MAN) {
+			this.setGender(Gender.WOMAN);
 		} else {
-			this.setSex(Sex.MAN);
+			this.setGender(Gender.MAN);
 		}
 	}
 
 	public Player cloneWithoutStats() {
 		Player newPlayer = new Player(this.name);
-		newPlayer.setSex(this.getSex());
+		newPlayer.setGender(this.getGender());
 		return newPlayer;
 	}
 
 	public Player cloneForBattle() {
-		return new Player(this.name, this.level, this.gear, this.sex);
+		return new Player(this.name, this.level, this.gear, this.gender);
 	}
 
 	public String getName() {
@@ -152,10 +212,6 @@ public class Player implements Parcelable, Comparable {
 		return winner;
 	}
 
-	public void setWinner(boolean winner) {
-		this.winner = winner;
-	}
-
 	public ArrayList<String> getLvlStats() {
 		return lvlStats;
 	}
@@ -188,12 +244,25 @@ public class Player implements Parcelable, Comparable {
 		this.color = color;
 	}
 
-	public Sex getSex() {
-		return sex;
+	public Gender getGender() {
+		return gender;
 	}
 
-	public void setSex(Sex sex) {
-		this.sex = sex;
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Player setId(long id) {
+		this.id = id;
+		return this;
 	}
 
 	@Override
@@ -206,7 +275,7 @@ public class Player implements Parcelable, Comparable {
 				", lvlStats=" + lvlStats +
 				", gearStats=" + gearStats +
 				", powerStats=" + powerStats +
-				", sex=" + sex.toString() +
+				", gender=" + gender.toString() +
 				'}';
 	}
 
@@ -222,7 +291,7 @@ public class Player implements Parcelable, Comparable {
 		if (color != player.color) return false;
 		if (winner != player.winner) return false;
 		if (!name.equals(player.name)) return false;
-		if (!sex.equals(player.sex)) return false;
+		if (!gender.equals(player.gender)) return false;
 
 		return true;
 	}
@@ -247,7 +316,7 @@ public class Player implements Parcelable, Comparable {
 		dest.writeInt(level);
 		dest.writeInt(gear);
 		dest.writeInt(color);
-		dest.writeSerializable(sex);
+		dest.writeSerializable(gender);
 		dest.writeByte((byte) (winner ? 1 : 0));
 		dest.writeStringList(lvlStats);
 		dest.writeStringList(gearStats);
@@ -255,14 +324,13 @@ public class Player implements Parcelable, Comparable {
 	}
 
 	@Override
-	public int compareTo(@NonNull Object another) {
+	public int compareTo(@NonNull Player another) {
 		Player pl1 = this;
-		Player pl2 = (Player) another;
 		Boolean pl1W = pl1.isWinner();
-		Boolean pl2W = pl2.isWinner();
+		Boolean pl2W = another.isWinner();
 		int colorCompare = pl2W.compareTo(pl1W);
 		if (colorCompare == 0) {
-			return pl1.getLevel() - pl2.getLevel();
+			return pl1.getLevel() - another.getLevel();
 		}
 		return colorCompare;
 	}
@@ -278,5 +346,88 @@ public class Player implements Parcelable, Comparable {
 	public void generateColor() {
 		final Random rnd = new Random();
 		setColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)));
+	}
+
+	public boolean getWinner() {
+		return this.winner;
+	}
+
+	public void setWinner(boolean winner) {
+		this.winner = winner;
+	}
+
+	/**
+	 * To-many relationship, resolved on first access (and after reset).
+	 * Changes to to-many relations are not persisted, make changes to the target entity.
+	 */
+	@Generated(hash = 471773044)
+	public List<Game> getGames() {
+		if (games == null) {
+			final DaoSession daoSession = this.daoSession;
+			if (daoSession == null) {
+				throw new DaoException("Entity is detached from DAO context");
+			}
+			GameDao targetDao = daoSession.getGameDao();
+			List<Game> gamesNew = targetDao._queryPlayer_Games(id);
+			synchronized (this) {
+				if (games == null) {
+					games = gamesNew;
+				}
+			}
+		}
+		return games;
+	}
+
+	/**
+	 * Resets a to-many relationship, making the next get call to query for a fresh result.
+	 */
+	@Generated(hash = 1596068969)
+	public synchronized void resetGames() {
+		games = null;
+	}
+
+	/**
+	 * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+	 * Entity must attached to an entity context.
+	 */
+	@Generated(hash = 128553479)
+	public void delete() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.delete(this);
+	}
+
+	/**
+	 * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+	 * Entity must attached to an entity context.
+	 */
+	@Generated(hash = 1942392019)
+	public void refresh() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.refresh(this);
+	}
+
+	/**
+	 * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+	 * Entity must attached to an entity context.
+	 */
+	@Generated(hash = 713229351)
+	public void update() {
+		if (myDao == null) {
+			throw new DaoException("Entity is detached from DAO context");
+		}
+		myDao.update(this);
+	}
+
+	/**
+	 * called by internal mechanisms, do not call yourself.
+	 */
+	@Generated(hash = 1600887847)
+	public void __setDaoSession(DaoSession daoSession) {
+		this.daoSession = daoSession;
+		myDao = daoSession != null ? daoSession.getPlayerDao() : null;
 	}
 }
