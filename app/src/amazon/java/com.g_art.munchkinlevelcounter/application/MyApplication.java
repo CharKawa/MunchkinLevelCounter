@@ -17,7 +17,7 @@ public class MyApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-				.setDefaultFontPath("fonts/Quasimodo.ttf")
+//				.setDefaultFontPath("fonts/Quasimodo_Original.ttf")
 				.setFontAttrId(R.attr.fontPath)
 				.build()
 		);

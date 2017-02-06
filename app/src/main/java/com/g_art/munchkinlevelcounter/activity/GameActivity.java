@@ -588,13 +588,16 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void updateMaxLVL(int newMaxLVL) {
-		if (settingsHandler.saveSettings(newMaxLVL)) {
-			Toast.makeText(this,
-					getString(R.string.settings_saved),
-					Toast.LENGTH_SHORT
-			).show();
-		}
-		settingsHandler.getMaxLvl();
+//		if (settingsHandler.saveSettings(newMaxLVL)) {
+//			Toast.makeText(this,
+//					getString(R.string.settings_saved),
+//					Toast.LENGTH_SHORT
+//			).show();
+//		}
+//		settingsHandler.getMaxLvl();
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		sp.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL);
+		sp.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, newMaxLVL).apply();
 	}
 
 	private void selectPlayer(int position) {

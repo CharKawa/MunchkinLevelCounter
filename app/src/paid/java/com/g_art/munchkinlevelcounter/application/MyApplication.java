@@ -22,7 +22,7 @@ public class MyApplication extends Application {
 		if ( BuildConfig.USE_FABRIC ) {
 		}
 		CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-				.setDefaultFontPath("fonts/Quasimodo.ttf")
+//				.setDefaultFontPath("fonts/Quasimodo_Original.ttf")
 				.setFontAttrId(R.attr.fontPath)
 				.build()
 		);
