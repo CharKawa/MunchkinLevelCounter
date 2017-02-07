@@ -18,7 +18,7 @@
     <screenName name="com.g_art.munchkinlevelcounter.activity.NewPlayers">
         LevelCounter NewPlayers
     </screenName>
-    <screenName name="com.g_art.munchkinlevelcounter.activity.Settings">
+    <screenName name="com.g_art.munchkinlevelcounter.activity.PreferenceScreen">
         LevelCounter Settings
     </screenName>
     <screenName name="com.g_art.munchkinlevelcounter.activity.Stats">

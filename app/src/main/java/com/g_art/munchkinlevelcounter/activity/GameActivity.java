@@ -89,6 +89,12 @@ public class GameActivity extends AppCompatActivity {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
 
+		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		final boolean screenOn = sp.getBoolean(PreferenceScreen.KEY_PREF_SCREEN_ON, false);
+		if (screenOn) {
+			getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		}
+
 		setContentView(R.layout.activity_game);
 		unbinder = ButterKnife.bind(this);
 
@@ -326,7 +332,8 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private int maxLvl() {
-		return settingsHandler.getMaxLvl();
+		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		return sp.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -568,7 +575,7 @@ public class GameActivity extends AppCompatActivity {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (s.length() > 0) {
+				if (s.length() > 0 && 1 < Integer.valueOf(s.toString())) {
 					maxLvlDialog.getActionButton(DialogAction.POSITIVE).setEnabled(true);
 				} else {
 					maxLvlDialog.getActionButton(DialogAction.POSITIVE).setEnabled(false);
@@ -588,15 +595,7 @@ public class GameActivity extends AppCompatActivity {
 	}
 
 	private void updateMaxLVL(int newMaxLVL) {
-//		if (settingsHandler.saveSettings(newMaxLVL)) {
-//			Toast.makeText(this,
-//					getString(R.string.settings_saved),
-//					Toast.LENGTH_SHORT
-//			).show();
-//		}
-//		settingsHandler.getMaxLvl();
-		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		sp.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL);
+		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sp.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, newMaxLVL).apply();
 	}
 
@@ -613,6 +612,7 @@ public class GameActivity extends AppCompatActivity {
 	@Override
 	protected void onDestroy() {
 		unbinder.unbind();
+		getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		super.onDestroy();
 	}
 

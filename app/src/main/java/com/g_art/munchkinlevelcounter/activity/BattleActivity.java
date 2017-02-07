@@ -2,9 +2,11 @@ package com.g_art.munchkinlevelcounter.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -96,6 +98,12 @@ public class BattleActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_battle_container);
+
+		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		final boolean screenOn = sp.getBoolean(PreferenceScreen.KEY_PREF_SCREEN_ON, false);
+		if (screenOn) {
+			getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		}
 
 		Analytics.getInstance().logEvent(AnalyticsActions.Open, "BattleActivity");
 
@@ -548,6 +556,7 @@ public class BattleActivity extends AppCompatActivity {
 	@Override
 	protected void onDestroy() {
 		unbinder.unbind();
+		getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		super.onDestroy();
 	}
 
