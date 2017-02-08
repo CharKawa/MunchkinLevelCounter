@@ -42,7 +42,7 @@
     </style>
 
     <style name="Munchkin.TextView" parent="android:Widget.Holo.Light.TextView">
-        <item name="fontPath">fonts/Quasimodo_Original.ttf</item>
+        <item name="fontPath">@string/font_path</item>
     </style>
 
     <style name="Munchkin.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">

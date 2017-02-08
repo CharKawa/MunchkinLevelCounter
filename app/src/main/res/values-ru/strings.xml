@@ -96,5 +96,6 @@
     <string name="save_stats_fail">Saving failed</string>
     <string name="helper_info_template">Сила:%1$d %2$s Уровень:%3$d</string>
     <string name="monster">Монстр</string>
+    <string name="font_path">fonts/Quasimodo_Cyrillic.ttf</string>
 
 </resources>
