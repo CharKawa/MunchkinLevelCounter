@@ -22,20 +22,18 @@ public class SettingsMigration {
 
 	public static void startMigration(Context baseContext) {
 		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(baseContext);
-		if (mPrefs.contains(SETTINGS_VERSION_KEY)) {
-			final int settingsVersion = mPrefs.getInt(SETTINGS_VERSION_KEY, DEFAULT_SETTINGS_VERSION);
-			if (CURRENT_SETTINGS_VERSION == settingsVersion) {
-				return;
-			}
-			if (DEFAULT_SETTINGS_VERSION == settingsVersion) {//Starting Migration
-				final int maxLevel = mPrefs.getInt(SettingsHandler.MAX_LVL_SETTINGS, PreferenceScreen.DEFAULT_MAX_LVL);
+		final int settingsVersion = mPrefs.getInt(SETTINGS_VERSION_KEY, DEFAULT_SETTINGS_VERSION);
+		if (CURRENT_SETTINGS_VERSION == settingsVersion) {
+			return;
+		}
+		if (DEFAULT_SETTINGS_VERSION == settingsVersion) {//Starting Migration
+			final int maxLevel = mPrefs.getInt(SettingsHandler.MAX_LVL_SETTINGS, PreferenceScreen.DEFAULT_MAX_LVL);
 
-				mPrefs.edit().remove(SettingsHandler.MAX_LVL_SETTINGS).apply();
-				mPrefs.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, maxLevel).apply();
-				mPrefs.edit().putInt(SettingsHandler.POPUP_STATUS, SettingsHandler.NEVER_ASK).apply();
+			mPrefs.edit().remove(SettingsHandler.MAX_LVL_SETTINGS).apply();
+			mPrefs.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, maxLevel).apply();
+			mPrefs.edit().putInt(SettingsHandler.POPUP_STATUS, SettingsHandler.NEVER_ASK).apply();
 
-				mPrefs.edit().putInt(SETTINGS_VERSION_KEY, CURRENT_SETTINGS_VERSION).apply();
-			}
+			mPrefs.edit().putInt(SETTINGS_VERSION_KEY, CURRENT_SETTINGS_VERSION).apply();
 		}
 	}
 }
