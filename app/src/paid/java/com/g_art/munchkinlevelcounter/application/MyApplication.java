@@ -28,5 +28,7 @@ public class MyApplication extends Application {
 		);
 
 		Analytics.init(this);
+
+		SettingsMigration.startMigration(getBaseContext());
 	}
 }

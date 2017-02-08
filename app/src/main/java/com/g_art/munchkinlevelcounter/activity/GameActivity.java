@@ -121,11 +121,6 @@ public class GameActivity extends AppCompatActivity {
 		// Obtain the shared Tracker instance.
 		Analytics.getInstance().logEvent(AnalyticsActions.Open, "GameActivity");
 
-		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		settingsHandler = SettingsHandler.getInstance(mPrefs);
-
-		settingsHandler.loadSettings();
-
 		onPlayerSelected(mSelectedPlayerPosition);
 	}
 

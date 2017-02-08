@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -23,5 +24,6 @@ public class MyApplication extends Application {
 		);
 		Analytics.init(this);
 
+		SettingsMigration.startMigration(getBaseContext());
 	}
 }

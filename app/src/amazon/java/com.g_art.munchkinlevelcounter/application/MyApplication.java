@@ -22,6 +22,12 @@ public class MyApplication extends Application {
 				.build()
 		);
 
-		Analytics.init(this);
+		final Fabric fabric = new Fabric.Builder(this)
+				.kits(new Crashlytics())
+				.debuggable(true)
+				.build();
+		Fabric.with(fabric);
+
+		SettingsMigration.startMigration(getBaseContext());
 	}
 }
