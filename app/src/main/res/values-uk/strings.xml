@@ -57,7 +57,7 @@
     <string name="ok_btn_for_dialog_finish">Так</string>
     <string name="cancel_btn_for_dialog_finish">Залишитись</string>
     <string name="action_finish">Закінчити</string>
-    <string name="enter_player_name">Ім'я</string>
+    <string name="enter_player_name">Ім\'я</string>
     <string name="mods">Модифікатор</string>
     <string name="warrior">Воїн</string>
     <string name="monster">Потвора</string>
