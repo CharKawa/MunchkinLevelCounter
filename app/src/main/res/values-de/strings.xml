@@ -96,5 +96,6 @@
     <string name="save_stats_result">Die Statistiken wurden in der Galerie gespeichert</string>
     <string name="save_stats_fail">Saving failed</string>
     <string name="helper_info_template">Power:%1$d %2$s LVL:%3$d</string>
+    <string name="font_path">fonts/Quasimodo_Original.ttf</string>
 
 </resources>
