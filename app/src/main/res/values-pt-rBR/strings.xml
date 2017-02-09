@@ -44,7 +44,6 @@
     <string name="player_1">Jogador #1</string>
     <string name="player_2">Jogador #2</string>
     <string name="error_max_lvl_settings">Erro definindo Nível Máximo.</string>
-    <string name="settings_saved">As configurações foram salvas.</string>
     <string name="error_max_level_one">Nível Máximo não pode ser igual a 1.</string>
     <string name="dice">Dado</string>
     <string name="more_players">Por favor, adicione mais jogadores.</string>

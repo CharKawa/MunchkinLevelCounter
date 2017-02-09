@@ -44,7 +44,6 @@
     <string name="player_1">Gracz #1</string>
     <string name="player_2">Gracz #2</string>
     <string name="error_max_lvl_settings">Błąd poziomu ustawienie max</string>
-    <string name="settings_saved">Ustawienia są zapisywane.</string>
     <string name="error_max_level_one">Maksymalny poziom nie może być równa 1.</string>
     <string name="dice">Kość</string>
     <string name="more_players">Proszę, dodaj więcej graczy.</string>

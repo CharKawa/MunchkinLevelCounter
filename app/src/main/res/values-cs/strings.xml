@@ -46,7 +46,6 @@
     <string name="player_1">"Player 1"</string>
     <string name="player_2">"Player 2"</string>
     <string name="error_max_lvl_settings">"Error setting max level."</string>
-    <string name="settings_saved">"Settings saved."</string>
     <string name="error_max_level_one">"Max level must be greater than 1."</string>
     <string name="dice">"Dice"</string>
     <string name="more_players">"Please add more players."</string>

@@ -44,7 +44,6 @@
     <string name="player_1">Игрок №1</string>
     <string name="player_2">Игрок №2</string>
     <string name="error_max_lvl_settings">Ошибка при выставлении максимального уровня.</string>
-    <string name="settings_saved">Настройки сохранены.</string>
     <string name="error_max_level_one">Максимальный уровень не может быть равным 1.</string>
     <string name="dice">Кубик</string>
     <string name="more_players">Игроков недостаточно.</string>
