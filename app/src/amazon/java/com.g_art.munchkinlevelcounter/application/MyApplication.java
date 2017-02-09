@@ -2,9 +2,11 @@ package com.g_art.munchkinlevelcounter.application;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.g_art.munchkinlevelcounter.R;
-import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 
+import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**

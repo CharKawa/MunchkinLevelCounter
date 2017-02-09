@@ -5,8 +5,7 @@ import android.app.Application;
 import com.g_art.munchkinlevelcounter.BuildConfig;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.analytics.Analytics;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
+import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
