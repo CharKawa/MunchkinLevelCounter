@@ -98,7 +98,6 @@
     <string name="font_path">fonts/Quasimodo_Original.ttf</string>
     <string name="pref_application_settings_title">Application Settings</string>
     <string name="open_gallery">Show</string>
-    <string name="app_save_folder" translatable="false">Level Counter Stats</string>
     <string name="pref_screen_on_title">Screen on</string>
     <string name="pref_game_settings_title">Game Settings</string>
     <string name="pref_max_level">Max Level</string>
