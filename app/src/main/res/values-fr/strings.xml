@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Level Counter</string>
+    <string name="action_settings">Options</string>
+    <string name="main_screen_Players">Joueurs</string>
+    <string name="main_screen_Stats">Statistiques</string>
+    <string name="main_screen_Settings">Options</string>
+    <string name="main_screen_About">À propos</string>
+    <string name="title_activity_stats">Stats</string>
+    <string name="title_activity_newPlayers">Joueurs</string>
+    <string name="title_dialog_continue">Felicitations</string>
+    <string name="title_dialog_confirm">Êtes vous sur(e)?</string>
+    <string name="txt_max_lvl">Niveau max</string>
+    <string name="dialog_ok_btn">Ok</string>
+    <string name="dialog_cancel_btn">Annuler</string>
+    <string name="total_power">Force</string>
+    <string name="level">Niveau</string>
+    <string name="gear">Equipement</string>
+    <string name="game_screen">Level Counter</string>
+    <string name="total">Total</string>
+    <string name="no_players">Ajoutez d\'autres joueurs.</string>
+    <string name="message_for_dialog_cont">Vous avez gagné ! Continuer ou arrêter ?</string>
+    <string name="message_for_dialog_confirm">Vous perdrez votre progression !</string>
+    <string name="ok_btn_for_dialog_confirm">Rester</string>
+    <string name="cancel_btn_for_dialog_confirm">Sortir</string>
+    <string name="ok_btn_for_dialog_cont">Continuer</string>
+    <string name="cancel_btn_for_dialog_cont">Quitter</string>
+    <string name="lvl_tab">Niveau</string>
+    <string name="gear_tab">Équipement</string>
+    <string name="power_tab">Force</string>
+    <string name="winner">Vainqueur</string>
+    <string name="loser">Perdant</string>
+    <string name="developed">Développé par:</string>
+    <string name="AG">Artem Gulia</string>
+    <string name="about_the_app">Compteur de niveau pour Munchkin, le jeu de carte populaire. Avec statistiques!</string>
+    <string name="rate">Si vous aimez l\'appli, merci de la noter!</string>
+    <string name="btn_rate">Noter</string>
+    <string name="thanks">Vous pouvez aussi le payer une bière:</string>
+    <string name="donate_0.99">Une canette: $0.99</string>
+    <string name="donate_1.99">Bonne bière: $1.99</string>
+    <string name="donate_3.99">Bière excellente : $3.99</string>
+    <string name="donate_9.99">Un pack de bière : $9.99</string>
+    <string name="list_players_Edit">Modifier</string>
+    <string name="player_1">Joueur 1</string>
+    <string name="player_2">Joueur 2</string>
+    <string name="error_max_lvl_settings">Erreur. Niveau max possible</string>
+    <string name="error_max_level_one">Le niveau max doit être supérieur à 1</string>
+    <string name="dice">Dé</string>
+    <string name="more_players">Ajoutez d\'autres joueur</string>
+    <string name="error_next_turn">Erreur lors du lancement du prochain tour</string>
+    <string name="no_data">Statistiques inexistantes, veuillez jouer une partie pour les générer</string>
+    <string name="prev_stas">Ces statistiques sont issues de la partie précédente</string>
+    <string name="contact">Des questions ? Vous pouvez toujours me contacter: </string>
+    <string name="btnNextPlayer">Joueur suivant</string>
+    <string name="msg_finish_game">Terminer la partie actuelle?</string>
+    <string name="title_dialog_finish">Terminer la partie</string>
+    <string name="ok_btn_for_dialog_finish">Oui</string>
+    <string name="cancel_btn_for_dialog_finish">Rester</string>
+    <string name="action_finish">Terminer la partie</string>
+    <string name="enter_player_name">Écrivez le nom d\'un joueur</string>
+    <string name="mods">Modificateurs</string>
+
+    <!-- Fuzzy -->
+    <string name="warrior">Guerrier</string>
+    <string name="monster">Monstre</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_screen">Combat</string>
+
+    <!-- Fuzzy -->
+    <string name="treasures">Trésors</string>
+
+    <!-- Fuzzy -->
+    <string name="ok_btn_dialog_battle_continue">Continuer</string>
+
+    <!-- Fuzzy -->
+    <string name="cancel_btn_for_dialog_battle">Annuler</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_title_win">Victoire!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_title_lose">Défaite!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_msg_lose">Vous perdez! Il serait peut être préférable de déguerpir?</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_lose_run_away">Sauvez moi!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_lose_anyway">Les guerriers ne fuient pas!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_title_run">Déguerpir!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_msg_run">Faites attention - vous pouvez mourir</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_run_confirm">Fuir!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_run_cancel">Rester et se battre!</string>
+
+    <!-- Fuzzy -->
+    <string name="battle_dialog_msg">Vous avez battu le monstre! N\'oubliez pas d\'augmenter d\'un niveau</string>
+    <string name="title_dialog_choose_helper_ok">Choisir</string>
+    <string name="title_dialog_choose_helper_cancel">Annuler</string>
+    <string name="title_dialog_choose_helper_remove">Retirer</string>
+    <string name="message_for_dialog_battle_leave">Annuler le combat?</string>
+    <string name="ok_btn_dialog_battle_leave">Oui</string>
+    <string name="cancel_btn_dialog_battle_leave">Non, rester</string>
+    <string name="run_away_success">Succès! N\'oubliez pas de vérifiées les modificateurs!</string>
+    <string name="run_away_fail">Échec! N\'oubliez pas de vérifier les modificateurs !</string>
+    <string name="action_start_battle">Combat</string>
+    <string name="tr_dialog_title">Aidez nous</string>
+    <string name="tr_dialog_msg">Vous pouvez nous aider pour traduire dans votre langue</string>
+    <string name="tr_dialog_pos">Oui</string>
+    <string name="tr_dialog_neg">Non</string>
+    <string name="tr_dialog_neu">Pas maintenant</string>
+    <string name="stats_screen_save">Sauvegarder les stats vers un fichier</string>
+    <string name="save_stats_file_name">Compteur_de_niveau_%1d</string>
+    <string name="save_stats_result">Les stats ont bien été sauvegardées dans la galerie</string>
+    <string name="save_stats_fail">La sauvegarde a échoué</string>
+    <string name="helper_info_template">Force:%1$d %2$s niveau:%3$d</string>
+    <string name="open_gallery">Montrer</string>
+    <string name="pref_application_settings_title">Options de l\'application </string>
+    <string name="pref_screen_on_title">Écran</string>
+    <string name="pref_game_settings_title">Options de jeu</string>
+    <string name="pref_max_level">Niveau max</string>
+    <string name="pref_screen_on_summary">Maintenir allumé durant la partie</string>
+</resources>
