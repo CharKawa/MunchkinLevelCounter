@@ -38,6 +38,10 @@ public class EntityManager {
 		daoSession.getPlayerDao().save(player);
 	}
 
+	public void insertPlayer(Player player) {
+		daoSession.getPlayerDao().insert(player);
+	}
+
 	public void saveGame(Game game) {
 		daoSession.getGameDao().save(game);
 	}

@@ -7,10 +7,11 @@ import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.analytics.Analytics;
 import com.g_art.munchkinlevelcounter.model.DaoMaster;
 import com.g_art.munchkinlevelcounter.model.DaoSession;
+import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 import com.g_art.munchkinlevelcounter.util.db.EntityManager;
+import com.g_art.munchkinlevelcounter.util.db.MigrationHelper;
 
 import org.greenrobot.greendao.query.QueryBuilder;
-import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -44,5 +45,7 @@ public class MyApplication extends Application {
 		daoMaster = new DaoMaster(db);
 		final DaoSession daoSession = daoMaster.newSession();
 		EntityManager.getInstance().init(daoSession);
+
+		MigrationHelper.migrateFromSharedPrefsToDatabase(getBaseContext());
 	}
 }

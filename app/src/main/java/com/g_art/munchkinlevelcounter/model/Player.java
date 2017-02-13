@@ -256,13 +256,13 @@ public class Player implements Parcelable, Comparable<Player> {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Player setId(long id) {
 		this.id = id;
 		return this;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	@Override
