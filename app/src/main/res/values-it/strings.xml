@@ -44,7 +44,6 @@
     <string name="player_1">Giocatore #1</string>
     <string name="player_2">Giocatore #2</string>
     <string name="error_max_lvl_settings">Errore livello di impostazione max</string>
-    <string name="settings_saved">Le impostazioni vengono salvate.</string>
     <string name="error_max_level_one">Livello Max non può essere uguale a 1.</string>
     <string name="dice">Dadi</string>
     <string name="more_players">Per favore, aggiungere più giocatori.</string>
@@ -96,5 +95,12 @@
     <string name="save_stats_result">Statistiche sono state salvate alla gallery</string>
     <string name="save_stats_fail">Saving failed</string>
     <string name="helper_info_template">Power:%1$d %2$s LVL:%3$d</string>
+    <string name="font_path">fonts/Quasimodo_Original.ttf</string>
+    <string name="pref_application_settings_title">Application Settings</string>
+    <string name="open_gallery">Show</string>
+    <string name="pref_screen_on_title">Screen on</string>
+    <string name="pref_game_settings_title">Game Settings</string>
+    <string name="pref_max_level">Max Level</string>
+    <string name="pref_screen_on_summary">Keep Screen on during the Game</string>
 
 </resources>

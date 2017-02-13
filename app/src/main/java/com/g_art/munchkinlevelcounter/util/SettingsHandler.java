@@ -11,9 +11,9 @@ public class SettingsHandler {
 	public static final int MIN_LVL = 1;
 	public static final int ASK_LATER = 1;
 	public static final int NEVER_ASK = 2;
+	public static final String MAX_LVL_SETTINGS = "max_lvl_settings";
+	public static final String POPUP_STATUS = "popup_status";
 	private static final int FIRST_SHOW = 0;
-	private static final String MAX_LVL_SETTINGS = "max_lvl_settings";
-	private static final String POPUP_STATUS = "popup_status";
 	private static final String STATUS_UPDATE_DATE = "status_update_date";
 	private static final int DEFAULT_MAX_LVL = 10;
 	private static SettingsHandler settingsInstance;

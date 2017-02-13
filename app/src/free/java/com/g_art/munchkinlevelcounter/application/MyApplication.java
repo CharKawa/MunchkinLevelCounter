@@ -10,6 +10,7 @@ import com.g_art.munchkinlevelcounter.model.DaoSession;
 import com.g_art.munchkinlevelcounter.util.db.EntityManager;
 
 import org.greenrobot.greendao.query.QueryBuilder;
+import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -27,12 +28,13 @@ public class MyApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-				.setDefaultFontPath("fonts/Quasimodo.ttf")
+				.setDefaultFontPath(getString(R.string.font_path))
 				.setFontAttrId(R.attr.fontPath)
 				.build()
 		);
 		Analytics.init(this);
 
+		SettingsMigration.startMigration(getBaseContext());
 		QueryBuilder.LOG_SQL = true;
 		QueryBuilder.LOG_VALUES = true;
 

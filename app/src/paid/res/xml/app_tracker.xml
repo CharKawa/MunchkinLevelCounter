@@ -18,7 +18,7 @@
     <screenName name="com.g_art.munchkinlevelcounter.activity.NewPlayers">
         LevelCounterPaid NewPlayers
     </screenName>
-    <screenName name="com.g_art.munchkinlevelcounter.activity.Settings">
+    <screenName name="com.g_art.munchkinlevelcounter.activity.PreferenceScreen">
         LevelCounterPaid Settings
     </screenName>
     <screenName name="com.g_art.munchkinlevelcounter.activity.Stats">
@@ -26,6 +26,9 @@
     </screenName>
     <screenName name="com.g_art.munchkinlevelcounter.activity.GameActivity">
         LevelCounterPaid GameActivity
+    </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.BattleActivity">
+        LevelCounter Battle
     </screenName>
 
     <!--  The property id associated with this analytics tracker -->

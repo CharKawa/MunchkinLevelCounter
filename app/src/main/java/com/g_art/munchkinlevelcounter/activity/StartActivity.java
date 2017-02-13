@@ -119,7 +119,7 @@ public class StartActivity extends AppCompatActivity {
 				}
 				return true;
 			case R.id.action_settings:
-				intent = new Intent(this, Settings.class);
+				intent = new Intent(this, PreferenceScreen.class);
 				startActivity(intent);
 				return true;
 			case R.id.action_about:

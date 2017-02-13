@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.analytics.Analytics;
+import com.g_art.munchkinlevelcounter.util.SettingsMigration;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -17,11 +18,12 @@ public class MyApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-				.setDefaultFontPath("fonts/Quasimodo.ttf")
+				.setDefaultFontPath(getString(R.string.font_path))
 				.setFontAttrId(R.attr.fontPath)
 				.build()
 		);
-
 		Analytics.init(this);
+
+		SettingsMigration.startMigration(getBaseContext());
 	}
 }

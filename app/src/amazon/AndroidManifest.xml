@@ -59,7 +59,7 @@
 
         </activity>
         <activity
-            android:name=".activity.Settings"
+            android:name=".activity.PreferenceScreen"
             android:label="@string/main_screen_Settings"
             android:parentActivityName=".activity.StartActivity">
 
