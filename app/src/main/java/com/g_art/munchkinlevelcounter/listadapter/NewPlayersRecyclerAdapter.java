@@ -1,6 +1,8 @@
 package com.g_art.munchkinlevelcounter.listadapter;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.g_art.munchkinlevelcounter.R;
+import com.g_art.munchkinlevelcounter.activity.NewPlayers;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperAdapter;
 import com.g_art.munchkinlevelcounter.listadapter.helper.ItemTouchHelperViewHolder;
 import com.g_art.munchkinlevelcounter.model.Player;
@@ -30,9 +34,11 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 
 	public static int color;
 	private final ArrayList<Player> mPlayers;
+	private final NewPlayers activity;
 
-	public NewPlayersRecyclerAdapter(ArrayList<Player> mPlayers) {
+	public NewPlayersRecyclerAdapter(NewPlayers activity, ArrayList<Player> mPlayers) {
 		this.mPlayers = mPlayers;
+		this.activity = activity;
 	}
 
 	@Override
@@ -89,6 +95,34 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 			} else {
 				holder.pSex.setImageResource(R.drawable.woman);
 			}
+
+			final ShapeDrawable icon;
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+				icon = new ShapeDrawable(new OvalShape());
+				icon.setIntrinsicHeight(24);
+				icon.setIntrinsicWidth(24);
+			} else {
+				icon = (ShapeDrawable) activity.getResources().getDrawable(R.drawable.player_color_circle, activity.getTheme());
+			}
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && icon != null) {
+				icon.getPaint().setColor(player.getColor());
+				holder.playerColor.setBackground(icon);
+			} else {
+				holder.playerColor.setBackgroundColor(player.getColor());
+			}
+
+			holder.playerColor.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					activity.onColorDialogOpen(position);
+					new ColorChooserDialog.Builder(activity, R.string.choose_player_color)
+							.cancelButton(R.string.dialog_cancel_btn)
+							.doneButton(R.string.dialog_ok_btn)
+							.preselect(player.getColor())
+							.dynamicButtonColor(true)
+							.show();
+				}
+			});
 		}
 	}
 
@@ -126,6 +160,7 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 		private final EditText pName;
 		private final ImageButton pSex;
 		private final ImageView imReorder;
+		private final View playerColor;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
@@ -141,6 +176,7 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 				icon = itemView.getContext().getResources().getDrawable(R.drawable.ic_reorder_24dp, itemView.getContext().getTheme());
 			}
 			imReorder.setImageDrawable(icon);
+			playerColor = itemView.findViewById(R.id.player_color);
 		}
 
 		@Override
