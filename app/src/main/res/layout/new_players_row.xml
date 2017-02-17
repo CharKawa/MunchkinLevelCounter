@@ -26,11 +26,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
+        android:layout_toLeftOf="@+id/player_color"
+        android:layout_toRightOf="@+id/imvPlayerSex"
+        android:layout_toStartOf="@+id/player_color"
+        android:hint="@string/enter_player_name"
+        android:lines="1"
+        android:textSize="25sp"/>
+
+    <View
+        android:id="@+id/player_color"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignBottom="@+id/reorder"
+        android:layout_alignTop="@+id/reorder"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/reorder"
-        android:layout_toRightOf="@+id/imvPlayerSex"
-        android:hint="@string/enter_player_name"
-        android:textSize="25sp"/>
+        android:background="@drawable/player_color_circle"
+        />
 
     <ImageView
         android:id="@+id/reorder"

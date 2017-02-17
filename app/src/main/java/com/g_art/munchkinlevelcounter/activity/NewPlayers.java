@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.g_art.munchkinlevelcounter.R;
 import com.g_art.munchkinlevelcounter.analytics.Analytics;
 import com.g_art.munchkinlevelcounter.analytics.AnalyticsActions;
@@ -30,7 +33,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by G_Art on 16/7/2014.
  */
-public class NewPlayers extends AppCompatActivity implements OnStartDragListener {
+public class NewPlayers extends AppCompatActivity implements OnStartDragListener, ColorChooserDialog.ColorCallback {
 	private final static String PLAYER_KEY = "playersList";
 	private StoredPlayers mStored;
 	private ArrayList<Player> mPlayers;
@@ -39,6 +42,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	private RecyclerView mRecyclerView;
 	private NewPlayersRecyclerAdapter mAdapter;
 	private ItemTouchHelper mItemTouchHelper;
+	private int mPlayerPosition;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 
 		mPlayers = initPlayers(savedInstanceState);
 
-		mAdapter = new NewPlayersRecyclerAdapter(mPlayers);
+		mAdapter = new NewPlayersRecyclerAdapter(this, mPlayers);
 		mRecyclerView.setAdapter(mAdapter);
 		mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -163,5 +167,22 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	@Override
 	protected void attachBaseContext(Context newBase) {
 		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+	}
+
+	@Override
+	public void onColorSelection(@NonNull ColorChooserDialog dialog, @ColorInt int selectedColor) {
+		if (mPlayers.size() > mPlayerPosition) {
+			mPlayers.get(mPlayerPosition).setColor(selectedColor);
+			mAdapter.notifyItemChanged(mPlayerPosition);
+		}
+	}
+
+	@Override
+	public void onColorChooserDismissed(@NonNull ColorChooserDialog dialog) {
+		//do nothing
+	}
+
+	public void onColorDialogOpen(int position) {
+		this.mPlayerPosition = position;
 	}
 }
