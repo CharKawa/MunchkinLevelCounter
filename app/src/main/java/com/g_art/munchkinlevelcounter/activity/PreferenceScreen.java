@@ -15,6 +15,7 @@ public class PreferenceScreen extends AppCompatPreferenceActivity {
 	public static final String KEY_PREF_MAX_LEVEL = "pref_max_lvl";
 	public static final String KEY_PREF_SCREEN_ON = "pref_screen_on";
 	public static final int DEFAULT_MAX_LVL = 10;
+	public static final String DEFAULT_MAX_LVL_STRING = "10";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

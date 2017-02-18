@@ -13,8 +13,7 @@
     <PreferenceCategory
         android:title="@string/pref_game_settings_title">
 
-        <com.g_art.munchkinlevelcounter.util.MaxLevelDialogPreference
-            android:dialogLayout="@layout/maxlvl_dialog"
+        <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
             android:key="pref_max_lvl"
             android:selectAllOnFocus="true"
             android:title="@string/pref_max_level"/>

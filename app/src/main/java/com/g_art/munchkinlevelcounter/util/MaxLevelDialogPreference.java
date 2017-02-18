@@ -32,7 +32,7 @@ public class MaxLevelDialogPreference extends DialogPreference {
 
 		final SharedPreferences sp = getSharedPreferences();
 		final EditText ed = (EditText) mView.findViewById(R.id.maxLvL);
-		ed.setText(String.valueOf(sp.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL)));
+		ed.setText(sp.getString(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL_STRING));
 		final int position = ed.length();
 		ed.setSelection(position);
 	}
@@ -51,7 +51,7 @@ public class MaxLevelDialogPreference extends DialogPreference {
 						Toast.LENGTH_SHORT
 				).show();
 			} else {
-				sp.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, mLvl).apply();
+				sp.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(mLvl)).apply();
 			}
 		}
 	}

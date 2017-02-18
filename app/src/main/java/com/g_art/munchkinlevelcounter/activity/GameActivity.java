@@ -328,7 +328,7 @@ public class GameActivity extends AppCompatActivity {
 
 	private int maxLvl() {
 		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		return sp.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL);
+		return Integer.valueOf(sp.getString(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL_STRING));
 	}
 
 	@SuppressWarnings("unchecked")
