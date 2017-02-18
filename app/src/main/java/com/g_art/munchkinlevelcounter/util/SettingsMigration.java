@@ -31,11 +31,11 @@ public class SettingsMigration {
 			final int maxLevel = mPrefs.getInt(SettingsHandler.MAX_LVL_SETTINGS, PreferenceScreen.DEFAULT_MAX_LVL);
 
 			mPrefs.edit().remove(SettingsHandler.MAX_LVL_SETTINGS).apply();
-			mPrefs.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, maxLevel).apply();
-			mPrefs.edit().putInt(SettingsHandler.POPUP_STATUS, SettingsHandler.NEVER_ASK).apply();
+			mPrefs.edit().remove(PreferenceScreen.KEY_PREF_MAX_LEVEL).apply();
 
-			mPrefs.edit().putInt(SETTINGS_VERSION_KEY, CURRENT_SETTINGS_VERSION).apply();
-		} else if (PREV_SETTINGS_VERSION == settingsVersion) {
+			mPrefs.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(maxLevel)).apply();
+		}
+		if (PREV_SETTINGS_VERSION == settingsVersion) {
 			final int maxLevel = mPrefs.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL);
 			mPrefs.edit().remove(PreferenceScreen.KEY_PREF_MAX_LEVEL).apply();
 			mPrefs.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(maxLevel)).apply();
