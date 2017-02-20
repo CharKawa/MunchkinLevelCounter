@@ -96,15 +96,11 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 				holder.pSex.setImageResource(R.drawable.woman);
 			}
 
-			final ShapeDrawable icon;
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-				icon = new ShapeDrawable(new OvalShape());
-				icon.setIntrinsicHeight(24);
-				icon.setIntrinsicWidth(24);
-			} else {
-				icon = (ShapeDrawable) activity.getResources().getDrawable(R.drawable.player_color_circle, activity.getTheme());
-			}
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && icon != null) {
+			final ShapeDrawable icon = new ShapeDrawable(new OvalShape());
+			icon.setIntrinsicHeight(24);
+			icon.setIntrinsicWidth(24);
+
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 				icon.getPaint().setColor(player.getColor());
 				holder.playerColor.setBackground(icon);
 			} else {

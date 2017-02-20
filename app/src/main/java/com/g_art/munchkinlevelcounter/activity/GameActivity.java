@@ -579,7 +579,7 @@ public class GameActivity extends AppCompatActivity {
 
 	private void updateMaxLVL(int newMaxLVL) {
 		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		sp.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, newMaxLVL).apply();
+		sp.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(newMaxLVL)).apply();
 	}
 
 	private void selectPlayer(int position) {
