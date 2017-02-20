@@ -46,7 +46,7 @@
             android:layout_alignLeft="@+id/txtAbout_text"
             android:layout_alignStart="@+id/txtAbout_text"
             android:layout_below="@+id/txtAbout_text"
-            android:paddingBottom="10dp"
+            android:paddingBottom="5dp"
             android:paddingEnd="10dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"

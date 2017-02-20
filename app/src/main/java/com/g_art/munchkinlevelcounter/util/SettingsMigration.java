@@ -23,6 +23,9 @@ public class SettingsMigration {
 
 	public static void startMigration(Context baseContext) {
 		final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(baseContext);
+
+		mPrefs.edit().putInt(SettingsHandler.POPUP_STATUS, SettingsHandler.NEVER_ASK).apply();
+
 		final int settingsVersion = mPrefs.getInt(SETTINGS_VERSION_KEY, DEFAULT_SETTINGS_VERSION);
 		if (CURRENT_SETTINGS_VERSION == settingsVersion) {
 			return;
@@ -42,6 +45,5 @@ public class SettingsMigration {
 			mPrefs.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(maxLevel)).apply();
 			mPrefs.edit().putInt(SETTINGS_VERSION_KEY, CURRENT_SETTINGS_VERSION).apply();
 		}
-
 	}
 }
