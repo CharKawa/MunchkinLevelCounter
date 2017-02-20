@@ -130,4 +130,7 @@
     <string name="pref_game_settings_title">Options de jeu</string>
     <string name="pref_max_level">Niveau max</string>
     <string name="pref_screen_on_summary">Maintenir allumé durant la partie</string>
+    <string name="choose_player_color">Choose color</string>
+    <string name="dialog_back_btn">Back</string>
+    <string name="theme_font_path">Quasimodo_Original.ttf</string>
 </resources>
