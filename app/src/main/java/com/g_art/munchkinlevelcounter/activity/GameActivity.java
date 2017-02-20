@@ -75,7 +75,6 @@ public class GameActivity extends AppCompatActivity {
 	ImageButton btnSexType;
 
 	private Unbinder unbinder;
-	private SettingsHandler settingsHandler;
 	private InGamePlayersAdapter inGameAdapter;
 	private ArrayList<Player> playersList;
 	private int mSelectedPlayerPosition;
@@ -235,11 +234,8 @@ public class GameActivity extends AppCompatActivity {
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_confirm)
 				.content(R.string.message_for_dialog_confirm)
-				.titleColor(getResources().getColor(R.color.text_color))
-				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.ok_btn_for_dialog_confirm)
 				.negativeText(R.string.cancel_btn_for_dialog_confirm)
-				.backgroundColor(getResources().getColor(R.color.background))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -375,7 +371,6 @@ public class GameActivity extends AppCompatActivity {
 
 		new MaterialDialog.Builder(this)
 				.customView(imageView, false)
-				.backgroundColor(getResources().getColor(R.color.background))
 				.autoDismiss(true)
 				.show();
 	}
@@ -422,11 +417,8 @@ public class GameActivity extends AppCompatActivity {
 		Analytics.getInstance().logEvent(AnalyticsActions.Win_Game, "Game_Activity");
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_continue)
-				.titleColor(getResources().getColor(R.color.text_color))
 				.content(R.string.message_for_dialog_cont)
-				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.ok_btn_for_dialog_cont)
-				.positiveColor(getResources().getColor(R.color.text_color))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -434,14 +426,12 @@ public class GameActivity extends AppCompatActivity {
 					}
 				})
 				.negativeText(R.string.cancel_btn_for_dialog_cont)
-				.negativeColor(getResources().getColor(R.color.text_color))
 				.onNegative(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 						doNegativeClickContinueDialog();
 					}
 				})
-				.backgroundColor(getResources().getColor(R.color.background))
 				.show();
 	}
 
@@ -462,11 +452,11 @@ public class GameActivity extends AppCompatActivity {
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_finish)
 				.content(R.string.msg_finish_game)
-				.titleColor(getResources().getColor(R.color.text_color))
-				.contentColor(getResources().getColor(R.color.text_color))
+//				.titleColor(getResources().getColor(R.color.text_color))
+//				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.ok_btn_for_dialog_finish)
 				.negativeText(R.string.cancel_btn_for_dialog_finish)
-				.backgroundColor(getResources().getColor(R.color.background))
+//				.backgroundColor(getResources().getColor(R.color.background))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -514,11 +504,9 @@ public class GameActivity extends AppCompatActivity {
 	private void showMaxLvLDialog() {
 		final MaterialDialog maxLvlDialog = new MaterialDialog.Builder(this)
 				.title(R.string.txt_max_lvl)
-				.titleColor(getResources().getColor(R.color.text_color))
 				.customView(R.layout.maxlvl_dialog, false)
 				.positiveText(R.string.dialog_ok_btn)
 				.negativeText(R.string.dialog_cancel_btn)
-				.backgroundColor(getResources().getColor(R.color.background))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
