@@ -18,6 +18,19 @@
         <item name="actionBarTheme">@style/Munchkin.ThemeOverlay.AppTheme.ActionBar</item>
         <item name="actionBarPopupTheme">@style/Munchkin.ThemeOverlay.AppTheme.PopupMenu</item>
 
+        <!--Material dialogs theming-->
+        <item name="md_dark_theme">true</item>
+        <item name="md_background_color">@color/background</item>
+        <item name="md_title_color">@color/text_color</item>
+        <item name="md_content_color">@color/text_color</item>
+        <item name="md_positive_color">@color/text_color</item>
+        <item name="md_neutral_color">@color/text_color</item>
+        <item name="md_negative_color">@color/text_color</item>
+        <item name="md_divider_color">@color/text_color</item>
+        <item name="md_medium_font">@string/theme_font_path</item>
+        <item name="md_regular_font">@string/theme_font_path</item>
+
+
     </style>
     <style name="floating_action_button_default">
         <item name="android:layout_margin">16dp</item>

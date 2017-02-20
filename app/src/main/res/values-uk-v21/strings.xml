@@ -101,5 +101,8 @@
     <string name="pref_max_level">Макс. рівень</string>
     <string name="pref_screen_on_summary">Тримати екран увімкненим</string>
     <string name="font_path">fonts/Quasimodo_Cyrillic.ttf</string>
+    <string name="theme_font_path">Quasimodo_Cyrillic.ttf</string>
+    <string name="choose_player_color">Choose color</string>
+    <string name="dialog_back_btn">Back</string>
 
 </resources>

@@ -17,7 +17,8 @@ import com.g_art.munchkinlevelcounter.activity.PreferenceScreen;
  */
 public class SettingsMigration {
 	public static String SETTINGS_VERSION_KEY = "settings_version";
-	public static int CURRENT_SETTINGS_VERSION = 1;
+	public static int CURRENT_SETTINGS_VERSION = 2;
+	public static int PREV_SETTINGS_VERSION = 1;
 	public static int DEFAULT_SETTINGS_VERSION = -1;
 
 	public static void startMigration(Context baseContext) {
@@ -30,10 +31,17 @@ public class SettingsMigration {
 			final int maxLevel = mPrefs.getInt(SettingsHandler.MAX_LVL_SETTINGS, PreferenceScreen.DEFAULT_MAX_LVL);
 
 			mPrefs.edit().remove(SettingsHandler.MAX_LVL_SETTINGS).apply();
-			mPrefs.edit().putInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, maxLevel).apply();
-			mPrefs.edit().putInt(SettingsHandler.POPUP_STATUS, SettingsHandler.NEVER_ASK).apply();
+			mPrefs.edit().remove(PreferenceScreen.KEY_PREF_MAX_LEVEL).apply();
 
+			mPrefs.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(maxLevel)).apply();
 			mPrefs.edit().putInt(SETTINGS_VERSION_KEY, CURRENT_SETTINGS_VERSION).apply();
 		}
+		if (PREV_SETTINGS_VERSION == settingsVersion) {
+			final int maxLevel = mPrefs.getInt(PreferenceScreen.KEY_PREF_MAX_LEVEL, PreferenceScreen.DEFAULT_MAX_LVL);
+			mPrefs.edit().remove(PreferenceScreen.KEY_PREF_MAX_LEVEL).apply();
+			mPrefs.edit().putString(PreferenceScreen.KEY_PREF_MAX_LEVEL, Integer.toString(maxLevel)).apply();
+			mPrefs.edit().putInt(SETTINGS_VERSION_KEY, CURRENT_SETTINGS_VERSION).apply();
+		}
+
 	}
 }

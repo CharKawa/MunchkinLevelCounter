@@ -116,10 +116,7 @@ public abstract class StatsFragment extends Fragment {
 			if (result) {
 				new MaterialDialog.Builder(getActivity())
 						.content(R.string.save_stats_result)
-						.contentColor(getResources().getColor(R.color.text_color))
-						.backgroundColor(getResources().getColor(R.color.background))
 						.positiveText(R.string.open_gallery)
-						.positiveColor(getResources().getColor(R.color.text_color))
 						.onPositive(new MaterialDialog.SingleButtonCallback() {
 							@Override
 							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -129,7 +126,6 @@ public abstract class StatsFragment extends Fragment {
 							}
 						})
 						.neutralText(R.string.dialog_cancel_btn)
-						.neutralColor(getResources().getColor(R.color.text_color))
 						.onNeutral(new MaterialDialog.SingleButtonCallback() {
 							@Override
 							public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

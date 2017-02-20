@@ -272,8 +272,8 @@ public class BattleActivity extends AppCompatActivity {
 							helperSelected(-1);
 						}
 					})
-					.backgroundColor(getResources().getColor(R.color.background))
-					.dividerColor(getResources().getColor(R.color.text_color))
+//					.backgroundColor(getResources().getColor(R.color.background))
+//					.dividerColor(getResources().getColor(R.color.text_color))
 					.autoDismiss(true)
 					.build();
 			dialog.show();
@@ -302,8 +302,8 @@ public class BattleActivity extends AppCompatActivity {
 			new MaterialDialog.Builder(this)
 					.title(R.string.battle_dialog_title_win)
 					.content(R.string.battle_dialog_msg)
-					.titleColor(getResources().getColor(R.color.text_color))
-					.contentColor(getResources().getColor(R.color.text_color))
+//					.titleColor(getResources().getColor(R.color.text_color))
+//					.contentColor(getResources().getColor(R.color.text_color))
 					.positiveText(R.string.ok_btn_dialog_battle_continue)
 					.onPositive(new MaterialDialog.SingleButtonCallback() {
 						@Override
@@ -319,14 +319,14 @@ public class BattleActivity extends AppCompatActivity {
 							dialog.dismiss();
 						}
 					})
-					.backgroundColor(getResources().getColor(R.color.background))
+//					.backgroundColor(getResources().getColor(R.color.background))
 					.show();
 		} else {
 			new MaterialDialog.Builder(this)
 					.title(R.string.battle_dialog_title_lose)
 					.content(R.string.battle_dialog_msg_lose)
-					.titleColor(getResources().getColor(R.color.text_color))
-					.contentColor(getResources().getColor(R.color.text_color))
+//					.titleColor(getResources().getColor(R.color.text_color))
+//					.contentColor(getResources().getColor(R.color.text_color))
 					.positiveText(R.string.battle_dialog_lose_run_away)
 					.onPositive(new MaterialDialog.SingleButtonCallback() {
 						@Override
@@ -343,7 +343,7 @@ public class BattleActivity extends AppCompatActivity {
 							dialog.dismiss();
 						}
 					})
-					.backgroundColor(getResources().getColor(R.color.background))
+//					.backgroundColor(getResources().getColor(R.color.background))
 					.show();
 		}
 	}
@@ -394,9 +394,7 @@ public class BattleActivity extends AppCompatActivity {
 
 		MaterialDialog diceDialog = new MaterialDialog.Builder(this)
 				.title(R.string.dice)
-				.titleColor(getResources().getColor(R.color.text_color))
 				.customView(R.layout.dice_dialog, false)
-				.backgroundColor(getResources().getColor(R.color.background))
 				.autoDismiss(true)
 				.positiveText(R.string.dialog_ok_btn)
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -525,8 +523,8 @@ public class BattleActivity extends AppCompatActivity {
 
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_confirm)
-				.titleColor(getResources().getColor(R.color.text_color))
-				.contentColor(getResources().getColor(R.color.text_color))
+//				.titleColor(getResources().getColor(R.color.text_color))
+//				.contentColor(getResources().getColor(R.color.text_color))
 				.content(R.string.message_for_dialog_battle_leave)
 				.positiveText(R.string.ok_btn_dialog_battle_leave)
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -543,7 +541,7 @@ public class BattleActivity extends AppCompatActivity {
 						dialog.dismiss();
 					}
 				})
-				.backgroundColor(getResources().getColor(R.color.background))
+//				.backgroundColor(getResources().getColor(R.color.background))
 				.autoDismiss(true)
 				.show();
 	}

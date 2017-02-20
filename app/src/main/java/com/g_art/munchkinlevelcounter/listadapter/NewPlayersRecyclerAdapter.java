@@ -116,7 +116,10 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 				public void onClick(View v) {
 					activity.onColorDialogOpen(position);
 					new ColorChooserDialog.Builder(activity, R.string.choose_player_color)
+							.allowUserColorInputAlpha(false)
+							.allowUserColorInput(false)
 							.cancelButton(R.string.dialog_cancel_btn)
+							.backButton(R.string.dialog_back_btn)
 							.doneButton(R.string.dialog_ok_btn)
 							.preselect(player.getColor())
 							.dynamicButtonColor(true)
