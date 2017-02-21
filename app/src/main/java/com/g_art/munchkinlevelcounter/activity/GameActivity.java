@@ -3,7 +3,6 @@ package com.g_art.munchkinlevelcounter.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -83,10 +82,6 @@ public class GameActivity extends AppCompatActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		if (getResources().getBoolean(R.bool.portrait_only)) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}
 
 		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		final boolean screenOn = sp.getBoolean(PreferenceScreen.KEY_PREF_SCREEN_ON, false);
