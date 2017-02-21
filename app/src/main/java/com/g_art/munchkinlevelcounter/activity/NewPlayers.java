@@ -25,6 +25,7 @@ import com.g_art.munchkinlevelcounter.util.StoredPlayers;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -39,6 +40,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	private ArrayList<Player> mPlayers;
 	private Unbinder unbinder;
 
+	@BindView(R.id.listNewPlayers)
 	private RecyclerView mRecyclerView;
 	private NewPlayersRecyclerAdapter mAdapter;
 	private ItemTouchHelper mItemTouchHelper;
@@ -53,8 +55,6 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 		Analytics.getInstance().logEvent(AnalyticsActions.Open, "NewPlayers");
 
 		mStored = StoredPlayers.getInstance(PreferenceManager.getDefaultSharedPreferences(getBaseContext()));
-
-		mRecyclerView = (RecyclerView) findViewById(R.id.listNewPlayers);
 
 		mPlayers = initPlayers(savedInstanceState);
 

@@ -47,57 +47,6 @@ public class StartActivity extends AppCompatActivity {
 		showTranslationPopup(popupStatus);
 	}
 
-	private void showTranslationPopup(int popupStatus) {
-		if (popupStatus == SettingsHandler.NEVER_ASK) {
-			return;
-		}
-		new MaterialDialog.Builder(this)
-				.title(R.string.tr_dialog_title)
-				.titleColor(getResources().getColor(R.color.text_color))
-				.content(R.string.tr_dialog_msg)
-				.contentColor(getResources().getColor(R.color.text_color))
-				.positiveText(R.string.tr_dialog_pos)
-				.positiveColor(getResources().getColor(R.color.text_color))
-				.onPositive(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Help, "StartActivity");
-
-						updateStatus(SettingsHandler.NEVER_ASK);
-
-						final Intent email = new Intent(Intent.ACTION_SENDTO);
-						email.setData(Uri.parse("mailto:"));
-						email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
-						email.putExtra(Intent.EXTRA_SUBJECT, "Translation");
-						email.putExtra(Intent.EXTRA_TEXT, "Yes, I want to help you with translation into: ");
-						if (email.resolveActivity(getPackageManager()) != null) {
-							startActivity(email);
-						}
-					}
-				})
-				.neutralText(R.string.tr_dialog_neu)
-				.neutralColor(getResources().getColor(R.color.text_color))
-				.onNeutral(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Not_Now, "StartActivity");
-						updateStatus(SettingsHandler.ASK_LATER);
-						dialog.dismiss();
-					}
-				})
-				.negativeText(R.string.tr_dialog_neg)
-				.negativeColor(getResources().getColor(R.color.text_color))
-				.onNegative(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						Analytics.getInstance().logEvent(AnalyticsActions.Translation_No, "StartActivity");
-						updateStatus(SettingsHandler.NEVER_ASK);
-					}
-				})
-				.backgroundColor(getResources().getColor(R.color.background))
-				.show();
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -149,6 +98,57 @@ public class StartActivity extends AppCompatActivity {
 	@Override
 	protected void attachBaseContext(Context newBase) {
 		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+	}
+
+	private void showTranslationPopup(int popupStatus) {
+		if (popupStatus == SettingsHandler.NEVER_ASK) {
+			return;
+		}
+		new MaterialDialog.Builder(this)
+				.title(R.string.tr_dialog_title)
+				.titleColor(getResources().getColor(R.color.text_color))
+				.content(R.string.tr_dialog_msg)
+				.contentColor(getResources().getColor(R.color.text_color))
+				.positiveText(R.string.tr_dialog_pos)
+				.positiveColor(getResources().getColor(R.color.text_color))
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Help, "StartActivity");
+
+						updateStatus(SettingsHandler.NEVER_ASK);
+
+						final Intent email = new Intent(Intent.ACTION_SENDTO);
+						email.setData(Uri.parse("mailto:"));
+						email.putExtra(Intent.EXTRA_EMAIL, new String[]{"android.dev.g.art@gmail.com"});
+						email.putExtra(Intent.EXTRA_SUBJECT, "Translation");
+						email.putExtra(Intent.EXTRA_TEXT, "Yes, I want to help you with translation into: ");
+						if (email.resolveActivity(getPackageManager()) != null) {
+							startActivity(email);
+						}
+					}
+				})
+				.neutralText(R.string.tr_dialog_neu)
+				.neutralColor(getResources().getColor(R.color.text_color))
+				.onNeutral(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_Not_Now, "StartActivity");
+						updateStatus(SettingsHandler.ASK_LATER);
+						dialog.dismiss();
+					}
+				})
+				.negativeText(R.string.tr_dialog_neg)
+				.negativeColor(getResources().getColor(R.color.text_color))
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						Analytics.getInstance().logEvent(AnalyticsActions.Translation_No, "StartActivity");
+						updateStatus(SettingsHandler.NEVER_ASK);
+					}
+				})
+				.backgroundColor(getResources().getColor(R.color.background))
+				.show();
 	}
 
 	@Override
