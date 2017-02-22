@@ -342,6 +342,8 @@ public class GameActivity extends AppCompatActivity {
 		int dice = Min + (int) (Math.random() * ((Max - Min) + 1));
 		final View v = View.inflate(this, R.layout.dice_dialog, null);
 		final ImageView imageView = (ImageView) v.findViewById(R.id.imgDice);
+		final TextView txtResult = (TextView) v.findViewById(R.id.run_away_result);
+		txtResult.setVisibility(View.GONE);
 
 		switch (dice) {
 			case 1:
@@ -365,7 +367,7 @@ public class GameActivity extends AppCompatActivity {
 		}
 
 		new MaterialDialog.Builder(this)
-				.customView(imageView, false)
+				.customView(v, false)
 				.title(R.string.dice)
 				.autoDismiss(true)
 				.show();
