@@ -105,5 +105,7 @@
     <string name="theme_font_path">Quasimodo_Original.ttf</string>
     <string name="choose_player_color">Choose color</string>
     <string name="dialog_back_btn">Back</string>
+    <string name="single_mode">Single Mode</string>
+    <string name="game_master">Game Master</string>
 
 </resources>
