@@ -36,12 +36,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 public class NewPlayers extends AppCompatActivity implements OnStartDragListener, ColorChooserDialog.ColorCallback {
 	private final static String PLAYER_KEY = "playersList";
+	@BindView(R.id.listNewPlayers)
+	RecyclerView mRecyclerView;
 	private StoredPlayers mStored;
 	private ArrayList<Player> mPlayers;
 	private Unbinder unbinder;
-
-	@BindView(R.id.listNewPlayers)
-	private RecyclerView mRecyclerView;
 	private NewPlayersRecyclerAdapter mAdapter;
 	private ItemTouchHelper mItemTouchHelper;
 	private int mPlayerPosition;

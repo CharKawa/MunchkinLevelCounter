@@ -414,22 +414,22 @@ public class BattleActivity extends AppCompatActivity {
 
 		switch (dice) {
 			case 1:
-				imageView.setImageResource(R.drawable.dice_1);
+				imageView.setImageResource(R.drawable.ic_dice_1);
 				break;
 			case 2:
-				imageView.setImageResource(R.drawable.dice_2);
+				imageView.setImageResource(R.drawable.ic_dice_2);
 				break;
 			case 3:
-				imageView.setImageResource(R.drawable.dice_3);
+				imageView.setImageResource(R.drawable.ic_dice_3);
 				break;
 			case 4:
-				imageView.setImageResource(R.drawable.dice_4);
+				imageView.setImageResource(R.drawable.ic_dice_4);
 				break;
 			case 5:
-				imageView.setImageResource(R.drawable.dice_5);
+				imageView.setImageResource(R.drawable.ic_dice_5);
 				break;
 			case 6:
-				imageView.setImageResource(R.drawable.dice_6);
+				imageView.setImageResource(R.drawable.ic_dice_6);
 				break;
 		}
 		final TextView textView = (TextView) diceDialog.getCustomView().findViewById(R.id.run_away_result);

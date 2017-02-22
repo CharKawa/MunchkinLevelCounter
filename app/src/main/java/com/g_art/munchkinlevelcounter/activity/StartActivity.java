@@ -81,7 +81,7 @@ public class StartActivity extends AppCompatActivity {
 
 	}
 
-	@OnClick(R.id.btnPlayers)
+	@OnClick(R.id.txt_btn_single_mode)
 	public void start() {
 		Intent intent = new Intent(this, NewPlayers.class);
 		startActivity(intent);

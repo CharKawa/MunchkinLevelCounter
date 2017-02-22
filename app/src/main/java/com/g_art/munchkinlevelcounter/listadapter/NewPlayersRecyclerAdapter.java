@@ -91,9 +91,9 @@ public class NewPlayersRecyclerAdapter extends RecyclerView.Adapter<NewPlayersRe
 			});
 
 			if (player.getSex() == Sex.MAN) {
-				holder.pSex.setImageResource(R.drawable.man);
+				holder.pSex.setImageResource(R.drawable.ic_gender_man);
 			} else {
-				holder.pSex.setImageResource(R.drawable.woman);
+				holder.pSex.setImageResource(R.drawable.ic_gender_woman);
 			}
 
 			final ShapeDrawable icon = new ShapeDrawable(new OvalShape());

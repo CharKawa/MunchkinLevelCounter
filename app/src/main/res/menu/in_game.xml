@@ -3,7 +3,7 @@
     <item
         android:id="@+id/action_dice"
         android:background="@null"
-        android:icon="@drawable/dice"
+        android:icon="@drawable/ic_dice"
         android:title="@string/dice"
         app:showAsAction="ifRoom|collapseActionView"/>
     <item

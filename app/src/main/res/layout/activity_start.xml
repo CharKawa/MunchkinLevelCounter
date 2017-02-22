@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/empty_view"
         android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/ic_stars_24dp"
         android:gravity="center"
         android:text="@string/single_mode"
         android:textSize="36sp"/>
@@ -21,7 +20,6 @@
         android:layout_alignLeft="@id/txt_btn_single_mode"
         android:layout_below="@id/empty_view"
         android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/ic_stars_24dp"
         android:gravity="center"
         android:text="@string/game_master"
         android:textSize="36sp"/>

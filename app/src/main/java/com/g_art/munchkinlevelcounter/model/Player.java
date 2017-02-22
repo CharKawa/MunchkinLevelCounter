@@ -109,6 +109,7 @@ public class Player implements Parcelable, Comparable {
 	public Player cloneWithoutStats() {
 		Player newPlayer = new Player(this.name);
 		newPlayer.setSex(this.getSex());
+		newPlayer.setColor(this.getColor());
 		return newPlayer;
 	}
 

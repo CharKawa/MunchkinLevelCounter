@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:src="http://schemas.android.com/tools"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null">
+                android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imgDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/dice"
-        android:src="@drawable/dice_1"/>
+        src:Compat="@drawable/ic_dice_1"/>
 
     <TextView
         android:id="@+id/run_away_result"
@@ -18,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imgDice"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Result"
         android:visibility="gone"/>

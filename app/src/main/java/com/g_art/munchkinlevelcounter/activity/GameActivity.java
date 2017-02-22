@@ -279,9 +279,9 @@ public class GameActivity extends AppCompatActivity {
 
 	private void updatePlayerSex() {
 		if (Sex.MAN == mSelectedPlayer.getSex()) {
-			btnSexType.setImageResource(R.drawable.man);
+			btnSexType.setImageResource(R.drawable.ic_gender_man);
 		} else {
-			btnSexType.setImageResource(R.drawable.woman);
+			btnSexType.setImageResource(R.drawable.ic_gender_woman);
 		}
 	}
 
@@ -345,27 +345,28 @@ public class GameActivity extends AppCompatActivity {
 
 		switch (dice) {
 			case 1:
-				imageView.setImageResource(R.drawable.dice_1);
+				imageView.setImageResource(R.drawable.ic_dice_1);
 				break;
 			case 2:
-				imageView.setImageResource(R.drawable.dice_2);
+				imageView.setImageResource(R.drawable.ic_dice_2);
 				break;
 			case 3:
-				imageView.setImageResource(R.drawable.dice_3);
+				imageView.setImageResource(R.drawable.ic_dice_3);
 				break;
 			case 4:
-				imageView.setImageResource(R.drawable.dice_4);
+				imageView.setImageResource(R.drawable.ic_dice_4);
 				break;
 			case 5:
-				imageView.setImageResource(R.drawable.dice_5);
+				imageView.setImageResource(R.drawable.ic_dice_5);
 				break;
 			case 6:
-				imageView.setImageResource(R.drawable.dice_6);
+				imageView.setImageResource(R.drawable.ic_dice_6);
 				break;
 		}
 
 		new MaterialDialog.Builder(this)
 				.customView(imageView, false)
+				.title(R.string.dice)
 				.autoDismiss(true)
 				.show();
 	}
@@ -447,11 +448,8 @@ public class GameActivity extends AppCompatActivity {
 		new MaterialDialog.Builder(this)
 				.title(R.string.title_dialog_finish)
 				.content(R.string.msg_finish_game)
-//				.titleColor(getResources().getColor(R.color.text_color))
-//				.contentColor(getResources().getColor(R.color.text_color))
 				.positiveText(R.string.ok_btn_for_dialog_finish)
 				.negativeText(R.string.cancel_btn_for_dialog_finish)
-//				.backgroundColor(getResources().getColor(R.color.background))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
