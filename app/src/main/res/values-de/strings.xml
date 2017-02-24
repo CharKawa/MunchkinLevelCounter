@@ -107,5 +107,7 @@
     <string name="pref_application_settings_title">Application Settings</string>
     <string name="single_mode">Single Mode</string>
     <string name="game_master">Game Master</string>
+    <string name="player_name">Player</string>
+    <string name="gender">Gender</string>
 
 </resources>

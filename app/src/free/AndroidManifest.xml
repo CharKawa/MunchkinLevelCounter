@@ -35,8 +35,18 @@
                 android:value="com.g_art.munchkinlevelcounter.activity.StartActivity"/>
         </activity>
         <activity
+            android:name=".activity.SingleModePrepareActivity"
+            android:label="@string/single_mode"
+            android:parentActivityName=".activity.StartActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.g_art.munchkinlevelcounter.activity.StartActivity"/>
+        </activity>
+        <activity
             android:name=".activity.NewPlayers"
-            android:label="@string/title_activity_newPlayers"
+            android:label="@string/game_master"
             android:parentActivityName=".activity.StartActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->

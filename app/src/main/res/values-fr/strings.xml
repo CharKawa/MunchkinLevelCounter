@@ -135,4 +135,6 @@
     <string name="theme_font_path">Quasimodo_Original.ttf</string>
     <string name="single_mode">Single Mode</string>
     <string name="game_master">Game Master</string>
+    <string name="player_name">Player</string>
+    <string name="gender">Gender</string>
 </resources>

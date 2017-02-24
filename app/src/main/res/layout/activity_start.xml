@@ -1,34 +1,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/txt_btn_single_mode"
+    <ImageView
+        android:id="@+id/imb_single_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/empty_view"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        app:srcCompat="@drawable/ic_sword_on_shield"/>
+
+    <TextView
+        android:id="@+id/btn_single_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/imb_single_mode"
+        android:layout_below="@id/imb_single_mode"
+        android:layout_marginTop="-10dp"
         android:text="@string/single_mode"
-        android:textSize="36sp"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24sp"
+        />
 
-    <TextView
-        android:id="@+id/txt_btn_game_master_mode"
+    <ImageView
+        android:id="@+id/imb_game_master_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/txt_btn_single_mode"
-        android:layout_below="@id/empty_view"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="@string/game_master"
-        android:textSize="36sp"/>
+        android:layout_above="@+id/btn_game_master_mode"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        app:srcCompat="@drawable/ic_main_launcher"/>
 
-    <View
-        android:id="@+id/empty_view"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_centerInParent="true"
+    <TextView
+        android:id="@+id/btn_game_master_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@id/imb_game_master_mode"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="-10dp"
+        android:gravity="right"
+        android:text="@string/game_master"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24sp"
         />
 
 </RelativeLayout>
