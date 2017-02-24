@@ -108,6 +108,7 @@
     <string name="game_master">Game Master</string>
     <string name="player_name">Player</string>
     <string name="gender">Gender</string>
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
 
 
 </resources>

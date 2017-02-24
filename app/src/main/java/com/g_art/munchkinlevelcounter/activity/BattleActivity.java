@@ -112,7 +112,7 @@ public class BattleActivity extends AppCompatActivity {
 			final Intent intent = getIntent();
 			final Bundle bundle = intent.getExtras();
 			int selectedPlayerId = bundle.getInt(GameActivity.PLAYER, 0);
-			players = bundle.getParcelableArrayList(GameActivity.PLAYERS_KEY);
+			players = bundle.getParcelableArrayList(GameActivity.PLAYERS_LIST_KEY);
 			if (players == null || players.isEmpty()) {
 				setResult(RESULT_CANCELED);
 				finish();

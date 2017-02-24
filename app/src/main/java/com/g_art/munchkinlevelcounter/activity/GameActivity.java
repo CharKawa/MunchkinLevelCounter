@@ -50,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
 
 	public static final String MAX_LVL = "max_lvl";
 	public static final String PLAYER = "player";
-	public static final String PLAYERS_KEY = "playersList";
+	public static final String PLAYERS_LIST_KEY = "playersList";
 	public static final int BATTLE_RESULT_OK = 1;
 	public static final int BATTLE_RESULT_CANCEL = 0;
 	public static final int BATTLE_RESULT_FAIL = 4;
@@ -93,11 +93,11 @@ public class GameActivity extends AppCompatActivity {
 		unbinder = ButterKnife.bind(this);
 
 		if (savedInstanceState != null) {
-			playersList = savedInstanceState.getParcelableArrayList(PLAYERS_KEY);
+			playersList = savedInstanceState.getParcelableArrayList(PLAYERS_LIST_KEY);
 			mSelectedPlayerPosition = savedInstanceState.getInt(SELECTED_KEY);
 		} else {
 			final Intent intent = getIntent();
-			playersList = intent.getParcelableArrayListExtra(PLAYERS_KEY);
+			playersList = intent.getParcelableArrayListExtra(PLAYERS_LIST_KEY);
 			/*
 			Saving first players stats
          	*/
@@ -140,7 +140,7 @@ public class GameActivity extends AppCompatActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelableArrayList(PLAYERS_KEY, playersList);
+		outState.putParcelableArrayList(PLAYERS_LIST_KEY, playersList);
 		outState.putInt(SELECTED_KEY, mSelectedPlayerPosition);
 	}
 
@@ -377,7 +377,7 @@ public class GameActivity extends AppCompatActivity {
 		final Intent intent = new Intent(this, BattleActivity.class);
 		final Bundle bundle = new Bundle();
 		bundle.putInt(PLAYER, mSelectedPlayerPosition);
-		bundle.putParcelableArrayList(PLAYERS_KEY, playersList);
+		bundle.putParcelableArrayList(PLAYERS_LIST_KEY, playersList);
 		bundle.putInt(MAX_LVL, maxLvl());
 		intent.putExtras(bundle);
 
@@ -487,7 +487,7 @@ public class GameActivity extends AppCompatActivity {
 	private void openStatsActivity() {
 		final Intent intent = new Intent(this, Stats.class);
 		final Bundle bundle = new Bundle();
-		bundle.putParcelableArrayList(PLAYERS_KEY, getPlayersList());
+		bundle.putParcelableArrayList(PLAYERS_LIST_KEY, getPlayersList());
 		intent.putExtra(BUNDLE_STATS_KEY, bundle);
 		startActivity(intent);
 	}

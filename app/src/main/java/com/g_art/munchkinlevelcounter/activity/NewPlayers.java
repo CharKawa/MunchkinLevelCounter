@@ -35,7 +35,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by G_Art on 16/7/2014.
  */
 public class NewPlayers extends AppCompatActivity implements OnStartDragListener, ColorChooserDialog.ColorCallback {
-	private final static String PLAYER_KEY = "playersList";
 	@BindView(R.id.listNewPlayers)
 	RecyclerView mRecyclerView;
 	private StoredPlayers mStored;
@@ -68,7 +67,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 
 	private ArrayList<Player> initPlayers(Bundle savedInstanceState) {
 		final ArrayList<Player> playerList;
-		if (savedInstanceState == null || !savedInstanceState.containsKey(PLAYER_KEY)) {
+		if (savedInstanceState == null || !savedInstanceState.containsKey(GameActivity.PLAYERS_LIST_KEY)) {
 			if (mStored.isPlayersStored()) {
 				playerList = getPlayersForNewGame();
 			} else {
@@ -77,7 +76,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 				playerList.add(new Player(getString(R.string.player_2)));
 			}
 		} else {
-			playerList = savedInstanceState.getParcelableArrayList(PLAYER_KEY);
+			playerList = savedInstanceState.getParcelableArrayList(GameActivity.PLAYERS_LIST_KEY);
 		}
 
 		return playerList;
@@ -110,7 +109,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelableArrayList(PLAYER_KEY, mPlayers);
+		outState.putParcelableArrayList(GameActivity.PLAYERS_LIST_KEY, mPlayers);
 	}
 
 	@OnClick({
@@ -133,7 +132,7 @@ public class NewPlayers extends AppCompatActivity implements OnStartDragListener
 					Toast.makeText(this, getString(R.string.more_players), Toast.LENGTH_SHORT).show();
 				} else {
 					Intent intent = new Intent(this, GameActivity.class);
-					intent.putParcelableArrayListExtra(PLAYER_KEY, mPlayers);
+					intent.putParcelableArrayListExtra(GameActivity.PLAYERS_LIST_KEY, mPlayers);
 
 					Analytics.getInstance().logEvent(AnalyticsActions.Game_Starting, "NewPlayers");
 					startActivity(intent);

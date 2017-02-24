@@ -1,80 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
 
     <LinearLayout
+        android:id="@+id/name_placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <android.support.design.widget.TextInputLayout
+            <EditText
+                android:id="@+id/single_player_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/single_player_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusableInTouchMode="true"
-                    android:hint="@string/enter_player_name"
-                    android:lines="1"
-                    android:textAppearance="?android:attr/textAppearanceLarge"/>
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/gender"
+                android:focusableInTouchMode="true"
+                android:hint="@string/enter_player_name"
+                android:lines="1"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <ImageView
-                android:id="@+id/imb_single_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
-                app:srcCompat="@drawable/ic_gender_man"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/choose_player_color"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <View
-                android:id="@+id/single_player_color"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/player_color_circle"
-                />
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
-</ScrollView>
+
+    <LinearLayout
+        android:id="@+id/gender_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_placeholder"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/gender"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <ImageView
+            android:id="@+id/imb_single_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            app:srcCompat="@drawable/ic_gender_man"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/color_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gender_placeholder"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/choose_player_color"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <View
+            android:id="@+id/single_player_color"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/player_color_circle"
+            />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_start_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:elevation="0dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="0dp"
+        app:srcCompat="@drawable/ic_check_24dp"
+        />
+
+</RelativeLayout>
