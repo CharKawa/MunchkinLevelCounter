@@ -11,6 +11,8 @@
         android:id="@+id/name_placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
@@ -21,9 +23,9 @@
                 android:id="@+id/single_player_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
                 android:hint="@string/enter_player_name"
                 android:lines="1"
+                android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>

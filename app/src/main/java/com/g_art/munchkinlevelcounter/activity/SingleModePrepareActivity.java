@@ -57,7 +57,7 @@ public class SingleModePrepareActivity extends AppCompatActivity implements Colo
 			playerForTheGame = savedInstanceState.getParcelable(PLAYER_KEY);
 		}
 		if (playerForTheGame == null) {
-			playerForTheGame = new Player(getString(R.string.player_name));
+			playerForTheGame = new Player("");
 		}
 
 		mEdPlayerName.setFocusableInTouchMode(true);

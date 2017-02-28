@@ -21,7 +21,7 @@ android {
 		applicationId 'com.g_art.munchkinlevelcounter'
 		minSdkVersion 15
 		targetSdkVersion 25
-		versionCode 24
+		versionCode 27
 		versionName '1.1.1'
 		vectorDrawables.useSupportLibrary = true
 

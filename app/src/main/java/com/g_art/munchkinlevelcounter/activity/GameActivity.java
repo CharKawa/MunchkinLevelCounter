@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -72,6 +73,8 @@ public class GameActivity extends AppCompatActivity {
 	TextView txtCurrentPlayerPower;
 	@BindView(R.id.player_sex)
 	ImageButton btnSexType;
+	@BindView(R.id.btnNextPlayer)
+	Button btnNextPlayer;
 
 	private Unbinder unbinder;
 	private InGamePlayersAdapter inGameAdapter;
@@ -274,6 +277,12 @@ public class GameActivity extends AppCompatActivity {
 			txtCurrentPlayerPower.setText(String.valueOf(mSelectedPlayer.getPower()));
 			updatePlayerSex();
 			updatePlayer(mSelectedPlayerPosition);
+
+			if (playersList.size() == 1) {
+				btnNextPlayer.setVisibility(View.GONE);
+			} else {
+				btnNextPlayer.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
@@ -284,7 +293,6 @@ public class GameActivity extends AppCompatActivity {
 			btnSexType.setImageResource(R.drawable.ic_gender_woman);
 		}
 	}
-
 
 	private void finishClick() {
 		savePlayersStats();
