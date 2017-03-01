@@ -82,7 +82,7 @@ public class StartActivity extends AppCompatActivity {
 			R.id.imb_single_mode
 	})
 	public void startSingleMode() {
-		Intent intent = new Intent(this, SingleModePrepareActivity.class);
+		Intent intent = new Intent(this, PlayerDetailsScreen.class);
 		startActivity(intent);
 	}
 

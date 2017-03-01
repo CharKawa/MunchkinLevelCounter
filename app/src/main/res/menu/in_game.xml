@@ -2,27 +2,31 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_dice"
-        android:background="@null"
         android:icon="@drawable/ic_dice"
         android:title="@string/dice"
         app:showAsAction="ifRoom|collapseActionView"/>
     <item
         android:id="@+id/action_start_battle"
-        android:background="@null"
         android:icon="@drawable/ic_sword_action"
+        android:orderInCategory="100"
         android:title="@string/action_start_battle"
         app:showAsAction="ifRoom|collapseActionView"/>
     <item
+        android:id="@+id/action_add_player"
+        android:icon="@drawable/ic_person_add_24dp"
+        android:orderInCategory="101"
+        android:title="@string/add_player"
+        app:showAsAction="never|collapseActionView"/>
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings_24dp"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         android:title="@string/action_settings"
         app:showAsAction="never|collapseActionView"/>
     <item
         android:id="@+id/action_finish"
-        android:background="@null"
         android:icon="@drawable/end"
-        android:orderInCategory="100"
+        android:orderInCategory="103"
         android:title="@string/action_finish"
         app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

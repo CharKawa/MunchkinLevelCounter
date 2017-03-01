@@ -57,10 +57,13 @@ public class GameActivity extends AppCompatActivity {
 	public static final int BATTLE_RESULT_FAIL = 4;
 	public static final int RUN_AWAY_RESULT_OK = 2;
 	public static final int RUN_AWAY_RESULT_FAIL = 3;
+	public static final int REQUEST_ADD_PLAYER = 11;
+	public static final int ADD_PLAYER_RESULT_OK = 1;
+	public static final int ADD_PLAYER_RESULT_CANCEL = 0;
+	public static final String REQUEST_CODE = "requestCode";
 	private static final String BUNDLE_STATS_KEY = "bundleStats";
-	private static final int BATTLE_REQUEST = 10;
+	private static final int REQUEST_BATTLE = 10;
 	private static final String SELECTED_KEY = "selectedPlayer";
-
 	@BindView(R.id.rv_in_game_players)
 	RecyclerView mRecyclerView;
 	@BindView(R.id.currentPlayer)
@@ -222,9 +225,18 @@ public class GameActivity extends AppCompatActivity {
 			case R.id.action_settings:
 				showMaxLvLDialog();
 				return true;
+			case R.id.action_add_player:
+				addPlayerToGame();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void addPlayerToGame() {
+		final Intent intent = new Intent(this, PlayerDetailsScreen.class);
+		intent.putExtra(REQUEST_CODE, REQUEST_ADD_PLAYER);
+		startActivityForResult(intent, REQUEST_ADD_PLAYER);
 	}
 
 	@Override
@@ -396,14 +408,46 @@ public class GameActivity extends AppCompatActivity {
 			int x = (int) view.getX();
 			int y = (int) view.getY();
 			final ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeScaleUpAnimation(view, x, y, 0, 0);
-			startActivityForResult(intent, BATTLE_REQUEST, optionsCompat.toBundle());
+			startActivityForResult(intent, REQUEST_BATTLE, optionsCompat.toBundle());
 		} else {
-			startActivityForResult(intent, BATTLE_REQUEST);
+			startActivityForResult(intent, REQUEST_BATTLE);
 		}
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (REQUEST_BATTLE == requestCode) {
+			handleBattleResult(resultCode);
+		} else if (REQUEST_ADD_PLAYER == requestCode) {
+			handleNewPlayerResult(resultCode, data);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	private void handleNewPlayerResult(int requestCode, Intent data) {
+		switch (requestCode) {
+			case ADD_PLAYER_RESULT_OK:
+				if (data != null) {
+					final Player addedPlayer = data.getParcelableExtra(PLAYER);
+					if (addedPlayer != null) {
+						addPlayerToGame(addedPlayer);
+					}
+				}
+				break;
+			case ADD_PLAYER_RESULT_CANCEL:
+				//do nothing
+				break;
+			default:
+				break;
+		}
+	}
+
+	private void addPlayerToGame(Player addedPlayer) {
+		playersList.add(addedPlayer);
+		inGameAdapter.notifyItemInserted(playersList.size() - 1);
+	}
+
+	private void handleBattleResult(int resultCode) {
 		switch (resultCode) {
 			case BATTLE_RESULT_CANCEL:
 				break;
@@ -416,7 +460,6 @@ public class GameActivity extends AppCompatActivity {
 			case RUN_AWAY_RESULT_OK:
 				break;
 		}
-		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	private void showContinueDialog() {

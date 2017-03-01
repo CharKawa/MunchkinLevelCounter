@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.view.View;
@@ -36,8 +37,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by agulia on 2/23/17.
  */
 
-public class SingleModePrepareActivity extends AppCompatActivity implements ColorChooserDialog.ColorCallback {
+public class PlayerDetailsScreen extends AppCompatActivity implements ColorChooserDialog.ColorCallback {
 	public static final String PLAYER_KEY = "player";
+	private static final String SINGLE_MODE_KEY = "singleMode";
 	@BindView(R.id.single_player_name)
 	EditText mEdPlayerName;
 	@BindView(R.id.single_player_color)
@@ -47,15 +49,32 @@ public class SingleModePrepareActivity extends AppCompatActivity implements Colo
 	private Unbinder unbinder;
 	private Player playerForTheGame;
 
+	private boolean singleMode = true;
+
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_screen_activity);
 		unbinder = ButterKnife.bind(this);
 
+
 		if (savedInstanceState != null && savedInstanceState.containsKey(PLAYER_KEY)) {
 			playerForTheGame = savedInstanceState.getParcelable(PLAYER_KEY);
+			singleMode = savedInstanceState.getBoolean(SINGLE_MODE_KEY);
+		} else {
+			final Intent requestIntent = getIntent();
+			if (requestIntent == null) {
+				singleMode = true;
+			} else {
+				if (requestIntent.getIntExtra(GameActivity.REQUEST_CODE, 0) == GameActivity.REQUEST_ADD_PLAYER) {
+					singleMode = false;
+				} else {
+					singleMode = true;
+				}
+			}
+
 		}
+
 		if (playerForTheGame == null) {
 			playerForTheGame = new Player("");
 		}
@@ -64,6 +83,15 @@ public class SingleModePrepareActivity extends AppCompatActivity implements Colo
 		playerColor.setFocusable(true);
 		bindDataToViews();
 
+		updateTitle();
+
+	}
+
+	private void updateTitle() {
+		final ActionBar bar = getSupportActionBar();
+		if (bar != null && !singleMode) {
+			bar.setTitle(R.string.add_player);
+		}
 	}
 
 	private void bindDataToViews() {
@@ -124,8 +152,19 @@ public class SingleModePrepareActivity extends AppCompatActivity implements Colo
 	@OnClick(R.id.fab_start_game)
 	public void startTheGame() {
 		if (collectAllPlayerInfo()) {
-			startTheGameWithPlayer();
+			if (singleMode) {
+				startTheGameWithPlayer();
+			} else {
+				addPlayerToGame();
+			}
 		}
+	}
+
+	private void addPlayerToGame() {
+		final Intent playerIntent = new Intent();
+		playerIntent.putExtra(GameActivity.PLAYER, playerForTheGame);
+		setResult(GameActivity.ADD_PLAYER_RESULT_OK, playerIntent);
+		finish();
 	}
 
 	private boolean collectAllPlayerInfo() {
@@ -152,7 +191,7 @@ public class SingleModePrepareActivity extends AppCompatActivity implements Colo
 		players.add(playerForTheGame);
 		intent.putParcelableArrayListExtra(GameActivity.PLAYERS_LIST_KEY, players);
 
-		Analytics.getInstance().logEvent(AnalyticsActions.Game_Starting, SingleModePrepareActivity.class.toString());
+		Analytics.getInstance().logEvent(AnalyticsActions.Game_Starting, PlayerDetailsScreen.class.toString());
 		startActivity(intent);
 	}
 

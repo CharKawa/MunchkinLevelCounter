@@ -35,7 +35,7 @@
                 android:value="com.g_art.munchkinlevelcounter.activity.StartActivity"/>
         </activity>
         <activity
-            android:name=".activity.SingleModePrepareActivity"
+            android:name=".activity.PlayerDetailsScreen"
             android:label="@string/single_mode"
             android:parentActivityName=".activity.StartActivity">
 
