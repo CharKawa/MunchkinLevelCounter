@@ -445,6 +445,7 @@ public class GameActivity extends AppCompatActivity {
 	private void addPlayerToGame(Player addedPlayer) {
 		playersList.add(addedPlayer);
 		inGameAdapter.notifyItemInserted(playersList.size() - 1);
+		updateSelectedPlayer();
 	}
 
 	private void handleBattleResult(int resultCode) {
