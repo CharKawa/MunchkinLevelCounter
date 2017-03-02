@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -210,6 +211,23 @@ public class PlayerDetailsScreen extends AppCompatActivity implements ColorChoos
 	@Override
 	public void onColorChooserDismissed(@NonNull ColorChooserDialog dialog) {
 		dialog.dismiss();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (!singleMode) {
+			if (item.getItemId() == android.R.id.home) {
+				onBackPressed();
+				return true;
+			}
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onNavigateUp() {
+		return super.onNavigateUp();
 	}
 
 	@Override
