@@ -87,10 +87,10 @@ public abstract class StatsFragment extends Fragment {
 			desc.setTextSize(15f);
 			switch (statsType) {
 				case StatsHandler.GEAR_STATS:
-					desc.setText(getResources().getString(R.string.gear_tab));
+					desc.setText(getResources().getString(R.string.gear));
 					break;
 				case StatsHandler.POWER_STATS:
-					desc.setText(getResources().getString(R.string.power_tab));
+					desc.setText(getResources().getString(R.string.total_power));
 					break;
 				default:
 					break;

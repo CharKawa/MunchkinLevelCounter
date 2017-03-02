@@ -95,13 +95,13 @@ public class Stats extends AppCompatActivity implements ActionBar.TabListener {
 
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		lvlTab = actionBar.newTab().setText(getResources().getText(R.string.lvl_tab));
+		lvlTab = actionBar.newTab().setText(getResources().getText(R.string.level));
 		lvlTab.setTabListener(this);
 
-		gearTab = actionBar.newTab().setText(getResources().getText(R.string.gear_tab));
+		gearTab = actionBar.newTab().setText(getResources().getText(R.string.gear));
 		gearTab.setTabListener(this);
 
-		powerTab = actionBar.newTab().setText(getResources().getText(R.string.power_tab));
+		powerTab = actionBar.newTab().setText(getResources().getText(R.string.total_power));
 		powerTab.setTabListener(this);
 
 		actionBar.addTab(lvlTab);
