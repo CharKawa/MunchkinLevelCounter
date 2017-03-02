@@ -85,11 +85,6 @@
     <string name="title_dialog_choose_helper_cancel">Cancellare</string>
     <string name="title_dialog_choose_helper_ok">Scegliere</string>
     <string name="title_dialog_choose_helper_remove">Rimuovere</string>
-    <string name="tr_dialog_title">Help Us.</string>
-    <string name="tr_dialog_msg">You can help us with translation into your language! Please, mail us: android.dev.g.art@gmail.com</string>
-    <string name="tr_dialog_pos">Sure</string>
-    <string name="tr_dialog_neg">No</string>
-    <string name="tr_dialog_neu">Not Now</string>
     <string name="stats_screen_save">Save Stats to file</string>
     <string name="save_stats_file_name">Level_Counter_%1d</string>
     <string name="save_stats_result">Statistiche sono state salvate alla gallery</string>
@@ -105,8 +100,8 @@
     <string name="theme_font_path">Quasimodo_Original.ttf</string>
     <string name="choose_player_color">Choose color</string>
     <string name="dialog_back_btn">Back</string>
-    <string name="single_mode">Single Mode</string>
-    <string name="game_master">Game Master</string>
+    <string name="single_mode">Lone Munchkin Mode</string>
+    <string name="game_master">Game Master Mode</string>
     <string name="player_name">Player</string>
     <string name="gender">Gender</string>
     <string name="name_cannot_be_empty">Name cannot be empty</string>

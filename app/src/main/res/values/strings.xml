@@ -85,11 +85,6 @@
     <string name="battle_dialog_msg_run">Run carefully—you can die.</string>
     <string name="battle_dialog_run_confirm">Run!</string>
     <string name="battle_dialog_run_cancel">Stay and fight!</string>
-    <string name="tr_dialog_title">Help Us.</string>
-    <string name="tr_dialog_msg">You can help us with translations in your language! Please email us if you\'re interested: android.dev.g.art@gmail.com</string>
-    <string name="tr_dialog_pos">Sure</string>
-    <string name="tr_dialog_neg">No</string>
-    <string name="tr_dialog_neu">Not Now</string>
     <string name="helper_power_value" translatable="false">+%1$d</string>
     <string name="stats_screen_save">Save stats to file</string>
     <string name="save_stats_file_name">Level_Counter_%1d</string>
@@ -107,7 +102,7 @@
     <string name="theme_font_path">Quasimodo_Original.ttf</string>
     <string name="choose_player_color">Choose color</string>
     <string name="dialog_back_btn">Back</string>
-    <string name="single_mode">Lone Wolf Mode</string>
+    <string name="single_mode">Lone Munchkin Mode</string>
     <string name="game_master">Game Master Mode</string>
     <string name="player_name">Player</string>
     <string name="gender">Gender</string>
