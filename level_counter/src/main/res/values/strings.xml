@@ -32,9 +32,6 @@
     <string name="cancel_btn_for_dialog_confirm">Exit</string>
     <string name="ok_btn_for_dialog_cont">Continue</string>
     <string name="cancel_btn_for_dialog_cont">Quit</string>
-    <string name="lvl_tab">Level</string>
-    <string name="gear_tab">Gear</string>
-    <string name="power_tab">Power</string>
     <string name="winner">Winner</string>
     <string name="loser">Loser</string>
     <string name="developed">Developed by:</string>

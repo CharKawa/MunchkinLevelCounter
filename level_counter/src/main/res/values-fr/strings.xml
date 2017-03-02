@@ -25,9 +25,6 @@
     <string name="cancel_btn_for_dialog_confirm">Sortir</string>
     <string name="ok_btn_for_dialog_cont">Continuer</string>
     <string name="cancel_btn_for_dialog_cont">Quitter</string>
-    <string name="lvl_tab">Niveau</string>
-    <string name="gear_tab">Équipement</string>
-    <string name="power_tab">Force</string>
     <string name="winner">Vainqueur</string>
     <string name="loser">Perdant</string>
     <string name="developed">Développé par:</string>

@@ -82,7 +82,7 @@ public abstract class StatsFragment extends Fragment {
 			mChart.setBorderColor(getResources().getColor(R.color.text_color));
 
 			Description desc = new Description();
-			desc.setText(getResources().getString(R.string.lvl_tab));
+			desc.setText(getResources().getString(R.string.level));
 			desc.setTextColor(getResources().getColor(R.color.text_color));
 			desc.setTextSize(15f);
 			switch (statsType) {

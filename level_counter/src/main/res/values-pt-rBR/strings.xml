@@ -25,9 +25,6 @@
     <string name="cancel_btn_for_dialog_confirm">Sair</string>
     <string name="ok_btn_for_dialog_cont">Continuar</string>
     <string name="cancel_btn_for_dialog_cont">Sair</string>
-    <string name="lvl_tab">Nível</string>
-    <string name="gear_tab">Armas</string>
-    <string name="power_tab">Poder</string>
     <string name="winner">Vencedor</string>
     <string name="loser">Perdedor</string>
     <string name="developed">Desenvolvido por:</string>

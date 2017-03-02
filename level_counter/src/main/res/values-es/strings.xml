@@ -22,8 +22,6 @@
     <string name="message_for_dialog_cont">¡Eres ganador! ¿Vas a continuar o terminar la partida?</string>
     <string name="message_for_dialog_confirm">Vas a perder su progreso!</string>
     <string name="ok_btn_for_dialog_cont">Continuar</string>
-    <string name="lvl_tab">NIVEL</string>
-    <string name="gear_tab">OBJETOS</string>
     <string name="winner">Ganador.</string>
     <string name="loser">Perdedor.</string>
     <string name="developed">Developed by:</string>
@@ -50,7 +48,6 @@
     <string name="cancel_btn_for_dialog_cont">Salida</string>
     <string name="contact">¿Tienes alguna pregunta? Siempre puedes informarme:</string>
     <string name="ok_btn_for_dialog_confirm">Quedarse</string>
-    <string name="power_tab">PODER</string>
     <string name="title_activity_newPlayers">Los jugadores para el juego</string>
     <string name="btnNextPlayer">De Jugador</string>
     <string name="action_finish">Finalizar</string>

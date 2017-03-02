@@ -25,9 +25,6 @@
     <string name="cancel_btn_for_dialog_confirm">Вийти</string>
     <string name="ok_btn_for_dialog_cont">Продовжити</string>
     <string name="cancel_btn_for_dialog_cont">Закінчити</string>
-    <string name="lvl_tab">Рівень</string>
-    <string name="gear_tab">Манатки</string>
-    <string name="power_tab">Сила</string>
     <string name="winner">Переможець.</string>
     <string name="loser">Лузер.</string>
     <string name="developed">Developed by:</string>

@@ -30,6 +30,9 @@
     <screenName name="com.g_art.munchkinlevelcounter.activity.BattleActivity">
         LevelCounter Battle
     </screenName>
+    <screenName name="com.g_art.munchkinlevelcounter.activity.PlayerDetailsScreen">
+        LevelCounter Player Details
+    </screenName>
 
     <!--  The property id associated with this analytics tracker -->
     <string name="ga_trackingId">UA-72556928-2</string>

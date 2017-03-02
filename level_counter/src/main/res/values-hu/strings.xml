@@ -24,9 +24,6 @@
     <string name="cancel_btn_for_dialog_confirm">Kilép</string>
     <string name="ok_btn_for_dialog_cont">Folytat</string>
     <string name="cancel_btn_for_dialog_cont">Kilép</string>
-    <string name="lvl_tab">Szint</string>
-    <string name="gear_tab">Ruha</string>
-    <string name="power_tab">Erő</string>
     <string name="winner">Győztes</string>
     <string name="loser">Vesztes</string>
     <string name="developed">Developed by:</string>
