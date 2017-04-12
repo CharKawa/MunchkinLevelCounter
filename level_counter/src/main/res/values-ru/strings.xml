@@ -96,7 +96,7 @@
     <string name="theme_font_path">Quasimodo_Cyrillic.ttf</string>
     <string name="choose_player_color">Выберите цвет</string>
     <string name="dialog_back_btn">Назад</string>
-    <string name="single_mode">Манчкин одиночка</string>
+    <string name="single_mode">Волк одиночка</string>
     <string name="game_master">Мастер игры</string>
     <string name="player_name">Игрок</string>
     <string name="gender">Пол</string>

@@ -36,7 +36,7 @@
     <string name="loser">Loser</string>
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
-    <string name="about_the_app">Level counter for the popular card game Munchkin. With statistics!</string>
+    <string name="about_the_app">Level counter for the card games. With statistics!</string>
     <string name="rate">If you like the app, please rate it! </string>
     <string name="btn_rate">Rate</string>
     <string name="thanks">Also, you can buy me a beer: </string>
@@ -99,7 +99,7 @@
     <string name="theme_font_path">Quasimodo_Original.ttf</string>
     <string name="choose_player_color">Choose color</string>
     <string name="dialog_back_btn">Back</string>
-    <string name="single_mode">Lone Munchkin Mode</string>
+    <string name="single_mode">Lone Wolf Mode</string>
     <string name="game_master">Game Master Mode</string>
     <string name="player_name">Player</string>
     <string name="gender">Gender</string>

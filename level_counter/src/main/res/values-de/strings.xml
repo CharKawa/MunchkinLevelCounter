@@ -97,7 +97,7 @@
     <string name="choose_player_color">Choose color</string>
     <string name="dialog_back_btn">Back</string>
     <string name="pref_application_settings_title">Application Settings</string>
-    <string name="single_mode">Lone Munchkin Mode</string>
+    <string name="single_mode">Lone Wolf Mode</string>
     <string name="game_master">Game Master Mode</string>
     <string name="player_name">Player</string>
     <string name="gender">Gender</string>

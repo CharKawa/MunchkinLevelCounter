@@ -29,7 +29,7 @@
     <string name="loser">Лузер.</string>
     <string name="developed">Developed by:</string>
     <string name="AG">Artem Gulia</string>
-    <string name="about_the_app">Лічильник рівнів для настільної гри \"Манчкін\". Зі статистикою партії.</string>
+    <string name="about_the_app">Лічильник рівнів для настільної гри. Зі статистикою партії.</string>
     <string name="rate">Якщо Вам сподобалось, будь ласка, поставте оцінку у маркеті: </string>
     <string name="btn_rate">Оцінити</string>
     <string name="thanks">Також, Ви можете придбати мені пива: </string>
@@ -96,7 +96,7 @@
     <string name="theme_font_path">Underdog.ttf</string>
     <string name="choose_player_color">Оберіть колір</string>
     <string name="dialog_back_btn">Повернутися</string>
-    <string name="single_mode">Манчкін одинак</string>
+    <string name="single_mode">Вовк одинак</string>
     <string name="game_master">Майстер Гри</string>
     <string name="player_name">Гравець</string>
     <string name="gender">Стать</string>
